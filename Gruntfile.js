@@ -48,6 +48,7 @@ module.exports = grunt => {
         },
         files: {
           'dist/index.html': 'views/index.pug',
+          'dist/introduction.html': 'views/introduction.pug',
         }
       }
     },
