@@ -1,7 +1,7 @@
 ## Web Authentication
 Web Authentication is a [W3C proposal](https://www.w3.org/TR/webauthn/) for defining an API enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users.
 
-Web Authentication works hand in hand with other industry standards such as [Credential Management Level 1](https://www.w3.org/TR/credential-management-1/) and [Client to Authenticator Protocol 2](https://fidoalliance.org/specs/fido-v2.0-rd-20170927/fido-client-to-authenticator-protocol-v2.0-rd-20170927.html).
+Web Authentication works hand in hand with other industry standards such as [Credential Management Level 1](https://www.w3.org/TR/credential-management-1/) and [FIDO 2.0 Client to Authenticator Protocol 2](https://fidoalliance.org/specs/fido-v2.0-rd-20170927/fido-client-to-authenticator-protocol-v2.0-rd-20170927.html).
 
 ### How It Works
 <figure class="image">
@@ -92,4 +92,15 @@ navigator.credentials.get({
 ```
 
 ### Glossary
-TODO
+- **Assertion**: a signed statement returned by the authenticator carrying data sent by the relying party and the client.
+- **Attestation**: an operation that conveys the provenance of an authenticator and the data it emits. This operation can also be used to create new credentials.
+- **Authentication**: the ceremony where a user, and the user’s computing device(s) (containing at least one authenticator) work in concert to cryptographically prove to a Relying Party that the user controls the credential private key associated with a previously-registered public key credential. Note that this includes a test of user presence or user verification.
+- **Authenticator**: a hardware or software device that receives requests from the client to either perform an attestation operation or an assertion operation. It generates public key credentials and associates them with a single user and relying party.
+- **Authorization Gesture**: An authorization gesture is a physical interaction performed by a user with an authenticator as part of a ceremony, such as registration or authentication. By making such an authorization gesture, a user provides consent for (i.e., authorizes) a ceremony to proceed. This may involve user verification if the employed authenticator is capable, or it may involve a simple test of user presence.
+- **Ceremony**: a group of operations performed in a certain way by a group of entities according to protocols and procedures. These entities can include humans performing actions.
+- **Client**: an entity that represents the collaboration between the user, the user agent, and the platform.
+- **Credential ID**: A probabilistically-unique byte sequence identifying a public key credential source and its authentication assertions. It may contain encrypted data only readable by the authenticator that created it.
+- **Registration**: The ceremony where a user, a Relying Party, and the user’s computing device(s) (containing at least one authenticator) work in concert to create a public key credential and associate it with the user’s Relying Party account. Note that this includes employing a test of user presence or user verification.
+- **Relying Party**: the entity that makes use of Web Authentication to authenticate a user (for example: Auth0, Facebook, Google).
+
+
