@@ -377,11 +377,18 @@ function getGetOptions() {
 async function authenticate() {
   try {
     const credentials = await navigator.credentials.get(getGetOptions());
+
+    lastCredentials = deepClone(credentials);
+    lastCredentialsParsed = parseCredentials(credentials);
+
     const prettyCredentials = prettifyCredentials(credentials);
+    const withHtml = prettyCredentialsWithHtml(prettyCredentials);
 
     log.debug(prettyCredentials);
+    log.debug(withHtml);
 
-    dom.outputConsole.textContent = prettyCredentials;
+    //dom.outputConsole.textContent = prettyCredentials;
+    dom.outputConsole.innerHTML = withHtml;
   } catch(e) {
     log.debug(e);
 
