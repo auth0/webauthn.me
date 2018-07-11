@@ -16,9 +16,9 @@ let lastCredentials;
 let lastCredentialsParsed;
 
 const options = {
-  challenge: Uint8Array.of(0),
-  userId: Uint8Array.of(0)
-}
+  challenge: new Uint8Array(32),
+  userId: new Uint8Array(32)
+};
 
 function getErrorMessage(e) {
   if(e instanceof Error) {
