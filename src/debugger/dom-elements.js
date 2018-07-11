@@ -134,16 +134,16 @@ export const authenticateButton =
 export const availableIndicatorSpan =
   document.getElementById('debugger-auth-available-indicator');
 
-export const outputConsole =
-  document.getElementById('debugger-output-console');
-
-export const outputKeyModal = document.getElementById('debugger-key-modal');
-
-export const outputKeyModalCloseButton =
-  document.getElementById('debugger-key-modal-close-button');
-
-export const outputKeyModalPre =
-  document.getElementById('debugger-key-modal-key');
+export const output = {
+  downloadCBOR: document.getElementById('debugger-output-download-cbor'),
+  downloadJSON: document.getElementById('debugger-output-download-json'),
+  console: document.getElementById('debugger-output-console'),
+  keyModal: {
+    modal: document.getElementById('debugger-key-modal'),
+    closeButton: document.getElementById('debugger-key-modal-close-button'),
+    pre: document.getElementById('debugger-key-modal-key')
+  }
+};
 
 export const pasteModal = document.getElementById('debugger-paste-modal');
 

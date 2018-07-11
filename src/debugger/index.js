@@ -230,8 +230,8 @@ window.outputButtonClick = function outputButtonClick(event) {
       break;
   }
 
-  dom.outputKeyModalPre.textContent = modalText;
-  dom.outputKeyModal.classList.add('is-active');
+  dom.output.keyModal.pre.textContent = modalText;
+  dom.output.keyModal.modal.classList.add('is-active');
 }
 
 function prettyCredentialsWithHtml(prettyCredentials) {
@@ -329,12 +329,12 @@ async function register() {
     log.debug(prettyCredentials);
     log.debug(withHtml);
 
-    //dom.outputConsole.textContent = prettyCredentials;
-    dom.outputConsole.innerHTML = withHtml;
+    //dom.output.console.textContent = prettyCredentials;
+    dom.output.console.innerHTML = withHtml;
   } catch(e) {
     log.debug(e);
 
-    dom.outputConsole.textContent = getErrorMessage(e);
+    dom.output.console.textContent = getErrorMessage(e);
   }
 }
 
@@ -387,12 +387,12 @@ async function authenticate() {
     log.debug(prettyCredentials);
     log.debug(withHtml);
 
-    //dom.outputConsole.textContent = prettyCredentials;
-    dom.outputConsole.innerHTML = withHtml;
+    //dom.output.console.textContent = prettyCredentials;
+    dom.output.console.innerHTML = withHtml;
   } catch(e) {
     log.debug(e);
 
-    dom.outputConsole.textContent = getErrorMessage(e);
+    dom.output.console.textContent = getErrorMessage(e);
   }
 }
 
@@ -493,11 +493,17 @@ function createRegenHandler(key, length) {
   };
 }
 
+function downloadCBOR() {
+  const creds = deepClone(lastCredentials);
+  delete creds.getClientExtensionResults;
+  saveAs(new Blob([cbor.encode(creds)]), 'output.cbor');
+}
+
 function setupEvents() {
   dom.registerButton.addEventListener('click', register);
   dom.authenticateButton.addEventListener('click', authenticate);
 
-  dom.outputKeyModalCloseButton.addEventListener('click', closeModal);
+  dom.output.keyModal.closeButton.addEventListener('click', closeModal);
   dom.pasteModalCloseButton.addEventListener('click', closeModal);
   dom.pasteModalOkButton.addEventListener('click', closeModal);
 
@@ -513,6 +519,8 @@ function setupEvents() {
   dom.createForm.challenge.button.addEventListener('click',
     challengeRegenHandler);
   dom.getForm.challenge.button.addEventListener('click', challengeRegenHandler);
+
+  dom.output.downloadCBOR.addEventListener('click', downloadCBOR);
 
   setupCheckboxes();
 }
