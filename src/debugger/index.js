@@ -339,25 +339,7 @@ function showPasteModal(event) {
   dom.pasteModal.classList.add('is-active');
 }
 
-function createCheckboxHandler(elements) {
-  return event => {
-    for(const e of elements) {
-      e.disabled = !event.target.checked;
-    }
-  };
-}
-
-function setupEvents() {
-  dom.registerButton.addEventListener('click', register);
-  dom.authenticateButton.addEventListener('click', authenticate);
-
-  dom.outputKeyModalCloseButton.addEventListener('click', closeModal);
-  dom.pasteModalCloseButton.addEventListener('click', closeModal);
-  dom.pasteModalOkButton.addEventListener('click', closeModal);
-
-  dom.getForm.allowCredentials.id.paste
-     .addEventListener('click', showPasteModal);
-
+function setupCheckboxes() {
   const cForm = dom.createForm;
   const gForm = dom.getForm;
 
@@ -419,6 +401,14 @@ function setupEvents() {
     [gForm.mediation.checkbox, [gForm.mediation.select]]
   ];
 
+  function createCheckboxHandler(elements) {
+    return event => {
+      for(const e of elements) {
+        e.disabled = !event.target.checked;
+      }
+    };
+  }
+
   for(const checkbox of checkboxes) {
     const cbox = checkbox[0];
     const elements = checkbox[1];
@@ -428,6 +418,20 @@ function setupEvents() {
 
     cbox.addEventListener('input', handler);
   }
+}
+
+function setupEvents() {
+  dom.registerButton.addEventListener('click', register);
+  dom.authenticateButton.addEventListener('click', authenticate);
+
+  dom.outputKeyModalCloseButton.addEventListener('click', closeModal);
+  dom.pasteModalCloseButton.addEventListener('click', closeModal);
+  dom.pasteModalOkButton.addEventListener('click', closeModal);
+
+  dom.getForm.allowCredentials.id.paste
+     .addEventListener('click', showPasteModal);
+
+  setupCheckboxes();
 }
 
 function setupAuthenticatorsListInterval() {
