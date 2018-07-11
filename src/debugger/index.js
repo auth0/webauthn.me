@@ -1,4 +1,3 @@
-import EventManager from './event-manager.js';
 import * as dom from './dom-elements.js';
 import strings from './strings.js';
 import { deepClone, objectSlice, findKey, findAllKeys } from './utils.js';
@@ -11,11 +10,6 @@ import tippy from 'tippy.js';
 //import { asn1, util, pki, pkcs12 } from 'node-forge';
 import { fromBER } from 'asn1js';
 import { Certificate } from 'pkijs';
-
-// The event manager lets us enable/disable events as needed without
-// manually tracking them. Events that need to be disabled should be
-// passed to the event manager.
-const eventManager = new EventManager();
 
 // TODO: temporary
 let lastCredentials;
@@ -345,9 +339,17 @@ function showPasteModal(event) {
   dom.pasteModal.classList.add('is-active');
 }
 
+function createCheckboxHandler(elements) {
+  return event => {
+    for(const e of elements) {
+      e.disabled = !event.target.checked;
+    }
+  };
+}
+
 function setupEvents() {
-  eventManager.addDomEvent(dom.registerButton, 'click', register);
-  eventManager.addDomEvent(dom.authenticateButton, 'click', authenticate);
+  dom.registerButton.addEventListener('click', register);
+  dom.authenticateButton.addEventListener('click', authenticate);
 
   dom.outputKeyModalCloseButton.addEventListener('click', closeModal);
   dom.pasteModalCloseButton.addEventListener('click', closeModal);
@@ -355,6 +357,77 @@ function setupEvents() {
 
   dom.getForm.allowCredentials.id.paste
      .addEventListener('click', showPasteModal);
+
+  const cForm = dom.createForm;
+  const gForm = dom.getForm;
+
+  const checkboxes = [
+    // Create
+    [cForm.relyingParty.id.checkbox, [cForm.relyingParty.id.input]],
+    [cForm.excludeCredentials.checkbox, [
+      cForm.excludeCredentials.button,
+      cForm.excludeCredentials.id.buttonBin,
+      cForm.excludeCredentials.id.buttonB64,
+      cForm.excludeCredentials.type.checkbox,
+      cForm.excludeCredentials.type.usbCheckbox,
+      cForm.excludeCredentials.type.nfcCheckbox,
+      cForm.excludeCredentials.type.bleCheckbox
+    ]],
+    [cForm.excludeCredentials.type.checkbox, [
+      cForm.excludeCredentials.type.usbCheckbox,
+      cForm.excludeCredentials.type.nfcCheckbox,
+      cForm.excludeCredentials.type.bleCheckbox
+    ]],
+    [cForm.authenticatorSelect.checkbox, [
+      cForm.authenticatorSelect.authenticatorAttachment.checkbox,
+      cForm.authenticatorSelect.authenticatorAttachment.select,
+      cForm.authenticatorSelect.requireResidentKey.checkbox,
+      cForm.authenticatorSelect.requireResidentKey.input,
+      cForm.authenticatorSelect.userVerification.checkbox,
+      cForm.authenticatorSelect.userVerification.select,
+    ]],
+    [cForm.authenticatorSelect.authenticatorAttachment.checkbox, [
+      cForm.authenticatorSelect.authenticatorAttachment.select
+    ]],
+    [cForm.authenticatorSelect.requireResidentKey.checkbox, [
+      cForm.authenticatorSelect.requireResidentKey.input
+    ]],
+    [cForm.authenticatorSelect.userVerification.checkbox, [
+      cForm.authenticatorSelect.userVerification.select
+    ]],
+    [cForm.attestation.checkbox, [
+      cForm.attestation.select
+    ]],
+
+    // Get
+    [gForm.rpId.checkbox, [gForm.rpId.input]],
+    [gForm.allowCredentials.checkbox, [
+      gForm.allowCredentials.button,
+      gForm.allowCredentials.id.upload,
+      gForm.allowCredentials.id.paste,
+      gForm.allowCredentials.type.checkbox,
+      gForm.allowCredentials.type.usbCheckbox,
+      gForm.allowCredentials.type.nfcCheckbox,
+      gForm.allowCredentials.type.bleCheckbox
+    ]],
+    [gForm.allowCredentials.type.checkbox, [
+      gForm.allowCredentials.type.usbCheckbox,
+      gForm.allowCredentials.type.nfcCheckbox,
+      gForm.allowCredentials.type.bleCheckbox
+    ]],
+    [gForm.userVerification.checkbox, [gForm.userVerification.select]],
+    [gForm.mediation.checkbox, [gForm.mediation.select]]
+  ];
+
+  for(const checkbox of checkboxes) {
+    const cbox = checkbox[0];
+    const elements = checkbox[1];
+    const handler = createCheckboxHandler(elements);
+
+    handler({ target: cbox });
+
+    cbox.addEventListener('input', handler);
+  }
 }
 
 function setupAuthenticatorsListInterval() {

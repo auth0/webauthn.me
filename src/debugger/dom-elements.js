@@ -4,7 +4,7 @@ export const createForm = {
     id: {
       line: document.getElementById('d-c-rp-id-line'),
       checkbox: document.getElementById('d-c-rp-id-cbox'),
-      input: document.getElementById('d-c-rp-ip')
+      input: document.getElementById('d-c-rp-id')
     },
     name: {
       line: document.getElementById('d-c-rp-name-line'),
@@ -45,14 +45,15 @@ export const createForm = {
     button: document.getElementById('d-c-add-excl-creds'),
     id: {
       line: document.getElementById('d-c-excl-creds-id-line'),
-      button: document.getElementById('d-c-upload-excl-creds-id')
+      buttonBin: document.getElementById('d-c-upload-excl-creds-id'),
+      buttonB64: document.getElementById('d-c-upload-base64-excl-creds-id')
     },
     type: {
       line: document.getElementById('d-c-excl-creds-type-line'),
       checkbox: document.getElementById('d-c-excl-creds-type-cbox'),
-      usbCheckbox: document.getElementById('d-c-excl-creds-type-usb)'),
-      nfcCheckbox: document.getElementById('d-c-excl-creds-type-nfc)'),
-      bleCheckbox: document.getElementById('d-c-excl-creds-type-ble)'),
+      usbCheckbox: document.getElementById('d-c-excl-creds-type-usb'),
+      nfcCheckbox: document.getElementById('d-c-excl-creds-type-nfc'),
+      bleCheckbox: document.getElementById('d-c-excl-creds-type-ble'),
     }
   },
   authenticatorSelect: {
@@ -93,7 +94,7 @@ export const getForm = {
   rpId: {
     line: document.getElementById('d-g-rp-id-line'),
     checkbox: document.getElementById('d-g-rp-id-cbox'),
-    input: document.getElementById('d-g-rp-ip')
+    input: document.getElementById('d-g-rp-id')
   },
   allowCredentials: {
     checkbox: document.getElementById('d-g-allow-creds-cbox'),
@@ -106,9 +107,9 @@ export const getForm = {
     type: {
       line: document.getElementById('d-g-allow-creds-type-line'),
       checkbox: document.getElementById('d-g-allow-creds-type-cbox'),
-      usbCheckbox: document.getElementById('d-g-allow-creds-type-usb)'),
-      nfcCheckbox: document.getElementById('d-g-allow-creds-type-nfc)'),
-      bleCheckbox: document.getElementById('d-g-allow-creds-type-ble)'),
+      usbCheckbox: document.getElementById('d-g-allow-creds-type-usb'),
+      nfcCheckbox: document.getElementById('d-g-allow-creds-type-nfc'),
+      bleCheckbox: document.getElementById('d-g-allow-creds-type-ble'),
     }
   },
   userVerification: {
