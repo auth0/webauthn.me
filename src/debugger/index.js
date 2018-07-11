@@ -33,8 +33,12 @@ function getSelectValue(select) {
 }
 
 function getAlgValueFromSelect(select) {
-  // TODO
-  return -7;
+  // TODO: add other algs
+  const values = {
+    es256: -7,
+    rs256: -257
+  }
+  return values[select.options[select.selectedIndex].value];
 }
 
 function prettyStringify(object) {
@@ -259,25 +263,56 @@ function prettyCredentialsWithHtml(prettyCredentials) {
 }
 
 function getCreateOptions() {
-  // TODO: handle all values
-  return {
-    publicKey: {
-      rp: {
-        name: dom.createForm.relyingParty.name.input.value
-      },
-      user: {
-        id: new Uint8Array(16),
-        name: dom.createForm.user.name.input.value,
-        displayName: dom.createForm.user.displayName.input.value
-      },
-      challenge: new Uint8Array(32),
-      pubKeyCredParams: [{
-        type: 'public-key',
-        alg: getAlgValueFromSelect(dom.createForm.pubKeyCredParams.alg.select)
-      }],
-      timeout: dom.createForm.timeout.input.value,
-      attestation: getSelectValue(dom.createForm.attestation.select)
+  const cForm = dom.createForm;
+
+  const publicKey = {
+    rp: {
+      name: cForm.relyingParty.name.input.value
+    },
+    user: {
+      id: options.userId,
+      name: cForm.user.name.input.value,
+      displayName: cForm.user.displayName.input.value
+    },
+    challenge: options.challenge,
+    pubKeyCredParams: [{
+      type: 'public-key',
+      alg: getAlgValueFromSelect(cForm.pubKeyCredParams.alg.select)
+    }],
+    timeout: cForm.timeout.input.value
+  };
+
+  //TODO: excludeCredentials
+
+  if(cForm.authenticatorSelect.checkbox.checked) {
+    const authenticatorSelect = {};
+
+    if(cForm.authenticatorSelect.authenticatorAttachment.checkbox.checked) {
+      authenticatorSelect.authenticatorAttachment =
+        getSelectValue(
+          cForm.authenticatorSelect.authenticatorAttachment.select);
     }
+
+    if(cForm.authenticatorSelect.requireResidentKey.checkbox.checked) {
+      authenticatorSelect.requireResidentKey =
+        cForm.authenticatorSelect.requireResidentKey.input.checked;
+    }
+
+    if(cForm.authenticatorSelect.userVerification.checkbox.checked) {
+      authenticatorSelect.userVerification =
+        getSelectValue(
+          cForm.authenticatorSelect.userVerification.select);
+    }
+
+    publicKey.authenticatorSelect = authenticatorSelect;
+  }
+
+  if(dom.createForm.attestation.checkbox.checked) {
+    publicKey.attestation = getSelectValue(dom.createForm.attestation.select);
+  }
+
+  return {
+    publicKey: publicKey
   };
 }
 
@@ -304,20 +339,39 @@ async function register() {
 }
 
 function getGetOptions() {
-  // TODO: handle all values
-  return {
-    publicKey: {
-      challenge: new Uint8Array(32),
-      timeout: dom.getForm.timeout.input.value,
-      allowCredentials: [{
-        type: 'public-key',
-        id: lastCredentials.rawId,
-        transports: ['usb']
-      }],
-      userVerification: getSelectValue(dom.getForm.userVerification.select)
-    },
-    mediation: getSelectValue(dom.getForm.mediation.select)
+  const gForm = dom.getForm;
+
+  const publicKey = {
+    challenge: options.challenge,
+    timeout: gForm.timeout.input.value
   };
+
+  if(gForm.rpId.checkbox.checked) {
+    publicKey.rpId = gForm.rpId.input.value;
+  }
+
+  // TODO: handle multiple credentials
+  if(gForm.allowCredentials.checkbox.checked) {
+    publicKey.allowCredentials = [{
+      type: 'public-key',
+      id: lastCredentials.rawId,
+      transports: ['usb']
+    }];
+  }
+
+  if(gForm.userVerification.checkbox.checked) {
+    publicKey.userVerification = getSelectValue(gForm.userVerification.select);
+  }
+
+  const result = {
+    publicKey: publicKey
+  };
+
+  if(gForm.mediation.checkbox.checked) {
+    result.mediation = getSelectValue(gForm.mediation.select);
+  }
+
+  return result;
 }
 
 async function authenticate() {
@@ -427,7 +481,7 @@ function setupCheckboxes() {
 
 function createRegenHandler(key, length) {
   options[key] = new Uint8Array(length);
-  return event => {
+  return () => {
     crypto.getRandomValues(options[key]);
   };
 }
@@ -443,12 +497,15 @@ function setupEvents() {
   dom.getForm.allowCredentials.id.paste
      .addEventListener('click', showPasteModal);
 
-  dom.createForm.user.id.button.addEventListener('click',
-    createRegenHandler('userId', 32));
+  const userIdRegenHandler = createRegenHandler('userId', 32);
+  userIdRegenHandler();
+  const challengeRegenHandler = createRegenHandler('challenge', 32);
+  challengeRegenHandler();
+
+  dom.createForm.user.id.button.addEventListener('click', userIdRegenHandler);
   dom.createForm.challenge.button.addEventListener('click',
-    createRegenHandler('challenge', 32));
-  dom.getForm.challenge.button.addEventListener('click',
-    createRegenHandler('challenge', 32));
+    challengeRegenHandler);
+  dom.getForm.challenge.button.addEventListener('click', challengeRegenHandler);
 
   setupCheckboxes();
 }
