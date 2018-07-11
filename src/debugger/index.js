@@ -15,6 +15,11 @@ import { Certificate } from 'pkijs';
 let lastCredentials;
 let lastCredentialsParsed;
 
+const options = {
+  challenge: Uint8Array.of(0),
+  userId: Uint8Array.of(0)
+}
+
 function getErrorMessage(e) {
   if(e instanceof Error) {
     return e.toString();
@@ -420,6 +425,13 @@ function setupCheckboxes() {
   }
 }
 
+function createRegenHandler(key, length) {
+  options[key] = new Uint8Array(length);
+  return event => {
+    crypto.getRandomValues(options[key]);
+  };
+}
+
 function setupEvents() {
   dom.registerButton.addEventListener('click', register);
   dom.authenticateButton.addEventListener('click', authenticate);
@@ -430,6 +442,13 @@ function setupEvents() {
 
   dom.getForm.allowCredentials.id.paste
      .addEventListener('click', showPasteModal);
+
+  dom.createForm.user.id.button.addEventListener('click',
+    createRegenHandler('userId', 32));
+  dom.createForm.challenge.button.addEventListener('click',
+    createRegenHandler('challenge', 32));
+  dom.getForm.challenge.button.addEventListener('click',
+    createRegenHandler('challenge', 32));
 
   setupCheckboxes();
 }
