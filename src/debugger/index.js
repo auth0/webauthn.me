@@ -474,8 +474,16 @@ function setupTooltips() {
   }
 }
 
+function initConfigFields() {
+  const rpId = document.location.origin;
+
+  dom.createForm.relyingParty.id.input.value = rpId;
+  dom.getForm.rpId.input.value = rpId;
+}
+
 export function setupDebugger() {
   setupAuthenticatorsListInterval();
+  initConfigFields();
   setupEvents();
   setupTooltips();
 }
