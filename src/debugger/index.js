@@ -10,6 +10,7 @@ import tippy from 'tippy.js';
 //import { asn1, util, pki, pkcs12 } from 'node-forge';
 import { fromBER } from 'asn1js';
 import { Certificate } from 'pkijs';
+import jkwToPem from 'jwk-to-pem';
 
 const symbols = {
   binary: Symbol()
@@ -176,7 +177,7 @@ const prettifyTransformations = {
   },
   credentialPublicKey: {
     transform: coseToJwk,
-    buttons: ['Download COSE', 'Download JWK', 'Download PEM', 'Download DER']
+    buttons: ['Download COSE', 'Download JWK', 'Download PEM']
   },
   authenticatorData: {
     transform: parseAuthenticatorData
@@ -240,12 +241,10 @@ window.outputButtonClick = function outputButtonClick(event) {
   } else if(text.includes('download')) {
     switch(key) {
       case 'rawId':
-        saveAs(new Blob([lastCredentials.rawId]), 'rawId.bin');
+        saveAs(new Blob([value]), 'rawId.bin');
         break;
       case 'sig':
-        saveAs(new Blob([
-          lastCredentialsParsed.response.attestationObject.attStmt.sig
-        ]), 'sig.bin');
+        saveAs(new Blob([value]), 'sig.bin');
         break;
       case 'x5c':
         if(text.includes('pem')) {
@@ -253,6 +252,20 @@ window.outputButtonClick = function outputButtonClick(event) {
           const joined = pems.join('\r\n');
           saveAs(new Blob([joined]), 'x5c.pem');
         }
+        break;
+      case 'credentialPublicKey':
+        if(text.includes('jwk')) {
+          saveAs(new Blob([
+            prettyStringify(coseToJwk(value))
+          ]), 'credentialPublicKey.jwk');
+        } else if(text.includes('pem')) {
+          saveAs(new Blob([
+            jkwToPem(coseToJwk(value))
+          ]), 'credentialPublicKey.pem');
+        } else if(text.includes('cose')) {
+          saveAs(new Blob([value]), 'credentialPublicKey.cose');
+        }
+        break;
     }
   }
 }
