@@ -1,6 +1,6 @@
 import * as dom from './dom-elements.js';
 import strings from './strings.js';
-import { deepClone, objectSlice, findKey, findAllKeys } from './utils.js';
+import { deepClone, objectSlice, findKey, derToPem } from './utils.js';
 
 import log from 'loglevel';
 import cbor from 'cbor';
@@ -156,7 +156,7 @@ function parseClientDataJSON(data) {
 const prettifyTransformations = {
   rawId: {
     transform: binToHex,
-    buttons: ['Download']
+    buttons: ['Use', 'Download']
   },
   sig: {
     transform: binToHex,
@@ -172,7 +172,7 @@ const prettifyTransformations = {
   },
   x5c: {
     transform: arr => arr.map(binToHex),
-    buttons: ['View', 'Download PEM', 'Download DER']
+    buttons: ['View', 'Download PEM']
   },
   credentialPublicKey: {
     transform: coseToJwk,
@@ -229,7 +229,7 @@ window.outputButtonClick = function outputButtonClick(event) {
   const value = findKey(lastCredentialsParsed, key);
   const text = event.target.firstChild.textContent.toLowerCase();
 
-  if(key === 'x5c' && text.includes('view')) {
+  if(text.includes('view')) {
     const buffer = value[0].buffer.slice(value[0].byteOffset,
       value[0].byteOffset + value[0].byteLength);
     const parsed = fromBER(buffer);
@@ -242,6 +242,17 @@ window.outputButtonClick = function outputButtonClick(event) {
       case 'rawId':
         saveAs(new Blob([lastCredentials.rawId]), 'rawId.bin');
         break;
+      case 'sig':
+        saveAs(new Blob([
+          lastCredentialsParsed.response.attestationObject.attStmt.sig
+        ]), 'sig.bin');
+        break;
+      case 'x5c':
+        if(text.includes('pem')) {
+          const pems = value.map(derToPem);
+          const joined = pems.join('\r\n');
+          saveAs(new Blob([joined]), 'x5c.pem');
+        }
     }
   }
 }

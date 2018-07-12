@@ -101,3 +101,16 @@ export function getByPath(object, path) {
 
   return obj;
 }
+
+export function derToPem(der) {
+  const b64 = Buffer.from(der).toString('base64');
+
+  let withBreaks = '';
+  for(let i = 0; i < b64.length; ++i) {
+    withBreaks += (i % 64 === 0) ? `\r\n${b64[i]}` : b64[i];
+  }
+
+  return '-----BEGIN CERTIFICATE-----' +
+         `${withBreaks}\r\n` +
+         '-----END CERTIFICATE-----';
+}
