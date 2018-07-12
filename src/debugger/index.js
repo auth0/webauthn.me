@@ -509,6 +509,20 @@ function downloadCBOR() {
   saveAs(new Blob([encoded]), 'output.cbor');
 }
 
+function downloadJSON() {
+  const creds = deepClone(lastCredentials);
+  delete creds.getClientExtensionResults;
+
+  const transformations = deepClone(prettifyTransformations);
+  transformations.x5c.transform = data => data.map(binToHex);
+
+  transform(creds, transformations);
+
+  const encoded = prettyStringify(creds);
+  //log.debug(encoded);
+  saveAs(new Blob([encoded]), 'output.json');
+}
+
 function setupEvents() {
   dom.registerButton.addEventListener('click', register);
   dom.authenticateButton.addEventListener('click', authenticate);
@@ -531,6 +545,7 @@ function setupEvents() {
   dom.getForm.challenge.button.addEventListener('click', challengeRegenHandler);
 
   dom.output.downloadCBOR.addEventListener('click', downloadCBOR);
+  dom.output.downloadJSON.addEventListener('click', downloadJSON);
 
   setupCheckboxes();
 }
