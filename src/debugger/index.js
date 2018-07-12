@@ -167,7 +167,7 @@ const prettifyTransformations = {
     buttons: ['Download']
   },
   x5c: {
-    transform: arr => arr.map(() => '[Big Binary]'),
+    transform: arr => arr.map(binToHex),
     buttons: ['View', 'Download PEM', 'Download DER']
   },
   credentialPublicKey: {
