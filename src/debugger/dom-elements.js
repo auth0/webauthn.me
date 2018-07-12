@@ -135,6 +135,7 @@ export const availableIndicatorSpan =
   document.getElementById('debugger-auth-available-indicator');
 
 export const output = {
+  uploadCBOR: document.getElementById('debugger-output-upload-cbor'),
   downloadCBOR: document.getElementById('debugger-output-download-cbor'),
   downloadJSON: document.getElementById('debugger-output-download-json'),
   console: document.getElementById('debugger-output-console'),

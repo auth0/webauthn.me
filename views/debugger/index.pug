@@ -22,10 +22,22 @@ section#debugger
             button#debugger-authenticate-button.button Authenticate
     .columns
       #debugger-output.column
-        span.subtitle.is-4 Output&nbsp;&nbsp;&nbsp;&nbsp;
-        button#debugger-output-upload-cbor.button Upload Full Response (CBOR)
-        button#debugger-output-download-cbor.button Download (CBOR)
-        button#debugger-output-download-json.button Download (JSON)
+        .level
+          .level-left
+            .level-item
+              span.subtitle.is-4 Output&nbsp;&nbsp;&nbsp;&nbsp;
+            .level-item
+              .file
+                label.file-label
+                  input#debugger-output-upload-cbor.file-input(type='file')
+                  span.file-cta
+                    span.file-icon
+                      i.fas.fa-upload
+                    span.file-label Upload Full Response (CBOR)
+            .level-item
+              button#debugger-output-download-cbor.button Download (CBOR)
+            .level-item
+              button#debugger-output-download-json.button Download (JSON)
         pre#debugger-output-console
 
 #debugger-key-modal.modal

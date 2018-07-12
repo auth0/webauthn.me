@@ -352,21 +352,23 @@ function getCreateOptions() {
   };
 }
 
+function handleCredentials(credentials) {
+  lastCredentials = deepClone(credentials);
+  lastCredentialsParsed = parseCredentials(credentials);
+
+  const prettyCredentials = prettifyCredentials(credentials);
+  const withHtml = prettyCredentialsWithHtml(prettyCredentials);
+
+  log.debug(prettyCredentials);
+  log.debug(withHtml);
+
+  dom.output.console.innerHTML = withHtml;
+}
+
 async function register() {
   try {
     const credentials = await navigator.credentials.create(getCreateOptions());
-
-    lastCredentials = deepClone(credentials);
-    lastCredentialsParsed = parseCredentials(credentials);
-
-    const prettyCredentials = prettifyCredentials(credentials);
-    const withHtml = prettyCredentialsWithHtml(prettyCredentials);
-
-    log.debug(prettyCredentials);
-    log.debug(withHtml);
-
-    //dom.output.console.textContent = prettyCredentials;
-    dom.output.console.innerHTML = withHtml;
+    handleCredentials(credentials);
   } catch(e) {
     log.debug(e);
 
@@ -413,18 +415,7 @@ function getGetOptions() {
 async function authenticate() {
   try {
     const credentials = await navigator.credentials.get(getGetOptions());
-
-    lastCredentials = deepClone(credentials);
-    lastCredentialsParsed = parseCredentials(credentials);
-
-    const prettyCredentials = prettifyCredentials(credentials);
-    const withHtml = prettyCredentialsWithHtml(prettyCredentials);
-
-    log.debug(prettyCredentials);
-    log.debug(withHtml);
-
-    //dom.output.console.textContent = prettyCredentials;
-    dom.output.console.innerHTML = withHtml;
+    handleCredentials(credentials);
   } catch(e) {
     log.debug(e);
 
@@ -529,6 +520,21 @@ function createRegenHandler(key, length) {
   };
 }
 
+function uploadCBOR(event) {
+  const file = event.target.files[0];
+  if(!file) {
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const buf = Buffer.from(reader.result);
+    const credentials = cbor.decodeFirstSync(buf);
+    handleCredentials(credentials);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
 function downloadCBOR() {
   const creds = deepClone(lastCredentials);
   delete creds.getClientExtensionResults;
@@ -572,6 +578,7 @@ function setupEvents() {
     challengeRegenHandler);
   dom.getForm.challenge.button.addEventListener('click', challengeRegenHandler);
 
+  dom.output.uploadCBOR.addEventListener('change', uploadCBOR);
   dom.output.downloadCBOR.addEventListener('click', downloadCBOR);
   dom.output.downloadJSON.addEventListener('click', downloadJSON);
 
