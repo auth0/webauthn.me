@@ -11,6 +11,10 @@ import tippy from 'tippy.js';
 import { fromBER } from 'asn1js';
 import { Certificate } from 'pkijs';
 
+const symbols = {
+  binary: Symbol()
+}
+
 const cborEncoder = new cbor.Encoder({
   genTypes: [
     ArrayBuffer, (encoder, arrayBuffer) => {
@@ -223,23 +227,23 @@ window.outputButtonClick = function outputButtonClick(event) {
   }
 
   const value = findKey(lastCredentialsParsed, key);
+  const text = event.target.firstChild.textContent.toLowerCase();
 
-  let modalText;
-  switch(key) {
-    case 'x5c':
-      switch(event.target.firstChild.textContent.toLowerCase()) {
-        case 'view':
-          const buffer = value[0].buffer.slice(value[0].byteOffset,
-            value[0].byteOffset + value[0].byteLength);
-          const parsed = fromBER(buffer);
-          const cert = new Certificate({ schema: parsed.result });
-          modalText = prettyStringify(cert);
-      }
-      break;
+  if(key === 'x5c' && text.includes('view')) {
+    const buffer = value[0].buffer.slice(value[0].byteOffset,
+      value[0].byteOffset + value[0].byteLength);
+    const parsed = fromBER(buffer);
+    const cert = new Certificate({ schema: parsed.result });
+    const modalText = prettyStringify(cert);
+    dom.output.keyModal.pre.textContent = modalText;
+    dom.output.keyModal.modal.classList.add('is-active');
+  } else if(text.includes('download')) {
+    switch(key) {
+      case 'rawId':
+        saveAs(new Blob([lastCredentials.rawId]), 'rawId.bin');
+        break;
+    }
   }
-
-  dom.output.keyModal.pre.textContent = modalText;
-  dom.output.keyModal.modal.classList.add('is-active');
 }
 
 function prettyCredentialsWithHtml(prettyCredentials) {
