@@ -11,6 +11,14 @@ import tippy from 'tippy.js';
 import { fromBER } from 'asn1js';
 import { Certificate } from 'pkijs';
 
+const cborEncoder = new cbor.Encoder({
+  genTypes: [
+    ArrayBuffer, (encoder, arrayBuffer) => {
+      return encoder.pushAny(Buffer.from(arrayBuffer));
+    }
+  ]
+});
+
 // TODO: temporary
 let lastCredentials;
 let lastCredentialsParsed;
@@ -496,7 +504,9 @@ function createRegenHandler(key, length) {
 function downloadCBOR() {
   const creds = deepClone(lastCredentials);
   delete creds.getClientExtensionResults;
-  saveAs(new Blob([cbor.encode(creds)]), 'output.cbor');
+  const encoded = cborEncoder._encodeAll([creds]);
+  //log.debug(cbor.decodeFirstSync(encoded));
+  saveAs(new Blob([encoded]), 'output.cbor');
 }
 
 function setupEvents() {
