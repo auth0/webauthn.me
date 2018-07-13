@@ -12,13 +12,15 @@
           #[span#d-c-user-dp-line displayName: #[input#d-c-user-dpname(type='text', value='Test User')]]
         },
         #[span#d-c-challenge-line challenge: #[button#d-c-regen-challenge Regenerate (binary, random)]],
-        pubKeyCredParams: [{ #[button#d-c-add-pubkey-params +]
-          type: 'public-key',
-          <span id="d-c-pubkey-alg-line">alg: <select id="d-c-pubkey-alg-select">
-                                                <option value="es256" selected>ES256 (ECDSA P-256 + SHA-256)</option>
-                                                <option value="rs256">RS256 (RSASSA + SHA-256)</option>
-                                              </select></span>
-        }],
+        pubKeyCredParams: [ #[button#d-c-add-pubkey-params +]
+          <span>{
+            type: 'public-key',
+            <span id="d-c-pubkey-alg-line">alg: <select id="d-c-pubkey-alg-select">
+                                                  <option value="es256" selected>ES256 (ECDSA P-256 + SHA-256)</option>
+                                                  <option value="rs256">RS256 (RSASSA + SHA-256)</option>
+                                                </select></span>
+          }</span>#[span#d-c-add-pubkey-params-placeholder.is-invisible]
+        ],
         #[span#d-c-timeout-line timeout: #[input#d-c-timeout(type='number', value='5000')]],
         #[input#d-c-excl-creds-cbox(type='checkbox')] excludeCredentials: [{ #[button#d-c-add-excl-creds +]
           type: 'public-key',

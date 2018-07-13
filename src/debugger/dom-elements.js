@@ -34,7 +34,8 @@ export const createForm = {
     alg: {
       line: document.getElementById('d-c-pubkey-alg-line'),
       select: document.getElementById('d-c-pubkey-alg-select')
-    }
+    },
+    placeholder: document.getElementById('d-c-add-pubkey-params-placeholder')
   },
   timeout: {
     line: document.getElementById('d-c-timeout-line'),

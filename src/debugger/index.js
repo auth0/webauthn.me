@@ -16,10 +16,6 @@ import coseToJwk from 'cose-to-jwk';
 import tippy from 'tippy.js';
 import jkwToPem from 'jwk-to-pem';
 
-const symbols = {
-  binary: Symbol()
-}
-
 const cborEncoder = new cbor.Encoder({
   genTypes: [
     ArrayBuffer, (encoder, arrayBuffer) => {
@@ -28,9 +24,12 @@ const cborEncoder = new cbor.Encoder({
   ]
 });
 
-// TODO: temporary
 let lastCredentials;
 let lastCredentialsParsed;
+
+const pubKeyParams = [
+  dom.createForm.pubKeyCredParams.alg.select
+];
 
 const options = {
   challenge: new Uint8Array(32),
@@ -312,10 +311,10 @@ function getCreateOptions() {
       displayName: cForm.user.displayName.input.value
     },
     challenge: options.challenge,
-    pubKeyCredParams: [{
+    pubKeyCredParams: pubKeyParams.map(select => ({
       type: 'public-key',
-      alg: getAlgValueFromSelect(cForm.pubKeyCredParams.alg.select)
-    }],
+      alg: getAlgValueFromSelect(select)
+    })),
     timeout: cForm.timeout.input.value
   };
 
@@ -558,6 +557,26 @@ function downloadJSON() {
   saveAs(new Blob([encoded]), 'output.json');
 }
 
+function addPubKeyParam() {
+  const selectId = `d-c-pubkey-alg-select-${pubKeyParams.length}`;
+  const html =
+`, {
+        type: 'public-key',
+        <span id="d-c-pubkey-alg-line">alg: <select id="${selectId}">
+            <option value="es256" selected>ES256 (ECDSA P-256 + SHA-256)</option>
+            <option value="rs256">RS256 (RSASSA + SHA-256)</option>
+          </select></span>
+      }`;
+
+  const span = document.createElement('span');
+  span.innerHTML = html;
+  dom.createForm.pubKeyCredParams.placeholder.parentElement
+     .insertBefore(span, dom.createForm.pubKeyCredParams.placeholder);
+
+  const select = document.getElementById(selectId);
+  pubKeyParams.push(select);
+}
+
 function setupEvents() {
   dom.registerButton.addEventListener('click', register);
   dom.authenticateButton.addEventListener('click', authenticate);
@@ -578,6 +597,9 @@ function setupEvents() {
   dom.createForm.challenge.button.addEventListener('click',
     challengeRegenHandler);
   dom.getForm.challenge.button.addEventListener('click', challengeRegenHandler);
+
+  dom.createForm.pubKeyCredParams.button
+     .addEventListener('click', addPubKeyParam);
 
   dom.output.uploadCBOR.addEventListener('change', uploadCBOR);
   dom.output.downloadCBOR.addEventListener('click', downloadCBOR);
