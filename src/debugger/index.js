@@ -1,15 +1,19 @@
 import * as dom from './dom-elements.js';
 import strings from './strings.js';
-import { deepClone, objectSlice, findKey, derToPem } from './utils.js';
+import {
+  deepClone,
+  objectSlice,
+  findKey,
+  derToPem,
+  x5cArrayToCertInfo,
+  prettyStringify
+} from './utils.js';
 
 import log from 'loglevel';
 import cbor from 'cbor';
 import { saveAs } from 'file-saver';
 import coseToJwk from 'cose-to-jwk';
 import tippy from 'tippy.js';
-//import { asn1, util, pki, pkcs12 } from 'node-forge';
-import { fromBER } from 'asn1js';
-import { Certificate } from 'pkijs';
 import jkwToPem from 'jwk-to-pem';
 
 const symbols = {
@@ -52,10 +56,6 @@ function getAlgValueFromSelect(select) {
     rs256: -257
   }
   return values[select.options[select.selectedIndex].value];
-}
-
-function prettyStringify(object) {
-  return JSON.stringify(object, null, 2);
 }
 
 function parseAuthenticatorData(data) {
@@ -235,11 +235,7 @@ window.outputButtonClick = function outputButtonClick(event) {
   const text = event.target.firstChild.textContent.toLowerCase();
 
   if(text.includes('view')) {
-    const buffer = value[0].buffer.slice(value[0].byteOffset,
-      value[0].byteOffset + value[0].byteLength);
-    const parsed = fromBER(buffer);
-    const cert = new Certificate({ schema: parsed.result });
-    const modalText = prettyStringify(cert);
+    const modalText = x5cArrayToCertInfo(value);
     dom.output.keyModal.pre.textContent = modalText;
     dom.output.keyModal.modal.classList.add('is-active');
   } else if(text.includes('download')) {

@@ -1,3 +1,7 @@
+import { fromBER } from 'asn1js';
+import { Certificate } from 'pkijs';
+import oids from './oids.js';
+
 export function deepClone(object) {
   const result = {};
 
@@ -113,4 +117,36 @@ export function derToPem(der) {
   return '-----BEGIN CERTIFICATE-----' +
          `${withBreaks}\r\n` +
          '-----END CERTIFICATE-----';
+}
+
+export function prettyStringify(object) {
+  return JSON.stringify(object, null, 2);
+}
+
+export function x5cArrayToCertInfo(array) {
+  const info = [];
+  for(const x5c of array) {
+    const buffer = x5c.buffer.slice(x5c.byteOffset,
+                                    x5c.byteOffset + x5c.byteLength);
+    const parsed = fromBER(buffer);
+    const cert = new Certificate({ schema: parsed.result });
+    const slice = {
+      version: cert.version,
+      serialNumber: Buffer.from(cert.serialNumber.valueBlock.valueHex)
+                          .toString('hex'),
+      signature: {
+        algorithmId: oids[cert.signature.algorithmId],
+        value: Buffer.from(cert.signatureValue.valueBlock.valueHex)
+                    .toString('hex')
+      },
+      issuer: cert.issuer.typesAndValues[0].value.valueBlock.value,
+      notBefore: cert.notBefore.value,
+      notAfter: cert.notAfter.value,
+      subject: cert.subject.typesAndValues.map(v => v.value.valueBlock.value),
+      subjectPublicKeyInfo: cert.subjectPublicKeyInfo
+    };
+    info.push(prettyStringify(slice));
+  }
+
+  return info.join('\n');
 }
