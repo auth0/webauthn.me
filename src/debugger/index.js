@@ -142,7 +142,11 @@ function parseAttestationObject(data) {
 
 function binToHex(data) {
   if(!(data instanceof Buffer)) {
-    data = Buffer.from(data);
+    try {
+      data = Buffer.from(data);
+    } catch(e) {
+      return '';
+    }
   }
 
   return data.toString('hex');
@@ -244,7 +248,8 @@ window.outputButtonClick = function outputButtonClick(event) {
         saveAs(new Blob([value]), 'rawId.bin');
         break;
       case 'sig':
-        saveAs(new Blob([value]), 'sig.bin');
+      case 'signature':
+        saveAs(new Blob([value]), `${key}.bin`);
         break;
       case 'x5c':
         if(text.includes('pem')) {

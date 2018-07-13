@@ -7,7 +7,7 @@ export function deepClone(object) {
     if(typeof value === 'object') {
       if(Array.isArray(value) ||
          value instanceof ArrayBuffer ||
-         'length' in value) {
+         (value && ('length' in value))) {
         result[key] = value.slice();
       } else {
         result[key] = deepClone(value);
