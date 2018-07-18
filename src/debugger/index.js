@@ -34,6 +34,7 @@ const pubKeyParams = [
 const allowedCredentials = [{
   id: dom.getForm.allowCredentials.id.span,
   upload: dom.getForm.allowCredentials.id.upload,
+  file: dom.getForm.allowCredentials.id.file,
   paste: dom.getForm.allowCredentials.id.paste,
   type: {
     checkbox: dom.getForm.allowCredentials.type.checkbox,
@@ -475,7 +476,22 @@ function showPasteModal(event, i) {
 }
 
 function uploadAllowedCredentialsId(event, i) {
+  const ac = allowedCredentials[i];
 
+  ac.file.onchange = () => {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const buf = Buffer.from(reader.result);
+      const hex = buf.toString('hex');
+      ac.id.textContent = hex.substr(0, 8) + '...';
+      ac.id.value = hex;
+    };
+
+    reader.readAsArrayBuffer(ac.file.files[0]);
+  };
+
+  ac.file.click();
 }
 
 function setupCheckboxes() {
@@ -638,7 +654,7 @@ function addAllowedCredential() {
   const html =
 `, {
         type: 'public-key',
-        id: <span id="d-g-allow-creds-id-${i}"></span><button id="d-g-upload-allow-creds-id-${i}">Upload (binary)</button><button id="d-g-paste-base64-allow-creds-id-${i}">Paste (Base64)</button>,
+        id: <span id="d-g-allow-creds-id-${i}"></span><input type="file" id="d-g-upload-allow-creds-file-${i}" style="display: none"><button id="d-g-upload-allow-creds-id-${i}">Upload (binary)</button><button id="d-g-paste-base64-allow-creds-id-${i}">Paste (Base64)</button>,
         <input id="d-g-allow-creds-type-cbox-${i}" type="checkbox"> type: <input id="d-g-allow-creds-type-usb-${i}" type="checkbox"> 'usb' <input id="d-g-allow-creds-type-nfc-${i}" type="checkbox"> 'nfc' <input id="d-g-allow-creds-type-ble-${i}" type="checkbox"> 'ble'
       }`;
 
@@ -651,6 +667,7 @@ function addAllowedCredential() {
   const allowedCredential = {
     id: document.getElementById(`d-g-allow-creds-id-${i}`),
     upload: document.getElementById(`d-g-upload-allow-creds-id-${i}`),
+    file: document.getElementById(`d-g-upload-allow-creds-file-${i}`),
     paste: document.getElementById(`d-g-paste-base64-allow-creds-id-${i}`),
     type: {
       checkbox: document.getElementById(`d-g-allow-creds-type-cbox-${i}`),
@@ -670,9 +687,9 @@ function addAllowedCredential() {
   });
 
   allowedCredential.paste
-     .addEventListener('click', e => showPasteModal(e, 0));
+     .addEventListener('click', e => showPasteModal(e, i));
   allowedCredential.upload
-     .addEventListener('click', e => uploadAllowedCredentialsId(e, 0));
+     .addEventListener('click', e => uploadAllowedCredentialsId(e, i));
 }
 
 function setupEvents() {

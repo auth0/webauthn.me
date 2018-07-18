@@ -104,6 +104,7 @@ export const getForm = {
       line: document.getElementById('d-g-allow-creds-id-line'),
       span: document.getElementById('d-g-allow-creds-id'),
       upload: document.getElementById('d-g-upload-allow-creds-id'),
+      file: document.getElementById('d-g-upload-allow-creds-file'),
       paste: document.getElementById('d-g-paste-base64-allow-creds-id')
     },
     type: {

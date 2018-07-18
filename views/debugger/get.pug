@@ -8,7 +8,7 @@
         #[input#d-g-allow-creds-cbox(type='checkbox', checked)] allowCredentials: [ #[button#d-g-add-allow-creds +]
           <span>{
             type: 'public-key',
-            id: #[span#d-g-allow-creds-id] #[button#d-g-upload-allow-creds-id Upload (binary)]#[button#d-g-paste-base64-allow-creds-id Paste (Base64)],
+            id: #[span#d-g-allow-creds-id] #[input#d-g-upload-allow-creds-file(type='file', style='display: none')]#[button#d-g-upload-allow-creds-id Upload (binary)]#[button#d-g-paste-base64-allow-creds-id Paste (Base64)],
             #[input#d-g-allow-creds-type-cbox(type='checkbox')] transports: #[input#d-g-allow-creds-type-usb(type='checkbox')] 'usb' #[input#d-g-allow-creds-type-nfc(type='checkbox')] 'nfc' #[input#d-g-allow-creds-type-ble(type='checkbox')] 'ble'
           }</span>#[span#d-g-allow-creds-placeholder.is-invisible]
         ],
