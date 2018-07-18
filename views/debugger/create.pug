@@ -25,7 +25,7 @@
         #[input#d-c-excl-creds-cbox(type='checkbox')] excludeCredentials: [{ #[button#d-c-add-excl-creds +]
           type: 'public-key',
           #[span#d-c-excl-creds-id-line id: #[button#d-c-upload-excl-creds-id Upload (binary)]#[button#d-c-upload-base64-excl-creds-id Paste (Base64)]],
-          #[span#d-c-excl-creds-type-line #[input#d-c-excl-creds-type-cbox(type='checkbox')] type: #[input#d-c-excl-creds-type-usb(type='checkbox')] 'usb' #[input#d-c-excl-creds-type-nfc(type='checkbox')] 'nfc' #[input#d-c-excl-creds-type-ble(type='checkbox')] 'ble']
+          #[span#d-c-excl-creds-type-line #[input#d-c-excl-creds-type-cbox(type='checkbox')] transports: #[input#d-c-excl-creds-type-usb(type='checkbox')] 'usb' #[input#d-c-excl-creds-type-nfc(type='checkbox')] 'nfc' #[input#d-c-excl-creds-type-ble(type='checkbox')] 'ble']
         }],
         #[input#d-c-auth-sel-cbox(type='checkbox')] authenticatorSelect: {
           <span id="d-c-auth-attach-line"><input id="d-c-auth-attach-cbox" type="checkbox"> authenticatorAttachment: <select id="d-c-auth-attach-select">

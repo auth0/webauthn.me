@@ -102,6 +102,7 @@ export const getForm = {
     button: document.getElementById('d-g-add-allow-creds'),
     id: {
       line: document.getElementById('d-g-allow-creds-id-line'),
+      span: document.getElementById('d-g-allow-creds-id'),
       upload: document.getElementById('d-g-upload-allow-creds-id'),
       paste: document.getElementById('d-g-paste-base64-allow-creds-id')
     },
@@ -111,7 +112,8 @@ export const getForm = {
       usbCheckbox: document.getElementById('d-g-allow-creds-type-usb'),
       nfcCheckbox: document.getElementById('d-g-allow-creds-type-nfc'),
       bleCheckbox: document.getElementById('d-g-allow-creds-type-ble'),
-    }
+    },
+    placeholder: document.getElementById('d-g-allow-creds-placeholder')
   },
   userVerification: {
     line: document.getElementById('d-g-user-verif-line'),

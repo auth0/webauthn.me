@@ -31,6 +31,18 @@ const pubKeyParams = [
   dom.createForm.pubKeyCredParams.alg.select
 ];
 
+const allowedCredentials = [{
+  id: dom.getForm.allowCredentials.id.span,
+  upload: dom.getForm.allowCredentials.id.upload,
+  paste: dom.getForm.allowCredentials.id.paste,
+  type: {
+    checkbox: dom.getForm.allowCredentials.type.checkbox,
+    usb: dom.getForm.allowCredentials.type.usbCheckbox,
+    nfc: dom.getForm.allowCredentials.type.nfcCheckbox,
+    ble: dom.getForm.allowCredentials.type.bleCheckbox
+  }
+}];
+
 const options = {
   challenge: new Uint8Array(32),
   userId: new Uint8Array(32)
@@ -365,10 +377,24 @@ function handleCredentials(credentials) {
   dom.output.console.innerHTML = withHtml;
 }
 
+function useLastRawId(rawId) {
+  let last = allowedCredentials.length - 1;
+  if(allowedCredentials[last].id.textContent.length !== 0) {
+    addAllowedCredential();
+    ++last;
+  }
+
+  const ac = allowedCredentials[last];
+  ac.id.textContent = rawId.substr(0, 8) + '...';
+  ac.id.value = rawId;
+}
+
 async function register() {
   try {
     const credentials = await navigator.credentials.create(getCreateOptions());
     handleCredentials(credentials);
+
+    useLastRawId(binToHex(credentials.rawId));
   } catch(e) {
     log.debug(e);
 
@@ -390,11 +416,27 @@ function getGetOptions() {
 
   // TODO: handle multiple credentials
   if(gForm.allowCredentials.checkbox.checked) {
-    publicKey.allowCredentials = [{
-      type: 'public-key',
-      id: lastCredentials.rawId,
-      transports: ['usb']
-    }];
+    publicKey.allowCredentials = allowedCredentials.map(ac => {
+      const result = {
+        type: 'public-key',
+        id: Buffer.from(ac.id.value, 'hex')
+      };
+
+      if(ac.type.checkbox.checked) {
+        result.transports = [];
+        if(ac.type.usb.checked) {
+          result.transports.push('usb');
+        }
+        if(ac.type.nfc.checked) {
+          result.transports.push('nfc');
+        }
+        if(ac.type.ble.checked) {
+          result.transports.push('ble');
+        }
+      }
+
+      return result;
+    });
   }
 
   if(gForm.userVerification.checkbox.checked) {
@@ -427,9 +469,13 @@ function closeModal(event) {
   document.querySelector('.modal.is-active').classList.remove('is-active');
 }
 
-function showPasteModal(event) {
+function showPasteModal(event, i) {
   dom.pasteModalInput.value = '';
   dom.pasteModal.classList.add('is-active');
+}
+
+function uploadAllowedCredentialsId(event, i) {
+
 }
 
 function setupCheckboxes() {
@@ -476,20 +522,6 @@ function setupCheckboxes() {
 
     // Get
     [gForm.rpId.checkbox, [gForm.rpId.input]],
-    [gForm.allowCredentials.checkbox, [
-      gForm.allowCredentials.button,
-      gForm.allowCredentials.id.upload,
-      gForm.allowCredentials.id.paste,
-      gForm.allowCredentials.type.checkbox,
-      gForm.allowCredentials.type.usbCheckbox,
-      gForm.allowCredentials.type.nfcCheckbox,
-      gForm.allowCredentials.type.bleCheckbox
-    ]],
-    [gForm.allowCredentials.type.checkbox, [
-      gForm.allowCredentials.type.usbCheckbox,
-      gForm.allowCredentials.type.nfcCheckbox,
-      gForm.allowCredentials.type.bleCheckbox
-    ]],
     [gForm.userVerification.checkbox, [gForm.userVerification.select]],
     [gForm.mediation.checkbox, [gForm.mediation.select]]
   ];
@@ -511,6 +543,9 @@ function setupCheckboxes() {
 
     cbox.addEventListener('input', handler);
   }
+
+  dom.getForm.allowCredentials.checkbox
+     .addEventListener('input', allowCredentialsCheckboxHandler);
 }
 
 function createRegenHandler(key, length) {
@@ -577,6 +612,69 @@ function addPubKeyParam() {
   pubKeyParams.push(select);
 }
 
+function allowCredentialsCheckboxHandler(event) {
+  const disabled = !event.target.checked;
+
+  dom.getForm.allowCredentials.button.disabled = disabled;
+
+  for(const ac of allowedCredentials) {
+    const elements = ac.id.parentElement.getElementsByTagName('*');
+    for(const e of elements) {
+      e.disabled = disabled;
+    }
+  }
+}
+
+function allowCredentialsTypeCheckboxHandler(event, usb, nfc, ble) {
+  const disabled = !event.target.checked;
+
+  usb.disabled = disabled;
+  nfc.disabled = disabled;
+  ble.disabled = disabled;
+}
+
+function addAllowedCredential() {
+  const i = allowedCredentials.length;
+  const html =
+`, {
+        type: 'public-key',
+        id: <span id="d-g-allow-creds-id-${i}"></span><button id="d-g-upload-allow-creds-id-${i}">Upload (binary)</button><button id="d-g-paste-base64-allow-creds-id-${i}">Paste (Base64)</button>,
+        <input id="d-g-allow-creds-type-cbox-${i}" type="checkbox"> type: <input id="d-g-allow-creds-type-usb-${i}" type="checkbox"> 'usb' <input id="d-g-allow-creds-type-nfc-${i}" type="checkbox"> 'nfc' <input id="d-g-allow-creds-type-ble-${i}" type="checkbox"> 'ble'
+      }`;
+
+  const span = document.createElement('span');
+  span.innerHTML = html;
+
+  dom.getForm.allowCredentials.placeholder.parentElement
+     .insertBefore(span, dom.getForm.allowCredentials.placeholder);
+
+  const allowedCredential = {
+    id: document.getElementById(`d-g-allow-creds-id-${i}`),
+    upload: document.getElementById(`d-g-upload-allow-creds-id-${i}`),
+    paste: document.getElementById(`d-g-paste-base64-allow-creds-id-${i}`),
+    type: {
+      checkbox: document.getElementById(`d-g-allow-creds-type-cbox-${i}`),
+      usb: document.getElementById(`d-g-allow-creds-type-usb-${i}`),
+      nfc: document.getElementById(`d-g-allow-creds-type-nfc-${i}`),
+      ble: document.getElementById(`d-g-allow-creds-type-ble-${i}`)
+    }
+  };
+
+  allowedCredentials.push(allowedCredential);
+
+  allowedCredential.type.checkbox.addEventListener('input', e => {
+    return allowCredentialsTypeCheckboxHandler(e,
+      allowedCredential.type.usb,
+      allowedCredential.type.nfc,
+      allowedCredential.type.ble);
+  });
+
+  allowedCredential.paste
+     .addEventListener('click', e => showPasteModal(e, 0));
+  allowedCredential.upload
+     .addEventListener('click', e => uploadAllowedCredentialsId(e, 0));
+}
+
 function setupEvents() {
   dom.registerButton.addEventListener('click', register);
   dom.authenticateButton.addEventListener('click', authenticate);
@@ -586,7 +684,9 @@ function setupEvents() {
   dom.pasteModalOkButton.addEventListener('click', closeModal);
 
   dom.getForm.allowCredentials.id.paste
-     .addEventListener('click', showPasteModal);
+     .addEventListener('click', e => showPasteModal(e, 0));
+  dom.getForm.allowCredentials.id.upload
+     .addEventListener('click', e => uploadAllowedCredentialsId(e, 0));
 
   const userIdRegenHandler = createRegenHandler('userId', 32);
   userIdRegenHandler();
@@ -600,6 +700,9 @@ function setupEvents() {
 
   dom.createForm.pubKeyCredParams.button
      .addEventListener('click', addPubKeyParam);
+
+  dom.getForm.allowCredentials.button
+     .addEventListener('click', addAllowedCredential);
 
   dom.output.uploadCBOR.addEventListener('change', uploadCBOR);
   dom.output.downloadCBOR.addEventListener('click', downloadCBOR);
