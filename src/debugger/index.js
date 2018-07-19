@@ -562,6 +562,13 @@ function setupCheckboxes() {
 
   dom.getForm.allowCredentials.checkbox
      .addEventListener('input', allowCredentialsCheckboxHandler);
+
+  allowedCredentials[0].type.checkbox.oninput = e => {
+  return allowCredentialsTypeCheckboxHandler(e,
+    allowedCredentials[0].type.usb,
+    allowedCredentials[0].type.nfc,
+    allowedCredentials[0].type.ble);
+  };
 }
 
 function createRegenHandler(key, length) {
@@ -635,9 +642,16 @@ function allowCredentialsCheckboxHandler(event) {
 
   for(const ac of allowedCredentials) {
     const elements = ac.id.parentElement.getElementsByTagName('*');
+    const transportCboxes = [];
+
     for(const e of elements) {
+      if(!disabled && e.id.includes('d-g-allow-creds-type-cbox')) {
+        transportCboxes.push(e);
+      }
       e.disabled = disabled;
     }
+
+    transportCboxes.forEach(cbox => cbox.oninput({ target: cbox }));
   }
 }
 
@@ -655,7 +669,7 @@ function addAllowedCredential() {
 `, {
         type: 'public-key',
         id: <span id="d-g-allow-creds-id-${i}"></span><input type="file" id="d-g-upload-allow-creds-file-${i}" style="display: none"><button id="d-g-upload-allow-creds-id-${i}">Upload (binary)</button><button id="d-g-paste-base64-allow-creds-id-${i}">Paste (Base64)</button>,
-        <input id="d-g-allow-creds-type-cbox-${i}" type="checkbox"> type: <input id="d-g-allow-creds-type-usb-${i}" type="checkbox"> 'usb' <input id="d-g-allow-creds-type-nfc-${i}" type="checkbox"> 'nfc' <input id="d-g-allow-creds-type-ble-${i}" type="checkbox"> 'ble'
+        <input id="d-g-allow-creds-type-cbox-${i}" type="checkbox"> transports: <input id="d-g-allow-creds-type-usb-${i}" type="checkbox" disabled> 'usb' <input id="d-g-allow-creds-type-nfc-${i}" type="checkbox" disabled> 'nfc' <input id="d-g-allow-creds-type-ble-${i}" type="checkbox" disabled> 'ble'
       }`;
 
   const span = document.createElement('span');
@@ -679,12 +693,12 @@ function addAllowedCredential() {
 
   allowedCredentials.push(allowedCredential);
 
-  allowedCredential.type.checkbox.addEventListener('input', e => {
+  allowedCredential.type.checkbox.oninput = e => {
     return allowCredentialsTypeCheckboxHandler(e,
       allowedCredential.type.usb,
       allowedCredential.type.nfc,
       allowedCredential.type.ble);
-  });
+  };
 
   allowedCredential.paste
      .addEventListener('click', e => showPasteModal(e, i));
