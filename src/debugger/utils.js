@@ -1,6 +1,8 @@
+import oids from './oids.js';
+
 import { fromBER } from 'asn1js';
 import { Certificate } from 'pkijs';
-import oids from './oids.js';
+import cbor from 'cbor';
 
 export function deepClone(object) {
   const result = {};
@@ -106,6 +108,18 @@ export function getByPath(object, path) {
   return obj;
 }
 
+export function transform(object, transformations) {
+  Object.keys(object).forEach(key => {
+    if(key in transformations) {
+      object[key] = transformations[key].transform(object[key]);
+    }
+
+    if(typeof object[key] === 'object') {
+      transform(object[key], transformations);
+    }
+  });
+}
+
 export function derToPem(der) {
   const b64 = Buffer.from(der).toString('base64');
 
@@ -150,3 +164,25 @@ export function x5cArrayToCertInfo(array) {
 
   return info.join('\n');
 }
+
+export const cborEncoder = new cbor.Encoder({
+  genTypes: [
+    ArrayBuffer, (encoder, arrayBuffer) => {
+      return encoder.pushAny(Buffer.from(arrayBuffer));
+    }
+  ]
+});
+
+export function getErrorMessage(e) {
+  if(e instanceof Error) {
+    return e.toString();
+  }
+
+  return JSON.stringify(e, null, 2);
+}
+
+export function getSelectValue(select) {
+  return select.options[select.selectedIndex].value;
+}
+
+

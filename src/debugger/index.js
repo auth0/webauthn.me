@@ -1,13 +1,25 @@
 import * as dom from './dom-elements.js';
 import strings from './strings.js';
+
 import {
   deepClone,
-  objectSlice,
   findKey,
   derToPem,
   x5cArrayToCertInfo,
-  prettyStringify
+  prettyStringify,
+  cborEncoder,
+  getErrorMessage,
+  getSelectValue,
+  transform
 } from './utils.js';
+
+import { prettifyTransformations, binToHex } from './transformations.js';
+
+import {
+  parseCredentials,
+  prettifyCredentials,
+  prettyCredentialsWithHtml
+} from './output-parser.js';
 
 import log from 'loglevel';
 import cbor from 'cbor';
@@ -15,14 +27,6 @@ import { saveAs } from 'file-saver';
 import coseToJwk from 'cose-to-jwk';
 import tippy from 'tippy.js';
 import jkwToPem from 'jwk-to-pem';
-
-const cborEncoder = new cbor.Encoder({
-  genTypes: [
-    ArrayBuffer, (encoder, arrayBuffer) => {
-      return encoder.pushAny(Buffer.from(arrayBuffer));
-    }
-  ]
-});
 
 let lastCredentials;
 let lastCredentialsParsed;
@@ -49,18 +53,6 @@ const options = {
   userId: new Uint8Array(32)
 };
 
-function getErrorMessage(e) {
-  if(e instanceof Error) {
-    return e.toString();
-  }
-
-  return JSON.stringify(e, null, 2);
-}
-
-function getSelectValue(select) {
-  return select.options[select.selectedIndex].value;
-}
-
 function getAlgValueFromSelect(select) {
   // TODO: add other algs
   const values = {
@@ -68,172 +60,6 @@ function getAlgValueFromSelect(select) {
     rs256: -257
   }
   return values[select.options[select.selectedIndex].value];
-}
-
-function parseAuthenticatorData(data) {
-  const d = data instanceof ArrayBuffer ?
-    new DataView(data) :
-    new DataView(data.buffer, data.byteOffset, data.byteLength)
-  let p = 0;
-
-  const result = {};
-
-  result.rpIdHash = '';
-  for(const end = p + 32; p < end; ++p) {
-    result.rpIdHash += d.getUint8(p).toString(16);
-  }
-
-  const flags = d.getUint8(p++);
-  result.flags = {
-    userPresent: (flags & 0x01) !== 0,
-    reserved1: (flags & 0x02) !== 0,
-    userVerified: (flags & 0x04) !== 0,
-    reserved2: ((flags & 0x38) >>> 3).toString(16),
-    attestedCredentialData: (flags & 0x40) !== 0,
-    extensionDataIncluded: (flags & 0x80) !== 0
-  };
-
-  result.signCount = d.getUint32(p, false);
-  p += 4;
-
-  if(result.flags.attestedCredentialData) {
-    const atCredData = {};
-    result.attestedCredentialData = atCredData;
-
-    atCredData.aaguid = '';
-    for(const end = p + 16; p < end; ++p) {
-      atCredData.aaguid += d.getUint8(p).toString(16);
-    }
-
-    atCredData.credentialIdLength = d.getUint16(p, false);
-    p += 2;
-
-    atCredData.credentialId = '';
-    for(const end = p + atCredData.credentialIdLength; p < end; ++p) {
-      atCredData.credentialId += d.getUint8(p).toString(16);
-    }
-
-    try {
-      const encodedCred = Buffer.from(d.buffer, d.byteOffset + p);
-      atCredData.credentialPublicKey =
-        cbor.encode(cbor.decodeFirstSync(encodedCred));
-    } catch(e) {
-      log.error('Failed to decode CBOR data: ', e);
-
-      atCredData.credentialPublicKey = `Decode error: ${e.toString()}`
-    }
-  }
-
-  if(result.flags.extensionDataIncluded) {
-    // TODO
-  }
-
-  return result;
-}
-
-function parseAttestationObject(data) {
-  const buffer = data instanceof ArrayBuffer ?
-    Buffer.from(data) :
-    Buffer.from(data.buffer, data.byteOffset, data.byteLength);
-
-  try {
-    const decoded = cbor.decodeFirstSync(buffer);
-
-    if(decoded.authData) {
-      //saveAs(new Blob([decoded.authData]), 'authData.bin');
-      decoded.authData = parseAuthenticatorData(decoded.authData);
-    }
-
-    return decoded;
-  } catch(e) {
-    const msg = 'Failed to decode attestationObject, unknown attestation type?';
-    log.error(msg);
-    return msg;
-  }
-}
-
-function binToHex(data) {
-  if(!(data instanceof Buffer)) {
-    try {
-      data = Buffer.from(data);
-    } catch(e) {
-      return '';
-    }
-  }
-
-  return data.toString('hex');
-}
-
-function parseClientDataJSON(data) {
-  const decoder = new TextDecoder('utf-8');
-  const decoded = decoder.decode(data);
-  return JSON.parse(decoded);
-}
-
-const prettifyTransformations = {
-  rawId: {
-    transform: binToHex,
-    buttons: ['Use', 'Download']
-  },
-  sig: {
-    transform: binToHex,
-    buttons: ['Download']
-  },
-  signature: {
-    transform: binToHex,
-    buttons: ['Download']
-  },
-  userHandle: {
-    transform: binToHex,
-    buttons: ['Download']
-  },
-  x5c: {
-    transform: arr => arr.map(binToHex),
-    buttons: ['View', 'Download PEM']
-  },
-  credentialPublicKey: {
-    transform: coseToJwk,
-    buttons: ['Download COSE', 'Download JWK', 'Download PEM']
-  },
-  authenticatorData: {
-    transform: parseAuthenticatorData
-  },
-  attestationObject: {
-    transform: parseAttestationObject
-  },
-  clientDataJSON: {
-    transform: parseClientDataJSON
-  }
-};
-
-// Transform special keys
-function transform(object, transformations) {
-  Object.keys(object).forEach(key => {
-    if(key in transformations) {
-      object[key] = transformations[key].transform(object[key]);
-    }
-
-    if(typeof object[key] === 'object') {
-      transform(object[key], transformations);
-    }
-  });
-}
-
-function parseCredentials(credentials) {
-  const result = deepClone(credentials);
-  const transformations = objectSlice(prettifyTransformations, [
-    'clientDataJSON',
-    'authenticatorData',
-    'attestationObject'
-  ]);
-  transform(result, transformations);
-  return result;
-}
-
-function prettifyCredentials(credentials) {
-  const creds = deepClone(credentials);
-  transform(creds, prettifyTransformations);
-  return prettyStringify(creds);
 }
 
 window.outputButtonClick = function outputButtonClick(event) {
@@ -281,34 +107,6 @@ window.outputButtonClick = function outputButtonClick(event) {
         break;
     }
   }
-}
-
-function prettyCredentialsWithHtml(prettyCredentials) {
-  let lines = prettyCredentials.split('\n');
-
-  lines = lines.map(line => {
-    for(const key of Object.keys(prettifyTransformations)) {
-      const keyStr = `"${key}": `;
-      const idx = line.indexOf(keyStr);
-      if(idx !== -1 && prettifyTransformations[key].buttons) {
-        const pos = idx + keyStr.length;
-
-        const head = line.substring(0, pos);
-        const tail = line.substring(pos);
-
-        let buttons = '';
-        for(const but of prettifyTransformations[key].buttons) {
-          buttons +=
-            `<button data-key="${key}" onclick="outputButtonClick(event);">` +
-            `${but}</button>`;
-        }
-        line = `${head}${buttons}${tail}`;
-      }
-    }
-    return line;
-  });
-
-  return lines.join('\n');
 }
 
 function getCreateOptions() {
