@@ -1,6 +1,6 @@
 module.exports = grunt => {
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-stylus');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-pug');
   grunt.loadNpmTasks('grunt-webpack');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -31,10 +31,13 @@ module.exports = grunt => {
       }
     },
 
-    stylus: {
+    less: {
       default: {
         files: {
-          'dist/css/index.css': 'stylus/index.styl'
+          'dist/css/common.css': 'less/common.less',
+          'dist/css/index.css': 'less/index.less',
+          'dist/css/tutorial.css': 'less/tutorial.less',
+          'dist/css/introduction.css': 'less/introduction.less'
         }
       }
     },
@@ -79,11 +82,11 @@ module.exports = grunt => {
         ],
         tasks: 'pug'
       },
-      stylus: {
+      less: {
         files: [
-          'stylus/**',
+          'less/**',
         ],
-        tasks: 'stylus'
+        tasks: 'less'
       }
     },
 
@@ -114,7 +117,7 @@ module.exports = grunt => {
   grunt.registerTask('build-dev', [
     'clean',
     'copy',
-    'stylus',
+    'less',
     'pug',
     'webpack:dev'
   ]);
@@ -122,7 +125,7 @@ module.exports = grunt => {
   grunt.registerTask('build-prod', [
     'clean',
     'copy',
-    'stylus',
+    'less',
     'pug',
     'webpack:prod'
   ]);
