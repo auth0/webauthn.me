@@ -1,0 +1,25 @@
+extends ../layout.pug
+
+block stylesheets
+  link(rel='stylesheet', href='/css/tutorial.css', type='text/css', media='all')
+
+block scripts
+  script(src="js/tutorial.js")
+
+block content
+  include ../hero.pug
+  
+  .tutorial-container
+    include step-1.pug
+    include step-2.pug
+    include step-3.pug
+    include step-4.pug
+    include step-5.pug
+    include step-6.pug
+
+    .tutorial-try-the-debugger-container
+      .tutorial-try-the-debugger-left
+        h1 Now you can try the debugger to see all options in-depth
+      .tutorial-try-the-debugger-right
+        button.tutorial-try-the-debugger-learn-more.button Learn more
+        button.tutorial-try-the-debugger-try.button Try the debugger

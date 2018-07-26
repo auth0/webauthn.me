@@ -1,29 +1,12 @@
-doctype html
-html(lang='en')
-  head
-    block meta
-    title Web Authentication Debugger PoC
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(name='author', content='auth0.com')
-    meta(name='description', content='Web Authentication Debugger PoC')
+extends layout.pug
 
-    link(rel='stylesheet', href='css/bulma.min.css', type='text/css', media='all')
+block stylesheets
+  link(rel='stylesheet', href='css/index.css', type='text/css', media='all')
 
-    link(rel='prefetch', href='/introduction.html')
+block scripts
+  script(src="js/index.js")
 
-  body
-
-    include navbar.pug
-    include top.pug
-    include debugger/howto.pug
-    include debugger/index.pug
-
-    // Main script
-    script(src="js/index.js")
-
-    // GDPR cookie banner
-    script(src="https://cdn.cookielaw.org/consent/c1198aef-6105-4bf5-9af7-ab5b543482e0.js")
-    script(type="text/javascript").
-      function OptanonWrapper() { }
+block content
+  include top.pug
+  include debugger/howto.pug
+  include debugger/index.pug

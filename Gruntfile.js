@@ -45,13 +45,14 @@ module.exports = grunt => {
     pug: {
       default: {
         options: {
-          //pretty: true,
+          pretty: true,
           data: {
           }
         },
         files: {
-          'dist/index.html': 'views/index.pug',
-          'dist/introduction.html': 'views/introduction.pug',
+          //'dist/index.html': 'views/index.pug',
+          //'dist/introduction.html': 'views/introduction/index.pug',
+          'dist/tutorial.html': 'views/tutorial/index.pug',
         }
       }
     },
