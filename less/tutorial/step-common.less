@@ -1,0 +1,60 @@
+@import "../vars.less";
+
+@tutorial-step-box-margin-top: 69px;
+
+.tutorial-step-container {
+  display: flex;
+  color: white;
+  letter-spacing: 0;
+
+  .tutorial-step-left {
+    position: relative;
+    width: @tutorial-step-left-width;
+
+    .tutorial-step-circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: @tutorial-step-left-width;
+      height: @tutorial-step-left-width;
+      border-radius: 50%;
+      border: 2px solid #00B7EF;
+      background-color: @background-color;
+
+      .tutorial-step-number {
+        font-size: 28pt;
+        text-align: center;
+      }
+    }
+
+    .tutorial-step-line {
+      position: relative;
+      left: 50%;
+      border-left: 1px solid @color-dark-gray;
+      height: 100%;
+      z-index: -1;
+    }
+  }
+
+  .tutorial-step-content {
+    max-width: 795px;
+
+    .tutorial-step-title {
+      font-size: 28pt;
+      font-weight: @font-weight-normal;
+      line-height: @tutorial-step-left-width;
+    }
+
+    .tutorial-step-subtitle {
+      font-size: 12pt;
+    }
+
+    padding-left: 116px;
+    flex-grow: 1;
+  }
+}

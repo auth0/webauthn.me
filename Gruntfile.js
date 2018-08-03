@@ -36,7 +36,7 @@ module.exports = grunt => {
         files: {
           'dist/css/common.css': 'less/common.less',
           'dist/css/index.css': 'less/index.less',
-          'dist/css/tutorial.css': 'less/tutorial.less',
+          'dist/css/tutorial.css': 'less/tutorial/index.less',
           'dist/css/introduction.css': 'less/introduction.less'
         }
       }

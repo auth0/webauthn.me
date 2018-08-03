@@ -4,7 +4,7 @@
 @import "hero.less";
 
 html {
-  background-color: black;
+  background-color: @background-color;
   color: @font-color-gray;
   font-family: 'fakt-web', 'Helvetica Neue',
                Helvetica, Arial, sans-serif;
@@ -25,4 +25,17 @@ a {
 
 pre {
   font-family: 'Roboto Mono', monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: @font-weight-normal;
+}
+
+input {
+  font-family: 'Roboto Mono', monospace;
+  color: white;
+  border-style: none;
+  height: @input-type-text-height;
+  font-size: @font-size;
 }
