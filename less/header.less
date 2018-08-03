@@ -1,3 +1,5 @@
+@import "vars.less";
+
 .header-container {
   width: 100%;
   height: 5em;
@@ -10,17 +12,23 @@
 
     .header-crafted-by-container {
       display: flex;
+      font-size: @font-size + 1pt;
+
+      span {
+        margin-right: 1ch;
+      }
     }
   }
 
   .header-right {
     display: flex;
     flex-grow: 1;
-    flex-direction: row-reverse;
+    //flex-direction: row-reverse;
+    justify-content: flex-end;
 
     .header-nav-item {
       text-transform: uppercase;
-      margin: 0 3ch;
+      margin-left: 26px;
     }
   }
 }

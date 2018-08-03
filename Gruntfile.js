@@ -20,14 +20,14 @@ module.exports = grunt => {
           cwd: 'img',
           src: ['**'],
           dest: 'dist/img'
-        }, {
+        }, /*{
           expand: true,
           flatten: true,
           src: [
             'node_modules/bulma/css/bulma.min.css'
           ],
           dest: 'dist/css/'
-        }]
+        }*/]
       }
     },
 
