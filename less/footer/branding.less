@@ -1,0 +1,48 @@
+@import "../vars.less";
+
+.footer-branding-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-family: Helvetica, 'fakt-web', Arial, sans-serif;
+  font-weight: @font-weight-light;
+  margin-bottom: 73px;
+
+  .footer-branding-left, .footer-branding-right {
+    display: flex;
+    width: 300px;
+  }
+
+  .footer-branding-left {
+    flex-direction: column;
+
+    .footer-crafted-by-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      color: white;
+
+      span {
+        margin-right: 1ch;
+      }
+    }
+
+    .footer-copyright {
+      color: #696969;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .footer-branding-right {
+    justify-content: flex-end;
+
+    img {
+      margin-right: 2ch;
+    }
+
+    span {
+      color: white;
+    }
+  }
+}
