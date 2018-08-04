@@ -20,6 +20,11 @@ module.exports = grunt => {
           cwd: 'img',
           src: ['**'],
           dest: 'dist/img'
+        }, {
+          expand: true,
+          cwd: 'fonts',
+          src: ['**'],
+          dest: 'dist/fonts'
         }, /*{
           expand: true,
           flatten: true,

@@ -12,7 +12,8 @@
 
     .header-crafted-by-container {
       display: flex;
-      font-size: @font-size + 1pt;
+      font-size: @font-size + 2px;
+      font-weight: @font-weight-light;
 
       span {
         margin-right: 1ch;
@@ -23,8 +24,9 @@
   .header-right {
     display: flex;
     flex-grow: 1;
-    //flex-direction: row-reverse;
     justify-content: flex-end;
+    letter-spacing: @letter-spacing;
+    font-weight: @font-weight-semi-bold;
 
     .header-nav-item {
       text-transform: uppercase;
