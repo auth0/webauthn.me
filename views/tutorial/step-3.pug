@@ -1,20 +1,27 @@
 .tutorial-step-container
-  .tutorial-step-left
+  +tutorial-step-left(3)
+
   .tutorial-step-content
     h1.tutorial-step-title.title Your New Credential
     h4.tutorial-step-subtitle.normal.
-      You have created a new credential. The rawId and the public key are all that are needed to identify you. These are meant to be passed to the relying party.
+      You have created a new credential. The #[pre rawId] and the public key are all that are needed to identify you. These are meant to be passed to the relying party.
 
     .tutorial-animation-container
 
     .tutorial-step-3-data-container
       .tutorial-step-3-data-left
         h3.tutorial-step-3-data-title Your rawId
-        pre.tutorial-code-container
+        code.tutorial-code-container.
+          ab23423abcd342edab23423abcd342edab23423abcd342edab23423abcd342edab23423abcd342edab23423abcd342edab23423abcd342edab23423abcd342edab23423abcd342edab23423abcd342edab23423abcd342edab23423abcd342ed
 
       .tutorial-step-3-data-right
         h3.tutorial-step-3-data-title Your Public Key
-        pre.tutorial-code-container
+        pre.tutorial-code-container.
+          "kty": "EC",
+          "alg": "ECDSA_w_SHA256",
+          “crv": "P-256",
+          "x": "zkagx2pN2xevrsZoBYsiW7OOiSXWW2IDMvjhVTPwzBY=",
+          "y": "G3lHSN3T43JxPly/86rm2bYwNACrFo1IOXI1HY2V1Xw="
 
-    button.tutorial-step-3-next.button Next
+    button.tutorial-step-3-next.button-colorful Next
   

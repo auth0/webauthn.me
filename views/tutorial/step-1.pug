@@ -1,8 +1,8 @@
+include step-left.pug
+
 .tutorial-step-container
-  .tutorial-step-left
-    .tutorial-step-circle
-      span.tutorial-step-number 1
-    .tutorial-step-line
+  +tutorial-step-left(1)
+  
   .tutorial-step-content
     h1.tutorial-step-title.title Register Your User
     h4.tutorial-step-subtitle.normal.

@@ -3,6 +3,8 @@
 @tutorial-step-box-margin-top: 69px;
 
 .tutorial-step-container {
+  position: relative;
+  left: 100px;
   display: flex;
   color: white;
   letter-spacing: 0;
@@ -26,6 +28,8 @@
       border: 2px solid #00B7EF;
       background-color: @background-color;
 
+      box-sizing: border-box;
+
       .tutorial-step-number {
         font-weight: @font-weight-semi-bold;
         font-size: 36px;
@@ -44,6 +48,8 @@
 
   .tutorial-step-content {
     max-width: 795px;
+    padding-left: 116px;
+    flex-grow: 1;
 
     .tutorial-step-title {
       font-size: 36px;
@@ -53,16 +59,22 @@
 
     .tutorial-step-subtitle {
       font-size: 16px;
+      font-weight: @font-weight-light;
     }
-
-    padding-left: 116px;
-    flex-grow: 1;
 
     .tutorial-animation-container {
       width: 100%;
       height: 118px;
       background-color: @color-dark-gray;
       margin: @tutorial-step-box-margin-top 0;
+    }
+
+    .tutorial-code-container {
+      font-size: 13px;
+      font-weight: lighter;
+      line-height: 24px;
+      word-wrap: break-word;
+      color: @color-text-light-gray;
     }
   }
 }
