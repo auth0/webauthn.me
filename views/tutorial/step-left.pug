@@ -1,5 +1,6 @@
-mixin tutorial-step-left(number)
+mixin tutorial-step-left(number, noline)
   .tutorial-step-left
     .tutorial-step-circle
       span.tutorial-step-number= number
-    .tutorial-step-line
+    unless noline
+      .tutorial-step-line

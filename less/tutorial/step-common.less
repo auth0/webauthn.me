@@ -1,6 +1,6 @@
 @import "../vars.less";
 
-@tutorial-step-box-margin-top: 69px;
+@tutorial-step-box-margin-top: 64px;
 
 .tutorial-step-container {
   position: relative;
@@ -58,6 +58,8 @@
     }
 
     .tutorial-step-subtitle {
+      position: relative;
+      top: -5px;
       font-size: 16px;
       font-weight: @font-weight-light;
     }
@@ -75,6 +77,15 @@
       line-height: 24px;
       word-wrap: break-word;
       color: @color-text-light-gray;
+    }
+
+    .tutorial-step-data-common() {
+      flex-grow: 1;
+      width: 50%;
+      max-width: 50%;
+      padding: 32px 32px 32px 32px;
+      box-sizing: border-box;
+      overflow: scroll;
     }
   }
 }

@@ -1,4 +1,5 @@
 @import "../vars.less";
+@import "step-common.less";
 
 .tutorial-step-3-data-container {
   display: flex;
@@ -12,7 +13,7 @@
     margin: 0 0 16px 0;
   }
 
-  .tutorial-step-3-data-common() {
+  .tutorial-step-data-common() {
     flex-grow: 1;
     width: 50%;
     max-width: 50%;
@@ -22,16 +23,16 @@
   }
 
   .tutorial-step-3-data-left {
-    .tutorial-step-3-data-common();
+    .tutorial-step-data-common();
     border-right: 1px solid black;
   }
 
   .tutorial-step-3-data-right {
-    .tutorial-step-3-data-common();
+    .tutorial-step-data-common();
   }
 }
 
 .tutorial-step-3-next {
-  margin: 64px 0;
+  margin: @tutorial-step-box-margin-top 0;
 }
 

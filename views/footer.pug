@@ -1,0 +1,26 @@
+mixin footer-browser-status-element(icon, name)
+  .todo
+
+.footer-container
+  .footer-browser-status-container
+    .footer-browser-status-text-container
+      .footer-browser-status-text-title
+        img(src='/img/question-circle.svg', alt='question icon')
+        h4 Browser Status
+      p.footer-browser-status-text-title.
+        Web Authentication is only partially included in Chrome 67, Firefox 60, and Edge build 17723 or newer versions.
+    .footer-browser-icons-container
+      +footer-browser-status-element('/img/firefox.svg', 'Firefox 60')
+      +footer-browser-status-element('/img/chrome.svg', 'Chrome 67')
+      +footer-browser-status-element('/img/edge.svg', 'Edge 17723')
+
+  .footer-branding-container
+    .footer-branding-left
+      .footer-crafted-by-container
+        span Crafted by
+        img(src='/img/auth0-logo-color.svg', alt='auth0 logo')
+      span.footer-copyright
+    img(src='/img/webauthn-logo-footer.svg', alt='webauthn logo')
+    a.footer-branding-right(src='')
+      img(src='/img/twitter-logo.svg', alt='twitter logo')
+      span Spread the word
