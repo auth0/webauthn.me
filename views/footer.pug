@@ -1,5 +1,7 @@
 mixin footer-browser-status-element(icon, name)
-  .todo
+  .footer-browser-status
+    img(src=icon, alt='browser logo')
+    span= name
 
 .footer-container
   .footer-browser-status-container
@@ -7,12 +9,12 @@ mixin footer-browser-status-element(icon, name)
       .footer-browser-status-text-title
         img(src='/img/question-circle.svg', alt='question icon')
         h4 Browser Status
-      p.footer-browser-status-text-title.
+      p.
         Web Authentication is only partially included in Chrome 67, Firefox 60, and Edge build 17723 or newer versions.
     .footer-browser-icons-container
-      +footer-browser-status-element('/img/firefox.svg', 'Firefox 60')
-      +footer-browser-status-element('/img/chrome.svg', 'Chrome 67')
-      +footer-browser-status-element('/img/edge.svg', 'Edge 17723')
+      +footer-browser-status-element('/img/firefox-logo.png', 'Firefox 60')
+      +footer-browser-status-element('/img/chrome-logo.png', 'Chrome 67')
+      +footer-browser-status-element('/img/edge-logo.png', 'Edge 17723')
 
   .footer-branding-container
     .footer-branding-left
