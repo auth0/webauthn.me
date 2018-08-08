@@ -1,6 +1,6 @@
 include step-left.pug
 
-.tutorial-step-container
+.tutorial-step-1-container.tutorial-step-container
   +tutorial-step-left(1)
   
   .tutorial-step-content
@@ -17,4 +17,7 @@ include step-left.pug
     button.tutorial-step-1-register.button-colorful Register
     
     .tutorial-animation-container
+      object#tutorial-step-1-animation-object(type='image/svg+xml', 
+                                              data='/img/animation.svg')
+
   

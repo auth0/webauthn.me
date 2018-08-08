@@ -6,6 +6,7 @@ module.exports = merge(common, {
   mode: 'development',
   entry: {
     index: './src/index.js',
+    tutorial: './src/tutorial/index.js',
   },
   output: {
     filename: '[name].js',
