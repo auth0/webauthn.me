@@ -9,13 +9,13 @@
     <g id="Lock-and-Feeling" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="UI_Tutorial-Step-byt-Step" transform="translate(-423.000000, -1366.000000)">
             <g id="Group-4" transform="translate(423.000000, 1366.000000)">
-                <text id="browser" font-family="RobotoMono-Medium, Roboto Mono" font-size="13" font-weight="400" line-spacing="25" fill="#FFFFFF">
+                <text id="browser" font-family="RobotoMono-Medium, Roboto Mono, Monospace" font-size="13" font-weight="400" line-spacing="25" fill="#FFFFFF">
                     <tspan x="374" y="87">browser</tspan>
                 </text>
-                <text id="relying-party" font-family="RobotoMono-Medium, Roboto Mono" font-size="13" font-weight="400" line-spacing="25" fill="#FFFFFF">
+                <text id="relying-party" font-family="RobotoMono-Medium, Roboto Mono, Monospace" font-size="13" font-weight="400" line-spacing="25" fill="#FFFFFF">
                     <tspan x="693" y="87">relying party</tspan>
                 </text>
-                <text id="authenticator" font-family="RobotoMono-Medium, Roboto Mono" font-size="13" font-weight="400" line-spacing="25" fill="#FFFFFF">
+                <text id="authenticator" font-family="RobotoMono-Medium, Roboto Mono, Monospace" font-size="13" font-weight="400" line-spacing="25" fill="#FFFFFF">
                     <tspan x="0" y="87">authenticator</tspan>
                 </text>
                 <path d="M122,32 L338.5,32" id="Line-Left" stroke="#4C4C4C" stroke-linecap="square" fill-rule="nonzero"></path>
@@ -56,10 +56,10 @@
                     <circle id="Oval-6" fill="#000000" cx="79" cy="54" r="2"></circle>
                 </g>
                 <circle id="Data-Dot" fill="#FFFFFF" fill-rule="nonzero" cx="674.5" cy="31.5" r="2.5"></circle>
-                <text id="Text-Right" font-family="FaktPro-SemiBold, Fakt Pro" font-size="14" font-weight="500" line-spacing="24" letter-spacing="1" fill="#FFFFFF">
+                <text id="Text-Right" font-family="FaktPro-SemiBold, Fakt Pro, Helvetica, Arial, sans-serif" font-size="14" font-weight="500" line-spacing="24" letter-spacing="1" fill="#FFFFFF">
                     <tspan x="519.943" y="60">CHALLENGE</tspan>
                 </text>
-                <text id="Text-Left" font-family="FaktPro-SemiBold, Fakt Pro" font-size="14" font-weight="500" line-spacing="24" letter-spacing="1" fill="#FFFFFF">
+                <text id="Text-Left" font-family="FaktPro-SemiBold, Fakt Pro, Helvetica, Arial, sans-serif" font-size="14" font-weight="500" line-spacing="24" letter-spacing="1" fill="#FFFFFF">
                     <tspan x="177.443" y="60">CHALLENGE</tspan>
                 </text>
             </g>
