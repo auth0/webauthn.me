@@ -13,7 +13,13 @@ function getElements() {
   Object.assign(elements, {
     svg: svg,
     dot: svg.getElementById('Data-Dot'),
-    lineRight: svg.getElementById('Line-Right')
+    lineRight: svg.getElementById('Line-Right'),
+    lineLeft: svg.getElementById('Line-Left'),
+    textRight: svg.getElementById('Text-Right').firstChild.firstChild,
+    textLeft: svg.getElementById('Text-Left').firstChild.firstChild,
+    check: svg.getElementById('Check'),
+    countdown: svg.getElementById('Countdown'),
+    countdown: svg.getElementById('Touch-Circles'),
   });
 }
 
