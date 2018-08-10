@@ -1,3 +1,5 @@
+import anime from 'animejs';
+
 const translateRegExp = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/;
 function getTranslate(element) {
   const transforms = element.getAttribute('transform');
@@ -50,33 +52,27 @@ function show(element) {
 }
 
 export default class Animation {
-  construct(svg) {
+  constructor(svg) {
     this.svg = svg;
     this.elements = {
       dot: svg.getElementById('Data-Dot'),
       lineRight: svg.getElementById('Line-Right'),
       lineLeft: svg.getElementById('Line-Left'),
-      textRight: svg.getElementById('Text-Right').firstChild.firstChild,
-      textLeft: svg.getElementById('Text-Left').firstChild.firstChild,
+      textRight: svg.querySelector('#Text-Right tspan'),
+      textLeft: svg.querySelector('#Text-Left tspan'),
       check: svg.getElementById('Check'),
-      countdown: svg.getElementById('Countdown').firstChild,
+      countdown: svg.querySelector('#Countdown tspan'),
       touchCircles: svg.getElementById('Touch-Circles')
     };
 
-    // Save initial state of elements.
-    /*this.initial = {
-      dot: getTranslate(this.elements.dot),
-      textRight: getText(this.elements.textRight),
-      textLeft: getText(this.elements.textLeft),
-      check: getTranslate(this.elements.check),
-      countdown: {
-        visibility: isVisible(this.element.countdown),
-        text: getText(this.elements.countdown)
-      },
-      touchCircles: isVisible(this.element.touchCircles)
-    };*/
-
     this.states = {};
+
+    // Initial state
+    hide(this.elements.check);
+    setText(this.elements.textLeft, '');
+    setText(this.elements.textRight, '');
+    hide(this.elements.countdown);
+    hide(this.elements.touchCircles);
   }
 
   addState(name, elements) {
@@ -84,7 +80,44 @@ export default class Animation {
   }
 
   async trigger(stateName) {
+    const state = this.states[stateName];
+    if(!state) {
+      throw new Error('Unknown state');
+    }
 
+    for(const action of state) {
+      await this.run(action);
+    }
+  }
+
+  async run(action) {
+    const promises = [];
+    
+    if(action.dot) {
+      promises.push(anime(Object.assign({
+        targets: this.elements.dot,
+        duration: 1000,
+        easing: 'easeOutQuad'
+      }, action.dot)).finished);
+    }
+
+    if(action.check) {
+      promises.push(anime(Object.assign({
+        targets: this.elements.check,
+        duration: 0,
+        easing: 'linear'
+      }, action.check)).finished);
+    }
+
+    if(action.textRight) {
+      setText(this.elements.textRight, action.textRight);
+    }
+
+    if(action.textLeft) {
+      setText(this.elements.textLeft, action.textLeft);
+    }
+
+    return Promise.all(promises);
   }
 
   reset() {
@@ -95,22 +128,23 @@ export default class Animation {
 
   static get symbols() {
     return {
+      hide: Symbol(),
+      show: Symbol()
+    };
+  }
+
+  static get offsets() {
+    return {
       dot: {
-        side: {
-          left: Symbol(),
-          right: Symbol()
-        },
-        direction: {
-          leftToRight: Symbol(),
-          rightToLeft: Symbol()
-        }
+        distance: 216.5,
+        toRight: 335
       },
       check: {
-        left: Symbol(),
-        center: Symbol(),
-        right: Symbol()
+        centerToLeft: 344,
+        centerToRight: 331
       }
     };
   }
+
 };
 

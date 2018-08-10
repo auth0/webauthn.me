@@ -90,7 +90,7 @@
                     <circle id="Oval-6" fill="#000000" cx="79" cy="38" r="2"></circle>
                     <circle id="Oval-6" fill="#000000" cx="79" cy="54" r="2"></circle>
                 </g>
-                <circle id="Data-Dot" fill="#FFFFFF" fill-rule="nonzero" cx="674.5" cy="68.5" r="2.5"></circle>
+                <circle id="Data-Dot" fill="#FFFFFF" fill-rule="nonzero" cx="121.5" cy="69.5" r="2.5"></circle>
                 <g id="Text-Right" transform="translate(519.000000, 87.000000)" fill="#FFFFFF" font-family="FaktPro-Medium, Fakt Pro" font-size="14" font-weight="400">
                     <text id="CHALLENGE">
                         <tspan x="0.943" y="10">CHALLENGE</tspan>
