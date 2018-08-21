@@ -1,5 +1,6 @@
 import Animation from './animation.js';
 import animations from './step-1-animations.js';
+import * as step2 from './step-2.js';
 
 let animation;
 
@@ -8,6 +9,8 @@ async function register() {
 
   await animation.trigger('challenge');
   await animation.trigger('register');
+  
+  step2.trigger();
 }
 
 function setupAnimation(object) {
