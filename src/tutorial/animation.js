@@ -1,6 +1,6 @@
 import anime from 'animejs';
 
-const translateRegExp = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/;
+const translateRegExp = /translate\(\s*([^\s,\)]+)[ ,]+([^\s,\)]+)/;
 function getTranslate(element) {
   const transforms = element.getAttribute('transform');
   const matches = translateRegExp.exec(transforms);
@@ -39,16 +39,18 @@ function setText(element, text) {
   element.textContent = text;
 }
 
-function isVisible(element) {
+/*function isVisible(element) {
   return element.style.display !== 'none';
-}
+}*/
 
 function hide(element) {
-  element.style.display = 'none';
+  //element.style.display = 'none';
+  element.style.opacity = 0;
 }
 
 function show(element) {
-  element.style.display = '';
+  //element.style.display = '';
+  element.style.opacity = 1;
 }
 
 export default class Animation {
@@ -73,10 +75,13 @@ export default class Animation {
     setText(this.elements.textRight, '');
     hide(this.elements.countdown);
     hide(this.elements.touchCircles);
+    hide(this.elements.dot);
+
+    this.checkY = getTranslate(this.elements.check).y;
   }
 
-  addState(name, elements) {
-    this.states[name] = elements;
+  addState(name, actions) {
+    this.states[name] = actions;
   }
 
   async trigger(stateName) {
@@ -94,16 +99,18 @@ export default class Animation {
     const promises = [];
     
     if(action.dot) {
+      show(this.elements.dot);
       promises.push(anime(Object.assign({
         targets: this.elements.dot,
         duration: 1000,
         easing: 'easeOutQuad'
-      }, action.dot)).finished);
+      }, action.dot)).finished.then(() => hide(this.elements.dot)));
     }
 
     if(action.check) {
       promises.push(anime(Object.assign({
         targets: this.elements.check,
+        translateY: this.checkY,
         duration: 0,
         easing: 'linear'
       }, action.check)).finished);
@@ -115,6 +122,10 @@ export default class Animation {
 
     if(action.textLeft) {
       setText(this.elements.textLeft, action.textLeft);
+    }
+
+    if(action.wait) {
+      promises.push(new Promise(resolve => setTimeout(resolve, action.wait)));
     }
 
     return Promise.all(promises);
@@ -136,12 +147,15 @@ export default class Animation {
   static get offsets() {
     return {
       dot: {
-        distance: 216.5,
-        toRight: 335
+        leftStart: 0,
+        leftEnd: 216.5,
+        rightStart: 335,
+        rightEnd: 216.5 + 335        
       },
       check: {
-        centerToLeft: 344,
-        centerToRight: 331
+        center: 388,
+        left: 44,
+        right: 388 + 342
       }
     };
   }

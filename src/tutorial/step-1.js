@@ -1,20 +1,23 @@
 import Animation from './animation.js';
+import animations from './step-1-animations.js';
 
 let animation;
 
 async function register() {
+  // Animation + business logic
+
+  // 1. Request challenge
+  await animation.trigger('challenge');
 }
 
 function setupAnimation(object) {
   const svg = object.contentWindow.document.firstChild;
   animation = new Animation(svg);
   
-  // Initial state
-  animation.run({
-    dot: {
-      translateX: Animation.offsets.dot.distance
-    }
-  });
+  // Animation states
+  for(const state of Object.keys(animations)) {
+    animation.addState(state, animations[state]);
+  }
 }
 
 function setupListeners() {
