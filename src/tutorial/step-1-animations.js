@@ -37,5 +37,19 @@ export default {
       opacity: 1
     },
     textRight: ' '
+  }],
+
+  register: [{
+    // Wait
+    wait: 1000
+  }, {
+    // Register call to authenticator
+    dot: {
+      translateX: [
+        Animation.offsets.dot.leftEnd,
+        Animation.offsets.dot.leftStart
+      ]
+    },
+    textLeft: 'CHALLENGE'
   }]
 };

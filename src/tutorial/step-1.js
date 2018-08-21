@@ -6,8 +6,8 @@ let animation;
 async function register() {
   // Animation + business logic
 
-  // 1. Request challenge
   await animation.trigger('challenge');
+  await animation.trigger('register');
 }
 
 function setupAnimation(object) {
