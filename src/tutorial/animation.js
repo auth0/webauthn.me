@@ -53,6 +53,11 @@ function show(element) {
   element.style.opacity = 1;
 }
 
+const symbols = {
+  hide: Symbol(),
+  show: Symbol()
+};
+
 export default class Animation {
   constructor(svg) {
     this.svg = svg;
@@ -124,6 +129,33 @@ export default class Animation {
       setText(this.elements.textLeft, action.textLeft);
     }
 
+    if(action.touchCircles) {
+      if(action.touchCircles === symbols.show) {
+        show(this.elements.touchCircles);
+      } else {
+        hide(this.elements.touchCircles);
+      }
+    }
+
+    if(action.countdown === symbols.hide) {
+      hide(this.elements.countdown);
+      clearInterval(this.countdownInterval);
+    } else if(typeof action.countdown === 'number' && action.countdown > 0) {
+      let countdown = action.countdown;
+      
+      show(this.elements.countdown);
+      setText(this.elements.countdown, countdown);
+
+      this.countdownInterval = setInterval(() => {
+        --countdown;
+        setText(this.elements.countdown, countdown);
+        if(countdown === 0) {
+          hide(this.elements.countdown);
+          clearInterval(this.countdownInterval);
+        }
+      }, 1000);
+    }
+
     if(action.wait) {
       promises.push(new Promise(resolve => setTimeout(resolve, action.wait)));
     }
@@ -138,10 +170,7 @@ export default class Animation {
   }
 
   static get symbols() {
-    return {
-      hide: Symbol(),
-      show: Symbol()
-    };
+    return symbols;
   }
 
   static get offsets() {

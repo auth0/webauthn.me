@@ -13,7 +13,7 @@
         <g id="UI_Tutorial-Step-byt-Step" transform="translate(-401.000000, -1884.000000)">
             <g id="Group-5" transform="translate(400.000000, 1878.000000)">
                 <text id="Countdown" font-family="Helvetica-Bold, Helvetica" font-size="14" font-weight="bold" line-spacing="24" letter-spacing="1" fill="#34E27A">
-                    <tspan x="30.3208008" y="14">15s</tspan>
+                    <tspan x="35" y="17">15s</tspan>
                 </text>
                 <g id="browser" transform="translate(375.000000, 110.000000)" fill="#FFFFFF" font-family="RobotoMono-Regular, Roboto Mono" font-size="13" font-weight="normal">
                     <text>
