@@ -65,8 +65,16 @@ export default class Animation {
       dot: svg.getElementById('Data-Dot'),
       lineRight: svg.getElementById('Line-Right'),
       lineLeft: svg.getElementById('Line-Left'),
-      textRight: svg.querySelector('#Text-Right tspan'),
-      textLeft: svg.querySelector('#Text-Left tspan'),
+      textRight: [
+        svg.getElementById('Text-Right-1'),
+        svg.getElementById('Text-Right-2'),
+        svg.getElementById('Text-Right-3'),
+      ],
+      textLeft: [
+        svg.getElementById('Text-Left-1'),
+        svg.getElementById('Text-Left-2'),
+        svg.getElementById('Text-Left-3'),
+      ],
       check: svg.getElementById('Check'),
       countdown: svg.querySelector('#Countdown tspan'),
       touchCircles: svg.getElementById('Touch-Circles')
@@ -76,8 +84,8 @@ export default class Animation {
 
     // Initial state
     hide(this.elements.check);
-    setText(this.elements.textLeft, '');
-    setText(this.elements.textRight, '');
+    this.elements.textRight.forEach(e => setText(e, ' '));
+    this.elements.textLeft.forEach(e => setText(e, ' '));
     hide(this.elements.countdown);
     hide(this.elements.touchCircles);
     hide(this.elements.dot);
@@ -122,11 +130,21 @@ export default class Animation {
     }
 
     if(action.textRight) {
-      setText(this.elements.textRight, action.textRight);
+      let split = action.textRight.split('\n');
+      split.length = 3;
+      split = split.map(l => l ? l : ' ');
+      for(let i = 0; i < split.length; ++i) {
+        setText(this.elements.textRight[i], split[i]);
+      }
     }
 
     if(action.textLeft) {
-      setText(this.elements.textLeft, action.textLeft);
+      let split = action.textLeft.split('\n');
+      split.length = 3;
+      split = split.map(l => l ? l : ' ');
+      for(let i = 0; i < split.length; ++i) {
+        setText(this.elements.textLeft[i], split[i]);
+      }
     }
 
     if(action.touchCircles) {

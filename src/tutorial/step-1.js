@@ -5,12 +5,11 @@ import * as step2 from './step-2.js';
 let animation;
 
 async function register() {
-  // Animation + business logic
-
   await animation.trigger('challenge');
   await animation.trigger('register');
   
-  step2.trigger();
+  const username = document.querySelector('.tutorial-step-1-input').value;
+  step2.trigger(username);
 }
 
 function setupAnimation(object) {

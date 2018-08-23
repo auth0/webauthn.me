@@ -1,25 +1,28 @@
 import Animation from './animation.js';
 import animations from './step-2-animations.js';
+import { timeout } from './step-2-animations.js';
+import * as step3 from './step-3.js';
+import error from './error.js';
+import * as webauthn from './webauthn.js';
+import { scrollTo } from './utils.js';
 
 let animation;
 
-function scrollTo() {
-  const pos = document.querySelector('.tutorial-step-2-container')
-                      .getBoundingClientRect().top + window.scrollY;
-
-  window.scrollTo({
-    top: pos,
-    behavior: 'smooth'
-  });
-}
-
-export async function trigger(username) {
-  console.log('step 2');
+export async function trigger(username) {  
+  scrollTo('.tutorial-step-2-container');
   
-  scrollTo();
-  
-  await animation.trigger('push-button');
-  //await animation.trigger('response');
+  try {
+    animation.trigger('push-button');
+
+    const credentials = await webauthn.register(username, timeout * 1000);
+
+    await animation.trigger('response');
+    await animation.trigger('send-to-relying-party');
+
+    step3.trigger(credentials);
+  } catch(e) {
+    error(e);
+  }
 }
 
 function setupAnimation(object) {
