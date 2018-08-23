@@ -1,7 +1,7 @@
 import Animation from './animation.js';
 
 export default {
-  challenge: [{
+  'challenge': [{
     // Check center
       check: {
         translateX: Animation.offsets.check.center,
@@ -39,7 +39,7 @@ export default {
     textRight: ' '
   }],
 
-  register: [{
+  'register': [{
     // Wait
     wait: 1000
   }, {
@@ -51,5 +51,7 @@ export default {
       ]
     },
     textLeft: 'CHALLENGE'
+  }, {
+    textLeft: ' '
   }]
 };
