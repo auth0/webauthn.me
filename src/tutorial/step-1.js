@@ -1,10 +1,13 @@
 import Animation from './animation.js';
 import animations from './step-1-animations.js';
 import * as step2 from './step-2.js';
+import { scrollTo } from './utils.js';
 
 let animation;
 
 async function register() {
+  scrollTo('.tutorial-step-1-container');
+
   await animation.trigger('challenge');
   await animation.trigger('register');
   

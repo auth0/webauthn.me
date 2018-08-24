@@ -1,3 +1,7 @@
+import { parseAttestationObject } from '../debugger/output-parser.js';
+
+import coseToJwk from 'cose-to-jwk';
+
 export async function register(username, timeout) {
   const challenge = new Uint8Array(32);
   const userId = new Uint8Array(32);
@@ -27,3 +31,23 @@ export async function register(username, timeout) {
 export async function login(rawId) {
 
 }
+
+export function credentialsGetPublicKeyJWK(credentials) {
+  if(!credentials || 
+     !credentials.response || 
+     !credentials.response.attestationObject) {
+    throw new Error('No public-key');
+  }
+
+  const parsed = parseAttestationObject(credentials.response.attestationObject);
+  if(typeof parsed === 'string') {
+    throw new Error('Error parsing attestationObject: ', parsed);
+  }
+
+  try {
+    return coseToJwk(
+      parsed.authData.attestedCredentialData.credentialPublicKey);
+  } catch(e) {
+    throw new Error('No public-key: ', e);
+  }
+} 
