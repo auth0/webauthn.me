@@ -39,9 +39,10 @@ function setupAnimation(object) {
 }
 
 function setupListeners() {
-  document.querySelector('.tutorial-step-3-next').onclick = () => {
+  document.querySelector('.tutorial-step-3-next').onclick = e => {
     if(rawId) {
       step4.trigger(rawId);
+      e.target.disabled = true;
     }
   };
 }

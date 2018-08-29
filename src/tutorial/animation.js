@@ -201,7 +201,10 @@ export default class Animation {
       },
       check: {
         center: 388,
-        left: 44,
+        left: {
+          x: 30,
+          y: 56
+        },
         right: 388 + 342
       }
     };

@@ -42,7 +42,9 @@ export default {
     textLeft: '- RAWID\n- CHALLENGE'
   }, {
     check: {
-      translateX: Animation.offsets.check.left
-    }
+      translateX: Animation.offsets.check.left.x,
+      translateY: Animation.offsets.check.left.y
+    },
+    textLeft: ' '
   }]
 };

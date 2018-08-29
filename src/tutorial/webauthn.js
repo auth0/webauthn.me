@@ -28,8 +28,21 @@ export async function register(username, timeout) {
   });
 }
 
-export async function login(rawId) {
+export async function login(rawId, timeout) {
+  const challenge = new Uint8Array(32);
+  crypto.getRandomValues(challenge);
 
+  return navigator.credentials.get({
+    publicKey: {
+      challenge,
+      timeout,
+      allowCredentials: [{
+        type: 'public-key',
+        id: rawId,
+        transports: ['usb']
+      }]
+    }
+  });
 }
 
 export function credentialsGetPublicKeyJWK(credentials) {

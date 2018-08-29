@@ -1,6 +1,5 @@
 import Animation from './animation.js';
-import animations from './step-2-animations.js';
-import { timeout } from './step-2-animations.js';
+import animations, { timeout } from './step-2-animations.js';
 import * as step3 from './step-3.js';
 import error from './error.js';
 import * as webauthn from './webauthn.js';

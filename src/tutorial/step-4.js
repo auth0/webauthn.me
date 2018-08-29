@@ -21,9 +21,10 @@ export async function trigger(rawId_) {
   scrollTo('.tutorial-step-4-container');
 }
 
-async function login() {
+async function login(e) {
   await animation.trigger('request');
-  step5.trigger();
+  step5.trigger(rawId);
+  e.target.disabled = true;
 }
 
 function setupAnimation(object) {

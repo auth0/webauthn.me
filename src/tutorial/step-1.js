@@ -5,7 +5,7 @@ import { scrollTo } from './utils.js';
 
 let animation;
 
-async function register() {
+async function register(event) {
   scrollTo('.tutorial-step-1-container');
 
   await animation.trigger('challenge');
@@ -13,6 +13,8 @@ async function register() {
   
   const username = document.querySelector('.tutorial-step-1-input').value;
   step2.trigger(username);
+
+  event.target.disabled = true;
 }
 
 function setupAnimation(object) {
@@ -26,8 +28,7 @@ function setupAnimation(object) {
 }
 
 function setupListeners() {
-  document.querySelector('.tutorial-step-1-register').onclick = 
-    () => register();
+  document.querySelector('.tutorial-step-1-register').onclick = register;
 }
 
 export function init() {
