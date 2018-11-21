@@ -11,8 +11,14 @@
 
 .button-dark {
   .button-common-private();
+  transition: border-color 0.3s ease-in-out;
+
   background-color: transparent;
   border: 1px solid @button-dark-border-color;
+
+  &:hover {
+    border-color: @color-white;
+  }
 }
 
 .button-colorful {
