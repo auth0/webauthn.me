@@ -2,7 +2,7 @@ include step-left.pug
 
 .tutorial-step-1-container.tutorial-step-container
   +tutorial-step-left(1)
-  
+
   .tutorial-step-content
     h1.tutorial-step-title.title Register Your User
     h4.tutorial-step-subtitle.normal.
@@ -12,12 +12,10 @@ include step-left.pug
     .tutorial-step-1-box
       span.tutorial-step-1-name Name:
       input.tutorial-step-1-input(type='text',
-                                  value='Username or email')
-    
-    button.tutorial-step-1-register.button-colorful Register
-    
-    .tutorial-animation-container
-      object#tutorial-step-1-animation-object(type='image/svg+xml', 
-                                              data='/img/animation.svg')
+                                  placeholder='Username or email')
 
-  
+    button.tutorial-step-1-register.button-colorful Register
+
+    .tutorial-animation-container
+      object#tutorial-step-1-animation-object(type='image/svg+xml',
+                                              data='/img/animation.svg')
