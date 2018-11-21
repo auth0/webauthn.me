@@ -1,48 +1,51 @@
 module.exports = grunt => {
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-pug');
-  grunt.loadNpmTasks('grunt-webpack');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks("grunt-contrib-copy");
+  grunt.loadNpmTasks("grunt-contrib-less");
+  grunt.loadNpmTasks("grunt-contrib-pug");
+  grunt.loadNpmTasks("grunt-webpack");
+  grunt.loadNpmTasks("grunt-contrib-watch");
+  grunt.loadNpmTasks("grunt-contrib-clean");
+  grunt.loadNpmTasks("grunt-mocha-test");
+  grunt.loadNpmTasks("grunt-contrib-connect");
 
   grunt.initConfig({
     clean: {
-      default: [ 'dist' ]
+      default: ["dist"]
     },
 
     copy: {
       default: {
-        files: [{
-          expand: true,
-          cwd: 'img',
-          src: ['**'],
-          dest: 'dist/img'
-        }, {
-          expand: true,
-          cwd: 'fonts',
-          src: ['**'],
-          dest: 'dist/fonts'
-        }, /*{
+        files: [
+          {
+            expand: true,
+            cwd: "img",
+            src: ["**"],
+            dest: "dist/img"
+          },
+          {
+            expand: true,
+            cwd: "fonts",
+            src: ["**"],
+            dest: "dist/fonts"
+          } /*{
           expand: true,
           flatten: true,
           src: [
             'node_modules/bulma/css/bulma.min.css'
           ],
           dest: 'dist/css/'
-        }*/]
+        }*/
+        ]
       }
     },
 
     less: {
       default: {
         files: {
-          'dist/css/common.css': 'less/common.less',
-          'dist/css/index.css': 'less/index.less',
-          'dist/css/tutorial.css': 'less/tutorial/index.less',
-          'dist/css/introduction.css': 'less/introduction.less'
+          "dist/css/common.css": "less/common.less",
+          "dist/css/index.css": "less/index.less",
+          "dist/css/tutorial.css": "less/tutorial/index.less",
+          "dist/css/introduction.css": "less/introduction/index.less"
         }
       }
     },
@@ -51,48 +54,41 @@ module.exports = grunt => {
       default: {
         options: {
           pretty: true,
-          data: {
-          }
+          data: {}
         },
         files: {
           //'dist/index.html': 'views/index.pug',
-          //'dist/introduction.html': 'views/introduction/index.pug',
-          'dist/tutorial.html': 'views/tutorial/index.pug',
+          "dist/introduction.html": "views/introduction/index.pug",
+          "dist/tutorial.html": "views/tutorial/index.pug"
         }
       }
     },
 
     webpack: {
-      prod: require('./webpack.prod.js'),
-      dev: require('./webpack.dev.js')
+      prod: require("./webpack.prod.js"),
+      dev: require("./webpack.dev.js")
     },
 
     watch: {
       src: {
-        files: ['src/**'],
-        tasks: 'webpack:dev'
+        files: ["src/**"],
+        tasks: "webpack:dev"
       },
       img: {
-        files: [ 'img/**' ],
-        tasks: 'copy'
+        files: ["img/**"],
+        tasks: "copy"
       },
       assets: {
-        files: [
-          'node_modules/bulma/css/**'
-        ],
-        tasks: 'copy'
+        files: ["node_modules/bulma/css/**"],
+        tasks: "copy"
       },
       views: {
-        files: [
-          'views/**'
-        ],
-        tasks: 'pug'
+        files: ["views/**"],
+        tasks: "pug"
       },
       less: {
-        files: [
-          'less/**',
-        ],
-        tasks: 'less'
+        files: ["less/**"],
+        tasks: "less"
       }
     },
 
@@ -113,28 +109,28 @@ module.exports = grunt => {
     connect: {
       default: {
         options: {
-          hostname: '127.0.0.1',
-          base: 'dist',
+          hostname: "127.0.0.1",
+          base: "dist"
         }
       }
-    },
+    }
   });
 
-  grunt.registerTask('build-dev', [
-    'clean',
-    'copy',
-    'less',
-    'pug',
-    'webpack:dev'
+  grunt.registerTask("build-dev", [
+    "clean",
+    "copy",
+    "less",
+    "pug",
+    "webpack:dev"
   ]);
 
-  grunt.registerTask('build-prod', [
-    'clean',
-    'copy',
-    'less',
-    'pug',
-    'webpack:prod'
+  grunt.registerTask("build-prod", [
+    "clean",
+    "copy",
+    "less",
+    "pug",
+    "webpack:prod"
   ]);
 
-  grunt.registerTask('default', ['build-dev', 'connect', 'watch']);
+  grunt.registerTask("default", ["build-dev", "connect", "watch"]);
 };

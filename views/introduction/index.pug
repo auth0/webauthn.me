@@ -1,30 +1,15 @@
-doctype html
-html(lang='en')
-  head
-    block meta
-    title Web Authentication Debugger PoC
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(name='author', content='auth0.com')
-    meta(name='description', content='Web Authentication Debugger PoC')
+extends ../layout.pug
 
-    link(rel='stylesheet', href='css/bulma.min.css', type='text/css', media='all')
+block stylesheets
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css', type='text/css', media='all')
+  link(rel='stylesheet', href='/css/introduction.css', type='text/css', media='all')
 
-    link(rel='prefetch', href='/index.html')
+block variables
+  - var page="introduction"
 
-  body
+block content
+  .introduction-container
+      include:markdown-it(html) introduction.markdown
 
-    include navbar.pug
-    .container
-      section.section
-        .content
-          include:markdown-it(html) introduction.markdown
-
-    // Main script
-    //script(src="js/index.js")
-
-    // GDPR cookie banner
-    script(src="https://cdn.cookielaw.org/consent/c1198aef-6105-4bf5-9af7-ab5b543482e0.js")
-    script(type="text/javascript").
-      function OptanonWrapper() { }
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-javascript.min.js")

@@ -16,6 +16,7 @@
 
       a {
         display: flex;
+        color: @font-color-gray;
 
         span {
           margin-right: 1ch;
@@ -34,7 +35,18 @@
     .header-nav-item {
       text-transform: uppercase;
       margin-left: 26px;
+
+      &.active {
+        a {
+          color: @color-white;
+        }
+      }
+
+      a {
+        border: none;
+
+        color: @font-color-gray;
+      }
     }
   }
 }
-

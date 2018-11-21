@@ -1,0 +1,45 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: @font-weight-normal;
+}
+
+h2 {
+  margin: 0 0 45px 0;
+  color: @h2-color;
+  font-size: @h2-size;
+}
+
+p {
+  margin: 0 0 45px;
+  line-height: 1.8;
+}
+
+a {
+  transition: border 0.2s ease-in-out;
+
+  border-bottom: 1px solid transparent;
+
+  text-decoration: none;
+  color: @color-blue;
+
+  &:hover {
+    border-bottom-color: @color-blue;
+  }
+}
+
+ul {
+  margin: 0 0 32px;
+}
+
+li {
+  line-height: 1.8;
+
+  strong {
+    color: @color-white;
+  }
+}

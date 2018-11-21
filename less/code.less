@@ -1,0 +1,63 @@
+pre[class*="language-"] {
+  display: block;
+  width: 100%;
+  margin: 0 0 45px;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  background: @color-medium-gray;
+
+  border-radius: 3px;
+
+  color: @color-white;
+  text-shadow: none;
+}
+
+.token.tag,
+.token.boolean,
+.token.number,
+.token.deleted {
+  color: #f9015b;
+}
+
+.token.keyword,
+.token.property,
+.token.selector,
+.token.constant,
+.token.symbol,
+.token.builtin {
+  color: #00b7ef;
+}
+
+.token.attr-name,
+.token.attr-value,
+.token.string,
+.token.char,
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable,
+.token.inserted {
+  color: #d43aff;
+}
+
+.language-css .token.string,
+.style .token.string,
+.token.entity,
+.token.operator,
+.token.url {
+  background: none;
+}
+
+code {
+  background-color: @color-blue;
+  padding: 0 10px 2px;
+
+  border-radius: 10px;
+
+  font-size: 13px;
+  color: @color-white;
+}

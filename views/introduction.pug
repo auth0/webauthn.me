@@ -1,34 +1,28 @@
-- var page="tutorial";
-block variables
-
 doctype html
 html(lang='en')
   head
     block meta
-    title Web Authentication Playground
+    title Web Authentication Debugger PoC
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(name='author', content='auth0.com')
     meta(name='description', content='Web Authentication Debugger PoC')
 
-    link(href='https://fonts.googleapis.com/css?family=Roboto+Mono',
-         rel="stylesheet")
-    link(rel='stylesheet', href='/css/common.css', type='text/css', media='all')
-    block stylesheets
+    link(rel='stylesheet', href='css/bulma.min.css', type='text/css', media='all')
 
-    block prefetch
-      include prefetch.pug
+    link(rel='prefetch', href='/index.html')
 
   body
 
-    include header.pug
+    include navbar.pug
+    .container
+      section.section
+        .content
+          include:markdown-it(html) introduction.markdown
 
-    block content
-
-    include footer.pug
-
-    block scripts
+    // Main script
+    //script(src="js/index.js")
 
     // GDPR cookie banner
     script(src="https://cdn.cookielaw.org/consent/c1198aef-6105-4bf5-9af7-ab5b543482e0.js")

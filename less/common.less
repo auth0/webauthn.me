@@ -2,13 +2,13 @@
 @import "fonts.less";
 @import "header.less";
 @import "hero.less";
+@import "typography.less";
 @import "footer/index.less";
 
 html {
   background-color: @background-color;
   color: @font-color-gray;
-  font-family: 'fakt-web', 'Helvetica Neue',
-               Helvetica, Arial, sans-serif;
+  font-family: "fakt-web", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: @font-size;
   font-weight: @font-weight-normal;
 }
@@ -18,24 +18,15 @@ body {
   margin: 3em auto 0 auto;
 }
 
-a {
-  text-decoration: none;
-  color: @font-color-gray;
-}
-
-pre, code {
+pre,
+code {
   display: inline;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   font-size: @font-size;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  font-weight: @font-weight-normal;
-}
-
 input {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   color: white;
   border-style: none;
   height: @input-type-text-height;
@@ -44,4 +35,14 @@ input {
 
 button {
   font-size: @font-size;
+}
+
+.image {
+  width: 100%;
+  margin: 0 0 32px;
+  padding: 0;
+
+  img {
+    width: 100%;
+  }
 }
