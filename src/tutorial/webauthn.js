@@ -38,8 +38,7 @@ export async function login(rawId, timeout) {
       timeout,
       allowCredentials: [{
         type: 'public-key',
-        id: rawId,
-        transports: ['usb']
+        id: rawId
       }]
     }
   });
