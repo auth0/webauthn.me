@@ -1,6 +1,13 @@
-export default function error(err) {
-  console.log(err);
-  // TODO: show error dialog.
-  alert('ERROR, will reload.');
-  window.location.reload();
+import { modal } from "./modal";
+
+export default function error(error) {
+  const errorModal = modal();
+
+  errorModal.show(
+    `${error}. <br/><br/><strong>Close this modal reload the page so you can try again.</strong>`
+  );
+
+  errorModal.onHide(function() {
+    window.location.reload();
+  });
 }
