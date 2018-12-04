@@ -1,24 +1,26 @@
-import Animation from './animation.js';
-import { scrollTo } from './utils.js';
-import * as step4 from './step-4.js';
-import { credentialsGetPublicKeyJWK } from './webauthn.js';
-import { binToHex } from '../debugger/transformations.js';
+import Animation from "./animation.js";
+import { scrollTo, activateStep } from "./utils.js";
+import * as step4 from "./step-4.js";
+import { credentialsGetPublicKeyJWK } from "./webauthn.js";
+import { binToHex } from "../debugger/transformations.js";
 
 let animation;
 let rawId;
 
 const dom = {
-  object: document.getElementById('tutorial-step-3-animation-object'),
-  rawId: document.getElementById('tutorial-step-3-data-raw-id'),
-  publicKey: document.getElementById('tutorial-step-3-data-public-key')
+  object: document.getElementById("tutorial-step-3-animation-object"),
+  rawId: document.getElementById("tutorial-step-3-data-raw-id"),
+  publicKey: document.getElementById("tutorial-step-3-data-public-key")
 };
 
 export async function trigger(credentials) {
   rawId = credentials.rawId;
-  
-  const publicKey =
-    JSON.stringify(credentialsGetPublicKeyJWK(credentials), null, 2)
-        .replace(/\{\n|\n\}|  /g, '');
+
+  const publicKey = JSON.stringify(
+    credentialsGetPublicKeyJWK(credentials),
+    null,
+    2
+  ).replace(/\{\n|\n\}|  /g, "");
 
   dom.rawId.textContent = binToHex(rawId);
   dom.publicKey.textContent = publicKey;
@@ -30,7 +32,8 @@ export async function trigger(credentials) {
     }
   });
 
-  scrollTo('.tutorial-step-3-container');
+  scrollTo(".tutorial-step-3-container");
+  activateStep(3);
 }
 
 function setupAnimation(object) {
@@ -39,8 +42,8 @@ function setupAnimation(object) {
 }
 
 function setupListeners() {
-  document.querySelector('.tutorial-step-3-next').onclick = e => {
-    if(rawId) {
+  document.querySelector(".tutorial-step-3-next").onclick = e => {
+    if (rawId) {
       step4.trigger(rawId);
       e.target.disabled = true;
     }

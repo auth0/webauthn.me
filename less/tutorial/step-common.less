@@ -3,11 +3,20 @@
 @tutorial-step-box-margin-top: 64px;
 
 .tutorial-step-container {
+  will-change: opacity;
+  transition: opacity 0.2s ease-in-out;
+
   position: relative;
   left: 100px;
   display: flex;
   color: white;
   letter-spacing: 0;
+
+  opacity: 0.4;
+
+  &.active {
+    opacity: 1;
+  }
 
   .tutorial-step-left {
     position: relative;
@@ -25,7 +34,7 @@
       width: @tutorial-step-left-width;
       height: @tutorial-step-left-width;
       border-radius: 50%;
-      border: 2px solid #00B7EF;
+      border: 2px solid #00b7ef;
       background-color: @background-color;
 
       box-sizing: border-box;
@@ -68,8 +77,8 @@
       width: 100%;
       height: 118px;
       background-color: transparent;
-      margin: (@tutorial-step-box-margin-top / 2) 0 
-              @tutorial-step-box-margin-top 0;
+      margin: (@tutorial-step-box-margin-top / 2) 0
+        @tutorial-step-box-margin-top 0;
     }
 
     .tutorial-code-container {
