@@ -4,6 +4,18 @@ import * as step3 from "./step-3.js";
 import * as step4 from "./step-4.js";
 import * as step5 from "./step-5.js";
 import * as step6 from "./step-6.js";
+import { modal } from "./modal";
+
+if (
+  !navigator.credentials ||
+  !navigator.credentials.get ||
+  !navigator.credentials.create
+) {
+  const warning = modal();
+  warning.show(
+    "Looks like your browser does not support the web authentication API, or it doesn't support public key-based credentials. Please open this page in another browser."
+  );
+}
 
 step1.init();
 step2.init();
