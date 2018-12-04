@@ -1,7 +1,8 @@
 export function scrollTo(selector) {
   const pos =
     document.querySelector(selector).getBoundingClientRect().top +
-    window.scrollY;
+    window.scrollY -
+    112;
 
   window.scrollTo({
     top: pos,
