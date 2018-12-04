@@ -1,6 +1,6 @@
 import Animation from "./animation.js";
 import animations from "./step-4-animations.js";
-import { scrollTo, activateStep } from "./utils.js";
+import { scrollTo, loadStep, activateStep, onObjectLoad } from "./utils.js";
 import { binToHex } from "../debugger/transformations.js";
 import * as step5 from "./step-5.js";
 
@@ -43,8 +43,9 @@ function setupListeners() {
 }
 
 export function init() {
-  dom.object.onload = () => {
+  onObjectLoad(dom.object, () => {
     setupListeners();
     setupAnimation(dom.object);
-  };
+    loadStep(4);
+  });
 }

@@ -14,7 +14,6 @@ export function modal() {
     modalElement.classList.remove("active");
 
     onHideCallbacks.forEach(callback => {
-      console.log(callback);
       callback();
     });
   };

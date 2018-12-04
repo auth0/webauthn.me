@@ -1,12 +1,11 @@
 import Animation from "./animation.js";
 import animations from "./step-1-animations.js";
 import * as step2 from "./step-2.js";
-import { scrollTo, activateStep } from "./utils.js";
+import { scrollTo, loadStep, activateStep, onObjectLoad } from "./utils.js";
 
 let animation;
 
 async function register(event) {
-  console.log("goo");
   scrollTo(".tutorial-step-1-container");
   activateStep(1);
 
@@ -34,10 +33,12 @@ function setupListeners() {
 }
 
 export function init() {
-  const object = document.getElementById("tutorial-step-1-animation-object");
-  object.onload = () => {
+  const object = document.querySelector("#tutorial-step-1-animation-object");
+
+  onObjectLoad(object, () => {
     setupListeners();
     setupAnimation(object);
+    loadStep(1);
     activateStep(1);
-  };
+  });
 }

@@ -3,7 +3,7 @@ import animations, { timeout } from "./step-2-animations.js";
 import * as step3 from "./step-3.js";
 import error from "./error.js";
 import * as webauthn from "./webauthn.js";
-import { scrollTo, activateStep } from "./utils.js";
+import { scrollTo, loadStep, activateStep, onObjectLoad } from "./utils.js";
 
 let animation;
 
@@ -37,7 +37,9 @@ function setupAnimation(object) {
 
 export function init() {
   const object = document.getElementById("tutorial-step-2-animation-object");
-  object.onload = () => {
+
+  onObjectLoad(object, () => {
+    loadStep(2);
     setupAnimation(object);
-  };
+  });
 }

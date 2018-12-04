@@ -1,5 +1,5 @@
 import Animation from "./animation.js";
-import { scrollTo, activateStep } from "./utils.js";
+import { scrollTo, loadStep, activateStep, onObjectLoad } from "./utils.js";
 import * as step4 from "./step-4.js";
 import { credentialsGetPublicKeyJWK } from "./webauthn.js";
 import { binToHex } from "../debugger/transformations.js";
@@ -51,8 +51,9 @@ function setupListeners() {
 }
 
 export function init() {
-  dom.object.onload = () => {
+  onObjectLoad(dom.object, () => {
     setupListeners();
     setupAnimation(dom.object);
-  };
+    loadStep(3);
+  });
 }

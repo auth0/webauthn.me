@@ -1,6 +1,6 @@
 import Animation from "./animation.js";
 import animations from "./step-6-animations.js";
-import { scrollTo, activateStep } from "./utils.js";
+import { scrollTo, loadStep, activateStep, onObjectLoad } from "./utils.js";
 
 let animation;
 
@@ -23,7 +23,8 @@ function setupAnimation(object) {
 
 export function init() {
   const object = document.getElementById("tutorial-step-6-animation-object");
-  object.onload = () => {
+  onObjectLoad(object, () => {
     setupAnimation(object);
-  };
+    loadStep(6);
+  });
 }

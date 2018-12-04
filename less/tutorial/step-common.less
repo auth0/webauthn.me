@@ -3,7 +3,6 @@
 @tutorial-step-box-margin-top: 64px;
 
 .tutorial-step-container {
-  will-change: opacity;
   transition: opacity 0.2s ease-in-out;
 
   position: relative;
@@ -16,6 +15,14 @@
 
   &.active {
     opacity: 1;
+  }
+
+  &.loaded {
+    .tutorial-step-content {
+      .tutorial-animation-container {
+        opacity: 1;
+      }
+    }
   }
 
   .tutorial-step-left {
@@ -79,6 +86,9 @@
       background-color: transparent;
       margin: (@tutorial-step-box-margin-top / 2) 0
         @tutorial-step-box-margin-top 0;
+
+      transition: opacity 0.2s ease-in-out;
+      opacity: 0;
     }
 
     .tutorial-code-container {
