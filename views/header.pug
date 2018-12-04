@@ -1,12 +1,13 @@
-.header-container
-  .header-left
-    .header-crafted-by-container
-      a(href='https://auth0.com')
-        span Crafted by
-        img(src='/img/crafted-by-auth0-logo.svg', alt='Auth0 Logo')
+header.header
+  .header-container
+    .header-left
+      .header-crafted-by-container
+        a(href='https://auth0.com')
+          span Crafted by
+          img(src='/img/crafted-by-auth0-logo.svg', alt='Auth0 Logo')
 
-  .header-right
-    .header-nav-item(class=(page === "tutorial" ? "active" : undefined))
-      a(href='/tutorial.html') Tutorial
-    .header-nav-item(class=(page === "introduction" ? "active" : undefined))
-      a(href='/introduction.html') Information
+    .header-right
+      .header-nav-item(class=(page === "tutorial" ? "active" : undefined))
+        a(href='/tutorial.html') Tutorial
+      .header-nav-item(class=(page === "introduction" ? "active" : undefined))
+        a(href='/introduction.html') Information
