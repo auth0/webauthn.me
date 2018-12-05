@@ -20,9 +20,10 @@
                         <tspan x="0" y="14">browser</tspan>
                     </text>
                 </g>
-                <g id="relying-party" transform="translate(693.000000, 110.000000)" fill="#FFFFFF" font-family="FaktPro-Medium, Fakt Pro, sans-serif" font-size="13" font-weight="normal">
-                    <text>
+                <g id="relying-party" transform="translate(785.000000, 110.000000)" fill="#FFFFFF" font-family="FaktPro-Medium, Fakt Pro, sans-serif" font-size="13" font-weight="normal">
+                    <text text-anchor="end">
                         <tspan x="0" y="14">relying party</tspan>
+                        <tspan x="0" y="34">https://myapp.com</tspan>
                     </text>
                 </g>
                 <g id="authenticator" transform="translate(0.000000, 110.000000)" fill="#FFFFFF" font-family="FaktPro-Medium, Fakt Pro, sans-serif" font-size="13" font-weight="normal">
