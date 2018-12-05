@@ -6,9 +6,11 @@
     display: flex;
     align-items: center;
 
-    margin: @tutorial-step-box-margin-top 0;
+    margin: 20px 0;
+    padding: 0 20px;
     width: 100%;
     height: 73px;
+    box-sizing: border-box;
 
     background-color: @color-dark-gray;
     border-radius: @border-radius-round;
@@ -18,7 +20,7 @@
 
     .tutorial-step-1-name {
       text-transform: lowercase;
-      margin: 0 1ch 0 32px;
+      margin: 0 1ch 0 0;
     }
 
     .tutorial-step-1-input {
@@ -26,8 +28,18 @@
       border-radius: @border-radius-rounder;
       outline: none;
       border: 3px solid @color-light-gray;
-      width: 444px;
+      width: 100%;
+      max-width: 444px;
       font-size: 13px;
+    }
+  }
+}
+
+@media (min-width: @breakpoint-width) {
+  .tutorial-step-1-container {
+    .tutorial-step-1-box {
+      padding: 0 30px;
+      margin: @tutorial-step-box-margin-top 0;
     }
   }
 }

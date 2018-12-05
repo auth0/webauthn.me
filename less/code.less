@@ -2,14 +2,18 @@ pre[class*="language-"] {
   display: block;
   width: 100%;
   margin: 0 0 45px;
+  box-sizing: border-box;
+
+  background: @color-medium-gray;
+  border-radius: 3px;
+}
+
+code[class*="language-"] {
+  background: none;
 }
 
 code[class*="language-"],
 pre[class*="language-"] {
-  background: @color-medium-gray;
-
-  border-radius: 3px;
-
   color: @color-white;
   text-shadow: none;
 }

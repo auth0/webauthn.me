@@ -3,6 +3,7 @@
 
 .tutorial-step-3-data-container {
   display: flex;
+  flex-direction: column;
   background-color: @color-dark-gray;
   border-radius: @border-radius-rounder;
 
@@ -15,8 +16,6 @@
 
   .tutorial-step-data-common() {
     flex-grow: 1;
-    width: 50%;
-    max-width: 50%;
     padding: 32px 32px 32px 32px;
     box-sizing: border-box;
     overflow: hidden;
@@ -33,9 +32,9 @@
     position: relative;
 
     .tutorial-code-container:before {
-      content: '';
+      content: "";
       width: 100%;
-      height: 100%;    
+      height: 100%;
       position: absolute;
       left: 0;
       top: 0;
@@ -46,6 +45,20 @@
 }
 
 .tutorial-step-3-next {
-  margin: @tutorial-step-box-margin-top 0;
+  margin: 20px 0;
 }
 
+@media (min-width: @breakpoint-width) {
+  .tutorial-step-3-data-container {
+    flex-direction: row;
+
+    .tutorial-step-data-common() {
+      width: 50%;
+      max-width: 50%;
+    }
+  }
+
+  .tutorial-step-3-next {
+    margin: @tutorial-step-box-margin-top 0;
+  }
+}

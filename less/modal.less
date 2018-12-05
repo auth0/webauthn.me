@@ -6,9 +6,10 @@
   transform: translate3d(-50%, -50%, 0);
 
   display: none;
-  width: 600px;
-
-  background: @color-dark-gray;
+  width: 100%;
+  max-width: 600px;
+  padding: 30px;
+  box-sizing: border-box;
 
   box-shadow: 0 0 20px 10px black;
 
@@ -22,6 +23,7 @@
 
   padding: 10px 60px 10px 20px;
 
+  background: @color-dark-gray;
   border-bottom: 1px solid @color-blue;
 
   font-size: 20px;
@@ -50,4 +52,6 @@
 .modal-body {
   padding: 10px 20px;
   line-height: 1.5;
+
+  background: @color-dark-gray;
 }

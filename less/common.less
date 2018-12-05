@@ -7,6 +7,7 @@
 @import "modal.less";
 
 html {
+  padding: 0 30px;
   background-color: @background-color;
   color: @font-color-gray;
   font-family: "fakt-web", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -16,7 +17,7 @@ html {
 
 body {
   max-width: 1200px;
-  margin: 8em auto 0 auto;
+  margin: 5em auto 0 auto;
 }
 
 pre,
@@ -50,4 +51,10 @@ button {
 
 .optanon-alert-box-wrapper {
   left: 0;
+}
+
+@media (min-width: @breakpoint-width) {
+  body {
+    margin: 8em auto 0 auto;
+  }
 }
