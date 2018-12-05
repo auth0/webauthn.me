@@ -13,7 +13,7 @@ if (
 ) {
   const warning = modal();
   warning.show(
-    "Looks like your browser does not support the web authentication API, or it doesn't support public key-based credentials. Please open this page in another browser.<br/><br/>You can still get more information about the web authentication API on our introduction page. "
+    "Looks like your browser does not support the web authentication API, or it doesn't support public key-based credentials.<br/><br/>You won't be able to follow along with the interactive tutorial, but you can still get more information on the web authentication API."
   );
 }
 
