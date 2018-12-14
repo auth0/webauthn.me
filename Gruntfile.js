@@ -126,6 +126,7 @@ module.exports = grunt => {
         options: {
           iconsPath: "/",
           html: ["./dist/**/*.html"],
+          keep: ['meta[property="og:image"]'],
           design: {
             ios: {
               pictureAspect: "backgroundAndMargin",
