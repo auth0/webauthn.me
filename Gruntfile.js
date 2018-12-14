@@ -7,6 +7,7 @@ module.exports = grunt => {
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-mocha-test");
   grunt.loadNpmTasks("grunt-contrib-connect");
+  grunt.loadNpmTasks("grunt-sitemap");
 
   grunt.initConfig({
     clean: {
@@ -69,6 +70,17 @@ module.exports = grunt => {
       dev: require("./webpack.dev.js")
     },
 
+    sitemap: {
+      dist: {
+        homepage: "https://webauthn.is/",
+        pattern: ["*/*.html"],
+        siteRoot: "./dist",
+        extension: {
+          required: false
+        }
+      }
+    },
+
     watch: {
       src: {
         files: ["src/**"],
@@ -84,7 +96,7 @@ module.exports = grunt => {
       },
       views: {
         files: ["views/**"],
-        tasks: "pug"
+        tasks: ["pug", "sitemap"]
       },
       less: {
         files: ["less/**"],
@@ -121,7 +133,8 @@ module.exports = grunt => {
     "copy",
     "less",
     "pug",
-    "webpack:dev"
+    "webpack:dev",
+    "sitemap"
   ]);
 
   grunt.registerTask("build-prod", [
@@ -129,7 +142,8 @@ module.exports = grunt => {
     "copy",
     "less",
     "pug",
-    "webpack:prod"
+    "webpack:prod",
+    "sitemap"
   ]);
 
   grunt.registerTask("default", ["build-dev", "connect", "watch"]);
