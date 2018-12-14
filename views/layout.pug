@@ -12,6 +12,23 @@ html(lang='en')
     meta(name='author', content='auth0.com')
     meta(name='description', content='Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.')
 
+    meta(property="og:title" content="Web Authentication (WebAuthn) Credential and Login Demo")
+    meta(property="og:site_name" content="Web Authentication (WebAuthn) Credential and Login Demo")
+    meta(property="og:url" content="https://webauthn.is")
+    meta(property="og:image" content="https://cdn.auth0.com/blog/webauthn:share.png")
+    meta(property="og:description" content="Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.")
+
+    meta(name="twitter:site" content="@auth0")
+    meta(name="twitter:creator" content="@auth0")
+    meta(name="twitter:title" content="Web Authentication (WebAuthn) Credential and Login Demo")
+    meta(name="twitter:url" content="https://webauthn.is")
+    meta(name="twitter:description" content="Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.")
+    meta(name="twitter:card" content="summary")
+    meta(name="twitter:image" content="https://cdn.auth0.com/blog/webauthn:share.png")
+    meta(name="twitter:image:height" content="512")
+    meta(name="twitter:image:width" content="1024")
+
+
     link(href='https://fonts.googleapis.com/css?family=Roboto+Mono',
          rel="stylesheet")
     link(rel='stylesheet', href='/css/common.css', type='text/css', media='all')
@@ -19,6 +36,29 @@ html(lang='en')
 
     block prefetch
       include prefetch.pug
+
+      script(type="application/ld+json").
+        {
+            "@context": "http://schema.org",
+            "@type": "WebPage",
+            "name": "Web Authentication (WebAuthn) Credential and Login Demo",
+            "description": "Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.",
+            "url": "https://webauthn.is/",
+            "image": "https://webauthn.is/img/webauthn-logo.svg",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Auth0",
+                "legalName": "Auth0 Inc.",
+                "url": "https://auth0.com/",
+                "logo": "https://cdn.auth0.com/website/assets/pages/press/img/resources/auth0-logo-main-6001cece68.svg",
+                "foundingDate": "2013",
+                "sameAs": [
+                    "https://twitter.com/auth0",
+                    "https://www.facebook.com/getauth0/",
+                    "https://www.linkedin.com/company/auth0"
+                ]
+            }
+          }
 
   body
 
