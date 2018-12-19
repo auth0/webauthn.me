@@ -7,7 +7,8 @@
     "postinstall": "grunt build-prod",
     "start": "grunt",
     "build": "grunt build-prod",
-    "test": "grunt test"
+    "test": "grunt test",
+    "heroku-postbuild": "npm run build"
   },
   "keywords": [
     "webauthn",
