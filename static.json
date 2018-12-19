@@ -1,9 +1,4 @@
 {
   "root": "dist",
-  "clean_urls": true,
-  "redirects": {
-    "/": {
-      "url": "/tutorial"
-    }
-  }
+  "clean_urls": true
 }
