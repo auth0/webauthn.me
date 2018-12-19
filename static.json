@@ -1,7 +1,10 @@
 {
   "root": "dist",
   "clean_urls": true,
-  "routes": {
-    "/": "tutorial.html"
+  "redirects": {
+    "/": {
+      "url": "/tutorial",
+      "status": 302
+    }
   }
 }
