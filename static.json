@@ -3,8 +3,7 @@
   "clean_urls": true,
   "redirects": {
     "/": {
-      "url": "/tutorial",
-      "status": 302
+      "url": "/tutorial"
     }
   }
 }
