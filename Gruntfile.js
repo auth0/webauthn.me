@@ -73,7 +73,7 @@ module.exports = grunt => {
 
     sitemap: {
       dist: {
-        homepage: "https://webauthn.is/",
+        homepage: "https://webauthn.me/",
         pattern: ["*/*.html"],
         siteRoot: "./dist",
         extension: {
