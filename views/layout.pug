@@ -32,33 +32,34 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Roboto+Mono',
          rel="stylesheet")
     link(rel='stylesheet', href='/css/common.css', type='text/css', media='all')
+
     block stylesheets
-
     block prefetch
-      include prefetch.pug
+    include prefetch.pug
 
-      script(type="application/ld+json").
-        {
-            "@context": "http://schema.org",
-            "@type": "WebPage",
-            "name": "Web Authentication (WebAuthn) Credential and Login Demo",
-            "description": "Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.",
-            "url": "https://webauthn.me/",
-            "image": "https://webauthn.me/img/webauthn-logo.svg",
-            "publisher": {
-                "@type": "Organization",
-                "name": "Auth0",
-                "legalName": "Auth0 Inc.",
-                "url": "https://auth0.com/",
-                "logo": "https://cdn.auth0.com/website/assets/pages/press/img/resources/auth0-logo-main-6001cece68.svg",
-                "foundingDate": "2013",
-                "sameAs": [
-                    "https://twitter.com/auth0",
-                    "https://www.facebook.com/getauth0/",
-                    "https://www.linkedin.com/company/auth0"
-                ]
-            }
+    script(type="application/ld+json").
+      {
+          "@context": "http://schema.org",
+          "@type": "WebPage",
+          "name": "Web Authentication (WebAuthn) Credential and Login Demo",
+          "description": "Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.",
+          "url": "https://webauthn.me/",
+          "image": "https://webauthn.me/img/webauthn-logo.svg",
+          "publisher": {
+              "@type": "Organization",
+              "name": "Auth0",
+              "legalName": "Auth0 Inc.",
+              "url": "https://auth0.com/",
+              "logo": "https://cdn.auth0.com/website/assets/pages/press/img/resources/auth0-logo-main-6001cece68.svg",
+              "foundingDate": "2013",
+              "sameAs": [
+                  "https://twitter.com/auth0",
+                  "https://www.facebook.com/getauth0/",
+                  "https://www.linkedin.com/company/auth0"
+              ]
           }
+        }
+    meta(name="google-site-verification" content="8PENs1ni2zY2-JstEN8PRrMO3N76CRf2r1yP1qMf14M")
 
   body
 
