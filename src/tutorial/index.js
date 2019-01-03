@@ -29,4 +29,10 @@ document
   .querySelector("[data-learn-more]")
   .addEventListener("mousedown", () => {
     scrollTo(".tutorial-step-1-container");
+
+    // Withouth this timeout it does not focus in chrome,
+    // The 1000ms is an aproximation of the time it takes to scroll to step 1, less results in jank
+    window.setTimeout(() => {
+      document.querySelector(".tutorial-step-1-input").focus();
+    }, 1000);
   });
