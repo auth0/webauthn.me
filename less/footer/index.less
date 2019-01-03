@@ -8,8 +8,60 @@
   box-sizing: border-box;
 }
 
+.footer-banner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 50px 30px;
+  margin: 0 0 100px;
+  background: @color-medium-gray;
+  border-radius: 3px;
+
+  .footer-banner-logo {
+    width: 160px;
+    margin: 0 0 24px;
+  }
+
+  .footer-banner-text {
+    margin: 0 0 32px 0;
+    font-size: 24px;
+    line-height: 1.5;
+    text-align: center;
+
+    a {
+      color: @color-blue;
+    }
+  }
+
+  .footer-banner-buttons {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      width: 100%;
+      margin: 0 0 10px;
+      text-align: center;
+    }
+  }
+}
+
 @media (min-width: @breakpoint-width) {
   .footer-container {
     padding: 0;
+  }
+
+  .footer-banner {
+    padding: 100px 250px;
+
+    .footer-banner-buttons {
+      flex-flow: row;
+
+      a {
+        width: auto;
+        margin: 0 10px;
+      }
+    }
   }
 }

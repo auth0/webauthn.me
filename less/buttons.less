@@ -1,6 +1,7 @@
 @import "vars.less";
 
 .button-common-private() {
+  transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   color: white;
   text-transform: uppercase;
   font-weight: @font-weight-semi-bold;
@@ -11,7 +12,6 @@
 
 .button-dark {
   .button-common-private();
-  transition: border-color 0.3s ease-in-out;
 
   background-color: transparent;
   border: 1px solid @button-dark-border-color;
@@ -25,6 +25,22 @@
   .button-common-private();
   background-color: @button-colorful-background-color;
   border: 1px solid @button-colorful-background-color;
+
+  &:hover {
+    background-color: darken(@button-colorful-background-color, 10%);
+    border-color: darken(@button-colorful-background-color, 10%);
+  }
+}
+
+.button-orange {
+  .button-common-private();
+  background-color: @color-orange;
+  border: 1px solid @color-orange;
+
+  &:hover {
+    background-color: darken(@color-orange, 10%);
+    border-color: darken(@color-orange, 10%);
+  }
 }
 
 .button-colorful:disabled {
