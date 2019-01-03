@@ -32,6 +32,9 @@ mixin footer-browser-status-element(icon, name)
       span.footer-copyright.
         © 2019 Auth0 Inc. All Rights Reserved.
     img(src='/img/webauthn-logo-no-text.svg', alt='webauthn logo')
-    a.footer-branding-right(href='https://twitter.com/intent/tweet?text=Check%20out%20https%3A%2F%2Fwebaut.hn%20and%20learn%20what%20Web%20Authentication%20is%20all%20about%21')
-      img(src='/img/twitter-logo.png', alt='twitter logo')
+    .footer-branding-right
       span Spread the word
+      a.footer-branding-twitter(href='https://twitter.com/home?status=Check%20out%20https%3A//webauthn.me%20and%20learn%20what%20Web%20Authentication%20is%20all%20about!', target="_blank")
+        img(src='/img/twitter-logo.svg', alt='twitter logo')
+      a.footer-branding-facebook(href="https://www.facebook.com/sharer/sharer.php?u=https%3A//webauthn.me", target="_blank")
+        img(src='/img/facebook-logo.svg', alt='facebook logo')

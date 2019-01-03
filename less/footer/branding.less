@@ -50,8 +50,36 @@
     align-items: center;
     margin: 0 0 30px;
 
-    img {
-      margin-right: 2ch;
+    .footer-branding-twitter,
+    .footer-branding-facebook {
+      transition: background-color 0.3s ease-in-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      margin: 0 0 0 12px;
+      border-radius: 50%;
+
+      img {
+        height: 16px;
+      }
+    }
+
+    .footer-branding-twitter {
+      background-color: #1da1f2;
+
+      &:hover {
+        background-color: darken(#1da1f2, 10%);
+      }
+    }
+
+    .footer-branding-facebook {
+      background-color: #3b5998;
+
+      &:hover {
+        background-color: darken(#3b5998, 10%);
+      }
     }
 
     span {
