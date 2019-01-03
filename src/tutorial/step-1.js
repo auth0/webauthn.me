@@ -1,12 +1,11 @@
 import Animation from "./animation.js";
 import animations from "./step-1-animations.js";
 import * as step2 from "./step-2.js";
-import { scrollTo, loadStep, activateStep, onObjectLoad } from "./utils.js";
+import { loadStep, activateStep, onObjectLoad } from "./utils.js";
 
 let animation;
 
 async function register(event) {
-  scrollTo(".tutorial-step-1-container");
   activateStep(1);
 
   await animation.trigger("challenge");

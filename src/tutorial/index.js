@@ -5,6 +5,7 @@ import * as step4 from "./step-4.js";
 import * as step5 from "./step-5.js";
 import * as step6 from "./step-6.js";
 import { modal } from "./modal";
+import { scrollTo } from "./utils.js";
 
 if (
   !navigator.credentials ||
@@ -23,3 +24,9 @@ step3.init();
 step4.init();
 step5.init();
 step6.init();
+
+document
+  .querySelector("[data-learn-more]")
+  .addEventListener("mousedown", () => {
+    scrollTo(".tutorial-step-1-container");
+  });
