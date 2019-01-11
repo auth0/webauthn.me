@@ -12,7 +12,7 @@ export async function trigger(credentials) {
 }
 
 function setupAnimation(object) {
-  const svg = object.contentWindow.document.firstChild;
+  const svg = object.contentDocument.firstChild;
   animation = new Animation(svg);
 
   // Animation states
