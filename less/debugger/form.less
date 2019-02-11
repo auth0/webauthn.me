@@ -1,0 +1,167 @@
+.input-mixin {
+  height: 25px;
+  padding: 0 10px;
+  margin: 0;
+  border: none;
+  border-radius: 6px;
+  outline: @color-blue;
+  font-size: 13px;
+  height: 1.8;
+  color: @color-white;
+  font-family: "fakt-web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.form-row {
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+  min-height: 24px;
+  max-width: 610px;
+  margin: 10px 0;
+}
+
+.label {
+  margin-right: 5px;
+}
+
+.input {
+  .input-mixin();
+  width: 100%;
+  background: @color-light-gray;
+}
+
+.button {
+  .input-mixin();
+
+  background: @color-blue;
+
+  & + .button {
+    margin-left: 10px;
+  }
+
+  &.button-big {
+    width: auto;
+    height: 55px;
+    background: transparent;
+    border-radius: 0;
+    border: 1px solid @color-light-gray;
+    font-size: 14px;
+    color: @color-white;
+    text-transform: uppercase;
+  }
+
+  &.button-full {
+    display: block;
+    width: 100%;
+    height: 80px;
+    background-color: @color-pink;
+    border-radius: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+
+    &:active {
+      background: darken(@color-pink, 10%);
+    }
+  }
+
+  &:disabled {
+    background: lighten(@color-blue, 10%);
+    cursor: not-allowed;
+  }
+
+  &:active {
+    background: darken(@color-blue, 10%);
+  }
+}
+
+.checkbox-container {
+  position: relative;
+  display: inline-block;
+  padding-left: 25px;
+  margin-right: 10px;
+  min-height: 24px;
+
+  input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+
+    &:checked + .checkbox {
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &:disabled {
+      &::before {
+        background: lighten(@color-light-gray, 70%);
+      }
+
+      & + .checkbox {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.checkbox {
+  display: inline-block;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 0;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: transparent;
+    border-radius: 2px;
+    border: 1px solid @color-light-gray;
+  }
+
+  &::after {
+    content: "";
+    transition: opacity 0.2s ease-in-out;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    display: block;
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+    background: @color-light-gray
+      url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIxMXB4IiBoZWlnaHQ9IjlweCIgdmlld0JveD0iMCAwIDExIDkiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+ICAgICAgICA8dGl0bGU+UGF0aCAyPC90aXRsZT4gICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+ICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPiAgICAgICAgPHBvbHlsaW5lIGlkPSJQYXRoLTIiIHN0cm9rZT0iIzI0MjYyNyIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHBvaW50cz0iMSAzLjg4ODk5Nzg5IDQuMDc5OTIyMyA3IDEwIDEiPjwvcG9seWxpbmU+ICAgIDwvZz48L3N2Zz4=)
+      center center no-repeat;
+    border-radius: 2px;
+    border: 1px solid @color-light-gray;
+  }
+}
+
+.select-container {
+  .input-mixin();
+  display: inline-block;
+  width: 250px;
+  background: @color-white
+    url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIxMnB4IiBoZWlnaHQ9IjhweCIgdmlld0JveD0iMCAwIDEyIDgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+ICAgICAgICA8dGl0bGU+TGluZSAyPC90aXRsZT4gICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+ICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lY2FwPSJzcXVhcmUiPiAgICAgICAgPHBhdGggZD0iTTIsMiBMNiw2IiBpZD0iTGluZS0yIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMiIgZmlsbC1ydWxlPSJub256ZXJvIj48L3BhdGg+ICAgICAgICA8cGF0aCBkPSJNNiwyIEwxMCw2IiBpZD0iTGluZS0yIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMiIgZmlsbC1ydWxlPSJub256ZXJvIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4LjAwMDAwMCwgNC4wMDAwMDApIHNjYWxlKC0xLCAxKSB0cmFuc2xhdGUoLTguMDAwMDAwLCAtNC4wMDAwMDApICI+PC9wYXRoPiAgICA8L2c+PC9zdmc+)
+    220px center no-repeat;
+  border-radius: 12px;
+  color: @color-dark-gray;
+  overflow: hidden;
+
+  .select {
+    margin: 5px 0 0;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    color: @color-dark-gray;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+  }
+}

@@ -1,0 +1,57 @@
+extends ../layout.pug
+
+block stylesheets
+  link(rel='stylesheet', href='/css/debugger.css', type='text/css', media='all')
+
+block scripts
+  script(src="js/debugger.js")
+  
+block variables
+  - var page="tutorial"
+
+block content  
+  section#debugger
+    ul.tabs(data-tabs="debugger")
+      li.tab
+        a(href="#", class="active", data-tab="#debugger-register") Register
+      li.tab
+        a(href="#", data-tab="#debugger-authenticate") Authenticate
+      li.tab
+        a(href="#", data-tab="#debugger-upload") Upload CBOR output
+    .container
+        #debugger-register
+          h2 Register New Credentials
+          
+          #debugger-auth-available-indicator
+            | No authenticators available
+      
+          #debugger-register-options
+            include create.pug
+            
+        #debugger-authenticate
+          #debugger-authenticate-options
+            include get.pug
+            button#debugger-authenticate-button.button Authenticate
+          
+        #debugger-upload
+          span Upload CBOR
+          
+    button#debugger-register-button.button.button-full Register
+      
+    include output.pug
+
+  #debugger-key-modal.modal
+    .modal-background
+    .modal-content.has-background-light
+      pre#debugger-key-modal-key Placeholder
+    button#debugger-key-modal-close-button.modal-close.is-large(aria-label='close')
+
+  #debugger-paste-modal.modal
+    .modal-background
+    .modal-content.has-background-light
+      .level
+        .level-item
+          input#debugger-paste-modal-input.input(type='text', placeholder='Base64 data')
+        .level-item
+          button.button#debugger-paste-modal-button-ok OK
+    button#debugger-paste-modal-close-button.modal-close.is-large(aria-label='close')

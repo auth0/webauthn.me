@@ -1,0 +1,112 @@
+#debugger-code-create
+  .editor
+    .editor-label navigator.credentials.create({
+    .editor-label.indent-1 publicKey: {
+    .editor-label.indent-2 rp: {
+      .form-row.indent-1
+        span.checkbox-container.position-outside
+          input#d-c-rp-id-cbox(type='checkbox')
+          label.checkbox(for="d-c-rp-id-cbox")
+        label#d-c-rp-id-line.label(for="d-c-rp-id") id: 
+        input#d-c-rp-id(type='text', value='localhost', class="input")
+      .form-row.indent-1
+        label#d-c-rp-name-line.label(for="d-c-rp-name") name: 
+        input#d-c-rp-name(type='text', value='test', class="input")
+    .editor-label.indent-2 }
+    .editor-label.indent-2 user: {
+      .form-row.indent-1
+        label#d-c-user-id-line.label(for="d-c-regen-uid") id: 
+        button#d-c-regen-uid.button Regenerate (binary, random)
+      .form-row.indent-1
+        label#d-c-user-name-line.label(for="d-c-user-name") name: 
+        input#d-c-user-name(type='text', value='test', class="input")
+      .form-row.indent-1
+        label#d-c-user-dp-line.label(for="d-c-user-dpname") displayName: 
+        input#d-c-user-dpname(type='text', value='Test User', class="input")
+    .editor-label.indent-2 }
+    .form-row.indent-2 
+      label#d-c-challenge-line.label(for="d-c-regen-challenge") challenge:
+      button#d-c-regen-challenge.button Regenerate (binary, random)  
+    .editor-dynamic.indent-1
+      button#d-c-add-pubkey-params.editor-dynamic-add +
+      .editor-label.indent-1 pubKeyCredParams: [
+      .editor-dynamic-item 
+        .editor-label.indent-2 {
+        .editor-label.indent-3 type: 'public-key',
+        .form-row.indent-3
+          label#d-c-pubkey-alg-line.label(for="d-c-pubkey-alg-select") alg: 
+          .select-container
+            select#d-c-pubkey-alg-select.select
+              option(value="es256", selected) ES256 (ECDSA P-256 + SHA-256)
+              option(value="rs256") RS256 (RSASSA + SHA-256)
+        .editor-label.indent-2 }
+      #d-c-add-pubkey-params-placeholder.editor-public-key-credential-params-placeholder
+      .editor-label.indent-1 ]
+    .form-row.indent-2 
+      label#d-c-timeout-line.label(for="d-c-timeout") timeout:
+      input#d-c-timeout(type='number', value='15000', class="input")  
+    .editor-dynamic.indent-1
+      .form-row.indent-2
+        span.checkbox-container.position-outside
+          input#d-c-excl-creds-cbox(type='checkbox')
+          label.checkbox(for="d-c-excl-creds-cbox") excludeCredentials: [{
+      button#d-c-add-excl-creds.editor-dynamic-add +
+      .editor-dynamic-item 
+        .editor-label.indent-2 type: 'public-key',
+        .form-row.indent-2
+          span#d-c-excl-creds-id-line.label id:
+          button#d-c-upload-excl-creds-id.button Upload (binary)
+          button#d-c-upload-base64-excl-creds-id.button Paste (Base64)
+        .form-row.indent-3
+          span.checkbox-container.position-outside
+            input#d-c-excl-creds-type-cbox(type='checkbox')
+            label.checkbox(for="d-c-excl-creds-type-cbox")
+          label#d-c-excl-creds-type-cbox.label transports: [ 
+            span.checkbox-container
+              input#d-c-excl-creds-type-usb(type='checkbox')
+              label.checkbox(for="d-c-excl-creds-type-usb") USB
+            span.checkbox-container
+              input#d-c-excl-creds-type-nfc(type='checkbox')
+              label.checkbox(for="d-c-excl-creds-type-nfc") NFC
+            span.checkbox-container
+              input#d-c-excl-creds-type-ble(type='checkbox')
+              label.checkbox(for="d-c-excl-creds-type-ble") BLE
+          | ]
+      .editor-label.indent-1 }]
+    .form-row.indent-2
+      span.checkbox-container.position-outside
+        input#d-c-auth-sel-cbox(type='checkbox')
+        label.checkbox(for="d-c-auth-sel-cbox") authenticatorSelect: {
+    .form-row.indent-2
+      span.checkbox-container
+        input#d-c-auth-attach-cbox(type="checkbox")
+        label#d-c-auth-attach-line.checkbox(for="d-c-auth-attach-cbox") authenticatorAttachment:
+      .select-container
+        select#d-c-auth-attach-select.select
+          option(value="platform") platform
+          option(value="cross-platform", selected) cross-platform
+    .form-row.indent-2
+      span.checkbox-container
+        input#d-c-req-res-key-cbox-val(type='checkbox')
+        label#d-c-req-res-key-line.checkbox(for="d-c-req-res-key-cbox-val") requireResidentKey
+    .form-row.indent-2
+      span.checkbox-container
+        input#d-c-user-verif-cbox(type='checkbox')
+        label#d-c-user-verif-line.checkbox(for="d-c-user-verif-cbox") userVerification:
+      .select-container
+        select#d-c-user-verif-select.select
+          option(value="required") required
+          option(value="preferred", selected) preferred
+          option(value="discouraged") discouraged
+    .editor-label.indent-1 }
+    .form-row.indent-1
+      span.checkbox-container
+        input#d-c-attest-cbox(type='checkbox')
+        label#d-c-attest-line.checkbox(for="d-c-attest-cbox") attestation:
+      .select-container
+        select#d-c-attest-select.select
+          option(value="none", selected) none
+          option(value="indirect") indirect
+          option(value="direct") direct
+    .editor-label.indent-1 }
+    .editor-label });

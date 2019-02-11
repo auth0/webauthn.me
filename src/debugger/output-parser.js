@@ -1,27 +1,21 @@
-import {
-  deepClone,
-  objectSlice,
-  transform,
-  prettyStringify
-} from './utils.js';
+import { deepClone, objectSlice, transform, prettyStringify } from "./utils.js";
 
-import {
-  prettifyTransformations
-} from './transformations.js';
+import { prettifyTransformations } from "./transformations.js";
 
-import cbor from 'cbor';
-import log from 'loglevel';
+import cbor from "cbor";
+import log from "loglevel";
 
 export function parseAuthenticatorData(data) {
-  const d = data instanceof ArrayBuffer ?
-    new DataView(data) :
-    new DataView(data.buffer, data.byteOffset, data.byteLength)
+  const d =
+    data instanceof ArrayBuffer
+      ? new DataView(data)
+      : new DataView(data.buffer, data.byteOffset, data.byteLength);
   let p = 0;
 
   const result = {};
 
-  result.rpIdHash = '';
-  for(const end = p + 32; p < end; ++p) {
+  result.rpIdHash = "";
+  for (const end = p + 32; p < end; ++p) {
     result.rpIdHash += d.getUint8(p).toString(16);
   }
 
@@ -38,35 +32,36 @@ export function parseAuthenticatorData(data) {
   result.signCount = d.getUint32(p, false);
   p += 4;
 
-  if(result.flags.attestedCredentialData) {
+  if (result.flags.attestedCredentialData) {
     const atCredData = {};
     result.attestedCredentialData = atCredData;
 
-    atCredData.aaguid = '';
-    for(const end = p + 16; p < end; ++p) {
+    atCredData.aaguid = "";
+    for (const end = p + 16; p < end; ++p) {
       atCredData.aaguid += d.getUint8(p).toString(16);
     }
 
     atCredData.credentialIdLength = d.getUint16(p, false);
     p += 2;
 
-    atCredData.credentialId = '';
-    for(const end = p + atCredData.credentialIdLength; p < end; ++p) {
+    atCredData.credentialId = "";
+    for (const end = p + atCredData.credentialIdLength; p < end; ++p) {
       atCredData.credentialId += d.getUint8(p).toString(16);
     }
 
     try {
       const encodedCred = Buffer.from(d.buffer, d.byteOffset + p);
-      atCredData.credentialPublicKey =
-        cbor.encode(cbor.decodeFirstSync(encodedCred));
-    } catch(e) {
-      log.error('Failed to decode CBOR data: ', e);
+      atCredData.credentialPublicKey = cbor.encode(
+        cbor.decodeFirstSync(encodedCred)
+      );
+    } catch (e) {
+      log.error("Failed to decode CBOR data: ", e);
 
-      atCredData.credentialPublicKey = `Decode error: ${e.toString()}`
+      atCredData.credentialPublicKey = `Decode error: ${e.toString()}`;
     }
   }
 
-  if(result.flags.extensionDataIncluded) {
+  if (result.flags.extensionDataIncluded) {
     // TODO
   }
 
@@ -74,27 +69,28 @@ export function parseAuthenticatorData(data) {
 }
 
 export function parseAttestationObject(data) {
-  const buffer = data instanceof ArrayBuffer ?
-    Buffer.from(data) :
-    Buffer.from(data.buffer, data.byteOffset, data.byteLength);
+  const buffer =
+    data instanceof ArrayBuffer
+      ? Buffer.from(data)
+      : Buffer.from(data.buffer, data.byteOffset, data.byteLength);
 
   try {
     const decoded = cbor.decodeFirstSync(buffer);
 
-    if(decoded.authData) {
+    if (decoded.authData) {
       decoded.authData = parseAuthenticatorData(decoded.authData);
     }
 
     return decoded;
-  } catch(e) {
-    const msg = 'Failed to decode attestationObject, unknown attestation type?';
+  } catch (e) {
+    const msg = "Failed to decode attestationObject, unknown attestation type?";
     log.error(msg);
     return msg;
   }
 }
 
 export function parseClientDataJSON(data) {
-  const decoder = new TextDecoder('utf-8');
+  const decoder = new TextDecoder("utf-8");
   const decoded = decoder.decode(data);
   return JSON.parse(decoded);
 }
@@ -102,9 +98,9 @@ export function parseClientDataJSON(data) {
 export function parseCredentials(credentials) {
   const result = deepClone(credentials);
   const transformations = objectSlice(prettifyTransformations, [
-    'clientDataJSON',
-    'authenticatorData',
-    'attestationObject'
+    "clientDataJSON",
+    "authenticatorData",
+    "attestationObject"
   ]);
   transform(result, transformations);
   return result;
@@ -113,33 +109,71 @@ export function parseCredentials(credentials) {
 export function prettifyCredentials(credentials) {
   const creds = deepClone(credentials);
   transform(creds, prettifyTransformations);
-  return prettyStringify(creds);
+  return splitCredentialsByType(creds);
+}
+
+export function addMarkupToLine(line) {
+  const separator = line.indexOf(":");
+  const head = line.substring(0, separator);
+  const tail = line.substr(separator);
+
+  if (separator < 0) {
+    return line;
+  }
+
+  if (tail === ": {") {
+    return `<span class="output-key">${head}</span>${tail}`;
+  }
+
+  return `<span class="output-key">${head}</span><span class="output-value">${tail}</span>`;
+}
+
+export function splitCredentialsByType(credentials) {
+  return `<code class="output-section"><pre>rawId: ${credentials.rawId}\nid: ${
+    credentials.id
+  }\ntype: ${
+    credentials.type
+  }\n</pre></code>\n<div class="output-section output-section-transparent">response: {</div>\n<code class="output-section output-section-turqoise"><pre>clientDataJSON: ${prettyStringify(
+    credentials.clientDataJSON
+  )}\n\n</pre></code>\n<code class="output-section output-section-green"><pre>attestationObject: ${prettyStringify(
+    credentials.attestationObject
+  )}\n</pre></code>\n<div class="output-section output-section-transparent">}</div>`;
+}
+
+export function orderCredentialsByType(credentials) {
+  return {
+    rawId: credentials.rawId,
+    id: credentials.id,
+    type: credentials.type,
+    clientDataJSON: credentials.response.clientDataJSON,
+    attestationObject: credentials.response.attestationObject
+  };
 }
 
 export function prettyCredentialsWithHtml(prettyCredentials) {
-  let lines = prettyCredentials.split('\n');
+  let lines = prettyCredentials.split("\n");
 
   lines = lines.map(line => {
-    for(const key of Object.keys(prettifyTransformations)) {
+    for (const key of Object.keys(prettifyTransformations)) {
       const keyStr = `"${key}": `;
       const idx = line.indexOf(keyStr);
-      if(idx !== -1 && prettifyTransformations[key].buttons) {
+      if (idx !== -1 && prettifyTransformations[key].buttons) {
         const pos = idx + keyStr.length;
 
         const head = line.substring(0, pos);
         const tail = line.substring(pos);
 
-        let buttons = '';
-        for(const but of prettifyTransformations[key].buttons) {
+        let buttons = "";
+        for (const but of prettifyTransformations[key].buttons) {
           buttons +=
-            `<button data-key="${key}" onclick="outputButtonClick(event);">` +
+            `<button class="button" data-key="${key}" onclick="outputButtonClick(event);">` +
             `${but}</button>`;
         }
-        line = `${head}${buttons}${tail}`;
+        line = `${head}${buttons} ${tail}`;
       }
     }
-    return line;
-  });
 
-  return lines.join('\n');
+    return addMarkupToLine(line);
+  });
+  return lines.join("\n");
 }

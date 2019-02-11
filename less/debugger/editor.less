@@ -1,0 +1,66 @@
+.generate-indents(@n, @i: 1) when (@i =< @n) {
+  .indent-@{i} {
+    margin-left: (@i * 30px);
+  }
+  .generate-indents(@n, (@i + 1));
+}
+
+.position-outside {
+  position: absolute;
+  top: 0;
+  left: -25px;
+}
+
+.editor {
+  width: 100%;
+  padding: 65px 80px;
+  background: #2f3132;
+  color: @color-white;
+  font-family: "Roboto Mono", monospace;
+}
+
+.editor-label {
+  margin: 10px 0;
+}
+
+.generate-indents(5);
+
+.editor-dynamic {
+  transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  position: relative;
+  padding: 15px 0;
+  border-radius: 6px;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4);
+
+  &:hover {
+    background: #636566;
+    box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.editor-dynamic-placeholder {
+  display: none;
+}
+
+.editor-dynamic-add {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #a0a2a2;
+  border-radius: 8px;
+  border: none;
+  outline: @color-blue;
+  font-size: 25px;
+  color: @color-white;
+}
+
+.editor-dynamic-item ~ .editor-dynamic-item {
+  padding: 0 25px;
+  border-top: 1px @color-dark-gray solid;
+
+  &:first-of-type {
+    border: none;
+  }
+}
