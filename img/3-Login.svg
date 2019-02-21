@@ -65,7 +65,7 @@
                             <tspan x="443" y="289">with this data</tspan>
                         </text>
                         <text id="Challenge-+-get-cred" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
-                            <tspan x="263.432617" y="407">Challenge + get credentuals command +</tspan>
+                            <tspan x="263.432617" y="407">Challenge + get credentials command +</tspan>
                             <tspan x="284.113281" y="425">requested credential id (optional)</tspan>
                         </text>
                         <text id="Authorization-reques" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
@@ -74,11 +74,11 @@
                         <text id="Authorized" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
                             <tspan x="258" y="545">Authorized</tspan>
                         </text>
-                        <text id="Signed-challange" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
-                            <tspan x="329" y="601">Signed challange</tspan>
+                        <text id="Signed-challenge" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
+                            <tspan x="329" y="601">Signed challenge</tspan>
                         </text>
-                        <text id="Signed-challange" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
-                            <tspan x="229" y="655">Signed challange</tspan>
+                        <text id="Signed-challenge" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
+                            <tspan x="229" y="655">Signed challenge</tspan>
                         </text>
                         <text id="Logged-in" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
                             <tspan x="250" y="712">Logged in</tspan>

@@ -65,7 +65,7 @@
                             <tspan x="438" y="289">with this data</tspan>
                         </text>
                         <text id="Challenge-+create-ne" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
-                            <tspan x="251.265625" y="423">Challenge +create new credentials command</tspan>
+                            <tspan x="251.265625" y="423">Challenge + create new credentials command</tspan>
                         </text>
                         <text id="Authorization-reques" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
                             <tspan x="172" y="483">Authorization request (optional)</tspan>
@@ -78,7 +78,7 @@
                         </text>
                         <text id="Credentials-(public" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
                             <tspan x="219.136719" y="648">Credentials (public key) + </tspan>
-                            <tspan x="241.964844" y="666">signed challange</tspan>
+                            <tspan x="241.964844" y="666">signed challenge</tspan>
                         </text>
                         <text id="Registred" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="18" fill="#FFFFFF">
                             <tspan x="250" y="711">Registred</tspan>
