@@ -92,7 +92,7 @@
                     </g>
                     <path d="M397.5,350.5 L397.5,373.5" id="Line-8" stroke="#FFFFFF" stroke-linecap="square" fill-rule="nonzero"></path>
                     <text id="The-user-may-be-requ" opacity="0.5" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="20" fill="#FFFFFF">
-                        <tspan x="64" y="458">The user may be required </tspan>
+                        <tspan x="64" y="458">The user may be required to </tspan>
                         <tspan x="64" y="478">interact with the authenticator </tspan>
                         <tspan x="64" y="498">to authorize operations</tspan>
                     </text>
