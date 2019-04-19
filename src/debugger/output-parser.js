@@ -155,15 +155,10 @@ export function splitCredentialsByType(credentials) {
   }
 
   if (credentials.authenticatorData) {
-    console.log(prettyStringify(
-      credentials.authenticatorData
-    ));
     cred += `<code class="output-section output-section-green"><pre>authenticatorData: ${prettyStringify(
       credentials.authenticatorData
     )}</pre></code>`;
   }
-
-  console.log(credentials);
 
   cred += `</div><div class="output-section output-section-transparent">}</div>`;
 

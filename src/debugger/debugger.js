@@ -236,11 +236,11 @@ function handleAuthenticationCredentials(credentials) {
   dom.output.authentication.console.innerHTML = withHtml;
 
   if (lastCredentialsParsed.response.signature) {
-    dom.output.authentication.signature.innerHTML = binToHex(credentials.response.signature);
+    dom.output.authentication.signature.innerHTML = binToHex(lastCredentialsParsed.response.signature);
   }
 
   if (lastCredentialsParsed.response.clientDataJSON.challenge) {
-    dom.output.authentication.challenge.innerHTML = binToHex(credentials.response.clientDataJSON.challenge);
+    dom.output.authentication.challenge.innerHTML = binToHex(lastCredentialsParsed.response.clientDataJSON.challenge);
   }
 }
 
