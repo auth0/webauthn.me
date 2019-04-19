@@ -49,13 +49,14 @@
       .form-row.indent-2
         span.checkbox-container.position-outside
           input#d-c-excl-creds-cbox(type='checkbox')
-          label.checkbox(for="d-c-excl-creds-cbox") excludeCredentials: [{
+          label.checkbox(for="d-c-excl-creds-cbox") excludeCredentials: [
       button#d-c-add-excl-creds.editor-dynamic-add +
       .editor-dynamic-item 
-        .editor-label.indent-2 type: 'public-key',
-        .form-row.indent-2
-          span#d-c-excl-creds-id-line.label id:
-          input#d-c-add-excl-creds-upload(type='file', style='display: none')
+        .editor-label.indent-2 {
+        .editor-label.indent-3 type: 'public-key',
+        .form-row.indent-3
+          label.label(for='d-c-excl-creds-upload') id: #[span#d-c-excl-creds-id-line]
+          input#d-c-excl-creds-upload(type='file', style='display: none')
           button#d-c-upload-excl-creds-id.button Upload (binary)
           //- button#d-c-upload-base64-excl-creds-id.button Paste (Base64)
         .form-row.indent-3
@@ -73,7 +74,9 @@
               input#d-c-excl-creds-type-ble(type='checkbox')
               label.checkbox(for="d-c-excl-creds-type-ble") BLE
           | ]
-      .editor-label.indent-1 }]
+        .editor-label.indent-2 }
+        span#d-c-excl-creds-placeholder
+      .editor-label.indent-1 ]
     .form-row.indent-2
       span.checkbox-container.position-outside
         input#d-c-auth-sel-cbox(type='checkbox')

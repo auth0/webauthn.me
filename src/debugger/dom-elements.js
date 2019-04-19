@@ -44,7 +44,8 @@ export const createForm = {
   excludeCredentials: {
     checkbox: document.getElementById("d-c-excl-creds-cbox"),
     button: document.getElementById("d-c-add-excl-creds"),
-    file: document.getElementById("d-c-add-excl-creds-upload"),
+    file: document.getElementById("d-c-excl-creds-upload"),
+    placeholder: document.getElementById("d-c-excl-creds-placeholder"),
     id: {
       line: document.getElementById("d-c-excl-creds-id-line"),
       buttonBin: document.getElementById("d-c-upload-excl-creds-id"),

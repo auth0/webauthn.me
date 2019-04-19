@@ -503,7 +503,7 @@ function setupCheckboxes() {
     allowCredentialsCheckboxHandler
   );
   allowedCredentials[0].type.checkbox.oninput = e => {
-    return allowCredentialsTypeCheckboxHandler(
+    return transportsCheckboxHandler(
       e,
       allowedCredentials[0].type.usb,
       allowedCredentials[0].type.nfc,
@@ -606,7 +606,67 @@ function allowCredentialsCheckboxHandler(event) {
   }
 }
 
-function allowCredentialsTypeCheckboxHandler(event, usb, nfc, ble) {
+function addExcludeCredential() {
+  const i = excludedCredentials.length;
+  const html = `<div class="editor-label indent-2">{</div>
+    <div class="editor-label indent-3">type: 'public-key',</div>
+    <div class="form-row indent-3">
+      <label class="label" for="d-c-excl-creds-upload">id: <span id="d-c-excl-creds-id-line-${i}"></span></label>
+      <input id="d-c-excl-creds-upload-${i}" type="file" style="display: none">
+      <button class="button" id="d-c-upload-excl-creds-id-${i}">Upload (binary)</button>
+    </div>
+    <div class="form-row indent-3"><span class="checkbox-container position-outside">
+        <input id="d-c-excl-creds-type-cbox-${i}" type="checkbox">
+        <label class="checkbox" for="d-c-excl-creds-type-cbox-${i}"></label></span>
+      <label class="label" id="d-c-excl-creds-type-cbox-${i}">transports: [ <span class="checkbox-container">
+          <input id="d-c-excl-creds-type-usb-${i}" type="checkbox" disabled="">
+          <label class="checkbox" for="d-c-excl-creds-type-usb-${i}">USB</label></span><span class="checkbox-container">
+          <input id="d-c-excl-creds-type-nfc-${i}" type="checkbox" disabled="">
+          <label class="checkbox" for="d-c-excl-creds-type-nfc-${i}">NFC</label></span><span class="checkbox-container">
+          <input id="d-c-excl-creds-type-ble-${i}" type="checkbox" disabled="">
+          <label class="checkbox" for="d-c-excl-creds-type-ble-${i}">BLE</label></span></label>]
+    </div>
+    <div class="editor-label indent-2">}</div>`;
+
+    const cred = document.createElement("div");
+    cred.innerHTML = html;
+    cred.classList.add("editor-dynamic-item");
+
+    dom.createForm.excludeCredentials.placeholder.parentElement.insertBefore(
+      cred,
+      dom.createForm.excludeCredentials.placeholder
+    );
+
+    const excludedCredential = {
+      id: document.getElementById(`d-c-excl-creds-id-line-${i}`),
+      upload: document.getElementById(`d-c-upload-excl-creds-id-${i}`),
+      file: document.getElementById(`d-c-excl-creds-upload-${i}`),
+      type: {
+        checkbox: document.getElementById(`d-c-excl-creds-type-cbox-${i}`),
+        usb: document.getElementById(`d-c-excl-creds-type-usb-${i}`),
+        nfc: document.getElementById(`d-c-excl-creds-type-nfc-${i}`),
+        ble: document.getElementById(`d-c-excl-creds-type-ble-${i}`),
+      }
+    };
+
+
+    excludedCredentials.push(excludedCredential);
+
+    excludedCredential.type.checkbox.oninput = e => {
+      return transportsCheckboxHandler(
+        e,
+        excludedCredential.type.usb,
+        excludedCredential.type.nfc,
+        excludedCredential.type.ble
+      );
+    };
+
+    excludedCredential.upload.addEventListener("click", e =>
+      uploadExcludedCredentialsId(e, i)
+    );
+}
+
+function transportsCheckboxHandler(event, usb, nfc, ble) {
   const disabled = !event.target.checked;
 
   usb.disabled = disabled;
@@ -662,7 +722,7 @@ function addAllowedCredential() {
   allowedCredentials.push(allowedCredential);
 
   allowedCredential.type.checkbox.oninput = e => {
-    return allowCredentialsTypeCheckboxHandler(
+    return transportsCheckboxHandler(
       e,
       allowedCredential.type.usb,
       allowedCredential.type.nfc,
@@ -709,6 +769,10 @@ function setupEvents() {
   dom.createForm.pubKeyCredParams.button.addEventListener(
     "click",
     addPubKeyParam
+  );
+  dom.createForm.excludeCredentials.button.addEventListener(
+    "click",
+    addExcludeCredential
   );
 
   dom.getForm.allowCredentials.button.addEventListener(
