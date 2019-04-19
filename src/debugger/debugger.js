@@ -260,12 +260,13 @@ async function register() {
   try {
     const credentials = await navigator.credentials.create(getCreateOptions());
     handleRegistrationCredentials(credentials);
-
     useLastRawId(binToHex(credentials.rawId));
+    dom.output.registration.output.classList.remove('is-invisible');
   } catch (e) {
     log.debug(e);
 
     dom.output.registration.console.textContent = getErrorMessage(e);
+    dom.output.registration.output.classList.remove('is-invisible');
   }
 }
 
@@ -325,11 +326,13 @@ async function authenticate() {
   try {
     const credentials = await navigator.credentials.get(getGetOptions());
     handleAuthenticationCredentials(credentials);
+    dom.output.authentication.output.classList.remove('is-invisible');
   } catch (e) {
     log.debug(e);
     console.error(e);
 
     dom.output.authentication.console.textContent = getErrorMessage(e);
+    dom.output.authentication.output.classList.remove('is-invisible');
   }
 }
 
@@ -468,6 +471,7 @@ function uploadCBOR(event) {
     const buf = Buffer.from(reader.result);
     const credentials = cbor.decodeFirstSync(buf);
     handleCBORCredentials(credentials);
+    dom.output.cbor.output.classList.remove('is-invisible');
   };
   reader.readAsArrayBuffer(file);
 }

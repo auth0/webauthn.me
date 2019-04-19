@@ -31,7 +31,7 @@ block content
         
         button#debugger-register-button.button.button-full Register
         
-        #debugger-register-output
+        #debugger-register-output.is-invisible
           include output.pug
       #debugger-authenticate
         .container
@@ -43,13 +43,13 @@ block content
         
         button#debugger-authenticate-button.button.button-full Authenticate
           
-        #debugger-authenticate-output
+        #debugger-authenticate-output.is-invisible
           include output-authenticate.pug
       #debugger-upload
         .container
           input#debugger-output-upload-cbor.file-input(type='file')
         
-        #debugger-cbor-output
+        #debugger-cbor-output.is-invisible
           include output-cbor.pug
 
   #debugger-key-modal.modal

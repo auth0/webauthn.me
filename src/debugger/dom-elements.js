@@ -151,16 +151,19 @@ export const output = {
     pre: document.getElementById("debugger-key-modal-key")
   },
   registration: {
+    output: document.getElementById("debugger-register-output"),
     console: document.getElementById("debugger-register-output-console"),
     rawId: document.getElementById("register-output-rawid"),
     publicKey: document.getElementById("register-output-public-key"),
   },
   authentication: {
-    console: document.getElementById("debugger-authentication-output-console"),
-    signature: document.getElementById("authentication-output-signature"),
-    challenge: document.getElementById("authentication-output-challenge"),
+    output: document.getElementById("debugger-authenticate-output"),
+    console: document.getElementById("debugger-authenticate-output-console"),
+    signature: document.getElementById("authenticate-output-signature"),
+    challenge: document.getElementById("authenticate-output-challenge"),
   },
   cbor: {
+    output: document.getElementById("debugger-cbor-output"),
     console: document.getElementById("debugger-cbor-output-console"),
     rawId: document.getElementById("cbor-output-rawid"),
     publicKey: document.getElementById("cbor-output-public-key"),
