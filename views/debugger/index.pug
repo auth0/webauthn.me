@@ -18,8 +18,9 @@ block content
         a(href="#", data-tab="#debugger-authenticate") Authenticate
       li.tab
         a(href="#", data-tab="#debugger-upload") Upload CBOR output
-    .container
-        #debugger-register
+    div
+      #debugger-register
+        .container
           h2 Register New Credentials
           
           #debugger-auth-available-indicator
@@ -27,18 +28,29 @@ block content
       
           #debugger-register-options
             include create.pug
-            
-        #debugger-authenticate
+        
+        button#debugger-register-button.button.button-full Register
+        
+        #debugger-register-output
+          include output.pug
+      #debugger-authenticate
+        .container
+          h2 Authenticate new credentials
+                    
           #debugger-authenticate-options
             include get.pug
-            button#debugger-authenticate-button.button Authenticate
+            
+        
+        button#debugger-authenticate-button.button.button-full Authenticate
           
-        #debugger-upload
-          span Upload CBOR
-          
-    button#debugger-register-button.button.button-full Register
-      
-    include output.pug
+        #debugger-authenticate-output
+          include output-authenticate.pug
+      #debugger-upload
+        .container
+          input#debugger-output-upload-cbor.file-input(type='file')
+        
+        #debugger-cbor-output
+          include output-cbor.pug
 
   #debugger-key-modal.modal
     .modal-background

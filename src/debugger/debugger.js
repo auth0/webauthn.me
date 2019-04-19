@@ -166,7 +166,7 @@ function getCreateOptions() {
   };
 }
 
-function handleCredentials(credentials) {
+function handleRegistrationCredentials(credentials) {
   lastCredentials = deepClone(credentials);
   lastCredentialsParsed = parseCredentials(credentials);
 
@@ -178,16 +178,70 @@ function handleCredentials(credentials) {
 
   log.debug(prettyCredentials);
   log.debug(withHtml);
-  console.log(lastCredentialsParsed);
-  dom.output.console.innerHTML = withHtml;
-  dom.output.rawId.innerHTML = binToHex(credentials.rawId);
-  dom.output.publicKey.innerHTML = prettyStringify(
-    coseToJwk(
-      lastCredentialsParsed.response.attestationObject.authData
-        .attestedCredentialData.credentialPublicKey,
-      2
-    )
+
+  dom.output.registration.console.innerHTML = withHtml;
+  dom.output.registration.rawId.innerHTML = binToHex(credentials.rawId);
+
+  if (lastCredentialsParsed.response.attestationObject) {
+    dom.output.registration.publicKey.innerHTML = prettyStringify(
+      coseToJwk(
+        lastCredentialsParsed.response.attestationObject.authData
+          .attestedCredentialData.credentialPublicKey,
+        2
+      )
+    ).replace(/[{\n][}\n]/g, "");
+  }
+}
+
+function handleCBORCredentials(credentials) {
+  lastCredentials = deepClone(credentials);
+  lastCredentialsParsed = parseCredentials(credentials);
+
+  const prettyCredentials = prettifyCredentials(
+    orderCredentialsByType(credentials)
   );
+
+  const withHtml = prettyCredentialsWithHtml(prettyCredentials);
+
+  log.debug(prettyCredentials);
+  log.debug(withHtml);
+
+  dom.output.cbor.console.innerHTML = withHtml;
+  dom.output.cbor.rawId.innerHTML = binToHex(credentials.rawId);
+
+  if (lastCredentialsParsed.response.attestationObject) {
+    dom.output.cbor.publicKey.innerHTML = prettyStringify(
+      coseToJwk(
+        lastCredentialsParsed.response.attestationObject.authData
+          .attestedCredentialData.credentialPublicKey,
+        2
+      )
+    ).replace(/[{\n][}\n]/g, "");
+  }
+}
+
+function handleAuthenticationCredentials(credentials) {
+  lastCredentials = deepClone(credentials);
+  lastCredentialsParsed = parseCredentials(credentials);
+
+  const prettyCredentials = prettifyCredentials(
+    orderCredentialsByType(credentials)
+  );
+
+  const withHtml = prettyCredentialsWithHtml(prettyCredentials);
+
+  log.debug(prettyCredentials);
+  log.debug(withHtml);
+
+  dom.output.authentication.console.innerHTML = withHtml;
+
+  if (lastCredentialsParsed.response.signature) {
+    dom.output.authentication.signature.innerHTML = binToHex(credentials.response.signature);
+  }
+
+  if (lastCredentialsParsed.response.clientDataJSON.challenge) {
+    dom.output.authentication.challenge.innerHTML = binToHex(credentials.response.clientDataJSON.challenge);
+  }
 }
 
 function useLastRawId(rawId) {
@@ -205,13 +259,13 @@ function useLastRawId(rawId) {
 async function register() {
   try {
     const credentials = await navigator.credentials.create(getCreateOptions());
-    handleCredentials(credentials);
+    handleRegistrationCredentials(credentials);
 
     useLastRawId(binToHex(credentials.rawId));
   } catch (e) {
     log.debug(e);
 
-    dom.output.console.textContent = getErrorMessage(e);
+    dom.output.registration.console.textContent = getErrorMessage(e);
   }
 }
 
@@ -270,11 +324,12 @@ function getGetOptions() {
 async function authenticate() {
   try {
     const credentials = await navigator.credentials.get(getGetOptions());
-    handleCredentials(credentials);
+    handleAuthenticationCredentials(credentials);
   } catch (e) {
     log.debug(e);
+    console.error(e);
 
-    dom.output.console.textContent = getErrorMessage(e);
+    dom.output.authentication.console.textContent = getErrorMessage(e);
   }
 }
 
@@ -338,7 +393,6 @@ function setupCheckboxes() {
       [
         cForm.authenticatorSelect.authenticatorAttachment.checkbox,
         cForm.authenticatorSelect.authenticatorAttachment.select,
-        cForm.authenticatorSelect.requireResidentKey.checkbox,
         cForm.authenticatorSelect.requireResidentKey.input,
         cForm.authenticatorSelect.userVerification.checkbox,
         cForm.authenticatorSelect.userVerification.select
@@ -349,7 +403,7 @@ function setupCheckboxes() {
       [cForm.authenticatorSelect.authenticatorAttachment.select]
     ],
     [
-      cForm.authenticatorSelect.requireResidentKey.checkbox,
+      cForm.authenticatorSelect.requireResidentKey.input,
       [cForm.authenticatorSelect.requireResidentKey.input]
     ],
     [
@@ -386,7 +440,6 @@ function setupCheckboxes() {
     "input",
     allowCredentialsCheckboxHandler
   );
-
   allowedCredentials[0].type.checkbox.oninput = e => {
     return allowCredentialsTypeCheckboxHandler(
       e,
@@ -414,7 +467,7 @@ function uploadCBOR(event) {
   reader.onload = () => {
     const buf = Buffer.from(reader.result);
     const credentials = cbor.decodeFirstSync(buf);
-    handleCredentials(credentials);
+    handleCBORCredentials(credentials);
   };
   reader.readAsArrayBuffer(file);
 }
@@ -422,8 +475,9 @@ function uploadCBOR(event) {
 function downloadCBOR() {
   const creds = deepClone(lastCredentials);
   delete creds.getClientExtensionResults;
+  delete creds.response.getTransports;
   const encoded = cborEncoder._encodeAll([creds]);
-  //log.debug(cbor.decodeFirstSync(encoded));
+  log.debug(cbor.decodeFirstSync(encoded));
   saveAs(new Blob([encoded]), "output.cbor");
 }
 
@@ -459,7 +513,7 @@ function addPubKeyParam() {
 
   const cred = document.createElement("div");
   cred.innerHTML = html;
-  cred.classList.add("editor-dynamic-item");
+  cred.classList.add("editor-dynamic-item", "indent-1");
   dom.createForm.pubKeyCredParams.placeholder.parentElement.insertBefore(
     cred,
     dom.createForm.pubKeyCredParams.placeholder
@@ -499,17 +553,34 @@ function allowCredentialsTypeCheckboxHandler(event, usb, nfc, ble) {
 
 function addAllowedCredential() {
   const i = allowedCredentials.length;
-  const html = `, {
-        type: 'public-key',
-        id: <span id="d-g-allow-creds-id-${i}"></span><input type="file" id="d-g-upload-allow-creds-file-${i}" style="display: none"><button id="d-g-upload-allow-creds-id-${i}">Upload (binary)</button><button id="d-g-paste-base64-allow-creds-id-${i}">Paste (Base64)</button>,
-        <input id="d-g-allow-creds-type-cbox-${i}" type="checkbox"> transports: <input id="d-g-allow-creds-type-usb-${i}" type="checkbox" disabled> 'usb' <input id="d-g-allow-creds-type-nfc-${i}" type="checkbox" disabled> 'nfc' <input id="d-g-allow-creds-type-ble-${i}" type="checkbox" disabled> 'ble'
-      }`;
+  const html = `<div class="editor-label indent-1">{</div>
+    <div class="editor-label indent-2">type: 'public-key',</div>
+      <div class="form-row indent-2">
+        <label id="d-g-allow-creds-id-${i}" class="label">id: <span id="d-g-allow-creds-id"></span></label>
+        <input id="d-g-upload-allow-creds-file-${i}" type="file" style="display: none" />
+        <button id="d-g-upload-allow-creds-id-${i}" class="button">Upload (binary)</button>
+        <button id="d-g-paste-base64-allow-creds-id-${i}" class="button">Paste (Base64)</button>
+      </div>
+      <div class="form-row indent-2">
+        <span class="checkbox-container position-outside">
+          <input id="d-g-allow-creds-type-cbox-${i}" type="checkbox">
+          <label class="checkbox" for="d-g-allow-creds-type-cbox-${i}"></label></span>
+        <label class="label" id="d-c-excl-creds-type-cbox">transports: [ <span class="checkbox-container">
+            <input id="d-g-allow-creds-type-usb-${i}" type="checkbox" disabled="">
+            <label class="checkbox" for="d-g-allow-creds-type-usb-${i}">USB</label></span><span class="checkbox-container">
+            <input id="d-g-allow-creds-type-nfc-${i}" type="checkbox" disabled="">
+            <label class="checkbox" for="d-g-allow-creds-type-nfc-${i}">NFC</label></span><span class="checkbox-container">
+            <input id="d-g-allow-creds-type-ble-${i}" type="checkbox" disabled="">
+            <label class="checkbox" for="d-g-allow-creds-type-ble-${i}">BLE   </label></span></label>]
+      </div>
+      <div class="editor-label indent-1">}</div>`;
 
-  const span = document.createElement("span");
-  span.innerHTML = html;
+  const cred = document.createElement("div");
+  cred.innerHTML = html;
+  cred.classList.add("editor-dynamic-item");
 
   dom.getForm.allowCredentials.placeholder.parentElement.insertBefore(
-    span,
+    cred,
     dom.getForm.allowCredentials.placeholder
   );
 
@@ -581,8 +652,8 @@ function setupEvents() {
   );
 
   dom.output.uploadCBOR.addEventListener("change", uploadCBOR);
-  dom.output.downloadCBOR.addEventListener("click", downloadCBOR);
-  dom.output.downloadJSON.addEventListener("click", downloadJSON);
+  dom.output.downloadCBOR.forEach(button => button.addEventListener("click", downloadCBOR));
+  dom.output.downloadJSON.forEach(button => button.addEventListener("click", downloadJSON));
 
   setupCheckboxes();
 }

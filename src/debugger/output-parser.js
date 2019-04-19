@@ -102,6 +102,7 @@ export function parseCredentials(credentials) {
     "authenticatorData",
     "attestationObject"
   ]);
+
   transform(result, transformations);
   return result;
 }
@@ -129,25 +130,71 @@ export function addMarkupToLine(line) {
 }
 
 export function splitCredentialsByType(credentials) {
-  return `<code class="output-section"><pre>rawId: ${credentials.rawId}\nid: ${
+  let cred = `<code class="output-section"><pre>rawId: ${credentials.rawId}\nid: ${
     credentials.id
   }\ntype: ${
     credentials.type
-  }\n</pre></code>\n<div class="output-section output-section-transparent">response: {</div>\n<code class="output-section output-section-turqoise"><pre>clientDataJSON: ${prettyStringify(
-    credentials.clientDataJSON
-  )}\n\n</pre></code>\n<code class="output-section output-section-green"><pre>attestationObject: ${prettyStringify(
-    credentials.attestationObject
-  )}\n</pre></code>\n<div class="output-section output-section-transparent">}</div>`;
+  }\n</pre></code>\n<div class="output-section output-section-transparent">response: {<br/>`;
+
+  if (credentials.clientDataJSON && credentials.signature) {
+    cred += `\n\n<code class="output-section output-section-turqoise"><pre>signature: ${credentials.signature}\n</pre>
+      <pre>userHandle: ${credentials.userHandle}\n</pre>
+      <pre>clientDataJSON: ${prettyStringify(
+      credentials.clientDataJSON
+    )}</pre></code>`;
+  } else if (credentials.clientDataJSON) {
+    cred += `<code class="output-section output-section-turqoise"><pre>clientDataJSON: ${prettyStringify(
+      credentials.clientDataJSON
+    )}</pre></code>`;
+  }
+
+  if (credentials.attestationObject) {
+    cred += `<code class="output-section output-section-green"><pre>attestationObject: ${prettyStringify(
+      credentials.attestationObject
+    )}</pre></code>`;
+  }
+
+  if (credentials.authenticatorData) {
+    console.log(prettyStringify(
+      credentials.authenticatorData
+    ));
+    cred += `<code class="output-section output-section-green"><pre>authenticatorData: ${prettyStringify(
+      credentials.authenticatorData
+    )}</pre></code>`;
+  }
+
+  console.log(credentials);
+
+  cred += `</div><div class="output-section output-section-transparent">}</div>`;
+
+  return cred;
 }
 
 export function orderCredentialsByType(credentials) {
-  return {
+  const orderedCredentials = {
     rawId: credentials.rawId,
     id: credentials.id,
     type: credentials.type,
     clientDataJSON: credentials.response.clientDataJSON,
-    attestationObject: credentials.response.attestationObject
   };
+
+  if (credentials.response.attestationObject) {
+    orderedCredentials.attestationObject = credentials.response.attestationObject
+  }
+
+  if (credentials.response.authenticatorData) {
+    orderedCredentials.authenticatorData = credentials.response.authenticatorData
+  }
+
+  if (credentials.response.signature) {
+    orderedCredentials.signature = credentials.response.signature
+  }
+
+  if (credentials.response.userHandle) {
+    orderedCredentials.userHandle = credentials.response.userHandle
+  }
+
+  return orderedCredentials;
 }
 
 export function prettyCredentialsWithHtml(prettyCredentials) {

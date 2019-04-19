@@ -11,7 +11,6 @@
 }
 
 .output-container {
-  padding: 65px 80px;
   background: #2f3132;
   color: @color-white;
 }
@@ -20,15 +19,43 @@
   display: flex;
   flex-flow: row auto;
 
-  div {
+  > div {
     min-width: 50%;
     padding: 24px 34px;
+    border: 1px solid @color-medium-gray;
+    border-width: 0 1px 1px 0;
+
+    h4 {
+      margin: 0 0 16px 0;
+
+      font-size: 18px;
+      color: @color-white;
+    }
+
+    .overflow-wrapper {
+      max-width: 100%;
+      overflow: scroll;
+    }
+
+    &:last-child {
+      border-width: 0 0 1px 1px;
+    }
   }
 }
 
-.output-rawid {
+.output-raw,
+.output-public-key {
+  opacity: .8;
+}
+
+.output-raw {
   word-break: break-all;
-  letter-spacing: 1.06;
+  letter-spacing: 4px;
+}
+
+.output-console {
+  padding: 65px 80px;
+
 }
 
 .output-section {

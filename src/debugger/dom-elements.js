@@ -66,7 +66,7 @@ export const createForm = {
     },
     requireResidentKey: {
       line: document.getElementById("d-c-req-res-key-line"),
-      checkbox: document.getElementById("d-c-req-res-key-cbox"),
+      checkbox: document.getElementById("d-c-req-res-key-cbox-line"),
       input: document.getElementById("d-c-req-res-key-cbox-val")
     },
     userVerification: {
@@ -143,16 +143,28 @@ export const availableIndicatorSpan = document.getElementById(
 
 export const output = {
   uploadCBOR: document.getElementById("debugger-output-upload-cbor"),
-  downloadCBOR: document.getElementById("debugger-output-download-cbor"),
-  downloadJSON: document.getElementById("debugger-output-download-json"),
-  console: document.getElementById("debugger-output-console"),
+  downloadCBOR: document.querySelectorAll("#debugger-output-download-cbor"),
+  downloadJSON: document.querySelectorAll("#debugger-output-download-json"),
   keyModal: {
     modal: document.getElementById("debugger-key-modal"),
     closeButton: document.getElementById("debugger-key-modal-close-button"),
     pre: document.getElementById("debugger-key-modal-key")
   },
-  rawId: document.getElementById("output-rawid"),
-  publicKey: document.getElementById("output-public-key")
+  registration: {
+    console: document.getElementById("debugger-register-output-console"),
+    rawId: document.getElementById("register-output-rawid"),
+    publicKey: document.getElementById("register-output-public-key"),
+  },
+  authentication: {
+    console: document.getElementById("debugger-authentication-output-console"),
+    signature: document.getElementById("authentication-output-signature"),
+    challenge: document.getElementById("authentication-output-challenge"),
+  },
+  cbor: {
+    console: document.getElementById("debugger-cbor-output-console"),
+    rawId: document.getElementById("cbor-output-rawid"),
+    publicKey: document.getElementById("cbor-output-public-key"),
+  }
 };
 
 export const pasteModal = document.getElementById("debugger-paste-modal");

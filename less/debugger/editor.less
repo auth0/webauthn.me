@@ -56,8 +56,12 @@
   color: @color-white;
 }
 
-.editor-dynamic-item ~ .editor-dynamic-item {
+.editor-dynamic-item.indent-1 {
+  margin: 0;
   padding: 0 25px;
+}
+
+.editor-dynamic-item ~ .editor-dynamic-item {
   border-top: 1px @color-dark-gray solid;
 
   &:first-of-type {
