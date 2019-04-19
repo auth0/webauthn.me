@@ -44,6 +44,7 @@ export const createForm = {
   excludeCredentials: {
     checkbox: document.getElementById("d-c-excl-creds-cbox"),
     button: document.getElementById("d-c-add-excl-creds"),
+    file: document.getElementById("d-c-add-excl-creds-upload"),
     id: {
       line: document.getElementById("d-c-excl-creds-id-line"),
       buttonBin: document.getElementById("d-c-upload-excl-creds-id"),
@@ -66,8 +67,7 @@ export const createForm = {
     },
     requireResidentKey: {
       line: document.getElementById("d-c-req-res-key-line"),
-      checkbox: document.getElementById("d-c-req-res-key-cbox-line"),
-      input: document.getElementById("d-c-req-res-key-cbox-val")
+      checkbox: document.getElementById("d-c-req-res-key-cbox-val"),
     },
     userVerification: {
       line: document.getElementById("d-c-user-verif-line"),

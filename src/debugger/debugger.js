@@ -34,6 +34,18 @@ let lastCredentialsParsed;
 
 const pubKeyParams = [dom.createForm.pubKeyCredParams.alg.select];
 
+const excludedCredentials = [{
+  id: dom.createForm.excludeCredentials.id.line,
+  upload: dom.createForm.excludeCredentials.id.buttonBin,
+  file: dom.createForm.excludeCredentials.file,
+  type: {
+    checkbox: dom.createForm.excludeCredentials.type.checkbox,
+    usb: dom.createForm.excludeCredentials.type.usbCheckbox,
+    nfc: dom.createForm.excludeCredentials.type.nfcCheckbox,
+    ble: dom.createForm.excludeCredentials.type.bleCheckbox
+  }
+}];
+
 const allowedCredentials = [
   {
     id: dom.getForm.allowCredentials.id.span,
@@ -132,7 +144,34 @@ function getCreateOptions() {
     timeout: cForm.timeout.input.value
   };
 
-  //TODO: excludeCredentials
+  if (cForm.excludeCredentials.checkbox.checked) {
+    publicKey.excludeCredentials = excludedCredentials.map(ec => {
+      const result = {
+        type: "public-key",
+        id: Buffer.from(ec.id.value, "hex")
+      };
+
+      if (ec.type.checkbox.checked) {
+        const transports = [];
+
+        if (ec.type.usb.checked) {
+          transports.push("usb");
+        }
+
+        if (ec.type.nfc.checked) {
+          transports.push("nfc");
+        }
+
+        if (ec.type.ble.checked) {
+          transports.push("ble");
+        }
+
+        result.transports = transports;
+
+        return result;
+      }
+    })
+  }
 
   if (cForm.authenticatorSelect.checkbox.checked) {
     const authenticatorSelect = {};
@@ -145,7 +184,7 @@ function getCreateOptions() {
 
     if (cForm.authenticatorSelect.requireResidentKey.checkbox.checked) {
       authenticatorSelect.requireResidentKey =
-        cForm.authenticatorSelect.requireResidentKey.input.checked;
+        cForm.authenticatorSelect.requireResidentKey.checkbox.checked;
     }
 
     if (cForm.authenticatorSelect.userVerification.checkbox.checked) {
@@ -160,7 +199,7 @@ function getCreateOptions() {
   if (dom.createForm.attestation.checkbox.checked) {
     publicKey.attestation = getSelectValue(dom.createForm.attestation.select);
   }
-
+  console.log(publicKey);
   return {
     publicKey: publicKey
   };
@@ -264,7 +303,7 @@ async function register() {
     dom.output.registration.output.classList.remove('is-invisible');
   } catch (e) {
     log.debug(e);
-
+    console.error(e);
     dom.output.registration.console.textContent = getErrorMessage(e);
     dom.output.registration.output.classList.remove('is-invisible');
   }
@@ -345,6 +384,26 @@ function showPasteModal(event, i) {
   dom.pasteModal.classList.add("is-active");
 }
 
+function uploadExcludedCredentialsId(event, i) {
+  console.log(excludedCredentials);
+  const ec = excludedCredentials[i];
+
+  ec.file.onchange = () => {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const buf = Buffer.from(reader.result);
+      const hex = buf.toString("hex");
+      ec.id.textContent = hex.substr(0, 8) + "...";
+      ec.id.value = hex;
+    };
+
+    reader.readAsArrayBuffer(ec.file.files[0]);
+  };
+
+  ec.file.click();
+}
+
 function uploadAllowedCredentialsId(event, i) {
   const ac = allowedCredentials[i];
 
@@ -396,7 +455,7 @@ function setupCheckboxes() {
       [
         cForm.authenticatorSelect.authenticatorAttachment.checkbox,
         cForm.authenticatorSelect.authenticatorAttachment.select,
-        cForm.authenticatorSelect.requireResidentKey.input,
+        cForm.authenticatorSelect.requireResidentKey.checkbox,
         cForm.authenticatorSelect.userVerification.checkbox,
         cForm.authenticatorSelect.userVerification.select
       ]
@@ -406,8 +465,8 @@ function setupCheckboxes() {
       [cForm.authenticatorSelect.authenticatorAttachment.select]
     ],
     [
-      cForm.authenticatorSelect.requireResidentKey.input,
-      [cForm.authenticatorSelect.requireResidentKey.input]
+      cForm.authenticatorSelect.requireResidentKey.checkbox,
+      [cForm.authenticatorSelect.requireResidentKey.checkbox]
     ],
     [
       cForm.authenticatorSelect.userVerification.checkbox,
@@ -611,7 +670,7 @@ function addAllowedCredential() {
     );
   };
 
-  allowedCredential.paste.addEventListener("click", e => showPasteModal(e, i));
+  // allowedCredential.paste.addEventListener("click", e => showPasteModal(e, i));
   allowedCredential.upload.addEventListener("click", e =>
     uploadAllowedCredentialsId(e, i)
   );
@@ -627,6 +686,10 @@ function setupEvents() {
   // dom.getForm.allowCredentials.id.paste.addEventListener("click", e =>
   //   showPasteModal(e, 0)
   // );
+
+  dom.createForm.excludeCredentials.id.buttonBin.addEventListener("click", e =>
+    uploadExcludedCredentialsId(e, 0)
+  );
   dom.getForm.allowCredentials.id.upload.addEventListener("click", e =>
     uploadAllowedCredentialsId(e, 0)
   );
