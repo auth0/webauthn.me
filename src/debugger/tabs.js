@@ -1,14 +1,22 @@
 const tabs = () => {
   const tabCollections = document.querySelectorAll("[data-tabs]");
 
-  const handleShowTab = (tabID, event) => {
+  const handleShowTab = (tabsID, tabID, event) => {
     event.preventDefault();
 
-    const tabs = document.querySelectorAll(`[data-tabs="${tabID}"] .tab > a`);
-    tabs.forEach(tab => hideTab(tab));
+    const tabs = document.querySelectorAll(`[data-tabs="${tabsID}"] .tab > a`);
+    const tab = document.querySelector(`[data-tab="${tabID}"]`);
+    const tabContent = document.querySelector(tab.dataset.tab);
 
-    event.target.classList.add("active");
-    document.querySelector(event.target.dataset.tab).classList.remove("hidden");
+    tabs.forEach(tab => hideTab(tab));
+    tab.classList.add("active");
+    tabContent.classList.remove("hidden");
+
+    const tabContentBounding = tabContent.getBoundingClientRect();
+
+    if (tabContentBounding.top < 0) {
+      window.scrollTo(0, 0);
+    }
   };
 
   const hideTab = tab => {
@@ -16,14 +24,22 @@ const tabs = () => {
     document.querySelector(`${tab.dataset.tab}`).classList.add("hidden");
   };
 
-  const initTabs = tabID => {
-    const tabs = document.querySelectorAll(`[data-tabs="${tabID}"] a`);
+  const initTabs = tabsID => {
+    const tabs = document.querySelectorAll(`[data-tabs="${tabsID}"] a`);
+    const triggers = document.querySelectorAll('[data-tab-trigger]');
+
     tabs.forEach(tab => {
-      tab.addEventListener("mousedown", handleShowTab.bind(null, tabID));
+      tab.addEventListener("mousedown", handleShowTab.bind(null, tabsID, tab.dataset.tab));
 
       if (!tab.classList.contains("active")) {
         hideTab(tab);
       }
+    });
+
+    triggers.forEach(trigger => {
+      const tabsID = trigger.dataset.tabTrigger.split('.')[0];
+      const tab = trigger.dataset.tabTrigger.split('.')[1];
+      trigger.addEventListener('click', event => handleShowTab(tabsID, tab, event));
     });
   };
 

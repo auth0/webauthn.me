@@ -13,9 +13,13 @@
 .output-container {
   background: #2f3132;
   color: @color-white;
+
+  & + .output-container {
+      border-top: 1px solid @color-medium-gray;
+  }
 }
 
-.output-credentials {
+.output-columns {
   display: flex;
   flex-flow: row auto;
 
@@ -41,6 +45,29 @@
       border-width: 0 0 1px 1px;
     }
   }
+}
+
+.output-more-container {
+  padding: 0 70px;
+  background: @color-medium-gray;
+  border-top: 1px solid #000;
+
+  .output-columns {
+    > div {
+      padding: 50px 34px;
+      border: 0;
+      border-right: 1px solid #000;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+}
+
+.output-description {
+  color: @color-text-light-gray;
+  margin-bottom: 40px;
 }
 
 .output-raw,

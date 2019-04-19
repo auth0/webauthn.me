@@ -65,6 +65,28 @@
     }
   }
 
+  &.button-large {
+    display: block;
+    height: 64px;
+    background-color: @color-pink;
+    border-radius: 3px;
+    font-size: 14px;
+    text-transform: uppercase;
+
+    &:active {
+      background: darken(@color-pink, 10%);
+    }
+
+    &.button-clear {
+      background: none;
+      color: @color-blue;
+
+      &:active {
+        background: darken(@color-blue, 10%);
+      }
+    }
+  }
+
   &.button-wide {
     display: block;
     width: 100%;
