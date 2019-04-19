@@ -19,8 +19,8 @@
           input#d-g-allow-creds-cbox(type='checkbox', checked)
           label.checkbox(for="d-g-allow-creds-cbox")
         label#d-g-rp-id-line.label(for="d-g-rp-id") allowCredentials: 
-        button#d-g-add-allow-creds.button.editor-dynamic-add +
       .editor-dynamic
+        button#d-g-add-allow-creds.button.editor-dynamic-add +
         .editor-dynamic-item 
           .editor-label.indent-1 {
           .editor-label.indent-2 type: 'public-key',
@@ -55,14 +55,16 @@
             option(value="required") required
             option(value="preferred", selected) preferred
             option(value="discouraged") discouraged
+      .editor-label }
       .form-row
         span.checkbox-container
           input#d-g-mediation-cbox(type='checkbox')
-          label#d-g-mediation-line.checkbox(for="d-g-mediation-cbox") userVerification:
+          label#d-g-mediation-line.checkbox(for="d-g-mediation-cbox") mediation:
         .select-container
           select#d-g-mediation-select.select
             option(value="silent") silent
             option(value="optional", selected) optional
             option(value="required") required
+    
     .editor-label });
     

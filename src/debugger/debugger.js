@@ -357,7 +357,7 @@ function getGetOptions() {
   if (gForm.mediation.checkbox.checked) {
     result.mediation = getSelectValue(gForm.mediation.select);
   }
-
+  console.log(result);
   return result;
 }
 
