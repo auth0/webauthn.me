@@ -60,10 +60,11 @@ block content
 
   #debugger-paste-modal.modal
     .modal-background
-    .modal-content.has-background-light
-      .level
-        .level-item
-          input#debugger-paste-modal-input.input(type='text', placeholder='Base64 data')
-        .level-item
-          button.button#debugger-paste-modal-button-ok OK
-    button#debugger-paste-modal-close-button.modal-close.is-large(aria-label='close')
+    .modal-header
+      span Paste your content below
+      button.modal-header-close-button &times;
+    .modal-body
+      .form-row
+        input#debugger-paste-modal-input.input(type='text', placeholder='Base64 data')
+      button.button.button-wide#debugger-paste-modal-button-ok OK
+          

@@ -65,6 +65,19 @@
     }
   }
 
+  &.button-wide {
+    display: block;
+    width: 100%;
+    background-color: @color-pink;
+    border-radius: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+
+    &:active {
+      background: darken(@color-pink, 10%);
+    }
+  }
+
   &:disabled {
     background: lighten(@color-blue, 10%);
     cursor: not-allowed;

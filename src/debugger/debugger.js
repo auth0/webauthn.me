@@ -376,7 +376,7 @@ function setupCheckboxes() {
       [
         cForm.excludeCredentials.button,
         cForm.excludeCredentials.id.buttonBin,
-        cForm.excludeCredentials.id.buttonB64,
+        // cForm.excludeCredentials.id.buttonB64,
         cForm.excludeCredentials.type.checkbox,
         cForm.excludeCredentials.type.usbCheckbox,
         cForm.excludeCredentials.type.nfcCheckbox,
@@ -563,7 +563,6 @@ function addAllowedCredential() {
         <label id="d-g-allow-creds-id-${i}" class="label">id: <span id="d-g-allow-creds-id"></span></label>
         <input id="d-g-upload-allow-creds-file-${i}" type="file" style="display: none" />
         <button id="d-g-upload-allow-creds-id-${i}" class="button">Upload (binary)</button>
-        <button id="d-g-paste-base64-allow-creds-id-${i}" class="button">Paste (Base64)</button>
       </div>
       <div class="form-row indent-2">
         <span class="checkbox-container position-outside">
@@ -623,12 +622,11 @@ function setupEvents() {
   dom.authenticateButton.addEventListener("click", authenticate);
 
   dom.output.keyModal.closeButton.addEventListener("click", closeModal);
-  dom.pasteModalCloseButton.addEventListener("click", closeModal);
   dom.pasteModalOkButton.addEventListener("click", closeModal);
 
-  dom.getForm.allowCredentials.id.paste.addEventListener("click", e =>
-    showPasteModal(e, 0)
-  );
+  // dom.getForm.allowCredentials.id.paste.addEventListener("click", e =>
+  //   showPasteModal(e, 0)
+  // );
   dom.getForm.allowCredentials.id.upload.addEventListener("click", e =>
     uploadAllowedCredentialsId(e, 0)
   );

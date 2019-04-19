@@ -134,7 +134,7 @@ export function splitCredentialsByType(credentials) {
     credentials.id
   }\ntype: ${
     credentials.type
-  }\n</pre></code>\n<div class="output-section output-section-transparent">response: {<br/>`;
+  }\n</pre></code>\n<div class="output-section output-section-transparent">response: {</div>`;
 
   if (credentials.clientDataJSON && credentials.signature) {
     cred += `\n\n<code class="output-section output-section-turqoise"><pre>signature: ${credentials.signature}\n</pre>
@@ -160,7 +160,7 @@ export function splitCredentialsByType(credentials) {
     )}</pre></code>`;
   }
 
-  cred += `</div><div class="output-section output-section-transparent">}</div>`;
+  cred += `<div class="output-section output-section-transparent">}</div>`;
 
   return cred;
 }
