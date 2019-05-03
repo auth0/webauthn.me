@@ -46,8 +46,10 @@ block content
         #debugger-authenticate-output.is-invisible
           include output-authenticate.pug
       #debugger-upload
-        .container
-          input#debugger-output-upload-cbor.file-input(type='file')
+        .container(style='text-align: center;')
+          h2 Upoad full response
+          button#debugger-output-upload-cbor-trigger.button.button-large.button-wide Upload CBOR
+          input#debugger-output-upload-cbor.file-input(type='file').hidden
         
         #debugger-cbor-output.is-invisible
           include output-cbor.pug

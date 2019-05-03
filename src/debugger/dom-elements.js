@@ -68,7 +68,7 @@ export const createForm = {
     },
     requireResidentKey: {
       line: document.getElementById("d-c-req-res-key-line"),
-      checkbox: document.getElementById("d-c-req-res-key-cbox-val"),
+      checkbox: document.getElementById("d-c-req-res-key-cbox-val")
     },
     userVerification: {
       line: document.getElementById("d-c-user-verif-line"),
@@ -143,6 +143,9 @@ export const availableIndicatorSpan = document.getElementById(
 );
 
 export const output = {
+  triggerUploadCBOR: document.getElementById(
+    "debugger-output-upload-cbor-trigger"
+  ),
   uploadCBOR: document.getElementById("debugger-output-upload-cbor"),
   downloadCBOR: document.querySelectorAll("#debugger-output-download-cbor"),
   downloadJSON: document.querySelectorAll("#debugger-output-download-json"),
@@ -155,19 +158,19 @@ export const output = {
     output: document.getElementById("debugger-register-output"),
     console: document.getElementById("debugger-register-output-console"),
     rawId: document.getElementById("register-output-rawid"),
-    publicKey: document.getElementById("register-output-public-key"),
+    publicKey: document.getElementById("register-output-public-key")
   },
   authentication: {
     output: document.getElementById("debugger-authenticate-output"),
     console: document.getElementById("debugger-authenticate-output-console"),
     signature: document.getElementById("authenticate-output-signature"),
-    challenge: document.getElementById("authenticate-output-challenge"),
+    challenge: document.getElementById("authenticate-output-challenge")
   },
   cbor: {
     output: document.getElementById("debugger-cbor-output"),
     console: document.getElementById("debugger-cbor-output-console"),
     rawId: document.getElementById("cbor-output-rawid"),
-    publicKey: document.getElementById("cbor-output-public-key"),
+    publicKey: document.getElementById("cbor-output-public-key")
   }
 };
 

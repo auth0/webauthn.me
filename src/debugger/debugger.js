@@ -34,17 +34,19 @@ let lastCredentialsParsed;
 
 const pubKeyParams = [dom.createForm.pubKeyCredParams.alg.select];
 
-const excludedCredentials = [{
-  id: dom.createForm.excludeCredentials.id.line,
-  upload: dom.createForm.excludeCredentials.id.buttonBin,
-  file: dom.createForm.excludeCredentials.file,
-  type: {
-    checkbox: dom.createForm.excludeCredentials.type.checkbox,
-    usb: dom.createForm.excludeCredentials.type.usbCheckbox,
-    nfc: dom.createForm.excludeCredentials.type.nfcCheckbox,
-    ble: dom.createForm.excludeCredentials.type.bleCheckbox
+const excludedCredentials = [
+  {
+    id: dom.createForm.excludeCredentials.id.line,
+    upload: dom.createForm.excludeCredentials.id.buttonBin,
+    file: dom.createForm.excludeCredentials.file,
+    type: {
+      checkbox: dom.createForm.excludeCredentials.type.checkbox,
+      usb: dom.createForm.excludeCredentials.type.usbCheckbox,
+      nfc: dom.createForm.excludeCredentials.type.nfcCheckbox,
+      ble: dom.createForm.excludeCredentials.type.bleCheckbox
+    }
   }
-}];
+];
 
 const allowedCredentials = [
   {
@@ -170,7 +172,7 @@ function getCreateOptions() {
 
         return result;
       }
-    })
+    });
   }
 
   if (cForm.authenticatorSelect.checkbox.checked) {
@@ -275,11 +277,15 @@ function handleAuthenticationCredentials(credentials) {
   dom.output.authentication.console.innerHTML = withHtml;
 
   if (lastCredentialsParsed.response.signature) {
-    dom.output.authentication.signature.innerHTML = binToHex(lastCredentialsParsed.response.signature);
+    dom.output.authentication.signature.innerHTML = binToHex(
+      lastCredentialsParsed.response.signature
+    );
   }
 
   if (lastCredentialsParsed.response.clientDataJSON.challenge) {
-    dom.output.authentication.challenge.innerHTML = binToHex(lastCredentialsParsed.response.clientDataJSON.challenge);
+    dom.output.authentication.challenge.innerHTML = binToHex(
+      lastCredentialsParsed.response.clientDataJSON.challenge
+    );
   }
 }
 
@@ -300,12 +306,12 @@ async function register() {
     const credentials = await navigator.credentials.create(getCreateOptions());
     handleRegistrationCredentials(credentials);
     useLastRawId(binToHex(credentials.rawId));
-    dom.output.registration.output.classList.remove('is-invisible');
+    dom.output.registration.output.classList.remove("is-invisible");
   } catch (e) {
     log.debug(e);
     console.error(e);
     dom.output.registration.console.textContent = getErrorMessage(e);
-    dom.output.registration.output.classList.remove('is-invisible');
+    dom.output.registration.output.classList.remove("is-invisible");
   }
 }
 
@@ -365,13 +371,13 @@ async function authenticate() {
   try {
     const credentials = await navigator.credentials.get(getGetOptions());
     handleAuthenticationCredentials(credentials);
-    dom.output.authentication.output.classList.remove('is-invisible');
+    dom.output.authentication.output.classList.remove("is-invisible");
   } catch (e) {
     log.debug(e);
     console.error(e);
 
     dom.output.authentication.console.textContent = getErrorMessage(e);
-    dom.output.authentication.output.classList.remove('is-invisible');
+    dom.output.authentication.output.classList.remove("is-invisible");
   }
 }
 
@@ -519,6 +525,12 @@ function createRegenHandler(key, length) {
   };
 }
 
+function showCBORUpload(event) {
+  event.preventDefault();
+
+  dom.output.uploadCBOR.click();
+}
+
 function uploadCBOR(event) {
   const file = event.target.files[0];
   if (!file) {
@@ -530,7 +542,7 @@ function uploadCBOR(event) {
     const buf = Buffer.from(reader.result);
     const credentials = cbor.decodeFirstSync(buf);
     handleCBORCredentials(credentials);
-    dom.output.cbor.output.classList.remove('is-invisible');
+    dom.output.cbor.output.classList.remove("is-invisible");
   };
   reader.readAsArrayBuffer(file);
 }
@@ -628,42 +640,41 @@ function addExcludeCredential() {
     </div>
     <div class="editor-label indent-2">}</div>`;
 
-    const cred = document.createElement("div");
-    cred.innerHTML = html;
-    cred.classList.add("editor-dynamic-item");
+  const cred = document.createElement("div");
+  cred.innerHTML = html;
+  cred.classList.add("editor-dynamic-item");
 
-    dom.createForm.excludeCredentials.placeholder.parentElement.insertBefore(
-      cred,
-      dom.createForm.excludeCredentials.placeholder
+  dom.createForm.excludeCredentials.placeholder.parentElement.insertBefore(
+    cred,
+    dom.createForm.excludeCredentials.placeholder
+  );
+
+  const excludedCredential = {
+    id: document.getElementById(`d-c-excl-creds-id-line-${i}`),
+    upload: document.getElementById(`d-c-upload-excl-creds-id-${i}`),
+    file: document.getElementById(`d-c-excl-creds-upload-${i}`),
+    type: {
+      checkbox: document.getElementById(`d-c-excl-creds-type-cbox-${i}`),
+      usb: document.getElementById(`d-c-excl-creds-type-usb-${i}`),
+      nfc: document.getElementById(`d-c-excl-creds-type-nfc-${i}`),
+      ble: document.getElementById(`d-c-excl-creds-type-ble-${i}`)
+    }
+  };
+
+  excludedCredentials.push(excludedCredential);
+
+  excludedCredential.type.checkbox.oninput = e => {
+    return transportsCheckboxHandler(
+      e,
+      excludedCredential.type.usb,
+      excludedCredential.type.nfc,
+      excludedCredential.type.ble
     );
+  };
 
-    const excludedCredential = {
-      id: document.getElementById(`d-c-excl-creds-id-line-${i}`),
-      upload: document.getElementById(`d-c-upload-excl-creds-id-${i}`),
-      file: document.getElementById(`d-c-excl-creds-upload-${i}`),
-      type: {
-        checkbox: document.getElementById(`d-c-excl-creds-type-cbox-${i}`),
-        usb: document.getElementById(`d-c-excl-creds-type-usb-${i}`),
-        nfc: document.getElementById(`d-c-excl-creds-type-nfc-${i}`),
-        ble: document.getElementById(`d-c-excl-creds-type-ble-${i}`),
-      }
-    };
-
-
-    excludedCredentials.push(excludedCredential);
-
-    excludedCredential.type.checkbox.oninput = e => {
-      return transportsCheckboxHandler(
-        e,
-        excludedCredential.type.usb,
-        excludedCredential.type.nfc,
-        excludedCredential.type.ble
-      );
-    };
-
-    excludedCredential.upload.addEventListener("click", e =>
-      uploadExcludedCredentialsId(e, i)
-    );
+  excludedCredential.upload.addEventListener("click", e =>
+    uploadExcludedCredentialsId(e, i)
+  );
 }
 
 function transportsCheckboxHandler(event, usb, nfc, ble) {
@@ -780,9 +791,14 @@ function setupEvents() {
     addAllowedCredential
   );
 
+  dom.output.triggerUploadCBOR.addEventListener("click", showCBORUpload);
   dom.output.uploadCBOR.addEventListener("change", uploadCBOR);
-  dom.output.downloadCBOR.forEach(button => button.addEventListener("click", downloadCBOR));
-  dom.output.downloadJSON.forEach(button => button.addEventListener("click", downloadJSON));
+  dom.output.downloadCBOR.forEach(button =>
+    button.addEventListener("click", downloadCBOR)
+  );
+  dom.output.downloadJSON.forEach(button =>
+    button.addEventListener("click", downloadJSON)
+  );
 
   setupCheckboxes();
 }
