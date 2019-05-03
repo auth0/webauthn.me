@@ -1,11 +1,7 @@
 #debugger-output.container.output
   
   .output-header
-    h2 Output
-    .output-download
-      button#debugger-output-download-cbor.button.button-big Download (CBOR)
-      button#debugger-output-download-json.button.button-big Download (JSON)
-  
+    h2 Output  
   
   .output-container
     .output-columns
@@ -17,3 +13,14 @@
         #authenticate-output-challenge.output-raw
     
     #debugger-authenticate-output-console.output-console
+
+.output-container.output-more-container
+  .output-columns
+    div
+      h4 Would you like to register a new credential?
+      p.output-description You can test and debug a new credential.
+      button.button.button-large(data-tab-trigger="debugger.#debugger-register") Register
+    div
+      h4 Do you want to check your CBOR code?
+      p.output-description You can make your own tests and analyze your code in our panel.
+      button.button.button-large.button-clear(data-tab-trigger="debugger.#debugger-upload") Upload CBOR code

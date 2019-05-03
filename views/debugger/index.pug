@@ -21,11 +21,13 @@ block content
     div
       #debugger-register
         .container
-          h2 Register New Credentials
+          .debugger-header
+            .debugger-header-title
+              h2 Register New Credentials
+              p Set your preferential registration settings and check them below in the output
+            #debugger-auth-available-indicator.debugger-header-key
+              img(src="/img/yubikey.svg" alt="Yubi key")
           
-          #debugger-auth-available-indicator
-            | No authenticators available
-      
           #debugger-register-options
             include create.pug
         
@@ -35,7 +37,13 @@ block content
           include output.pug
       #debugger-authenticate
         .container
-          h2 Authenticate new credentials
+          .debugger-header
+            .debugger-header-title
+              h2 Authenticate new credentials
+              p Set your preferential authentication settings and check them below in the output
+            #debugger-auth-available-indicator.debugger-header-key
+              img(src="/img/yubikey.svg" alt="Yubi key")
+          
                     
           #debugger-authenticate-options
             include get.pug
@@ -46,10 +54,11 @@ block content
         #debugger-authenticate-output.is-invisible
           include output-authenticate.pug
       #debugger-upload
-        .container(style='text-align: center;')
-          h2 Upoad full response
-          button#debugger-output-upload-cbor-trigger.button.button-large.button-wide Upload CBOR
-          input#debugger-output-upload-cbor.file-input(type='file').hidden
+        .container(style='display: flex; flex-flow: column; align-items: center;')
+          h2(style="display: block;") Upoad full response
+          div(style="text-align: center;")
+            button#debugger-output-upload-cbor-trigger.button.button-large Upload CBOR
+            input#debugger-output-upload-cbor.file-input(type='file').hidden
         
         #debugger-cbor-output.is-invisible
           include output-cbor.pug

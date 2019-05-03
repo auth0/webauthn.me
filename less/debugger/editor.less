@@ -35,6 +35,19 @@
   &:hover {
     background: #636566;
     box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.4);
+
+    .editor-dynamic-add {
+      background-color: #a0a2a2;
+
+      &:disabled {
+        &,
+        &:hover,
+        &:active {
+          background: #a0a2a2 !important;
+          border-color: #a0a2a2 !important;
+        }
+      }
+    }
   }
 }
 
@@ -43,17 +56,35 @@
 }
 
 .editor-dynamic-add {
+  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
   position: absolute;
   top: 15px;
   right: 20px;
   width: 40px;
   height: 40px;
-  background-color: #a0a2a2;
+  background: none;
   border-radius: 8px;
-  border: none;
+  border: 1px solid #a0a2a2;
   outline: @color-blue;
   font-size: 25px;
   color: @color-white;
+
+  &:hover,
+  &:active {
+    background: @color-blue !important;
+    border-color: @color-blue !important;
+  }
+
+  &:disabled {
+    &,
+    &:hover,
+    &:active {
+      background: none !important;
+      border-color: #a0a2a2 !important;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
 }
 
 .editor-dynamic-item.indent-1 {

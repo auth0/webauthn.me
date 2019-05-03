@@ -805,24 +805,14 @@ function setupEvents() {
 
 function setupAuthenticatorsListInterval() {
   async function checkAvailableAuthenticators() {
-    const indicator = dom.availableIndicatorSpan;
+    const indicator = dom.availableIndicators;
     try {
       const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
       if (available) {
-        indicator.textContent = strings.authenticatorAvailable;
-        indicator.classList.remove("is-danger");
-        indicator.classList.add("is-success");
-      } else {
-        indicator.textContent = strings.authenticatorNotAvailable;
-        indicator.classList.add("is-danger");
-        indicator.classList.remove("is-success");
+        indicator.forEach(ind => ind.classList.add("hidden"));
       }
     } catch (e) {
       log.debug("isUserVerifyingPlatformAuthenticatorAvailable(): ", e);
-
-      indicator.textContent = strings.authenticatorAvailableNotSupported;
-      indicator.classList.add("is-danger");
-      indicator.classList.remove("is-success");
     }
   }
 

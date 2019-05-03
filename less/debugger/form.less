@@ -29,6 +29,11 @@
   .input-mixin();
   width: 100%;
   background: @color-light-gray;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .button {

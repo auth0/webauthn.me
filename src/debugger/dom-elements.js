@@ -138,8 +138,8 @@ export const authenticateButton = document.getElementById(
   "debugger-authenticate-button"
 );
 
-export const availableIndicatorSpan = document.getElementById(
-  "debugger-auth-available-indicator"
+export const availableIndicators = document.querySelectorAll(
+  "#debugger-auth-available-indicator"
 );
 
 export const output = {
