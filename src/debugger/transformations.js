@@ -51,5 +51,5 @@ export const prettifyTransformations = {
   },
   clientDataJSON: {
     transform: parseClientDataJSON
-  }
+  },
 };

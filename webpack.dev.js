@@ -1,15 +1,16 @@
-const merge = require('webpack-merge');
+const merge = require("webpack-merge");
 
-const common = require('./webpack.common.js');
+const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
-  mode: 'development',
+  mode: "development",
   entry: {
-    index: './src/index.js',
-    tutorial: './src/tutorial/index.js',
+    index: "./src/index.js",
+    tutorial: "./src/tutorial/index.js",
+    debugger: "./src/debugger/index.js"
   },
   output: {
-    filename: '[name].js',
-    path: __dirname + '/dist/js'
+    filename: "[name].js",
+    path: __dirname + "/dist/js"
   }
 });

@@ -1,0 +1,70 @@
+#debugger-code-get
+  .editor
+    .editor-label navigator.credentials.get({
+    .editor-label.indent-1 publicKey: {
+      .form-row.indent-1 
+        label#d-g-challenge-line.label(for="d-g-regen-challenge") challenge:
+        button#d-g-regen-challenge.button Regenerate (binary, random)  
+      .form-row.indent-1 
+        label#d-g-timeout-line.label(for="d-g-timeout") timeout:
+        input#d-g-timeout(type='number', value='5000', class="input")
+      .form-row.indent-1
+        span.checkbox-container.position-outside
+          input#d-g-rp-id-cbox(type='checkbox')
+          label.checkbox(for="d-g-rp-id-cbox")
+        label#d-g-rp-id-line.label(for="d-g-rp-id") rpId: 
+        input#d-g-rp-id(type='text', value='localhost', class="input")
+      .form-row.indent-1
+        span.checkbox-container.position-outside
+          input#d-g-allow-creds-cbox(type='checkbox', checked)
+          label.checkbox(for="d-g-allow-creds-cbox")
+        label#d-g-rp-id-line.label(for="d-g-rp-id") allowCredentials: 
+      .editor-dynamic
+        button#d-g-add-allow-creds.button.editor-dynamic-add +
+        .editor-dynamic-item 
+          .editor-label.indent-1 {
+          .editor-label.indent-2 type: 'public-key',
+          .form-row.indent-2
+            label.label id: #[span#d-g-allow-creds-id]
+            input#d-g-upload-allow-creds-file(type='file', style='display: none')
+            button#d-g-upload-allow-creds-id.button Upload (binary)
+            //- button#d-g-paste-base64-allow-creds-id.button Paste (Base64)
+          .form-row.indent-2
+            span.checkbox-container.position-outside
+              input#d-g-allow-creds-type-cbox(type='checkbox')
+              label.checkbox(for="d-g-allow-creds-type-cbox")
+            label#d-c-excl-creds-type-cbox.label transports: [ 
+              span.checkbox-container
+                input#d-g-allow-creds-type-usb(type='checkbox', disabled)
+                label.checkbox(for="d-g-allow-creds-type-usb") USB
+              span.checkbox-container
+                input#d-g-allow-creds-type-nfc(type='checkbox', disabled)
+                label.checkbox(for="d-g-allow-creds-type-nfc") NFC
+              span.checkbox-container
+                input#d-g-allow-creds-type-ble(type='checkbox', disabled)
+                label.checkbox(for="d-g-allow-creds-type-ble") BLE   
+            | ]         
+          .editor-label.indent-1 }
+        div#d-g-allow-creds-placeholder.is-invisible
+      .form-row
+        span.checkbox-container
+          input#d-g-user-verif-cbox(type='checkbox')
+          label#d-g-user-verif-line.checkbox(for="d-g-user-verif-cbox") userVerification:
+        .select-container
+          select#d-g-user-verif-select.select
+            option(value="required") required
+            option(value="preferred", selected) preferred
+            option(value="discouraged") discouraged
+      .editor-label }
+      .form-row
+        span.checkbox-container
+          input#d-g-mediation-cbox(type='checkbox')
+          label#d-g-mediation-line.checkbox(for="d-g-mediation-cbox") mediation:
+        .select-container
+          select#d-g-mediation-select.select
+            option(value="silent") silent
+            option(value="optional", selected) optional
+            option(value="required") required
+    
+    .editor-label });
+    

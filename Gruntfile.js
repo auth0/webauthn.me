@@ -47,7 +47,8 @@ module.exports = grunt => {
           "dist/css/common.css": "less/common.less",
           "dist/css/index.css": "less/index.less",
           "dist/css/tutorial.css": "less/tutorial/index.less",
-          "dist/css/introduction.css": "less/introduction/index.less"
+          "dist/css/introduction.css": "less/introduction/index.less",
+          "dist/css/debugger.css": "less/debugger/index.less"
         }
       }
     },
@@ -61,7 +62,8 @@ module.exports = grunt => {
         files: {
           //'dist/index.html': 'views/index.pug',
           "dist/introduction.html": "views/introduction/index.pug",
-          "dist/index.html": "views/tutorial/index.pug"
+          "dist/index.html": "views/tutorial/index.pug",
+          "dist/debugger.html": "views/debugger/index.pug"
         }
       }
     },

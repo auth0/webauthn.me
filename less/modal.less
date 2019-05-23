@@ -11,7 +11,8 @@
   padding: 30px;
   box-sizing: border-box;
 
-  &.active {
+  &.active,
+  &.is-active {
     display: block;
   }
 }
@@ -52,4 +53,14 @@
   line-height: 1.5;
 
   background: @color-dark-gray;
+}
+
+.modal-background {
+  position: fixed;
+  z-index: -1;
+  top: -100%;
+  left: -50%;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(47,47,47, .7);
 }

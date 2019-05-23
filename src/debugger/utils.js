@@ -169,7 +169,7 @@ export const cborEncoder = new cbor.Encoder({
   genTypes: [
     ArrayBuffer, (encoder, arrayBuffer) => {
       return encoder.pushAny(Buffer.from(arrayBuffer));
-    }
+    },
   ]
 });
 
@@ -184,5 +184,3 @@ export function getErrorMessage(e) {
 export function getSelectValue(select) {
   return select.options[select.selectedIndex].value;
 }
-
-

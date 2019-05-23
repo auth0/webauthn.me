@@ -1,0 +1,81 @@
+extends ../layout.pug
+
+block stylesheets
+  link(rel='stylesheet', href='/css/debugger.css', type='text/css', media='all')
+
+block scripts
+  script(src="js/debugger.js")
+  
+block variables
+  - var page="debugger"
+
+block content  
+  section#debugger
+    ul.tabs(data-tabs="debugger")
+      li.tab
+        a(href="#", class="active", data-tab="#debugger-register") Register
+      li.tab
+        a(href="#", data-tab="#debugger-authenticate") Authenticate
+      li.tab
+        a(href="#", data-tab="#debugger-upload") Upload CBOR output
+    div
+      #debugger-register
+        .container
+          .debugger-header
+            .debugger-header-title
+              h2 Register New Credentials
+              p Set your preferential registration settings and check them below in the output
+            #debugger-auth-available-indicator.debugger-header-key
+              img(src="/img/yubikey.svg" alt="Yubi key")
+          
+          #debugger-register-options
+            include create.pug
+        
+        button#debugger-register-button.button.button-full Register
+        
+        #debugger-register-output.is-invisible
+          include output.pug
+      #debugger-authenticate
+        .container
+          .debugger-header
+            .debugger-header-title
+              h2 Authenticate new credentials
+              p Set your preferential authentication settings and check them below in the output
+            #debugger-auth-available-indicator.debugger-header-key
+              img(src="/img/yubikey.svg" alt="Yubi key")
+          
+                    
+          #debugger-authenticate-options
+            include get.pug
+            
+        
+        button#debugger-authenticate-button.button.button-full Authenticate
+          
+        #debugger-authenticate-output.is-invisible
+          include output-authenticate.pug
+      #debugger-upload
+        .container(style='display: flex; flex-flow: column; align-items: center;')
+          h2(style="display: block;") Upoad full response
+          div(style="text-align: center;")
+            button#debugger-output-upload-cbor-trigger.button.button-large Upload CBOR
+            input#debugger-output-upload-cbor.file-input(type='file').hidden
+        
+        #debugger-cbor-output.is-invisible
+          include output-cbor.pug
+
+  #debugger-key-modal.modal
+    .modal-background
+    .modal-content.has-background-light
+      pre#debugger-key-modal-key Placeholder
+    button#debugger-key-modal-close-button.modal-close.is-large(aria-label='close')
+
+  #debugger-paste-modal.modal
+    .modal-background
+    .modal-header
+      span Paste your content below
+      button.modal-header-close-button &times;
+    .modal-body
+      .form-row
+        input#debugger-paste-modal-input.input(type='text', placeholder='Base64 data')
+      button.button.button-wide#debugger-paste-modal-button-ok OK
+          
