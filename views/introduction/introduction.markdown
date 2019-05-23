@@ -1,6 +1,6 @@
 ## Web Authentication
 
-[Web Authentication](https://auth0.com/blog/introduction-to-web-authentication/) is a [W3C proposal](https://www.w3.org/TR/webauthn/) for defining an API enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users.
+[Web Authentication](https://auth0.com/blog/introduction-to-web-authentication/) is a [W3C recommendation](https://www.w3.org/TR/webauthn/) for defining an API enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users.
 
 Web Authentication works hand in hand with other industry standards such as [Credential Management Level 1](https://www.w3.org/TR/credential-management-1/) and [FIDO 2.0 Client to Authenticator Protocol 2](https://fidoalliance.org/specs/fido-v2.0-rd-20170927/fido-client-to-authenticator-protocol-v2.0-rd-20170927.html).
 
