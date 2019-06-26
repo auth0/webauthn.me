@@ -175,33 +175,33 @@ function getCreateOptions() {
     });
   }
 
-  if (cForm.authenticatorSelect.checkbox.checked) {
-    const authenticatorSelect = {};
+  if (cForm.authenticatorSelection.checkbox.checked) {
+    const authenticatorSelection = {};
 
-    if (cForm.authenticatorSelect.authenticatorAttachment.checkbox.checked) {
-      authenticatorSelect.authenticatorAttachment = getSelectValue(
-        cForm.authenticatorSelect.authenticatorAttachment.select
+    if (cForm.authenticatorSelection.authenticatorAttachment.checkbox.checked) {
+      authenticatorSelection.authenticatorAttachment = getSelectValue(
+        cForm.authenticatorSelection.authenticatorAttachment.select
       );
     }
 
-    if (cForm.authenticatorSelect.requireResidentKey.checkbox.checked) {
-      authenticatorSelect.requireResidentKey =
-        cForm.authenticatorSelect.requireResidentKey.checkbox.checked;
+    if (cForm.authenticatorSelection.requireResidentKey.checkbox.checked) {
+      authenticatorSelection.requireResidentKey =
+        cForm.authenticatorSelection.requireResidentKey.checkbox.checked;
     }
 
-    if (cForm.authenticatorSelect.userVerification.checkbox.checked) {
-      authenticatorSelect.userVerification = getSelectValue(
-        cForm.authenticatorSelect.userVerification.select
+    if (cForm.authenticatorSelection.userVerification.checkbox.checked) {
+      authenticatorSelection.userVerification = getSelectValue(
+        cForm.authenticatorSelection.userVerification.select
       );
     }
 
-    publicKey.authenticatorSelect = authenticatorSelect;
+    publicKey.authenticatorSelection = authenticatorSelection;
   }
 
   if (dom.createForm.attestation.checkbox.checked) {
     publicKey.attestation = getSelectValue(dom.createForm.attestation.select);
   }
-  console.log(publicKey);
+
   return {
     publicKey: publicKey
   };
@@ -303,6 +303,7 @@ function useLastRawId(rawId) {
 
 async function register() {
   try {
+    console.log(getCreateOptions());
     const credentials = await navigator.credentials.create(getCreateOptions());
     handleRegistrationCredentials(credentials);
     useLastRawId(binToHex(credentials.rawId));
@@ -363,7 +364,7 @@ function getGetOptions() {
   if (gForm.mediation.checkbox.checked) {
     result.mediation = getSelectValue(gForm.mediation.select);
   }
-  console.log(result);
+
   return result;
 }
 
@@ -391,7 +392,6 @@ function showPasteModal(event, i) {
 }
 
 function uploadExcludedCredentialsId(event, i) {
-  console.log(excludedCredentials);
   const ec = excludedCredentials[i];
 
   ec.file.onchange = () => {
@@ -457,26 +457,26 @@ function setupCheckboxes() {
       ]
     ],
     [
-      cForm.authenticatorSelect.checkbox,
+      cForm.authenticatorSelection.checkbox,
       [
-        cForm.authenticatorSelect.authenticatorAttachment.checkbox,
-        cForm.authenticatorSelect.authenticatorAttachment.select,
-        cForm.authenticatorSelect.requireResidentKey.checkbox,
-        cForm.authenticatorSelect.userVerification.checkbox,
-        cForm.authenticatorSelect.userVerification.select
+        cForm.authenticatorSelection.authenticatorAttachment.checkbox,
+        cForm.authenticatorSelection.authenticatorAttachment.select,
+        cForm.authenticatorSelection.requireResidentKey.checkbox,
+        cForm.authenticatorSelection.userVerification.checkbox,
+        cForm.authenticatorSelection.userVerification.select
       ]
     ],
     [
-      cForm.authenticatorSelect.authenticatorAttachment.checkbox,
-      [cForm.authenticatorSelect.authenticatorAttachment.select]
+      cForm.authenticatorSelection.authenticatorAttachment.checkbox,
+      [cForm.authenticatorSelection.authenticatorAttachment.select]
     ],
     [
-      cForm.authenticatorSelect.requireResidentKey.checkbox,
-      [cForm.authenticatorSelect.requireResidentKey.checkbox]
+      cForm.authenticatorSelection.requireResidentKey.checkbox,
+      [cForm.authenticatorSelection.requireResidentKey.checkbox]
     ],
     [
-      cForm.authenticatorSelect.userVerification.checkbox,
-      [cForm.authenticatorSelect.userVerification.select]
+      cForm.authenticatorSelection.userVerification.checkbox,
+      [cForm.authenticatorSelection.userVerification.select]
     ],
     [cForm.attestation.checkbox, [cForm.attestation.select]],
 

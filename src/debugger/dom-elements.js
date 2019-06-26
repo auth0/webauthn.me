@@ -59,7 +59,7 @@ export const createForm = {
       bleCheckbox: document.getElementById("d-c-excl-creds-type-ble")
     }
   },
-  authenticatorSelect: {
+  authenticatorSelection: {
     checkbox: document.getElementById("d-c-auth-sel-cbox"),
     authenticatorAttachment: {
       line: document.getElementById("d-c-auth-attach-line"),

@@ -11,7 +11,6 @@ if (
   !navigator.credentials.get ||
   !navigator.credentials.create
 ) {
-  console.log(document.querySelector("#tutorial"));
   document.querySelector("#tutorial").classList.add("hidden");
   document.querySelector("#tutorial-error-message").classList.remove("hidden");
 }
