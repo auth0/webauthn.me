@@ -62,13 +62,26 @@ block content
         
         #debugger-cbor-output.is-invisible
           include output-cbor.pug
-
+  #debugger-error-message.hidden
+    .error
+      h2 Oops!
+      p.intro Looks like your browser does not support the web authentication API, or it doesn't support public key-based credentials.
+      p You won't be able to follow along with the interactive tutorial, or try the debugger but you can still get more information on the web authentication API.
+      a(href="/introduction").button-colorful Learn more
+      
+  #debugger-screen-size-error-message
+    .error
+      h2 Oops!
+      p.intro This page contains a lot of information.
+      p Because this page contains a lot of information, it currently only works on bigger screens. Try opening this page on a laptop or desktop computer for the best result.
+      a(href="/introduction").button-colorful Learn more
+      
   #debugger-key-modal.modal
     .modal-background
     .modal-content.has-background-light
       pre#debugger-key-modal-key Placeholder
     button#debugger-key-modal-close-button.modal-close.is-large(aria-label='close')
-
+    
   #debugger-paste-modal.modal
     .modal-background
     .modal-header
@@ -79,3 +92,4 @@ block content
         input#debugger-paste-modal-input.input(type='text', placeholder='Base64 data')
       button.button.button-wide#debugger-paste-modal-button-ok OK
           
+  

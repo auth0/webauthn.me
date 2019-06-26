@@ -4,18 +4,16 @@ import * as step3 from "./step-3.js";
 import * as step4 from "./step-4.js";
 import * as step5 from "./step-5.js";
 import * as step6 from "./step-6.js";
-import { modal } from "./modal";
-import { scrollTo } from "./utils.js";
+import { modal } from "../util/modal";
 
 if (
   !navigator.credentials ||
   !navigator.credentials.get ||
   !navigator.credentials.create
 ) {
-  const warning = modal();
-  warning.show(
-    "Looks like your browser does not support the web authentication API, or it doesn't support public key-based credentials.<br/><br/>You won't be able to follow along with the interactive tutorial, but you can still get more information on the web authentication API."
-  );
+  console.log(document.querySelector("#tutorial"));
+  document.querySelector("#tutorial").classList.add("hidden");
+  document.querySelector("#tutorial-error-message").classList.remove("hidden");
 }
 
 step1.init();

@@ -13,19 +13,27 @@ block content
   include ../hero.pug
 
   .tutorial-container
-    include step-1.pug
-    include step-2.pug
-    include step-3.pug
-    include step-4.pug
-    include step-5.pug
-    include step-6.pug
+    #tutorial
+      include step-1.pug
+      include step-2.pug
+      include step-3.pug
+      include step-4.pug
+      include step-5.pug
+      include step-6.pug
 
-    //- .tutorial-try-the-debugger-container
-    //-   .tutorial-try-the-debugger-left
-    //-     h1 Now you can try the debugger to play with all options
-    //-   .tutorial-try-the-debugger-right
-    //-     button.tutorial-try-the-debugger-learn-more.button-dark Learn more
-    //-     button.tutorial-try-the-debugger-try.button-colorful Try the debugger
+      .tutorial-try-the-debugger-container
+        .tutorial-try-the-debugger-left
+          h1 Now you can try the debugger to play with all options
+        .tutorial-try-the-debugger-right
+          a(href="/introduction").tutorial-try-the-debugger-learn-more.button-dark Learn more
+          a(href="/debugger").tutorial-try-the-debugger-try.button-colorful Try the debugger
+
+    #tutorial-error-message.hidden
+      .error
+        h2 Oops!
+        p.intro Looks like your browser does not support the web authentication API, or it doesn't support public key-based credentials.
+        p You won't be able to follow along with the interactive tutorial, or try the debugger but you can still get more information on the web authentication API.
+        a(href="/introduction").button-colorful Learn more
 
   .modal
     .modal-header
@@ -33,3 +41,4 @@ block content
       button.modal-header-close-button &times;
     .modal-body
       span.modal-message
+      

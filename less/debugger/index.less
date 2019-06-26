@@ -8,10 +8,6 @@
   box-sizing: border-box;
 }
 
-.hidden {
-  display: none;
-}
-
 .container {
   padding: 100px;
   background: #202122;
@@ -35,5 +31,32 @@
 .debugger-header-key {
   img {
     display: block;
+  }
+}
+
+#debugger {
+  display: none;
+}
+
+#debugger-screen-size-error-message {
+  display: block;
+}
+
+#debugger-error-message.hidden + #debugger-screen-size-error-message {
+  display: block;
+}
+
+#debugger-error-message + #debugger-screen-size-error-message {
+  display: none;
+}
+
+@media (min-width: 820px) {
+  #debugger {
+    display: block;
+  }
+
+  #debugger-screen-size-error-message,
+  #debugger-error-message.hidden + #debugger-screen-size-error-message {
+    display: none;
   }
 }

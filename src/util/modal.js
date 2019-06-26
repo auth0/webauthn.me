@@ -1,7 +1,9 @@
-export function modal() {
-  const modalElement = document.querySelector(".modal");
-  const modalMessageElement = document.querySelector(".modal-message");
-  const modalCloseButton = document.querySelector(".modal-header-close-button");
+export function modal(selector = ".modal") {
+  const modalElement = document.querySelector(selector);
+  const modalMessageElement = modalElement.querySelector(".modal-message");
+  const modalCloseButton = modalElement.querySelector(
+    ".modal-header-close-button"
+  );
 
   const onHideCallbacks = [];
 

@@ -1,4 +1,4 @@
-import { modal } from "./modal";
+import { modal } from "../util/modal";
 
 export default function error(error) {
   const errorModal = modal();

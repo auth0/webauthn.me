@@ -1,12 +1,13 @@
 import { setupDebugger } from "./debugger";
-import { tabs } from "./tabs";
+import { tabs } from "../util/tabs";
 
 if (
   !navigator.credentials ||
   !navigator.credentials.get ||
   !navigator.credentials.create
 ) {
-  console.error("No webauthn support");
+  document.querySelector("#debugger").classList.add("hidden");
+  document.querySelector("#debugger-error-message").classList.remove("hidden");
 }
 
 tabs();
