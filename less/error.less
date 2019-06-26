@@ -1,6 +1,6 @@
 .error {
   margin-top: 10rem;
-  padding: 65px 80px;
+  padding: 30px 40px;
   background: #2f3132;
   color: @color-white;
 
@@ -14,5 +14,11 @@
 
   .button-colorful {
     display: inline-block;
+  }
+}
+
+@media (min-width: @breakpoint-width) {
+  .error {
+    padding: 65px 80px;
   }
 }

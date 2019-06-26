@@ -8,7 +8,7 @@
 
   box-sizing: border-box;
   width: 100%;
-  padding: 3em 5em 0;
+  padding: 3em 0 0;
 
   background: @header-color;
 
@@ -56,13 +56,13 @@
     .header-right {
       display: flex;
       flex-grow: 1;
-      justify-content: flex-end;
+      justify-content: space-between;
       letter-spacing: @letter-spacing;
       font-weight: @font-weight-semi-bold;
 
       .header-nav-item {
         text-transform: uppercase;
-        margin-left: 26px;
+        margin-left: 10px;
 
         &.active {
           a {
@@ -72,7 +72,7 @@
 
         a {
           display: block;
-          padding: 20px;
+          padding: 20px 0;
 
           border: none;
 
@@ -85,15 +85,16 @@
 
 @media (min-width: @breakpoint-width) {
   .header {
+    padding: 3em 5rem 0;
+
     .header-container {
       flex-direction: row;
 
       .header-right {
+        justify-content: flex-end;
+
         .header-nav-item {
-          a {
-            display: inline;
-            padding: 0;
-          }
+          margin-left: 26px;
         }
       }
     }
