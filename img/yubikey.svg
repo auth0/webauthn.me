@@ -10,7 +10,7 @@
         <g id="Connect-the-Yubicard">
             <text id="debugger-auth-available-indicator" font-family="Helvetica" font-size="13" font-weight="normal" line-spacing="20" fill="#9B9B9B">
                 <tspan x="97" y="33">Recommended to connect </tspan>
-                <tspan x="97" y="53">the Yubickey first</tspan>
+                <tspan x="97" y="53">the Yubikey first</tspan>
             </text>
             <rect id="Rectangle-12" stroke="#606060" fill-rule="nonzero" x="0.5" y="23.5" width="48" height="34"></rect>
             <rect id="Rectangle-13" stroke="#606060" fill-rule="nonzero" x="48.5" y="30.5" width="22" height="20"></rect>
