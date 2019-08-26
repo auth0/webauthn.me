@@ -5,7 +5,8 @@
   "main": "src/debugger/index.js",
   "scripts": {
     "postinstall": "grunt build-prod",
-    "start": "grunt",
+    "start": "node server.js",
+    "start:dev": "grunt",
     "build": "grunt build-prod",
     "test": "grunt test",
     "heroku-postbuild": "npm run build"

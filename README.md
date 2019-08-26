@@ -16,7 +16,7 @@ npm install
 Spin up a development server:
 
 ```
-npm run start
+npm run start:dev
 ```
 
 Build the project:
