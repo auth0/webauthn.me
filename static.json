@@ -1,0 +1,11 @@
+{
+  "root": "dist",
+  "clean_urls": true,
+  "https_only": true,
+  "headers": {
+    "/**": {
+      "Strict-Transport-Security":
+        "max-age=63072000; includeSubDomains; preload"
+    }
+  }
+}
