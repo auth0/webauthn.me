@@ -29,6 +29,11 @@ module.exports = grunt => {
             cwd: "fonts",
             src: ["**"],
             dest: "dist/fonts"
+          }, {
+            expand: true,
+            cwd: "./",
+            src: "robots.txt",
+            dest: "dist/"
           } /*{
           expand: true,
           flatten: true,

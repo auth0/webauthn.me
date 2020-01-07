@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Sitemap: https://webauthn.me/sitemap.xml
+
+Disallow: /dir/*
+Disallow: /files/*
+Disallow: /see/*
+Disallow: /access/*
