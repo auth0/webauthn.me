@@ -208,7 +208,7 @@ export function prettyCredentialsWithHtml(prettyCredentials) {
         let buttons = "";
         for (const but of prettifyTransformations[key].buttons) {
           buttons +=
-            `<button class="button" data-key="${key}" onclick="outputButtonClick(event);">` +
+            `<button class="button hide-mobile" data-key="${key}" onclick="outputButtonClick(event);">` +
             `${but}</button>`;
         }
         line = `${head}${buttons} ${tail}`;
