@@ -54,12 +54,20 @@ button {
   left: 0;
 }
 
+.hidden {
+  display: none !important;
+}
+
+.hide-mobile {
+  display: none;
+}
+
 @media (min-width: @breakpoint-width) {
   body {
     margin: 8em auto 0 auto;
   }
-}
 
-.hidden {
-  display: none !important;
+  .hide-mobile {
+    display: initial;
+  }
 }

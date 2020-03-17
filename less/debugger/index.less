@@ -9,54 +9,58 @@
 }
 
 .container {
-  padding: 100px;
+  padding: 20px;
   background: #202122;
 }
 
 .debugger-header {
   display: flex;
-  flex-flow: row;
-  justify-content: space-between;
+  flex-flow: column;
 }
 
 .debugger-header-title {
-  min-width: 70%;
   color: #fff;
 
   h2 {
     margin-bottom: 10px;
   }
+
+  p {
+    margin: 0 0 20px;
+  }
 }
 
 .debugger-header-key {
+  margin: 0 0 20px;
   img {
+    margin: 0 auto;
     display: block;
   }
-}
-
-#debugger {
-  display: none;
-}
-
-#debugger-screen-size-error-message {
-  display: block;
-}
-
-#debugger-error-message.hidden + #debugger-screen-size-error-message {
-  display: block;
-}
-
-#debugger-error-message + #debugger-screen-size-error-message {
-  display: none;
 }
 
 @media (min-width: 820px) {
-  #debugger {
-    display: block;
+  .container {
+    padding: 100px;
   }
 
-  #debugger-screen-size-error-message,
-  #debugger-error-message.hidden + #debugger-screen-size-error-message {
-    display: none;
+  .debugger-header {
+    flex-flow: row;
+    justify-content: space-between;
+  }
+
+  .debugger-header-title {
+    min-width: 70%;
+
+    p {
+      margin: 0 0 45px;
+    }
+  }
+
+  .debugger-header-key {
+    margin: 0;
+
+    img {
+      margin: 0;
+    }
   }
 }

@@ -2,7 +2,7 @@
   
   .output-header
     h2 Output
-    .output-download
+    .output-download.hide-mobile
       button#debugger-output-download-cbor.button.button-big Download (CBOR)
       button#debugger-output-download-json.button.button-big Download (JSON)
   
@@ -25,7 +25,7 @@
       h4 Would you like to authenticate your credentials?
       p.output-description Now with your rawID you can authenticate.
       button.button.button-large(data-tab-trigger="debugger.#debugger-authenticate") Authenticate
-    div
+    div.hide-mobile
       h4 Do you want to check your CBOR code?
       p.output-description You can make your own tests and analyze your code in our panel.
       button.button.button-large.button-clear(data-tab-trigger="debugger.#debugger-upload") Upload CBOR code

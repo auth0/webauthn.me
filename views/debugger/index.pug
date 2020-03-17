@@ -16,7 +16,7 @@ block content
         a(href="#", class="active", data-tab="#debugger-register") Register
       li.tab
         a(href="#", data-tab="#debugger-authenticate") Authenticate
-      li.tab
+      li.tab.hide-mobile
         a(href="#", data-tab="#debugger-upload") Upload CBOR output
     div
       #debugger-register
@@ -67,13 +67,6 @@ block content
       h2 Oops!
       p.intro Looks like your browser does not support the web authentication API, or it doesn't support public key-based credentials.
       p You won't be able to follow along with the interactive tutorial, or try the debugger but you can still get more information on the web authentication API.
-      a(href="/introduction").button-colorful Learn more
-      
-  #debugger-screen-size-error-message
-    .error
-      h2 Oops!
-      p.intro This page contains a lot of information.
-      p Because this page contains a lot of information, it currently only works on bigger screens. Try opening this page on a laptop or desktop computer for the best result.
       a(href="/introduction").button-colorful Learn more
       
   #debugger-key-modal.modal
