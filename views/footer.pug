@@ -24,16 +24,21 @@ mixin footer-browser-status-element(icon, name)
       a(href="https://auth0.com/signup" class="button-orange") Try Auth0 for free
 
   .footer-branding-container
-    .footer-branding-left
-      a.footer-crafted-by-container(href='https://auth0.com')
-        span Crafted by
-        img.footer-branded-crafted-img(src='/img/logo-ft.svg', alt='auth0 logo')
-      span.footer-copyright.
-        © 2019 Auth0 Inc. All Rights Reserved.
-    img(src='/img/webauthn-logo-no-text.svg', alt='webauthn logo')
-    .footer-branding-right
-      span Spread the word
-      a.footer-branding-twitter(href='https://twitter.com/home?status=Check%20out%20https%3A//webauthn.me%20and%20learn%20what%20Web%20Authentication%20is%20all%20about!', target="_blank")
-        img(src='/img/twitter-logo.svg', alt='twitter logo')
-      a.footer-branding-facebook(href="https://www.facebook.com/sharer/sharer.php?u=https%3A//webauthn.me", target="_blank")
-        img(src='/img/facebook-logo.svg', alt='facebook logo')
+    .footer-branding-container-inner 
+      .footer-branding-left
+        a.footer-crafted-by-container(href='https://auth0.com')
+          span Crafted by
+          img.footer-branded-crafted-img(src='/img/logo-ft.svg', alt='auth0 logo')
+        span.footer-copyright.
+          © 2019 Auth0 Inc. All Rights Reserved.
+      img(src='/img/webauthn-logo-no-text.svg', alt='webauthn logo')
+      .footer-branding-right
+        span Spread the word
+        a.footer-branding-twitter(href='https://twitter.com/home?status=Check%20out%20https%3A//webauthn.me%20and%20learn%20what%20Web%20Authentication%20is%20all%20about!', target="_blank")
+          img(src='/img/twitter-logo.svg', alt='twitter logo')
+        a.footer-branding-facebook(href="https://www.facebook.com/sharer/sharer.php?u=https%3A//webauthn.me", target="_blank")
+          img(src='/img/facebook-logo.svg', alt='facebook logo')
+    .footer-github
+      p Found a bug? 
+      a(href='https://github.com/auth0/webauthn.me/pulls', target='_blank') Send a Pull Request!
+    
