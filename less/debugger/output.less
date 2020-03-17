@@ -21,11 +21,11 @@
 
 .output-columns {
   display: flex;
-  flex-flow: row auto;
+  flex-flow: column;
 
   > div {
-    min-width: 50%;
-    padding: 24px 34px;
+    min-width: 100%;
+    padding: 20px;
     border: 1px solid @color-medium-gray;
     border-width: 0 1px 1px 0;
 
@@ -48,7 +48,7 @@
 }
 
 .output-more-container {
-  padding: 0 70px;
+  padding: 0;
   background: @color-medium-gray;
   border-top: 1px solid #000;
 
@@ -81,14 +81,13 @@
 }
 
 .output-console {
-  padding: 65px 80px;
-
+  padding: 20px;
 }
 
 .output-section {
   overflow: auto;
   display: block;
-  padding: 16px;
+  padding: 5px 16px;
   margin-bottom: 10px;
   background: @color-light-gray;
   border-radius: 6px;
@@ -121,4 +120,27 @@
 
 .is-invisible {
   display: none;
+}
+
+@media(min-width: 820px) {
+  .output-columns {
+    flex-flow: row;
+
+    > div {
+      min-width: 50%;
+      padding: 24px 34px;
+    }
+  }
+
+  .output-section {
+    padding: 16px;
+  }
+
+  .output-console {
+    padding: 65px 80px;
+  }
+
+  .output-more-container {
+    padding: 0 70px;
+  }
 }

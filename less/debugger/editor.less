@@ -1,6 +1,6 @@
 .generate-indents(@n, @i: 1) when (@i =< @n) {
   .indent-@{i} {
-    margin-left: (@i * 30px);
+    margin-left: (@i * 15px);
   }
   .generate-indents(@n, (@i + 1));
 }
@@ -12,8 +12,9 @@
 }
 
 .editor {
+  overflow-x: scroll;
   width: 100%;
-  padding: 65px 80px;
+  padding: 15px 20px;
   background: #2f3132;
   color: @color-white;
   font-family: "Roboto Mono", monospace;
@@ -58,15 +59,16 @@
 .editor-dynamic-add {
   transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
   position: absolute;
-  top: 15px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
+  top: 25px;
+  right: -12px;
+  width: 20px;
+  height: 20px;
   background: none;
   border-radius: 8px;
   border: 1px solid #a0a2a2;
   outline: @color-blue;
-  font-size: 25px;
+  padding: 0;
+  font-size: 10px;
   color: @color-white;
 
   &:hover,
@@ -97,5 +99,27 @@
 
   &:first-of-type {
     border: none;
+  }
+}
+
+@media (min-width: 820px) {
+  .editor {
+    overflow-x: initial;
+    padding: 65px 80px;
+  }
+
+  .generate-indents(@n, @i: 1) when (@i =< @n) {
+    .indent-@{i} {
+      margin-left: (@i * 30px);
+    }
+    .generate-indents(@n, (@i + 1));
+  }
+
+  .editor-dynamic-add {
+    top: 15px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
   }
 }
