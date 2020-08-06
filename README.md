@@ -1,4 +1,5 @@
 # WebAuthn.me
+
 ![A screenshot of webauthn.me](https://cdn.auth0.com/blog/webauthn/screenshot.png)
 
 Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators.
@@ -23,7 +24,7 @@ Build the project:
 
 ```
 npm run build
-```     
+```
 
 Run the tests:
 
@@ -35,12 +36,12 @@ npm run test
 
 Auth0 helps you to:
 
-* Add authentication with [multiple authentication sources](https://auth0.com/docs/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce, among others**, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
-* Add authentication through more traditional [username/password databases](https://auth0.com/docs/connections/database/custom-db).
-* Add support for [linking different user accounts](https://auth0.com/docs/link-accounts) with the same user.
-* Support for generating signed [JSON Web Tokens](https://auth0.com/docs/jwt) to call your APIs and **flow the user identity** securely.
-* Analytics of how, when, and where users are logging in.
-* Pull data from other sources and add it to the user profile, through [JavaScript rules](https://auth0.com/docs/rules/current).
+- Add authentication with [multiple authentication sources](https://auth0.com/docs/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce, among others**, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
+- Add authentication through more traditional [username/password databases](https://auth0.com/docs/connections/database/custom-db).
+- Add support for [linking different user accounts](https://auth0.com/docs/link-accounts) with the same user.
+- Support for generating signed [JSON Web Tokens](https://auth0.com/docs/jwt) to call your APIs and **flow the user identity** securely.
+- Analytics of how, when, and where users are logging in.
+- Pull data from other sources and add it to the user profile, through [JavaScript rules](https://auth0.com/docs/rules/current).
 
 ## Issue Reporting
 
@@ -48,7 +49,7 @@ If you have found a bug or if you have a feature request, please report them at 
 
 ## Author
 
-[Auth0](https://auth0.com)
+[Auth0](https://auth0.com/developers/)
 
 ## License
 
