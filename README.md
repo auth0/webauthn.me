@@ -6,6 +6,12 @@ Web Authentication is a new standard enabling the creation and use of strong, at
 
 [WebAuthn.me](https://webauthn.me) contains a visual walkthrough of each step of the process of registering new credentials and authenticating using these credentials. There's also a debugger to play around with different configurations and an introduction page with some more information.
 
+## Sponsor
+
+|||
+|-|-|
+|![auth0 logo](https://user-images.githubusercontent.com/83319/31722733-de95bbde-b3ea-11e7-96bf-4f4e8f915588.png)|If you want to quickly add secure token-based authentication to your projects, feel free to check Auth0's documentation and free plan at [auth0.com/developers](https://auth0.com/developers?utm_source=GHsponsor&utm_medium=GHsponsor&utm_campaign=webauthnme&utm_content=auth)|
+
 ### How to build
 
 First, install the required dependencies:
