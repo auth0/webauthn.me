@@ -1,0 +1,45 @@
+@import "../vars.less";
+
+table {
+  margin: 0 0 2rem;
+  width: 100%;
+  border: 1px solid @color-light-gray;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 1rem;
+  background: @color-light-gray;
+  border-right: 1px solid @color-black;
+  color: @color-white;
+
+  &:last-child {
+    border-right: 1px solid @color-light-gray;
+  }
+}
+
+td {
+  padding: 1rem;
+  width: 15%;
+  border: 1px solid @color-light-gray;
+
+  &:first-child {
+    width: 25%;
+    font-weight: bold;
+  }
+
+  &.y {
+    background: lighten(@color-pink, 10%);
+    color: @color-white;
+  }
+}
+
+.small {
+  display: block;
+  font-size: 12px;
+  font-style: italic;
+}
+
+a {
+  color: @color-pink;
+}
