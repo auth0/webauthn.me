@@ -4,21 +4,24 @@ mixin footer-browser-status-element(icon, name)
     span= name
 
 .footer-container
-  .footer-browser-status-container
-    .footer-browser-status-text-container
-      .footer-browser-status-text-title
-        img(src='/img/question-circle.svg', alt='question icon')
-        h4 Browser Status
-      p.
-        Web Authentication is only partially included in Chrome 67, Firefox 60, and Edge build 17723 or newer versions.
-    .footer-browser-icons-container
-      +footer-browser-status-element('/img/firefox-logo.png', 'Firefox 60')
-      +footer-browser-status-element('/img/chrome-logo.png', 'Chrome 67')
-      +footer-browser-status-element('/img/edge-logo.png', 'Edge 17723')
-
+  if page != "browser-support"
+    .footer-browser-status-container
+      .footer-browser-status-text-container
+        .footer-browser-status-text-title
+          img(src='/img/question-circle.svg', alt='question icon')
+          h4 Browser Status
+        p.
+          Web Authentication is (partially) supoprted in most modern browsers.
+        a(href="/browser-support", style="margin-top: 1rem; text-align: center;").button-dark See all browsers
+        
+      .footer-browser-icons-container
+        +footer-browser-status-element('/img/firefox-logo.png', 'Firefox 60')
+        +footer-browser-status-element('/img/chrome-logo.png', 'Chrome 67')
+        +footer-browser-status-element('/img/edge-logo.png', 'Edge 17723')
   .footer-banner
     img.footer-banner-logo(src="/img/auth0.svg", alt="Auth0 logo")
-    p.footer-banner-text webauthn.me is brought to you by #[a(href="https://auth0.com/developers/") Auth0] #[br] Securely implement an authentication flow in less than 10 minutes.
+    //- p.footer-banner-text webauthn.me is brought to you by #[a(href="https://auth0.com/developers/") Auth0] #[br] Securely implement an authentication flow in less than 10 minutes.
+    p.footer-banner-text With Auth0 you can easily add WebAuthN as a second factor<br/> to add an extra layer of security for your users.
 
     div.footer-banner-buttons
       a(href="https://auth0.com/signup" class="button-orange") Try Auth0 for free
