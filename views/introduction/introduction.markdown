@@ -5,7 +5,7 @@
 Web Authentication works hand in hand with other industry standards such as [Credential Management Level 1](https://www.w3.org/TR/credential-management-1/) and [FIDO 2.0 Client to Authenticator Protocol 2](https://fidoalliance.org/specs/fido-v2.0-rd-20170927/fido-client-to-authenticator-protocol-v2.0-rd-20170927.html).
 
 <div class="banner">
-  Auth0 allows you to quickly setup Multy Factor Authentication with WebAuthn.
+  Auth0 allows you to quickly setup Multi-Factor Authentication with WebAuthn.
   <a href="https://auth0.com/docs/mfa/fido-authentication-with-webauthn">Read more in our documentation.</a>
 </div>
 
