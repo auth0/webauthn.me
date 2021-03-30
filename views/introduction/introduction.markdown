@@ -4,6 +4,11 @@
 
 Web Authentication works hand in hand with other industry standards such as [Credential Management Level 1](https://www.w3.org/TR/credential-management-1/) and [FIDO 2.0 Client to Authenticator Protocol 2](https://fidoalliance.org/specs/fido-v2.0-rd-20170927/fido-client-to-authenticator-protocol-v2.0-rd-20170927.html).
 
+<div class="banner">
+  Auth0 allows you to quickly setup Multy Factor Authentication with WebAuthn.
+  <a href="https://auth0.com/docs/mfa/fido-authentication-with-webauthn">Read more in our documentation.</a>
+</div>
+
 ## How It Works
 
 <figure class="image">
@@ -19,6 +24,8 @@ Registration makes the authenticator create a new set of public-key credentials 
 </figure>
 
 Authentication, in contrast, allows the relying party to send a challenge to the authenticator. This challenge can then be signed with the previously generated public-key credentials and sent back to the relying party. This way, the relying party can verify that a user is in possession of the required credentials, proving their identity.
+
+There are two types of authentiators. [Roaming authenticators](https://auth0.com/docs/mfa/configure-webauthn-security-keys-for-mfa) connect to your devices trough USB, Bluetooth or NFC, and [platform authenticators](https://auth0.com/docs/mfa/configure-webauthn-device-biometrics-for-mfa) are built in.
 
 <figure class="image">
   <img src="img/3-Login.svg" alt="Authentication">
@@ -44,30 +51,30 @@ navigator.credentials
       challenge: base64url.decode("<%= challenge %>"),
       // relying party
       rp: {
-        name: "Awesome Corp" // sample relying party
+        name: "Awesome Corp", // sample relying party
       },
       user: {
         id: base64url.decode("<%= id %>"),
         name: "<%= name %>",
-        displayName: "<%= displayName %>"
+        displayName: "<%= displayName %>",
       },
       authenticatorSelection: { userVerification: "preferred" },
       attestation: "direct",
       pubKeyCredParams: [
         {
           type: "public-key",
-          alg: -7 // "ES256" IANA COSE Algorithms registry
-        }
-      ]
-    }
+          alg: -7, // "ES256" IANA COSE Algorithms registry
+        },
+      ],
+    },
   })
-  .then(res => {
+  .then((res) => {
     var json = publicKeyCredentialToJSON(res);
     // Send data to relying party's servers
     post("/webauthn/register", {
       state: "<%= state %>",
       provider: "<%= provider %>",
-      res: JSON.stringify(json)
+      res: JSON.stringify(json),
     });
   })
   .catch(console.error);
@@ -84,23 +91,23 @@ navigator.credentials
       allowCredentials: [
         {
           id: base64url.decode("<%= id %>"),
-          type: "public-key"
-        }
+          type: "public-key",
+        },
       ],
       timeout: 15000,
-      authenticatorSelection: { userVerification: "preferred" }
-    }
+      authenticatorSelection: { userVerification: "preferred" },
+    },
   })
-  .then(res => {
+  .then((res) => {
     var json = publicKeyCredentialToJSON(res);
     // Send data to relying party's servers
     post("/webauthn/authenticate", {
       state: "<%= state %>",
       provider: "<%= provider %>",
-      res: JSON.stringify(json)
+      res: JSON.stringify(json),
     });
   })
-  .catch(err => {
+  .catch((err) => {
     alert("Invalid FIDO device");
   });
 ```
