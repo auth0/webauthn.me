@@ -1,5 +1,30 @@
 extends ../layout.pug
 
+block meta  
+  title An introduction to WebAuthn
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  meta(name='author', content='auth0.com')
+  meta(name='description', content='Learn more about the WebAuthn spec, that enables public key-based credentials in the browser for securely authenticating users using hardware authenticators.')
+
+  meta(property="og:title" content="An introduction to WebAuthn")
+  meta(property="og:site_name" content="An introduction to WebAuthn")
+  meta(property="og:url" content="https://webauthn.me/introduction")
+  meta(property="og:image" content="https://cdn.auth0.com/blog/webauthn:card.png")
+  meta(property="og:description" content="Learn more about the WebAuthn spec, that enables public key-based credentials in the browser for securely authenticating users using hardware authenticators.")
+  meta(property="og:type" content="website")
+
+  meta(name="twitter:site" content="@auth0")
+  meta(name="twitter:creator" content="@auth0")
+  meta(name="twitter:title" content="An introduction to WebAuthn")
+  meta(name="twitter:url" content="https://webauthn.me/introduction")
+  meta(name="twitter:description" content="Learn more about the WebAuthn spec, that enables public key-based credentials in the browser for securely authenticating users using hardware authenticators.")
+  meta(name="twitter:card" content="summary_large_image")
+  meta(name="twitter:image" content="https://cdn.auth0.com/blog/webauthn:card.png")
+  meta(name="twitter:image:height" content="512")
+  meta(name="twitter:image:width" content="1024")
+
 block stylesheets
   link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css', type='text/css', media='all')
   link(rel='stylesheet', href='/css/introduction.css', type='text/css', media='all')

@@ -1,5 +1,30 @@
 extends ../layout.pug
 
+block meta  
+  title See your WebAuthn config in action
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  meta(name='author', content='auth0.com')
+  meta(name='description', content='Quickly change a WebAuthn configuration parameter, and see the change take effect in our handy debugger.')
+
+  meta(property="og:title" content="See your WebAuthn config in action")
+  meta(property="og:site_name" content="See your WebAuthn config in action")
+  meta(property="og:url" content="https://webauthn.me/debugger")
+  meta(property="og:image" content="https://cdn.auth0.com/blog/webauthn:card.png")
+  meta(property="og:description" content="Quickly change a WebAuthn configuration parameter, and see the change take effect in our handy debugger.")
+  meta(property="og:type" content="website")
+
+  meta(name="twitter:site" content="@auth0")
+  meta(name="twitter:creator" content="@auth0")
+  meta(name="twitter:title" content="See your WebAuthn config in action")
+  meta(name="twitter:url" content="https://webauthn.me/debugger")
+  meta(name="twitter:description" content="Quickly change a WebAuthn configuration parameter, and see the change take effect in our handy debugger.")
+  meta(name="twitter:card" content="summary_large_image")
+  meta(name="twitter:image" content="https://cdn.auth0.com/blog/webauthn:card.png")
+  meta(name="twitter:image:height" content="512")
+  meta(name="twitter:image:width" content="1024")
+
 block stylesheets
   link(rel='stylesheet', href='/css/debugger.css', type='text/css', media='all')
 
