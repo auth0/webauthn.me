@@ -1,5 +1,30 @@
 extends ../layout.pug
 
+block meta
+    title Does my browser support WebAuthn?
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='author', content='auth0.com')
+    meta(name='description', content='An overview of all modern browser and their support for WebAuthn platform and roaming authenticators.')
+
+    meta(property="og:title" content="Does my browser support WebAuthn?")
+    meta(property="og:site_name" content="Does my browser support WebAuthn?")
+    meta(property="og:url" content="https://webauthn.me/browser-support")
+    meta(property="og:image" content="https://cdn.auth0.com/blog/webauthn:card.png")
+    meta(property="og:description" content="An overview of all modern browser and their support for WebAuthn platform and roaming authenticators.")
+    meta(property="og:type" content="website")
+
+    meta(name="twitter:site" content="@auth0")
+    meta(name="twitter:creator" content="@auth0")
+    meta(name="twitter:title" content="Does my browser support WebAuthn?")
+    meta(name="twitter:url" content="https://webauthn.me/browser-support")
+    meta(name="twitter:description" content="An overview of all modern browser and their support for WebAuthn platform and roaming authenticators.")
+    meta(name="twitter:card" content="summary_large_image")
+    meta(name="twitter:image" content="https://cdn.auth0.com/blog/webauthn:card.png")
+    meta(name="twitter:image:height" content="512")
+    meta(name="twitter:image:width" content="1024")
+
 block stylesheets
   link(rel='stylesheet', href='/css/browser-support.css', type='text/css', media='all')
 
@@ -63,7 +88,7 @@ block content
             td Internet Explorer
             td N/A
             td N/A
-            td No
+            td N/A
             td N/A
             td N/A
 
@@ -112,7 +137,7 @@ block content
             td No
             td.y Yes
             td.y Yes
-            td.y Yes
+            td  Yes
           tr
             td Internet Explorer
             td N/A
@@ -129,4 +154,4 @@ block content
         li
           a(href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API#authenticatorresponse") Mozilla Developer Network
         li
-          a(href="https://caniuse.com/?search=webauthn") Can I use
+          a(href="https://caniuse.com/?search=webauthn") Caniuse
