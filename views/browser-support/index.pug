@@ -32,9 +32,30 @@ block variables
   - var page="browser-support"
 
 block content
-  .broser-support-container
+  .browser-support-container
       h2 Browser support
       p Browser support for WebAuthN is quickly improving. You can find an overview of both platform and external authenticators on this page.
+
+      h3 Does your current browser support WebAuthN?
+      .banner
+        .browser-test 
+          .roaming(data-credential-support) 
+            img(src="/img/roaming.svg" alt="Roaming authenticators")
+            p 
+              | Roaming authenticators
+              img.supported(src="/img/check-circle.svg" alt="Your browser supports roaming authenticators")
+              img.not-supported(src="/img/x-circle.svg" alt="Your browser does not support roaming authenticators")
+          .platform(data-platform-authenticator-support)
+            img(src="/img/platform.svg" alt="platform authenticators")
+            p 
+              | Platform authenticators
+              img.supported(src="/img/check-circle.svg" alt="Your browser supports platform authenticators")
+              img.not-supported(src="/img/x-circle.svg" alt="Your browser does not support platform authenticators")
+        .browser
+          | You are currently using 
+          strong(data-browser-name)
+          |  with version 
+          strong(data-browser-version)
 
       h3 Platform Authenticators
       p Platform authenticators are built into your devices like computers and smartphone. They can often be unlocked using biometrics, a finger print with Touch ID, or your face with Windows Hello or Face ID.
@@ -155,3 +176,6 @@ block content
           a(href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API#authenticatorresponse") Mozilla Developer Network
         li
           a(href="https://caniuse.com/?search=webauthn") Caniuse
+
+block scripts
+  script(src="js/browserSupport.js")
