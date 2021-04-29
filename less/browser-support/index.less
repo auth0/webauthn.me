@@ -1,5 +1,23 @@
 @import "../vars.less";
 
+.table {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background: linear-gradient(to left, #000, rgba(0, 0, 0, 0));
+  }
+}
+
+.table-scroll-wrap {
+  overflow-y: scroll;
+}
+
 table {
   margin: 0 0 2rem;
   width: 100%;
@@ -54,11 +72,15 @@ a {
 
 .browser-test {
   display: flex;
+  flex-direction: column;
   font-size: 16px;
 
   & > div {
-    border-right: 1px solid #2f3132;
-    width: 50%;
+    box-sizing: border-box;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #2f3132;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -77,6 +99,7 @@ a {
     justify-content: center;
     align-items: center;
     margin: 0;
+    line-height: 1.2;
 
     img {
       height: 20px;
@@ -118,5 +141,24 @@ a {
   strong {
     border-bottom: 1px dotted #9b9b9b;
     text-transform: capitalize;
+  }
+}
+
+@media (min-width: @breakpoint-width) {
+  .table {
+    position: static;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .browser-test {
+    flex-direction: row;
+
+    & > div {
+      width: 50%;
+      border-width: 0 1px 0 0;
+    }
   }
 }
