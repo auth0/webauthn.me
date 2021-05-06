@@ -1,6 +1,6 @@
 import Animation from './animation.js';
 
-export const timeout = 15;
+export const timeout = 30;
 
 export default {
   'validated': [{
