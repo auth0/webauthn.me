@@ -25,7 +25,7 @@ Registration makes the authenticator create a new set of public-key credentials 
 
 Authentication, in contrast, allows the relying party to send a challenge to the authenticator. This challenge can then be signed with the previously generated public-key credentials and sent back to the relying party. This way, the relying party can verify that a user is in possession of the required credentials, proving their identity.
 
-There are two types of authentiators. [Roaming authenticators](https://auth0.com/docs/mfa/configure-webauthn-security-keys-for-mfa) connect to your devices trough USB, Bluetooth or NFC, and [platform authenticators](https://auth0.com/docs/mfa/configure-webauthn-device-biometrics-for-mfa) are built in.
+There are two types of authenticators. [Roaming authenticators](https://auth0.com/docs/mfa/configure-webauthn-security-keys-for-mfa) connect to your devices through USB, Bluetooth or NFC, and [platform authenticators](https://auth0.com/docs/mfa/configure-webauthn-device-biometrics-for-mfa) are built in.
 
 While roaming authenticators are widely supported in most modern browsers, platform authenticators support is running a bit behind. [Find out if your current browser supports roaming and platform authenticators](/browser-support).
 
