@@ -32,8 +32,14 @@ mixin footer-browser-status-element(icon, name)
         a.footer-crafted-by-container(href='https://auth0.com/developers/')
           span Crafted by
           img.footer-branded-crafted-img(src='/img/logo-ft.svg', alt='auth0 logo')
+        div.footer-privacy-container
+          a.footer-privacy-link(href='https://auth0.com/privacy/', target="_blank")
+            | Privacy
+          span.footer-privacy-separator •
+          a.footer-privacy-link(href='https://auth0.com/web-terms', target="_blank")
+            | Terms of Service
         span.footer-copyright.
-          © 2020 Auth0 Inc. All Rights Reserved.
+          © #{new Date().getFullYear()} Auth0 Inc. All Rights Reserved.
       img(src='/img/webauthn-logo-no-text.svg', alt='webauthn logo')
       .footer-branding-right
         span Spread the word
