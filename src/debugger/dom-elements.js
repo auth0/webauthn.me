@@ -57,6 +57,7 @@ export const createForm = {
             usbCheckbox: document.getElementById("d-c-excl-creds-type-usb"),
             nfcCheckbox: document.getElementById("d-c-excl-creds-type-nfc"),
             bleCheckbox: document.getElementById("d-c-excl-creds-type-ble"),
+            internalCheckbox: document.getElementById("d-c-excl-creds-type-internal"),
         },
     },
     authenticatorSelection: {
@@ -66,6 +67,11 @@ export const createForm = {
             checkbox: document.getElementById("d-c-auth-attach-cbox"),
             select: document.getElementById("d-c-auth-attach-select"),
         },
+        residentKey: {
+            line: document.getElementById("d-c-res-key-line"),
+            checkbox: document.getElementById("d-c-res-key-cbox"),
+            select: document.getElementById("d-c-res-key-select"),
+        },        
         requireResidentKey: {
             line: document.getElementById("d-c-req-res-key-line"),
             checkbox: document.getElementById("d-c-req-res-key-cbox-val"),
@@ -81,6 +87,17 @@ export const createForm = {
         checkbox: document.getElementById("d-c-attest-cbox"),
         select: document.getElementById("d-c-attest-select"),
     },
+    extensions: {
+        checkbox: document.getElementById("d-c-extensions-cbox"),
+        credProps: {
+            line: document.getElementById("d-c-cred-props-line"),
+            checkbox: document.getElementById("d-c-cred-props-cbox-val"),
+        },
+        uvm: {
+            line: document.getElementById("d-c-uvm-line"),
+            checkbox: document.getElementById("d-c-uvm-cbox-val"),
+        }
+    },    
 };
 
 // Get
@@ -114,6 +131,7 @@ export const getForm = {
             usbCheckbox: document.getElementById("d-g-allow-creds-type-usb"),
             nfcCheckbox: document.getElementById("d-g-allow-creds-type-nfc"),
             bleCheckbox: document.getElementById("d-g-allow-creds-type-ble"),
+            internalCheckbox: document.getElementById("d-g-allow-creds-type-internal"),
         },
         placeholder: document.getElementById("d-g-allow-creds-placeholder"),
     },
@@ -126,6 +144,13 @@ export const getForm = {
         line: document.getElementById("d-g-mediation-line"),
         checkbox: document.getElementById("d-g-mediation-cbox"),
         select: document.getElementById("d-g-mediation-select"),
+    },
+    extensions: {
+        checkbox: document.getElementById("d-g-extensions-cbox"),
+        uvm: {
+            line: document.getElementById("d-g-uvm-line"),
+            checkbox: document.getElementById("d-g-uvm-cbox-val"),
+        }
     },
 };
 

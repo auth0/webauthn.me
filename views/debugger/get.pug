@@ -7,7 +7,7 @@
         button#d-g-regen-challenge.button Regenerate (binary, random)  
       .form-row.indent-1 
         label#d-g-timeout-line.label(for="d-g-timeout") timeout:
-        input#d-g-timeout(type='number', value='5000', class="input")
+        input#d-g-timeout(type='number', value='300000', class="input")
       .form-row.indent-1
         span.checkbox-container.position-outside
           input#d-g-rp-id-cbox(type='checkbox')
@@ -42,7 +42,10 @@
                 label.checkbox(for="d-g-allow-creds-type-nfc") NFC
               span.checkbox-container
                 input#d-g-allow-creds-type-ble(type='checkbox', disabled)
-                label.checkbox(for="d-g-allow-creds-type-ble") BLE   
+                label.checkbox(for="d-g-allow-creds-type-ble") BLE
+              span.checkbox-container
+                input#d-g-allow-creds-type-internal(type='checkbox', disabled)
+                label.checkbox(for="d-g-allow-creds-type-internal") INTERNAL
             | ]         
           .editor-label.indent-1 }
         div#d-g-allow-creds-placeholder.is-invisible
@@ -65,6 +68,15 @@
             option(value="silent") silent
             option(value="optional", selected) optional
             option(value="required") required
+      .form-row.indent-2
+        span.checkbox-container.position-outside
+          input#d-g-extensions-cbox(type='checkbox')
+          label.checkbox(for="d-g-extensions-cbox") extensions: {
+      .form-row.indent-2
+        span.checkbox-container
+          input#d-g-uvm-cbox-val(type='checkbox')
+          label#d-g-uvm-line.checkbox(for="d-g-uvm-cbox-val") uvm
+      .editor-label.indent-1 }
     
     .editor-label });
     
