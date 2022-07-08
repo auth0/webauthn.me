@@ -31,10 +31,16 @@ export const createForm = {
     },
     pubKeyCredParams: {
         button: document.getElementById("d-c-add-pubkey-params"),
-        alg: {
-            line: document.getElementById("d-c-pubkey-alg-line"),
-            select: document.getElementById("d-c-pubkey-alg-select"),
-        },
+        algos: [
+            {
+                line: document.getElementById("d-c-pubkey-alg-line"),
+                select: document.getElementById("d-c-pubkey-alg-select"),
+            },
+            {
+                line: document.getElementById("d-c-pubkey-alg-line-1"),
+                select: document.getElementById("d-c-pubkey-alg-select-1"),
+            }            
+        ],
         placeholder: document.getElementById("d-c-add-pubkey-params-placeholder"),
     },
     timeout: {

@@ -34,11 +34,27 @@
         .editor-label.indent-2 {
         .editor-label.indent-3 type: 'public-key',
         .form-row.indent-3
-          label#d-c-pubkey-alg-line.label(for="d-c-pubkey-alg-select") alg: 
+          label#d-c-pubkey-alg-line.label(for="d-c-pubkey-alg-select") alg:
           .select-container
             select#d-c-pubkey-alg-select.select
-              option(value="es256", selected) ES256 (ECDSA P-256 + SHA-256)
+              option(value="rs256", selected) RS256 (RSASSA + SHA-256)
+              option(value="es256") ES256 (ECDSA P-256 + SHA-256)
+              option(value="es384") ES384 (ECDSA P-384 + SHA-384)
+              option(value="es512") ES512 (ECDSA P-521 + SHA-512)
+              option(value="edDSA") EdDSA (Ed25519)
+        .editor-label.indent-2 }
+      .editor-dynamic-item
+        .editor-label.indent-2 {
+        .editor-label.indent-3 type: 'public-key',
+        .form-row.indent-3
+          label#d-c-pubkey-alg-line.label(for="d-c-pubkey-alg-select-1") alg:
+          .select-container
+            select#d-c-pubkey-alg-select-1.select
               option(value="rs256") RS256 (RSASSA + SHA-256)
+              option(value="es256", selected) ES256 (ECDSA P-256 + SHA-256)
+              option(value="es384") ES384 (ECDSA P-384 + SHA-384)
+              option(value="es512") ES512 (ECDSA P-521 + SHA-512)
+              option(value="edDSA") EdDSA (Ed25519)
         .editor-label.indent-2 }
       #d-c-add-pubkey-params-placeholder.editor-public-key-credential-params-placeholder
       .editor-label.indent-1 ]

@@ -33,7 +33,10 @@ import jkwToPem from "jwk-to-pem";
 let lastCredentials;
 let lastCredentialsParsed;
 
-const pubKeyParams = [dom.createForm.pubKeyCredParams.alg.select];
+const pubKeyParams = [
+    dom.createForm.pubKeyCredParams.algos[0].select,
+    dom.createForm.pubKeyCredParams.algos[1].select,
+];
 
 const excludedCredentials = [{
     id: dom.createForm.excludeCredentials.id.line,
@@ -68,9 +71,11 @@ const options = {
 };
 
 function getAlgValueFromSelect(select) {
-    // TODO: add other algs
     const values = {
         es256: -7,
+        edDSA: -8,
+        es384: -35,
+        es512: -36,
         rs256: -257,
     };
     return values[select.options[select.selectedIndex].value];
@@ -628,22 +633,25 @@ function downloadJSON() {
 function addPubKeyParam() {
     const selectId = `d-c-pubkey-alg-select-${pubKeyParams.length}`;
     const html = `
-<div class="editor-label indent-1">{</div>
-<div class="editor-label indent-2">type: 'public-key',</div>
-<div class="form-row indent-2">
+<div class="editor-label indent-2">{</div>
+<div class="editor-label indent-3">type: 'public-key',</div>
+<div class="form-row indent-3">
   <label id="d-c-pubkey-alg-line" class="label" for="d-c-pubkey-alg-select")>alg: </label>
   <div class="select-container">
     <select id="${selectId}" class="select">
-      <option value="es256" selected>ES256 (ECDSA P-256 + SHA-256)</option>
       <option value="rs256">RS256 (RSASSA + SHA-256)</option>
+      <option value="es256">ES256 (ECDSA P-256 + SHA-256)</option>
+      <option value="es384" selected>ES384 (ECDSA P-384 + SHA-384)</option>
+      <option value="es512">ES512 (ECDSA P-521 + SHA-512)</option>
+      <option value="edDSA">EdDSA (Ed25519)</option>
     </select>
   </div>
 </div>
-<div class="editor-label indent-1">}</div>`;
+<div class="editor-label indent-2">}</div>`;
 
     const cred = document.createElement("div");
     cred.innerHTML = html;
-    cred.classList.add("editor-dynamic-item", "indent-1");
+    cred.classList.add("editor-dynamic-item");
     dom.createForm.pubKeyCredParams.placeholder.parentElement.insertBefore(
         cred,
         dom.createForm.pubKeyCredParams.placeholder
