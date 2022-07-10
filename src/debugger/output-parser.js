@@ -148,16 +148,35 @@ export function splitCredentialsByType(credentials) {
     )}</pre></code>`;
     }
 
+    if (credentials.authenticatorAttachment || credentials.transports) {
+        cred += `<code class="output-section output-section-green"><pre>`
+        if (credentials.authenticatorAttachment) {
+            cred += `authenticatorAttachment: ${credentials.authenticatorAttachment},\n`;
+        }
+        if (credentials.transports) {
+            // registration only
+            cred += `transports: ${prettyStringify(credentials.transports)},`;
+        }
+        cred += `</pre></code>`;
+    }
+
     if (credentials.attestationObject) {
         cred += `<code class="output-section output-section-green"><pre>attestationObject: ${prettyStringify(
       credentials.attestationObject
-    )}</pre></code>`;
+    )},</pre></code>`;
     }
 
     if (credentials.authenticatorData) {
         cred += `<code class="output-section output-section-green"><pre>authenticatorData: ${prettyStringify(
       credentials.authenticatorData
-    )}</pre></code>`;
+    )},</pre></code>`;
+    }
+
+    if (credentials.extensions) {
+        cred += `<code class="output-section output-section-green">
+        <pre>extensions: ${prettyStringify(
+        credentials.extensions
+        )}</pre></code>`;
     }
 
     cred += `<div class="output-section output-section-transparent">}</div>`;
@@ -172,6 +191,11 @@ export function orderCredentialsByType(credentials) {
         type: credentials.type,
         clientDataJSON: credentials.response.clientDataJSON,
     };
+
+    if (credentials.authenticatorAttachment) {
+        orderedCredentials.authenticatorAttachment =
+            credentials.authenticatorAttachment;
+    }
 
     if (credentials.response.attestationObject) {
         orderedCredentials.attestationObject =
@@ -189,6 +213,14 @@ export function orderCredentialsByType(credentials) {
 
     if (credentials.response.userHandle) {
         orderedCredentials.userHandle = credentials.response.userHandle;
+    }
+
+    if (typeof credentials.response.getTransports === 'function') {
+        orderedCredentials.transports = credentials.response.getTransports();
+    }
+
+    if (typeof credentials.getClientExtensionResults === 'function') {
+        orderedCredentials.extensions = credentials.getClientExtensionResults();
     }
 
     return orderedCredentials;
