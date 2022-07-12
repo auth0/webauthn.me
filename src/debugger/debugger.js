@@ -367,29 +367,33 @@ function getGetOptions() {
 
     // TODO: handle multiple credentials
     if (gForm.allowCredentials.checkbox.checked) {
-        publicKey.allowCredentials = allowedCredentials.map((ac) => {
-            const result = {
-                type: "public-key",
-                id: Buffer.from(ac.id.value, "hex"),
-            };
+        publicKey.allowCredentials = allowedCredentials
+            .filter((ac) => {
+                return ac.id.value;
+            })
+            .map((ac) => {
+                const result = {
+                    type: "public-key",
+                    id: Buffer.from(ac.id.value, "hex"),
+                };
 
-            if (ac.type.checkbox.checked) {
-                result.transports = [];
-                if (ac.type.usb.checked) {
-                    result.transports.push("usb");
+                if (ac.type.checkbox.checked) {
+                    result.transports = [];
+                    if (ac.type.usb.checked) {
+                        result.transports.push("usb");
+                    }
+                    if (ac.type.nfc.checked) {
+                        result.transports.push("nfc");
+                    }
+                    if (ac.type.ble.checked) {
+                        result.transports.push("ble");
+                    }
+                    if (ac.type.internal.checked) {
+                        result.transports.push("internal");
+                    }
                 }
-                if (ac.type.nfc.checked) {
-                    result.transports.push("nfc");
-                }
-                if (ac.type.ble.checked) {
-                    result.transports.push("ble");
-                }
-                if (ac.type.internal.checked) {
-                    result.transports.push("internal");
-                }
-            }
 
-            return result;
+                return result;
         });
     }
 
