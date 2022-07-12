@@ -334,8 +334,9 @@ function useLastRawId(rawId) {
 
 async function register() {
     try {
-        console.log(getCreateOptions());
-        const credentials = await navigator.credentials.create(getCreateOptions());
+        const options = getCreateOptions()
+        console.log("navigator.credentials.create:", options);
+        const credentials = await navigator.credentials.create(options);
         handleRegistrationCredentials(credentials);
         useLastRawId(binToHex(credentials.rawId));
         dom.output.registration.output.classList.remove("is-invisible");
@@ -421,7 +422,9 @@ function getGetOptions() {
 
 async function authenticate() {
     try {
-        const credentials = await navigator.credentials.get(getGetOptions());
+        const options = getGetOptions()
+        console.log("navigator.credentials.get:", options);
+        const credentials = await navigator.credentials.get(options);
         handleAuthenticationCredentials(credentials);
         dom.output.authentication.output.classList.remove("is-invisible");
     } catch (e) {
@@ -766,15 +769,24 @@ function addAllowedCredential() {
         <span class="checkbox-container position-outside">
           <input id="d-g-allow-creds-type-cbox-${i}" type="checkbox">
           <label class="checkbox" for="d-g-allow-creds-type-cbox-${i}"></label></span>
-        <label class="label" id="d-c-excl-creds-type-cbox">transports: [ <span class="checkbox-container">
-            <input id="d-g-allow-creds-type-usb-${i}" type="checkbox" disabled="">
-            <label class="checkbox" for="d-g-allow-creds-type-usb-${i}">USB</label></span><span class="checkbox-container">
-            <input id="d-g-allow-creds-type-nfc-${i}" type="checkbox" disabled="">
-            <label class="checkbox" for="d-g-allow-creds-type-nfc-${i}">NFC</label></span><span class="checkbox-container">
-            <input id="d-g-allow-creds-type-ble-${i}" type="checkbox" disabled="">
-            <label class="checkbox" for="d-g-allow-creds-type-ble-${i}">BLE   </label></span></label>
-            <input id="d-g-allow-creds-type-internal-${i}" type="checkbox" disabled="">
-            <label class="checkbox" for="d-g-allow-creds-type-internal-${i}">Internal</label></span><span class="checkbox-container">]
+        <label class="label" id="d-c-excl-creds-type-cbox">transports: [ 
+            <span class="checkbox-container">
+                <input id="d-g-allow-creds-type-usb-${i}" type="checkbox" disabled="">
+                <label class="checkbox" for="d-g-allow-creds-type-usb-${i}">USB</label>
+            </span>
+            <span class="checkbox-container">
+                <input id="d-g-allow-creds-type-nfc-${i}" type="checkbox" disabled="">
+                <label class="checkbox" for="d-g-allow-creds-type-nfc-${i}">NFC</label>
+            </span>
+            <span class="checkbox-container">
+                <input id="d-g-allow-creds-type-ble-${i}" type="checkbox" disabled="">
+                <label class="checkbox" for="d-g-allow-creds-type-ble-${i}">BLE</label>
+            </span>
+            <span class="checkbox-container">
+                <input id="d-g-allow-creds-type-internal-${i}" type="checkbox" disabled="">
+                <label class="checkbox" for="d-g-allow-creds-type-internal-${i}">INTERNAL</label>
+            </span>
+            ]
       </div>
       <div class="editor-label indent-1">}</div>`;
 

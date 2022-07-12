@@ -24,7 +24,7 @@ export function parseAuthenticatorData(data) {
         userPresent: (flags & 0x01) !== 0,
         reserved1: (flags & 0x02) !== 0,
         userVerified: (flags & 0x04) !== 0,
-        backupEligiblity: (flags & 0x08) !== 0,
+        backupEligibility: (flags & 0x08) !== 0,
         backupState: (flags & 0x10) !== 0,
         reserved2: (flags & 0x20) !== 0,
         attestedCredentialData: (flags & 0x40) !== 0,
