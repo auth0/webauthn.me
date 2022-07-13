@@ -58,8 +58,6 @@ export function parseAuthenticatorData(data) {
             );
         } catch (e) {
             log.error("Failed to decode CBOR data: ", e);
-
-            atCredData.credentialPublicKey = `Decode error: ${e.toString()}`;
         }
     }
 

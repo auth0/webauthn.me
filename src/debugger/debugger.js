@@ -254,7 +254,8 @@ function handleRegistrationCredentials(credentials) {
     dom.output.registration.console.innerHTML = withHtml;
     dom.output.registration.rawId.innerHTML = binToHex(credentials.rawId);
 
-    if (lastCredentialsParsed.response.attestationObject) {
+    if (lastCredentialsParsed.response.attestationObject &&
+        lastCredentialsParsed.response.attestationObject.authData.attestedCredentialData.credentialPublicKey) {
         dom.output.registration.publicKey.innerHTML = prettyStringify(
             coseToJwk(
                 lastCredentialsParsed.response.attestationObject.authData
