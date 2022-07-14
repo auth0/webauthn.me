@@ -1,68 +1,70 @@
-import { deepClone, objectSlice, transform, prettyStringify } from "./utils.js";
+import { deepClone, objectSlice, transform, prettyStringify, decodeCborFirst } from "./utils.js";
 
 import { prettifyTransformations } from "./transformations.js";
 
 import cbor from "cbor";
 import log from "loglevel";
 
-export function parseAuthenticatorData(data) {
-    const d =
-        data instanceof ArrayBuffer ?
-        new DataView(data) :
-        new DataView(data.buffer, data.byteOffset, data.byteLength);
-    let p = 0;
-
-    const result = {};
-
-    result.rpIdHash = "";
-    for (const end = p + 32; p < end; ++p) {
-        result.rpIdHash += d.getUint8(p).toString(16);
+export function parseAuthenticatorData(authData) {
+    if (authData.byteLength < 37) {
+        throw new Error(
+            `Authenticator data was ${authData.byteLength} bytes, expected at least 37 bytes`,
+        );
     }
 
-    const flags = d.getUint8(p++);
+    const result = {};
+    let pointer = 0;
+
+    result.rpIdHash = authData.slice(pointer, (pointer += 32)).toString('hex');
+
+    const flagsBuf = authData.slice(pointer, (pointer += 1));
+    const flagsInt = flagsBuf[0];
+
+    // Bit positions can be referenced here:
+    // https://w3c.github.io/webauthn/#flags
     result.flags = {
-        userPresent: (flags & 0x01) !== 0,
-        reserved1: (flags & 0x02) !== 0,
-        userVerified: (flags & 0x04) !== 0,
-        backupEligibility: (flags & 0x08) !== 0,
-        backupState: (flags & 0x10) !== 0,
-        reserved2: (flags & 0x20) !== 0,
-        attestedCredentialData: (flags & 0x40) !== 0,
-        extensionDataIncluded: (flags & 0x80) !== 0,
+        userPresent: (flagsInt & 0x01) !== 0,
+        reserved1: (flagsInt & 0x02) !== 0,
+        userVerified: (flagsInt & 0x04) !== 0,
+        backupEligibility: (flagsInt & 0x08) !== 0,
+        backupState: (flagsInt & 0x10) !== 0,
+        reserved2: (flagsInt & 0x20) !== 0,
+        attestedCredentialData: (flagsInt & 0x40) !== 0,
+        extensionDataIncluded: (flagsInt & 0x80) !== 0,
     };
 
-    result.signCount = d.getUint32(p, false);
-    p += 4;
+    const counterBuf = authData.slice(pointer, (pointer += 4));
+    result.signCount = counterBuf.readUInt32BE(0);
 
     if (result.flags.attestedCredentialData) {
         const atCredData = {};
         result.attestedCredentialData = atCredData;
+  
+        atCredData.aaguid = authData.slice(pointer, (pointer += 16));
 
-        atCredData.aaguid = "";
-        for (const end = p + 16; p < end; ++p) {
-            atCredData.aaguid += d.getUint8(p).toString(16);
-        }
-
-        atCredData.credentialIdLength = d.getUint16(p, false);
-        p += 2;
-
-        atCredData.credentialId = "";
-        for (const end = p + atCredData.credentialIdLength; p < end; ++p) {
-            atCredData.credentialId += d.getUint8(p).toString(16);
-        }
-
-        try {
-            const encodedCred = Buffer.from(d.buffer, d.byteOffset + p);
-            atCredData.credentialPublicKey = cbor.encode(
-                cbor.decodeFirstSync(encodedCred)
-            );
-        } catch (e) {
-            log.error("Failed to decode CBOR data: ", e);
-        }
+        const credIdLenBuf = authData.slice(pointer, (pointer += 2));
+        const credIdLen = credIdLenBuf.readUInt16BE(0);
+  
+        atCredData.credentialId = authData.slice(pointer, (pointer += credIdLen));
+  
+        // Decode the next CBOR item in the buffer, then re-encode it back to a Buffer
+        const firstDecoded = decodeCborFirst(authData.slice(pointer));
+        const firstEncoded = Buffer.from(cbor.encode(firstDecoded));
+        atCredData.credentialPublicKey = firstEncoded;
+        pointer += firstEncoded.byteLength;
     }
 
     if (result.flags.extensionDataIncluded) {
-        // TODO
+        const firstDecoded = decodeCborFirst(authData.slice(pointer));
+        const firstEncoded = Buffer.from(cbor.encode(firstDecoded));
+        const extensionsDataBuffer = firstEncoded;
+        result.attestedExtensionData = cbor.decodeFirstSync(extensionsDataBuffer);
+        pointer += firstEncoded.byteLength;
+    }
+
+    // Pointer should be at the end of the authenticator data, otherwise too much data was sent
+    if (authData.byteLength > pointer) {
+        throw new Error('Leftover bytes detected while parsing authenticator data');
     }
 
     return result;
@@ -84,7 +86,7 @@ export function parseAttestationObject(data) {
         return decoded;
     } catch (e) {
         const msg = "Failed to decode attestationObject, unknown attestation type? ";
-        log.error(msg);
+        log.error(msg, e);
         return msg;
     }
 }
