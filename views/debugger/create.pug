@@ -146,12 +146,24 @@
     .form-row.indent-2
       span.checkbox-container.position-outside
         input#d-c-extensions-cbox(type='checkbox')
-        label.checkbox(for="d-c-extensions-cbox") extensions: {
-
+        label#d-c-extensions-cbox-line.checkbox(for="d-c-extensions-cbox") extensions: {
     .form-row.indent-2
       span.checkbox-container
         input#d-c-cred-props-cbox-val(type='checkbox')
         label#d-c-cred-props-line.checkbox(for="d-c-cred-props-cbox-val") credProps
+    .form-row.indent-2
+      span.checkbox-container
+        input#d-c-cred-protect-policy-cbox(type="checkbox")
+        label#d-c-cred-protect-policy-line.checkbox(for="d-c-cred-protect-policy-cbox") credentialProtectionPolicy:
+      .select-container
+        select#d-c-cred-protect-policy-select.select
+          option(value="userVerificationOptional") userVerificationOptional
+          option(value="userVerificationOptionalWithCredentialIDList", selected) userVerificationOptionalWithCredentialIDList
+          option(value="userVerificationRequired") userVerificationRequired
+    .form-row.indent-2
+      span.checkbox-container
+        input#d-c-cred-protect-enforce-cbox-val(type='checkbox')
+        label#d-c-cred-protect-enforce-line.checkbox(for="d-c-cred-protect-enforce-cbox-val") enforceCredentialProtectionPolicy
     .form-row.indent-2
       span.checkbox-container
         input#d-c-uvm-cbox-val(type='checkbox')

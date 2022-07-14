@@ -225,6 +225,16 @@ function getCreateOptions() {
                 cForm.extensions.credProps.checkbox.checked;
         }
 
+        if (cForm.extensions.credProtectPolicy.checkbox.checked) {
+            extensions.credentialProtectionPolicy =  getSelectValue(
+                cForm.extensions.credProtectPolicy.select
+            );
+        }
+
+        if (cForm.extensions.credProtectEnforce.checkbox.checked) {
+            extensions.enforceCredentialProtectionPolicy = true;
+        }
+
         if (cForm.extensions.uvm.checkbox.checked) {
             extensions.uvm =
                 cForm.extensions.uvm.checkbox.checked;
@@ -538,10 +548,15 @@ function setupCheckboxes() {
         [
             cForm.authenticatorSelection.userVerification.checkbox, [cForm.authenticatorSelection.userVerification.select],
         ],
-        [cForm.attestation.checkbox, [cForm.attestation.select]],
+        [
+            cForm.attestation.checkbox, [cForm.attestation.select]
+        ],
         [
             cForm.extensions.checkbox, [
                 cForm.extensions.credProps.checkbox,
+                cForm.extensions.credProtectPolicy.checkbox,
+                cForm.extensions.credProtectPolicy.select,
+                cForm.extensions.credProtectEnforce.checkbox,
                 cForm.extensions.uvm.checkbox,
             ],
         ],

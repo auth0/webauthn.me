@@ -99,6 +99,15 @@ export const createForm = {
             line: document.getElementById("d-c-cred-props-line"),
             checkbox: document.getElementById("d-c-cred-props-cbox-val"),
         },
+        credProtectPolicy: {
+            line: document.getElementById("d-c-cred-protect-policy-line"),
+            checkbox: document.getElementById("d-c-cred-protect-policy-cbox"),
+            select: document.getElementById("d-c-cred-protect-policy-select"),
+        },
+        credProtectEnforce: {
+            line: document.getElementById("d-c-cred-protect-enforce-line"),
+            checkbox: document.getElementById("d-c-cred-protect-enforce-cbox-val"),
+        },
         uvm: {
             line: document.getElementById("d-c-uvm-line"),
             checkbox: document.getElementById("d-c-uvm-cbox-val"),
