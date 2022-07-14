@@ -232,7 +232,13 @@ function getCreateOptions() {
         }
 
         if (cForm.extensions.credProtectEnforce.checkbox.checked) {
-            extensions.enforceCredentialProtectionPolicy = true;
+            extensions.enforceCredentialProtectionPolicy = 
+                cForm.extensions.credProtectEnforce.checkbox.checked;
+        }
+
+        if (cForm.extensions.minPinLength.checkbox.checked) {
+            extensions.minPinLength =
+                cForm.extensions.minPinLength.checkbox.checked;
         }
 
         if (cForm.extensions.uvm.checkbox.checked) {
@@ -557,6 +563,7 @@ function setupCheckboxes() {
                 cForm.extensions.credProtectPolicy.checkbox,
                 cForm.extensions.credProtectPolicy.select,
                 cForm.extensions.credProtectEnforce.checkbox,
+                cForm.extensions.minPinLength.checkbox,
                 cForm.extensions.uvm.checkbox,
             ],
         ],

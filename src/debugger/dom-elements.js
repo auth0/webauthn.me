@@ -108,6 +108,10 @@ export const createForm = {
             line: document.getElementById("d-c-cred-protect-enforce-line"),
             checkbox: document.getElementById("d-c-cred-protect-enforce-cbox-val"),
         },
+        minPinLength: {
+            line: document.getElementById("d-c-min-pin-length-line"),
+            checkbox: document.getElementById("d-c-min-pin-length-cbox-val"),
+        },
         uvm: {
             line: document.getElementById("d-c-uvm-line"),
             checkbox: document.getElementById("d-c-uvm-cbox-val"),
