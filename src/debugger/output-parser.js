@@ -6,6 +6,12 @@ import cbor from "cbor";
 import log from "loglevel";
 
 export function parseAuthenticatorData(authData) {
+    authData =
+        authData instanceof ArrayBuffer ?
+        Buffer.from(authData) :
+        authData;
+
+
     if (authData.byteLength < 37) {
         throw new Error(
             `Authenticator data was ${authData.byteLength} bytes, expected at least 37 bytes`,
