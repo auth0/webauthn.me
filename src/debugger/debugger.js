@@ -33,7 +33,10 @@ import jkwToPem from "jwk-to-pem";
 let lastCredentials;
 let lastCredentialsParsed;
 
-const pubKeyParams = [dom.createForm.pubKeyCredParams.alg.select];
+const pubKeyParams = [
+    dom.createForm.pubKeyCredParams.algos[0].select,
+    dom.createForm.pubKeyCredParams.algos[1].select,
+];
 
 const excludedCredentials = [{
     id: dom.createForm.excludeCredentials.id.line,
@@ -44,6 +47,7 @@ const excludedCredentials = [{
         usb: dom.createForm.excludeCredentials.type.usbCheckbox,
         nfc: dom.createForm.excludeCredentials.type.nfcCheckbox,
         ble: dom.createForm.excludeCredentials.type.bleCheckbox,
+        internal: dom.createForm.excludeCredentials.type.internalCheckbox,
     },
 }, ];
 
@@ -57,6 +61,7 @@ const allowedCredentials = [{
         usb: dom.getForm.allowCredentials.type.usbCheckbox,
         nfc: dom.getForm.allowCredentials.type.nfcCheckbox,
         ble: dom.getForm.allowCredentials.type.bleCheckbox,
+        internal: dom.getForm.allowCredentials.type.internalCheckbox,
     },
 }, ];
 
@@ -66,9 +71,11 @@ const options = {
 };
 
 function getAlgValueFromSelect(select) {
-    // TODO: add other algs
     const values = {
         es256: -7,
+        edDSA: -8,
+        es384: -35,
+        es512: -36,
         rs256: -257,
     };
     return values[select.options[select.selectedIndex].value];
@@ -165,6 +172,10 @@ function getCreateOptions() {
                     transports.push("ble");
                 }
 
+                if (ec.type.internal.checked) {
+                    transports.push("internal");
+                }
+
                 result.transports = transports;
 
                 return result;
@@ -178,6 +189,12 @@ function getCreateOptions() {
         if (cForm.authenticatorSelection.authenticatorAttachment.checkbox.checked) {
             authenticatorSelection.authenticatorAttachment = getSelectValue(
                 cForm.authenticatorSelection.authenticatorAttachment.select
+            );
+        }
+
+        if (cForm.authenticatorSelection.residentKey.checkbox.checked) {
+            authenticatorSelection.residentKey = getSelectValue(
+                cForm.authenticatorSelection.residentKey.select
             );
         }
 
@@ -197,6 +214,39 @@ function getCreateOptions() {
 
     if (dom.createForm.attestation.checkbox.checked) {
         publicKey.attestation = getSelectValue(dom.createForm.attestation.select);
+    }
+
+    if (cForm.extensions.checkbox.checked) {
+
+        const extensions = {};
+
+        if (cForm.extensions.credProps.checkbox.checked) {
+            extensions.credProps =
+                cForm.extensions.credProps.checkbox.checked;
+        }
+
+        if (cForm.extensions.credProtectPolicy.checkbox.checked) {
+            extensions.credentialProtectionPolicy =  getSelectValue(
+                cForm.extensions.credProtectPolicy.select
+            );
+        }
+
+        if (cForm.extensions.credProtectEnforce.checkbox.checked) {
+            extensions.enforceCredentialProtectionPolicy = 
+                cForm.extensions.credProtectEnforce.checkbox.checked;
+        }
+
+        if (cForm.extensions.minPinLength.checkbox.checked) {
+            extensions.minPinLength =
+                cForm.extensions.minPinLength.checkbox.checked;
+        }
+
+        if (cForm.extensions.uvm.checkbox.checked) {
+            extensions.uvm =
+                cForm.extensions.uvm.checkbox.checked;
+        }
+
+        publicKey.extensions = extensions;
     }
 
     return {
@@ -220,7 +270,8 @@ function handleRegistrationCredentials(credentials) {
     dom.output.registration.console.innerHTML = withHtml;
     dom.output.registration.rawId.innerHTML = binToHex(credentials.rawId);
 
-    if (lastCredentialsParsed.response.attestationObject) {
+    if (lastCredentialsParsed.response.attestationObject &&
+        lastCredentialsParsed.response.attestationObject.authData.attestedCredentialData.credentialPublicKey) {
         dom.output.registration.publicKey.innerHTML = prettyStringify(
             coseToJwk(
                 lastCredentialsParsed.response.attestationObject.authData
@@ -300,8 +351,9 @@ function useLastRawId(rawId) {
 
 async function register() {
     try {
-        console.log(getCreateOptions());
-        const credentials = await navigator.credentials.create(getCreateOptions());
+        const options = getCreateOptions()
+        console.log("navigator.credentials.create:", options);
+        const credentials = await navigator.credentials.create(options);
         handleRegistrationCredentials(credentials);
         useLastRawId(binToHex(credentials.rawId));
         dom.output.registration.output.classList.remove("is-invisible");
@@ -332,31 +384,50 @@ function getGetOptions() {
 
     // TODO: handle multiple credentials
     if (gForm.allowCredentials.checkbox.checked) {
-        publicKey.allowCredentials = allowedCredentials.map((ac) => {
-            const result = {
-                type: "public-key",
-                id: Buffer.from(ac.id.value, "hex"),
-            };
+        publicKey.allowCredentials = allowedCredentials
+            .filter((ac) => {
+                return ac.id.value;
+            })
+            .map((ac) => {
+                const result = {
+                    type: "public-key",
+                    id: Buffer.from(ac.id.value, "hex"),
+                };
 
-            if (ac.type.checkbox.checked) {
-                result.transports = [];
-                if (ac.type.usb.checked) {
-                    result.transports.push("usb");
+                if (ac.type.checkbox.checked) {
+                    result.transports = [];
+                    if (ac.type.usb.checked) {
+                        result.transports.push("usb");
+                    }
+                    if (ac.type.nfc.checked) {
+                        result.transports.push("nfc");
+                    }
+                    if (ac.type.ble.checked) {
+                        result.transports.push("ble");
+                    }
+                    if (ac.type.internal.checked) {
+                        result.transports.push("internal");
+                    }
                 }
-                if (ac.type.nfc.checked) {
-                    result.transports.push("nfc");
-                }
-                if (ac.type.ble.checked) {
-                    result.transports.push("ble");
-                }
-            }
 
-            return result;
+                return result;
         });
     }
 
     if (gForm.userVerification.checkbox.checked) {
         publicKey.userVerification = getSelectValue(gForm.userVerification.select);
+    }
+
+    if (gForm.extensions.checkbox.checked) {
+
+        const extensions = {};
+
+        if (gForm.extensions.uvm.checkbox.checked) {
+            extensions.uvm =
+                gForm.extensions.uvm.checkbox.checked;
+        }
+
+        publicKey.extensions = extensions;
     }
 
     const result = {
@@ -372,7 +443,9 @@ function getGetOptions() {
 
 async function authenticate() {
     try {
-        const credentials = await navigator.credentials.get(getGetOptions());
+        const options = getGetOptions()
+        console.log("navigator.credentials.get:", options);
+        const credentials = await navigator.credentials.get(options);
         handleAuthenticationCredentials(credentials);
         dom.output.authentication.output.classList.remove("is-invisible");
     } catch (e) {
@@ -447,6 +520,7 @@ function setupCheckboxes() {
                 cForm.excludeCredentials.type.usbCheckbox,
                 cForm.excludeCredentials.type.nfcCheckbox,
                 cForm.excludeCredentials.type.bleCheckbox,
+                cForm.excludeCredentials.type.internalCheckbox,
             ],
         ],
         [
@@ -454,12 +528,15 @@ function setupCheckboxes() {
                 cForm.excludeCredentials.type.usbCheckbox,
                 cForm.excludeCredentials.type.nfcCheckbox,
                 cForm.excludeCredentials.type.bleCheckbox,
+                cForm.excludeCredentials.type.internalCheckbox,
             ],
         ],
         [
             cForm.authenticatorSelection.checkbox, [
                 cForm.authenticatorSelection.authenticatorAttachment.checkbox,
                 cForm.authenticatorSelection.authenticatorAttachment.select,
+                cForm.authenticatorSelection.residentKey.checkbox,
+                cForm.authenticatorSelection.residentKey.select,
                 cForm.authenticatorSelection.requireResidentKey.checkbox,
                 cForm.authenticatorSelection.userVerification.checkbox,
                 cForm.authenticatorSelection.userVerification.select,
@@ -469,17 +546,33 @@ function setupCheckboxes() {
             cForm.authenticatorSelection.authenticatorAttachment.checkbox, [cForm.authenticatorSelection.authenticatorAttachment.select],
         ],
         [
+            cForm.authenticatorSelection.residentKey.checkbox, [cForm.authenticatorSelection.residentKey.checkbox],
+        ],        
+        [
             cForm.authenticatorSelection.requireResidentKey.checkbox, [cForm.authenticatorSelection.requireResidentKey.checkbox],
         ],
         [
             cForm.authenticatorSelection.userVerification.checkbox, [cForm.authenticatorSelection.userVerification.select],
         ],
-        [cForm.attestation.checkbox, [cForm.attestation.select]],
+        [
+            cForm.attestation.checkbox, [cForm.attestation.select]
+        ],
+        [
+            cForm.extensions.checkbox, [
+                cForm.extensions.credProps.checkbox,
+                cForm.extensions.credProtectPolicy.checkbox,
+                cForm.extensions.credProtectPolicy.select,
+                cForm.extensions.credProtectEnforce.checkbox,
+                cForm.extensions.minPinLength.checkbox,
+                cForm.extensions.uvm.checkbox,
+            ],
+        ],
 
         // Get
         [gForm.rpId.checkbox, [gForm.rpId.input]],
         [gForm.userVerification.checkbox, [gForm.userVerification.select]],
         [gForm.mediation.checkbox, [gForm.mediation.select]],
+        [gForm.extensions.checkbox, [gForm.extensions.uvm.checkbox]],
     ];
 
     function createCheckboxHandler(elements) {
@@ -509,7 +602,8 @@ function setupCheckboxes() {
             e,
             allowedCredentials[0].type.usb,
             allowedCredentials[0].type.nfc,
-            allowedCredentials[0].type.ble
+            allowedCredentials[0].type.ble,
+            allowedCredentials[0].type.internal
         );
     };
 }
@@ -569,22 +663,25 @@ function downloadJSON() {
 function addPubKeyParam() {
     const selectId = `d-c-pubkey-alg-select-${pubKeyParams.length}`;
     const html = `
-<div class="editor-label indent-1">{</div>
-<div class="editor-label indent-2">type: 'public-key',</div>
-<div class="form-row indent-2">
+<div class="editor-label indent-2">{</div>
+<div class="editor-label indent-3">type: 'public-key',</div>
+<div class="form-row indent-3">
   <label id="d-c-pubkey-alg-line" class="label" for="d-c-pubkey-alg-select")>alg: </label>
   <div class="select-container">
     <select id="${selectId}" class="select">
-      <option value="es256" selected>ES256 (ECDSA P-256 + SHA-256)</option>
       <option value="rs256">RS256 (RSASSA + SHA-256)</option>
+      <option value="es256">ES256 (ECDSA P-256 + SHA-256)</option>
+      <option value="es384" selected>ES384 (ECDSA P-384 + SHA-384)</option>
+      <option value="es512">ES512 (ECDSA P-521 + SHA-512)</option>
+      <option value="edDSA">EdDSA (Ed25519)</option>
     </select>
   </div>
 </div>
-<div class="editor-label indent-1">}</div>`;
+<div class="editor-label indent-2">}</div>`;
 
     const cred = document.createElement("div");
     cred.innerHTML = html;
-    cred.classList.add("editor-dynamic-item", "indent-1");
+    cred.classList.add("editor-dynamic-item");
     dom.createForm.pubKeyCredParams.placeholder.parentElement.insertBefore(
         cred,
         dom.createForm.pubKeyCredParams.placeholder
@@ -626,13 +723,15 @@ function addExcludeCredential() {
     <div class="form-row indent-3"><span class="checkbox-container position-outside">
         <input id="d-c-excl-creds-type-cbox-${i}" type="checkbox">
         <label class="checkbox" for="d-c-excl-creds-type-cbox-${i}"></label></span>
-      <label class="label" id="d-c-excl-creds-type-cbox-${i}">transports: [ <span class="checkbox-container">
+      <label class="label" id="d-c-excl-creds-type-cbox-${i}">transports: [ <span class="checkbox-container">      
           <input id="d-c-excl-creds-type-usb-${i}" type="checkbox" disabled="">
           <label class="checkbox" for="d-c-excl-creds-type-usb-${i}">USB</label></span><span class="checkbox-container">
           <input id="d-c-excl-creds-type-nfc-${i}" type="checkbox" disabled="">
           <label class="checkbox" for="d-c-excl-creds-type-nfc-${i}">NFC</label></span><span class="checkbox-container">
           <input id="d-c-excl-creds-type-ble-${i}" type="checkbox" disabled="">
-          <label class="checkbox" for="d-c-excl-creds-type-ble-${i}">BLE</label></span></label>]
+          <label class="checkbox" for="d-c-excl-creds-type-ble-${i}">BLE</label></span></label>
+          <input id="d-c-excl-creds-type-internal-${i}" type="checkbox" disabled="">
+          <label class="checkbox" for="d-c-excl-creds-type-internal-${i}">Internal</label></span><span class="checkbox-container">]
     </div>
     <div class="editor-label indent-2">}</div>`;
 
@@ -654,6 +753,7 @@ function addExcludeCredential() {
             usb: document.getElementById(`d-c-excl-creds-type-usb-${i}`),
             nfc: document.getElementById(`d-c-excl-creds-type-nfc-${i}`),
             ble: document.getElementById(`d-c-excl-creds-type-ble-${i}`),
+            internal: document.getElementById(`d-c-excl-creds-type-internal-${i}`),
         },
     };
 
@@ -664,7 +764,8 @@ function addExcludeCredential() {
             e,
             excludedCredential.type.usb,
             excludedCredential.type.nfc,
-            excludedCredential.type.ble
+            excludedCredential.type.ble,
+            excludedCredential.type.internal
         );
     };
 
@@ -673,12 +774,13 @@ function addExcludeCredential() {
     );
 }
 
-function transportsCheckboxHandler(event, usb, nfc, ble) {
+function transportsCheckboxHandler(event, usb, nfc, ble, internal) {
     const disabled = !event.target.checked;
 
     usb.disabled = disabled;
     nfc.disabled = disabled;
     ble.disabled = disabled;
+    internal.disabled = disabled;
 }
 
 function addAllowedCredential() {
@@ -694,13 +796,24 @@ function addAllowedCredential() {
         <span class="checkbox-container position-outside">
           <input id="d-g-allow-creds-type-cbox-${i}" type="checkbox">
           <label class="checkbox" for="d-g-allow-creds-type-cbox-${i}"></label></span>
-        <label class="label" id="d-c-excl-creds-type-cbox">transports: [ <span class="checkbox-container">
-            <input id="d-g-allow-creds-type-usb-${i}" type="checkbox" disabled="">
-            <label class="checkbox" for="d-g-allow-creds-type-usb-${i}">USB</label></span><span class="checkbox-container">
-            <input id="d-g-allow-creds-type-nfc-${i}" type="checkbox" disabled="">
-            <label class="checkbox" for="d-g-allow-creds-type-nfc-${i}">NFC</label></span><span class="checkbox-container">
-            <input id="d-g-allow-creds-type-ble-${i}" type="checkbox" disabled="">
-            <label class="checkbox" for="d-g-allow-creds-type-ble-${i}">BLE   </label></span></label>]
+        <label class="label" id="d-c-excl-creds-type-cbox">transports: [ 
+            <span class="checkbox-container">
+                <input id="d-g-allow-creds-type-usb-${i}" type="checkbox" disabled="">
+                <label class="checkbox" for="d-g-allow-creds-type-usb-${i}">USB</label>
+            </span>
+            <span class="checkbox-container">
+                <input id="d-g-allow-creds-type-nfc-${i}" type="checkbox" disabled="">
+                <label class="checkbox" for="d-g-allow-creds-type-nfc-${i}">NFC</label>
+            </span>
+            <span class="checkbox-container">
+                <input id="d-g-allow-creds-type-ble-${i}" type="checkbox" disabled="">
+                <label class="checkbox" for="d-g-allow-creds-type-ble-${i}">BLE</label>
+            </span>
+            <span class="checkbox-container">
+                <input id="d-g-allow-creds-type-internal-${i}" type="checkbox" disabled="">
+                <label class="checkbox" for="d-g-allow-creds-type-internal-${i}">INTERNAL</label>
+            </span>
+            ]
       </div>
       <div class="editor-label indent-1">}</div>`;
 
@@ -723,6 +836,7 @@ function addAllowedCredential() {
             usb: document.getElementById(`d-g-allow-creds-type-usb-${i}`),
             nfc: document.getElementById(`d-g-allow-creds-type-nfc-${i}`),
             ble: document.getElementById(`d-g-allow-creds-type-ble-${i}`),
+            internal: document.getElementById(`d-g-allow-creds-type-internal-${i}`)
         },
     };
 
@@ -733,7 +847,8 @@ function addAllowedCredential() {
             e,
             allowedCredential.type.usb,
             allowedCredential.type.nfc,
-            allowedCredential.type.ble
+            allowedCredential.type.ble,
+            allowedCredential.type.internal
         );
     };
 

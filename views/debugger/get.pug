@@ -7,7 +7,7 @@
         button#d-g-regen-challenge.button Regenerate (binary, random)  
       .form-row.indent-1 
         label#d-g-timeout-line.label(for="d-g-timeout") timeout:
-        input#d-g-timeout(type='number', value='5000', class="input")
+        input#d-g-timeout(type='number', value='300000', class="input")
       .form-row.indent-1
         span.checkbox-container.position-outside
           input#d-g-rp-id-cbox(type='checkbox')
@@ -16,7 +16,7 @@
         input#d-g-rp-id(type='text', value='localhost', class="input")
       .form-row.indent-1
         span.checkbox-container.position-outside
-          input#d-g-allow-creds-cbox(type='checkbox', checked)
+          input#d-g-allow-creds-cbox(type='checkbox')
           label.checkbox(for="d-g-allow-creds-cbox")
         label#d-g-rp-id-line.label(for="d-g-rp-id") allowCredentials: 
       .editor-dynamic
@@ -42,29 +42,43 @@
                 label.checkbox(for="d-g-allow-creds-type-nfc") NFC
               span.checkbox-container
                 input#d-g-allow-creds-type-ble(type='checkbox', disabled)
-                label.checkbox(for="d-g-allow-creds-type-ble") BLE   
-            | ]         
+                label.checkbox(for="d-g-allow-creds-type-ble") BLE
+              span.checkbox-container
+                input#d-g-allow-creds-type-internal(type='checkbox', disabled)
+                label.checkbox(for="d-g-allow-creds-type-internal") INTERNAL
+              | ]
           .editor-label.indent-1 }
         div#d-g-allow-creds-placeholder.is-invisible
-      .form-row
-        span.checkbox-container
-          input#d-g-user-verif-cbox(type='checkbox')
-          label#d-g-user-verif-line.checkbox(for="d-g-user-verif-cbox") userVerification:
-        .select-container
-          select#d-g-user-verif-select.select
-            option(value="required") required
-            option(value="preferred", selected) preferred
-            option(value="discouraged") discouraged
+        .form-row.indent-2
+          span.checkbox-container.position-outside
+            input#d-g-user-verif-cbox(type='checkbox')
+            label.checkbox(for="d-g-user-verif-cbox")
+          label#d-g-mediation-line.label(for="d-g-user-verif-select") userVerification: 
+          .select-container
+            select#d-g-user-verif-select.select
+              option(value="required") required
+              option(value="preferred", selected) preferred
+              option(value="discouraged") discouraged
       .editor-label }
-      .form-row
-        span.checkbox-container
+      .form-row.indent-1
+        span.checkbox-container.position-outside
           input#d-g-mediation-cbox(type='checkbox')
-          label#d-g-mediation-line.checkbox(for="d-g-mediation-cbox") mediation:
+          label.checkbox(for="d-g-mediation-cbox")
+        label#d-g-mediation-line.label(for="d-g-mediation-select") mediation: 
         .select-container
           select#d-g-mediation-select.select
             option(value="silent") silent
             option(value="optional", selected) optional
+            option(value="conditional") conditional
             option(value="required") required
+      .form-row.indent-1
+        span.checkbox-container.position-outside
+          input#d-g-extensions-cbox(type='checkbox')
+          label.checkbox(for="d-g-extensions-cbox") extensions: {
+          .form-row.indent-2
+            span.checkbox-container
+              input#d-g-uvm-cbox-val(type='checkbox')
+              label#d-g-uvm-line.checkbox(for="d-g-uvm-cbox-val") uvm
+      .editor-label.indent-1 }
     
     .editor-label });
-    

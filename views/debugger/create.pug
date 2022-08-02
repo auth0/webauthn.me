@@ -34,17 +34,33 @@
         .editor-label.indent-2 {
         .editor-label.indent-3 type: 'public-key',
         .form-row.indent-3
-          label#d-c-pubkey-alg-line.label(for="d-c-pubkey-alg-select") alg: 
+          label#d-c-pubkey-alg-line.label(for="d-c-pubkey-alg-select") alg:
           .select-container
             select#d-c-pubkey-alg-select.select
-              option(value="es256", selected) ES256 (ECDSA P-256 + SHA-256)
+              option(value="rs256", selected) RS256 (RSASSA + SHA-256)
+              option(value="es256") ES256 (ECDSA P-256 + SHA-256)
+              option(value="es384") ES384 (ECDSA P-384 + SHA-384)
+              option(value="es512") ES512 (ECDSA P-521 + SHA-512)
+              option(value="edDSA") EdDSA (Ed25519)
+        .editor-label.indent-2 }
+      .editor-dynamic-item
+        .editor-label.indent-2 {
+        .editor-label.indent-3 type: 'public-key',
+        .form-row.indent-3
+          label#d-c-pubkey-alg-line.label(for="d-c-pubkey-alg-select-1") alg:
+          .select-container
+            select#d-c-pubkey-alg-select-1.select
               option(value="rs256") RS256 (RSASSA + SHA-256)
+              option(value="es256", selected) ES256 (ECDSA P-256 + SHA-256)
+              option(value="es384") ES384 (ECDSA P-384 + SHA-384)
+              option(value="es512") ES512 (ECDSA P-521 + SHA-512)
+              option(value="edDSA") EdDSA (Ed25519)
         .editor-label.indent-2 }
       #d-c-add-pubkey-params-placeholder.editor-public-key-credential-params-placeholder
       .editor-label.indent-1 ]
     .form-row.indent-2 
       label#d-c-timeout-line.label(for="d-c-timeout") timeout:
-      input#d-c-timeout(type='number', value='15000', class="input")  
+      input#d-c-timeout(type='number', value='300000', class="input")
     .editor-dynamic.indent-1
       .form-row.indent-2
         span.checkbox-container.position-outside
@@ -73,6 +89,9 @@
             span.checkbox-container
               input#d-c-excl-creds-type-ble(type='checkbox')
               label.checkbox(for="d-c-excl-creds-type-ble") BLE
+            span.checkbox-container
+              input#d-c-excl-creds-type-internal(type='checkbox')
+              label.checkbox(for="d-c-excl-creds-type-internal") INTERNAL
           | ]
         .editor-label.indent-2 }
         span#d-c-excl-creds-placeholder
@@ -89,6 +108,15 @@
         select#d-c-auth-attach-select.select
           option(value="platform") platform
           option(value="cross-platform", selected) cross-platform
+    .form-row.indent-2
+      span.checkbox-container
+        input#d-c-res-key-cbox(type="checkbox")
+        label#d-c-res-key-line.checkbox(for="d-c-res-key-cbox") residentKey:
+      .select-container
+        select#d-c-res-key-select.select
+          option(value="discouraged") discouraged
+          option(value="preferred", selected) preferred
+          option(value="required") required
     .form-row.indent-2
       span.checkbox-container
         input#d-c-req-res-key-cbox-val(type='checkbox')
@@ -112,5 +140,39 @@
           option(value="none", selected) none
           option(value="indirect") indirect
           option(value="direct") direct
+          option(value="enterprise") enterprise
     .editor-label.indent-1 }
+
+    .form-row.indent-2
+      span.checkbox-container.position-outside
+        input#d-c-extensions-cbox(type='checkbox')
+        label#d-c-extensions-cbox-line.checkbox(for="d-c-extensions-cbox") extensions: {
+    .form-row.indent-2
+      span.checkbox-container
+        input#d-c-cred-props-cbox-val(type='checkbox')
+        label#d-c-cred-props-line.checkbox(for="d-c-cred-props-cbox-val") credProps
+    .form-row.indent-2
+      span.checkbox-container
+        input#d-c-cred-protect-policy-cbox(type="checkbox")
+        label#d-c-cred-protect-policy-line.checkbox(for="d-c-cred-protect-policy-cbox") credentialProtectionPolicy:
+      .select-container
+        select#d-c-cred-protect-policy-select.select
+          option(value="userVerificationOptional") userVerificationOptional
+          option(value="userVerificationOptionalWithCredentialIDList", selected) userVerificationOptionalWithCredentialIDList
+          option(value="userVerificationRequired") userVerificationRequired
+    .form-row.indent-2
+      span.checkbox-container
+        input#d-c-cred-protect-enforce-cbox-val(type='checkbox')
+        label#d-c-cred-protect-enforce-line.checkbox(for="d-c-cred-protect-enforce-cbox-val") enforceCredentialProtectionPolicy
+    .form-row.indent-2
+      span.checkbox-container
+        input#d-c-min-pin-length-cbox-val(type='checkbox')
+        label#d-c-min-pin-length-line.checkbox(for="d-c-min-pin-length-cbox-val") minPinLength
+    .form-row.indent-2
+      span.checkbox-container
+        input#d-c-uvm-cbox-val(type='checkbox')
+        label#d-c-uvm-line.checkbox(for="d-c-uvm-cbox-val") uvm
+
+    .editor-label.indent-1 }
+
     .editor-label });
