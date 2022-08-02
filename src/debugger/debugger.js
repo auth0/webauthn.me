@@ -65,7 +65,7 @@ const allowedCredentials = [{
     },
 }, ];
 
-const globaleOptions = {
+const globalOptions = {
     challenge: new Uint8Array(32),
     userId: new Uint8Array(32),
 };
@@ -138,11 +138,11 @@ function getCreateOptions() {
             name: cForm.relyingParty.name.input.value,
         },
         user: {
-            id: globaleOptions.userId,
+            id: globalOptions.userId,
             name: cForm.user.name.input.value,
             displayName: cForm.user.displayName.input.value,
         },
-        challenge: globaleOptions.challenge,
+        challenge: globalOptions.challenge,
         pubKeyCredParams: pubKeyParams.map((select) => ({
             type: "public-key",
             alg: getAlgValueFromSelect(select),
@@ -374,7 +374,7 @@ function getGetOptions() {
     const gForm = dom.getForm;
 
     const publicKey = {
-        challenge: globaleOptions.challenge,
+        challenge: globalOptions.challenge,
         timeout: gForm.timeout.input.value,
     };
 
@@ -609,9 +609,9 @@ function setupCheckboxes() {
 }
 
 function createRegenHandler(key, length) {
-    options[key] = new Uint8Array(length);
+    globalOptions[key] = new Uint8Array(length);
     return () => {
-        crypto.getRandomValues(options[key]);
+        crypto.getRandomValues(globalOptions[key]);
     };
 }
 
