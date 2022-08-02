@@ -65,7 +65,7 @@ const allowedCredentials = [{
     },
 }, ];
 
-const options = {
+const globaleOptions = {
     challenge: new Uint8Array(32),
     userId: new Uint8Array(32),
 };
@@ -138,11 +138,11 @@ function getCreateOptions() {
             name: cForm.relyingParty.name.input.value,
         },
         user: {
-            id: options.userId,
+            id: globaleOptions.userId,
             name: cForm.user.name.input.value,
             displayName: cForm.user.displayName.input.value,
         },
-        challenge: options.challenge,
+        challenge: globaleOptions.challenge,
         pubKeyCredParams: pubKeyParams.map((select) => ({
             type: "public-key",
             alg: getAlgValueFromSelect(select),
@@ -374,7 +374,7 @@ function getGetOptions() {
     const gForm = dom.getForm;
 
     const publicKey = {
-        challenge: options.challenge,
+        challenge: globaleOptions.challenge,
         timeout: gForm.timeout.input.value,
     };
 
