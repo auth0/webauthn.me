@@ -1,5 +1,5 @@
 {
-  "name": "webauthn-site-poc",
+  "name": "webasuthn-site-poc",
   "version": "0.1.0",
   "description": "Web Authentication website proof-of-concept",
   "main": "src/debugger/index.js",
