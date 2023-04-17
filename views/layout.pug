@@ -138,3 +138,11 @@ html(lang='en')
       div(id="consent_blackbar")
       div(id="teconsent" style="position: absolute; bottom: -100px;")
       script(async="async" src="//consent.trustarc.com/notice?domain=auth0banner.com&c=teconsent&js=nj&noticeType=bb&text=true" crossOrigin)
+
+    script.
+      function topBanner() {
+        event.preventDefault();
+        document.querySelector(".top-banner").classList.add('closed');
+        document.querySelector(".top-banner-spacer").classList.add('hide');
+        document.querySelector(".header").classList.remove("top-banner-open");
+      }
