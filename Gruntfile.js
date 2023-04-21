@@ -129,73 +129,6 @@ module.exports = (grunt) => {
               }
             },*/
 
-        // realFavicon: {
-        //     favicons: {
-        //         src: "./favicon.png",
-        //         dest: "./dist/",
-        //         options: {
-        //             iconsPath: "/",
-        //             html: ["./dist/**/*.html"],
-        //             keep: ['meta[property="og:image"]'],
-        //             design: {
-        //                 ios: {
-        //                     pictureAspect: "backgroundAndMargin",
-        //                     backgroundColor: "#000000",
-        //                     margin: "35%",
-        //                     assets: {
-        //                         ios6AndPriorIcons: false,
-        //                         ios7AndLaterIcons: false,
-        //                         precomposedIcons: false,
-        //                         declareOnlyDefaultIcon: true,
-        //                     },
-        //                 },
-        //                 desktopBrowser: {},
-        //                 windows: {
-        //                     pictureAspect: "noChange",
-        //                     backgroundColor: "#000000",
-        //                     onConflict: "override",
-        //                     assets: {
-        //                         windows80Ie10Tile: false,
-        //                         windows10Ie11EdgeTiles: {
-        //                             small: false,
-        //                             medium: true,
-        //                             big: false,
-        //                             rectangle: false,
-        //                         },
-        //                     },
-        //                 },
-        //                 androidChrome: {
-        //                     pictureAspect: "noChange",
-        //                     themeColor: "#ffffff",
-        //                     manifest: {
-        //                         display: "standalone",
-        //                         orientation: "notSet",
-        //                         onConflict: "override",
-        //                         declared: true,
-        //                         name: "Web Authentication (WebAuthn) Credential and Login Demo",
-        //                         short_name: "WebAuthn demo",
-        //                     },
-        //                     assets: {
-        //                         legacyIcon: false,
-        //                         lowResolutionIcons: false,
-        //                     },
-        //                 },
-        //                 safariPinnedTab: {
-        //                     pictureAspect: "silhouette",
-        //                     themeColor: "#d43aff",
-        //                 },
-        //             },
-        //             settings: {
-        //                 scalingAlgorithm: "Mitchell",
-        //                 errorOnImageTooSmall: false,
-        //                 readmeFile: false,
-        //                 htmlCodeFile: false,
-        //                 usePathAsIs: false,
-        //             },
-        //         },
-        //     },
-        // },
-
         connect: {
             default: {
                 options: {
@@ -222,7 +155,6 @@ module.exports = (grunt) => {
         "pug",
         "webpack:prod",
         "sitemap",
-        //"realFavicon",
     ]);
 
     grunt.registerTask("default", ["build-dev", "connect", "watch"]);
