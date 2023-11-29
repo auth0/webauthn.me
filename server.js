@@ -15,6 +15,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use("/", express.static("dist/"));
 app.use("/introduction", express.static("dist/introduction.html"));
+app.use("/passkeys", express.static("dist/passkeys.html"));
 app.use("/debugger", express.static("dist/debugger.html"));
 app.use("/browser-support", express.static("dist/browser-support.html"));
 
