@@ -8,7 +8,9 @@ According to the [FIDO Alliance](https://fidoalliance.org/), passkeys are a pass
 
 Passkeys use the same infrastructure as WebAuthn and involve the same entities &mdash; user, user agent, authenticator, and relying party &mdash; as shown in the following diagram:
 
-![WebAuthn entities](img/1-Web-Authentication-Entities.svg)
+<figure class="image">
+  <img src="img/1-Web-Authentication-Entities.svg" alt="Web Authentication Entities">
+</figure>
 
 Technically, **a passkey is a discoverable FIDO credential that is tied to a user account and a website or application**. Let's break this definition down:
 
