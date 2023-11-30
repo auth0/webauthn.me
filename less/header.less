@@ -147,10 +147,10 @@
       letter-spacing: @letter-spacing;
       font-weight: @font-weight-semi-bold;
       font-size: 14px;
+      column-gap: 16px;
 
       .header-nav-item {
         text-transform: uppercase;
-        margin-left: 10px;
 
         &.active {
           a {
@@ -196,10 +196,8 @@
       .header-right {
         font-size: 16px;
         justify-content: flex-end;
-
-        .header-nav-item {
-          margin-left: 26px;
-        }
+        column-gap: 26px;
+        margin-left: 26px;
       }
     }
   }
