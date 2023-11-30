@@ -90,7 +90,7 @@
 
   box-sizing: border-box;
   width: 100%;
-  padding: 3em 0 0;
+  padding: 0;
 
   background: @header-color;
 
@@ -102,7 +102,6 @@
   .header-container {
     width: 100%;
     max-width: calc(1200px + 10em);
-    height: 5em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -110,7 +109,11 @@
 
     .header-left {
       display: flex;
+      align-items: center;
+      justify-content: center;
       flex-grow: 1;
+      height: 48px;
+      width: 100%;
 
       .header-crafted-by-container {
         font-size: @font-size + 2px;
@@ -143,13 +146,18 @@
     .header-right {
       display: flex;
       flex-grow: 1;
-      justify-content: space-between;
       letter-spacing: @letter-spacing;
       font-weight: @font-weight-semi-bold;
+      font-size: 14px;
+      gap: 16px;
+
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      width: 100%;
 
       .header-nav-item {
         text-transform: uppercase;
-        margin-left: 10px;
 
         &.active {
           a {
@@ -159,7 +167,7 @@
 
         a {
           display: block;
-          padding: 20px 0;
+          padding: 0;
 
           border: none;
 
@@ -184,20 +192,26 @@
       }
   }
   .header {
-    padding: 3em 5rem 0;
+    padding: 0 30px;
 
     &.top-banner-open {
       margin-top: 48px;
     }
+
     .header-container {
       flex-direction: row;
 
-      .header-right {
-        justify-content: flex-end;
+      .header-left {
+        justify-content: flex-start;
+        height: 64px;
+      }
 
-        .header-nav-item {
-          margin-left: 26px;
-        }
+      .header-right {
+        height: 64px;
+        font-size: 16px;
+        justify-content: flex-end;
+        column-gap: 26px;
+        margin-left: 26px;
       }
     }
   }

@@ -1,0 +1,40 @@
+extends ../layout.pug
+
+block meta
+  title WebAuthn and Passkeys
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  meta(name='author', content='auth0.com')
+  meta(name='description', content='Learn about how WebAuthn enables the implementation of passkeys, discoverable FIDO credentials that allows secure user authentication without the risk of phishing.')
+
+  meta(property="og:title" content="WebAuthn and Passkeys")
+  meta(property="og:site_name" content="WebAuthn and Passkeys")
+  meta(property="og:url" content="https://webauthn.me/passkeys")
+  meta(property="og:image" content="https://cdn.auth0.com/blog/webauthn:card.png")
+  meta(property="og:description" content="Learn about how WebAuthn enables the implementation of passkeys, discoverable FIDO credentials that allows secure user authentication without the risk of phishing.")
+  meta(property="og:type" content="website")
+
+  meta(name="twitter:site" content="@auth0")
+  meta(name="twitter:creator" content="@auth0")
+  meta(name="twitter:title" content="WebAuthn and Passkeys")
+  meta(name="twitter:url" content="https://webauthn.me/passkeys")
+  meta(name="twitter:description" content="Learn about how WebAuthn enables the implementation of passkeys, discoverable FIDO credentials that allows secure user authentication without the risk of phishing.")
+  meta(name="twitter:card" content="summary_large_image")
+  meta(name="twitter:image" content="https://cdn.auth0.com/blog/webauthn:card.png")
+  meta(name="twitter:image:height" content="512")
+  meta(name="twitter:image:width" content="1024")
+
+block stylesheets
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css', type='text/css', media='all')
+  link(rel='stylesheet', href='/css/passkeys.css', type='text/css', media='all')
+
+block variables
+  - var page="passkeys"
+
+block content
+  .content-container
+      include:markdown-it(html) passkeys.markdown
+
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-javascript.min.js")
