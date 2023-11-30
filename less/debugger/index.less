@@ -8,6 +8,24 @@
   box-sizing: border-box;
 }
 
+.content-container {
+  max-width: 790px;
+  margin: 128px auto;
+
+  a {
+    transition: border 0.2s ease-in-out;
+
+    border-bottom: 1px solid transparent;
+
+    text-decoration: none;
+    color: @color-blue;
+
+    &:hover {
+      border-bottom-color: @color-blue;
+    }
+  }
+}
+
 .container {
   padding: 20px;
   background: #202122;
