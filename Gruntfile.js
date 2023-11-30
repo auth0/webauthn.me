@@ -54,6 +54,7 @@ module.exports = (grunt) => {
                     "dist/css/index.css": "less/index.less",
                     "dist/css/tutorial.css": "less/tutorial/index.less",
                     "dist/css/introduction.css": "less/introduction/index.less",
+                    "dist/css/passkeys.css": "less/passkeys/index.less",
                     "dist/css/debugger.css": "less/debugger/index.less",
                     "dist/css/browser-support.css": "less/browser-support/index.less",
                 },
@@ -69,6 +70,7 @@ module.exports = (grunt) => {
                 files: {
                     //'dist/index.html': 'views/index.pug',
                     "dist/introduction.html": "views/introduction/index.pug",
+                    "dist/passkeys.html": "views/passkeys/index.pug",
                     "dist/index.html": "views/tutorial/index.pug",
                     "dist/debugger.html": "views/debugger/index.pug",
                     "dist/browser-support.html": "views/browser-support/index.pug",
