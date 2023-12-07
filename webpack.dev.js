@@ -9,6 +9,7 @@ module.exports = merge(common, {
         tutorial: "./src/tutorial/index.js",
         debugger: "./src/debugger/index.js",
         browserSupport: "./src/browser-support/index.js",
+        "cookie-consent": './src/cookie-consent.js'
     },
     output: {
         filename: "[name].js",
