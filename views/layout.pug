@@ -40,8 +40,9 @@ html(lang='en')
     include prefetch.pug
 
     // OneTrustScripts
-    script(src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js", type="text/javascript", charset="UTF-8", data-domain-script="3cdc400f-b58d-4d3b-83fd-9f22770403da", id="consent-script")
-    script(src="/js/cookie-consent.js")
+    if process.env.NODE_ENV === "production"
+      script(src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js", type="text/javascript", charset="UTF-8", data-domain-script="3cdc400f-b58d-4d3b-83fd-9f22770403da", id="consent-script")
+      script(src="/js/cookie-consent.js")
 
     script(type="application/ld+json").
       [{
