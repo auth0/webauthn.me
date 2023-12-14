@@ -38,6 +38,18 @@ mixin footer-browser-status-element(icon, name)
           span.footer-privacy-separator •
           a.footer-privacy-link(href='https://auth0.com/web-terms', target="_blank")
             | Terms of Service
+          span.footer-privacy-separator •
+          button.as-anchor#open-ccpa
+                | Your Privacy Choices 
+          img.ccpa-toggle(src='https://cdn.auth0.com/website/footer/ccpa.svg' alt='Privacy choices')
+        #ccpa-modal
+          button#close-ccpa x
+          h3.title Your Privacy Choices
+          p.paragraph Depending on your state of residence, including if you are a California resident, you have the right to opt out of certain sharing of personal information with third-party ad partners. We may share personal information with third-party ad partners, such as through cookies or by providing lists of email addresses for potential customers, so that we can reach them across the web with relevant ads.
+          p.paragraph If you wish to opt out of this sharing of your personal data in connection with cookies, please update your 
+            button.settings(onClick="window.OneTrust.ToggleInfoDisplay()") cookie settings.
+          p.paragraph If you wish to opt out of email-based sharing, provide your email address at 
+            a.settings(href="https://www.okta.com/your-privacy-choices/", target="_blank") this link.
         span.footer-copyright.
           © #{new Date().getFullYear()} Okta, Inc. All Rights Reserved.
       img(src='/img/webauthn-logo-no-text.svg', alt='webauthn logo')
