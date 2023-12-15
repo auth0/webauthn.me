@@ -39,14 +39,11 @@ html(lang='en')
     block prefetch
     include prefetch.pug
 
-    // Google Tag Manager
-    script().
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-W7FRLJ');
-    // End Google Tag Manager
+    // OneTrustScripts
+    if process.env.NODE_ENV === "production"
+      script(src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js", type="text/javascript", charset="UTF-8", data-domain-script="3cdc400f-b58d-4d3b-83fd-9f22770403da", id="consent-script")
+      script(src="/js/ccpa-modal.js")
+      script(src="/js/cookie-consent.js")
 
     script(type="application/ld+json").
       [{
@@ -123,7 +120,7 @@ html(lang='en')
   body
     // Google Tag Manager (noscript)
     noscript
-      iframe(src="https://www.googletagmanager.com/ns.html?id=GTM-W7FRLJ" height="0" width="0" style="display:none;visibility:hidden")
+      iframe(src="https://www.googletagmanager.com/ns.html?id=GTM-PJZ8DTR2" height="0" width="0" style="display:none;visibility:hidden")
     // End Google Tag Manager (noscript)
 
     include header.pug
@@ -133,12 +130,6 @@ html(lang='en')
     include footer.pug
 
     block scripts
-
-    // GDPR cookie banner
-    div
-      div(id="consent_blackbar")
-      div(id="teconsent" style="position: absolute; bottom: -100px;")
-      script(async="async" src="//consent.trustarc.com/notice?domain=auth0banner.com&c=teconsent&js=nj&noticeType=bb&text=true" crossOrigin)
 
     script.
       function topBanner() {
