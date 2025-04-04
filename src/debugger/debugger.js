@@ -29,6 +29,7 @@ import { saveAs } from "file-saver";
 import coseToJwk from "cose-to-jwk";
 import tippy from "tippy.js";
 import jkwToPem from "jwk-to-pem";
+import {tabs} from "../util/tabs.js"
 
 let lastCredentials;
 let lastCredentialsParsed;
@@ -49,7 +50,7 @@ const excludedCredentials = [{
         ble: dom.createForm.excludeCredentials.type.bleCheckbox,
         internal: dom.createForm.excludeCredentials.type.internalCheckbox,
     },
-}, ];
+},];
 
 const allowedCredentials = [{
     id: dom.getForm.allowCredentials.id.span,
@@ -63,7 +64,7 @@ const allowedCredentials = [{
         ble: dom.getForm.allowCredentials.type.bleCheckbox,
         internal: dom.getForm.allowCredentials.type.internalCheckbox,
     },
-}, ];
+},];
 
 const globalOptions = {
     challenge: new Uint8Array(32),
@@ -226,13 +227,13 @@ function getCreateOptions() {
         }
 
         if (cForm.extensions.credProtectPolicy.checkbox.checked) {
-            extensions.credentialProtectionPolicy =  getSelectValue(
+            extensions.credentialProtectionPolicy = getSelectValue(
                 cForm.extensions.credProtectPolicy.select
             );
         }
 
         if (cForm.extensions.credProtectEnforce.checkbox.checked) {
-            extensions.enforceCredentialProtectionPolicy = 
+            extensions.enforceCredentialProtectionPolicy =
                 cForm.extensions.credProtectEnforce.checkbox.checked;
         }
 
@@ -275,7 +276,7 @@ function handleRegistrationCredentials(credentials) {
         dom.output.registration.publicKey.innerHTML = prettyStringify(
             coseToJwk(
                 lastCredentialsParsed.response.attestationObject.authData
-                .attestedCredentialData.credentialPublicKey,
+                    .attestedCredentialData.credentialPublicKey,
                 2
             )
         ).replace(/[{\n][}\n]/g, "");
@@ -302,7 +303,7 @@ function handleCBORCredentials(credentials) {
         dom.output.cbor.publicKey.innerHTML = prettyStringify(
             coseToJwk(
                 lastCredentialsParsed.response.attestationObject.authData
-                .attestedCredentialData.credentialPublicKey,
+                    .attestedCredentialData.credentialPublicKey,
                 2
             )
         ).replace(/[{\n][}\n]/g, "");
@@ -411,7 +412,7 @@ function getGetOptions() {
                 }
 
                 return result;
-        });
+            });
     }
 
     if (gForm.userVerification.checkbox.checked) {
@@ -547,7 +548,7 @@ function setupCheckboxes() {
         ],
         [
             cForm.authenticatorSelection.residentKey.checkbox, [cForm.authenticatorSelection.residentKey.checkbox],
-        ],        
+        ],
         [
             cForm.authenticatorSelection.requireResidentKey.checkbox, [cForm.authenticatorSelection.requireResidentKey.checkbox],
         ],
@@ -769,8 +770,9 @@ function addExcludeCredential() {
         );
     };
 
-    excludedCredential.upload.addEventListener("click", (e) =>
-        uploadExcludedCredentialsId(e, i)
+    excludedCredential.upload.addEventListener("click", (e) => {
+        uploadExcludedCredentialsId(e, i);
+    }
     );
 }
 
@@ -951,11 +953,106 @@ function initConfigFields() {
 
     dom.createForm.relyingParty.id.input.value = rpId;
     dom.getForm.rpId.input.value = rpId;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    console.log('urlParams', urlParams);
+
+
 }
+
+const getValue = (obj, pathArray) =>
+    pathArray.reduce((acc, key) => acc?.[key], obj);
+
+const isCheckbox = (obj) =>
+    obj && obj.type === "checkbox";
+
+const enableCheckbox = (checkbox) => {
+    // checkbox.click();
+    checkbox.checked = true;
+    checkbox.disabled = false;
+};
+
+function handleTextInput(parts, value) {
+    const input = getValue(dom.createForm, [...parts, 'input']);
+    if (!input) return;
+
+    const parentCheckbox = getValue(dom.createForm, [...parts, 'checkbox']);
+    if (isCheckbox(parentCheckbox)) enableCheckbox(parentCheckbox);
+
+    input.value = value;
+
+    const sectionCheckbox = getValue(dom.createForm, [...parts.slice(0, -1), 'checkbox']);
+    if (isCheckbox(sectionCheckbox)) enableCheckbox(sectionCheckbox);
+}
+
+function handleMainCheckbox(parts, value) {
+    const checkbox = getValue(dom.createForm, [...parts, 'type', 'checkbox']);
+    if (!isCheckbox(checkbox)) return;
+
+    enableCheckbox(checkbox);
+
+    const parentCheckbox = getValue(dom.createForm, [...parts, 'checkbox']);
+    if (isCheckbox(parentCheckbox)) enableCheckbox(parentCheckbox);
+
+    for (const v of value.split(',')) {
+        const subCheckbox = getValue(dom.createForm, [...parts, 'type', `${v}Checkbox`]);
+        if (isCheckbox(subCheckbox)) enableCheckbox(subCheckbox);
+    }
+}
+
+function handleSelect(parts, value) {
+    const select = getValue(dom.createForm, [...parts, 'select']);
+    if (!select || select.type !== "select-one") return;
+
+    const parentCheckbox = getValue(dom.createForm, [...parts.slice(0, -1), 'checkbox']);
+    if (isCheckbox(parentCheckbox)) enableCheckbox(parentCheckbox);
+
+    select.value = value;
+    select.disabled = false;
+
+    const selectCheckbox = getValue(dom.createForm, [...parts, 'checkbox']);
+    if (isCheckbox(selectCheckbox)) enableCheckbox(selectCheckbox);
+}
+
+function handleStandaloneCheckbox(parts, value) {
+    const checkbox = getValue(dom.createForm, [...parts, 'checkbox']);
+    const hasInput = getValue(dom.createForm, [...parts, 'input']);
+    const hasSelect = getValue(dom.createForm, [...parts, 'select']);
+    const hasType = getValue(dom.createForm, [...parts, 'type']);
+    if (isCheckbox(checkbox) && !hasInput && !hasSelect && !hasType) {
+        if (value === 'true') { 
+            // checkbox.click();
+            checkbox.checked = true;
+        }
+        checkbox.disabled = false;
+        const parentCheckbox = getValue(dom.createForm, [...parts.slice(0, -1), 'checkbox']);
+        if (isCheckbox(parentCheckbox)) enableCheckbox(parentCheckbox);
+    }
+}
+
+function setupPostSettings() {
+    const urlParams = new URLSearchParams(window.location.search);
+    console.log('tabs', tabs);
+    for (const [key, value] of urlParams) {
+        const parts = key.split('_');
+
+        handleTextInput(parts, value);
+        handleMainCheckbox(parts, value);
+        handleSelect(parts, value);
+        handleStandaloneCheckbox(parts, value);
+        //http://127.0.0.1:8000/debugger.html?relyingParty_id=qwertz&user_name=xxx&user_displayName=yyy&timeout=2&excludeCredentials=usb,nfc,ble&authenticatorSelection_authenticatorAttachment=cross-platform&authenticatorSelection_residentKey=required&authenticatorSelection_requireResidentKey=true&authenticatorSelection_userVerification=required&attestation=direct&extensions_credProps=true&extensions_uvm=true
+    // dom.createForm.relyingParty.id.input.value = 'demo0';
+    // dom.createForm.relyingParty.name.input.value = 'demo00';
+    // dom.createForm.user.name.input.value = 'demo1';
+    // dom.createForm.user.displayName.input.value = 'demo2';
+    }
+}
+
 
 export function setupDebugger() {
     setupAuthenticatorsListInterval();
     initConfigFields();
     setupEvents();
     setupTooltips();
+    setupPostSettings();
 }
