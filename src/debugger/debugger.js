@@ -1037,7 +1037,6 @@ function setupPostSettings() {
         handleSelect(parts, value, dom.getForm);
         handleStandaloneCheckbox(parts, value, dom.createForm);
         handleStandaloneCheckbox(parts, value, dom.getForm);
-        //http://127.0.0.1:8000/debugger.html?relyingParty_id=qwertz&user_name=xxx&user_displayName=yyy&timeout=2&excludeCredentials=usb,nfc,ble&authenticatorSelection_authenticatorAttachment=cross-platform&authenticatorSelection_residentKey=required&authenticatorSelection_requireResidentKey=true&authenticatorSelection_userVerification=required&attestation=direct&extensions_credProps=true&extensions_uvm=true
     }
 }
 
