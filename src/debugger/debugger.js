@@ -29,7 +29,7 @@ import { saveAs } from "file-saver";
 import coseToJwk from "cose-to-jwk";
 import tippy from "tippy.js";
 import jkwToPem from "jwk-to-pem";
-import {tabs} from "../util/tabs.js"
+
 
 let lastCredentials;
 let lastCredentialsParsed;
@@ -953,11 +953,6 @@ function initConfigFields() {
 
     dom.createForm.relyingParty.id.input.value = rpId;
     dom.getForm.rpId.input.value = rpId;
-
-    const urlParams = new URLSearchParams(window.location.search);
-    console.log('urlParams', urlParams);
-
-
 }
 
 const getValue = (obj, pathArray) =>
@@ -972,79 +967,77 @@ const enableCheckbox = (checkbox) => {
     checkbox.disabled = false;
 };
 
-function handleTextInput(parts, value) {
-    const input = getValue(dom.createForm, [...parts, 'input']);
+function handleTextInput(parts, value, form) {
+    const input = getValue(form, [...parts, 'input']);
     if (!input) return;
 
-    const parentCheckbox = getValue(dom.createForm, [...parts, 'checkbox']);
+    const parentCheckbox = getValue(form, [...parts, 'checkbox']);
     if (isCheckbox(parentCheckbox)) enableCheckbox(parentCheckbox);
 
     input.value = value;
 
-    const sectionCheckbox = getValue(dom.createForm, [...parts.slice(0, -1), 'checkbox']);
+    const sectionCheckbox = getValue(form, [...parts.slice(0, -1), 'checkbox']);
     if (isCheckbox(sectionCheckbox)) enableCheckbox(sectionCheckbox);
 }
 
-function handleMainCheckbox(parts, value) {
-    const checkbox = getValue(dom.createForm, [...parts, 'type', 'checkbox']);
+function handleMainCheckbox(parts, value, form) {
+    const checkbox = getValue(form, [...parts, 'type', 'checkbox']);
     if (!isCheckbox(checkbox)) return;
 
     enableCheckbox(checkbox);
 
-    const parentCheckbox = getValue(dom.createForm, [...parts, 'checkbox']);
+    const parentCheckbox = getValue(form, [...parts, 'checkbox']);
     if (isCheckbox(parentCheckbox)) enableCheckbox(parentCheckbox);
 
     for (const v of value.split(',')) {
-        const subCheckbox = getValue(dom.createForm, [...parts, 'type', `${v}Checkbox`]);
+        const subCheckbox = getValue(form, [...parts, 'type', `${v}Checkbox`]);
         if (isCheckbox(subCheckbox)) enableCheckbox(subCheckbox);
     }
 }
 
-function handleSelect(parts, value) {
-    const select = getValue(dom.createForm, [...parts, 'select']);
+function handleSelect(parts, value, form) {
+    const select = getValue(form, [...parts, 'select']);
     if (!select || select.type !== "select-one") return;
 
-    const parentCheckbox = getValue(dom.createForm, [...parts.slice(0, -1), 'checkbox']);
+    const parentCheckbox = getValue(form, [...parts.slice(0, -1), 'checkbox']);
     if (isCheckbox(parentCheckbox)) enableCheckbox(parentCheckbox);
 
     select.value = value;
     select.disabled = false;
 
-    const selectCheckbox = getValue(dom.createForm, [...parts, 'checkbox']);
+    const selectCheckbox = getValue(form, [...parts, 'checkbox']);
     if (isCheckbox(selectCheckbox)) enableCheckbox(selectCheckbox);
 }
 
-function handleStandaloneCheckbox(parts, value) {
-    const checkbox = getValue(dom.createForm, [...parts, 'checkbox']);
-    const hasInput = getValue(dom.createForm, [...parts, 'input']);
-    const hasSelect = getValue(dom.createForm, [...parts, 'select']);
-    const hasType = getValue(dom.createForm, [...parts, 'type']);
+function handleStandaloneCheckbox(parts, value, form) {
+    const checkbox = getValue(form, [...parts, 'checkbox']);
+    const hasInput = getValue(form, [...parts, 'input']);
+    const hasSelect = getValue(form, [...parts, 'select']);
+    const hasType = getValue(form, [...parts, 'type']);
     if (isCheckbox(checkbox) && !hasInput && !hasSelect && !hasType) {
         if (value === 'true') { 
-            // checkbox.click();
             checkbox.checked = true;
         }
         checkbox.disabled = false;
-        const parentCheckbox = getValue(dom.createForm, [...parts.slice(0, -1), 'checkbox']);
+        const parentCheckbox = getValue(form, [...parts.slice(0, -1), 'checkbox']);
         if (isCheckbox(parentCheckbox)) enableCheckbox(parentCheckbox);
     }
 }
 
 function setupPostSettings() {
     const urlParams = new URLSearchParams(window.location.search);
-    console.log('tabs', tabs);
+    
     for (const [key, value] of urlParams) {
         const parts = key.split('_');
-
-        handleTextInput(parts, value);
-        handleMainCheckbox(parts, value);
-        handleSelect(parts, value);
-        handleStandaloneCheckbox(parts, value);
+        handleTextInput(parts, value, dom.createForm);
+        handleTextInput(parts, value, dom.getForm);
+        handleMainCheckbox(parts, value, dom.createForm);
+        handleMainCheckbox(parts, value, dom.getForm);
+        handleSelect(parts, value, dom.createForm);
+        handleSelect(parts, value, dom.getForm);
+        handleStandaloneCheckbox(parts, value, dom.createForm);
+        handleStandaloneCheckbox(parts, value, dom.getForm);
         //http://127.0.0.1:8000/debugger.html?relyingParty_id=qwertz&user_name=xxx&user_displayName=yyy&timeout=2&excludeCredentials=usb,nfc,ble&authenticatorSelection_authenticatorAttachment=cross-platform&authenticatorSelection_residentKey=required&authenticatorSelection_requireResidentKey=true&authenticatorSelection_userVerification=required&attestation=direct&extensions_credProps=true&extensions_uvm=true
-    // dom.createForm.relyingParty.id.input.value = 'demo0';
-    // dom.createForm.relyingParty.name.input.value = 'demo00';
-    // dom.createForm.user.name.input.value = 'demo1';
-    // dom.createForm.user.displayName.input.value = 'demo2';
     }
 }
 
