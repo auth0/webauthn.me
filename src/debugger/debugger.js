@@ -860,9 +860,52 @@ function addAllowedCredential() {
     );
 }
 
+function shareConfiguration(event) {
+    const urlParams = getUrlFromUiConfig();
+    const url = `${window.location.origin}${window.location.pathname}?${urlParams}`;
+    
+    // Zeige eine Erfolgsmeldung oder Dialog mit der URL
+    try {
+        if (navigator.share) {
+            navigator.share({
+                title: 'WebAuthn Konfiguration',
+                text: 'Meine WebAuthn Konfiguration',
+                url: url
+            })
+            .catch(err => {
+                copyToClipboard(url);
+            });
+        } else {
+            copyToClipboard(url);
+        }
+    } catch (e) {
+        copyToClipboard(url);
+    }
+}
+
+function copyToClipboard(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    
+    try {
+        document.execCommand('copy');
+        alert('Link zur Konfiguration wurde in die Zwischenablage kopiert!');
+    } catch (e) {
+        console.error('Konnte nicht in die Zwischenablage kopieren', e);
+        alert('Fehler beim Kopieren: ' + text);
+    } finally {
+        document.body.removeChild(textarea);
+    }
+}
+
 function setupEvents() {
     dom.registerButton.addEventListener("click", register);
     dom.authenticateButton.addEventListener("click", authenticate);
+    
+    dom.shareRegisterButton.addEventListener("click", shareConfiguration);
+    dom.shareAuthenticateButton.addEventListener("click", shareConfiguration);
 
     dom.output.keyModal.closeButton.addEventListener("click", closeModal);
     dom.pasteModalOkButton.addEventListener("click", closeModal);
@@ -1038,6 +1081,213 @@ function setupPostSettings() {
         handleStandaloneCheckbox(parts, value, dom.createForm);
         handleStandaloneCheckbox(parts, value, dom.getForm);
     }
+}
+
+function getUrlFromUiConfig() {
+    const urlParams = new URLSearchParams();
+    
+    // Hilfsfunktion zum Sammeln von Werten aus dem Formular
+    function collectTextInputs(form, prefix) {
+        const textParams = [];
+        
+        // Relying Party
+        if (form.relyingParty?.id?.input?.value) {
+            if (form.relyingParty.id.checkbox?.checked || !form.relyingParty.id.checkbox) {
+                textParams.push([`${prefix}relyingParty_id`, form.relyingParty.id.input.value]);
+            }
+        }
+        
+        if (form.relyingParty?.name?.input?.value) {
+            textParams.push([`${prefix}relyingParty_name`, form.relyingParty.name.input.value]);
+        }
+        
+        // User
+        if (form.user?.name?.input?.value) {
+            textParams.push([`${prefix}user_name`, form.user.name.input.value]);
+        }
+        
+        if (form.user?.displayName?.input?.value) {
+            textParams.push([`${prefix}user_displayName`, form.user.displayName.input.value]);
+        }
+        
+        // Timeout
+        if (form.timeout?.input?.value) {
+            textParams.push([`${prefix}timeout`, form.timeout.input.value]);
+        }
+        
+        // RPID
+        if (form.rpId?.checkbox?.checked && form.rpId?.input?.value) {
+            textParams.push([`${prefix}rpId`, form.rpId.input.value]);
+        }
+        
+        return textParams;
+    }
+    
+    // Hilfsfunktion zum Sammeln von Dropdown-Werten
+    function collectSelects(form, prefix) {
+        const selectParams = [];
+        
+        // AuthenticatorAttachment
+        if (form.authenticatorSelection?.authenticatorAttachment?.checkbox?.checked) {
+            const value = getSelectValue(form.authenticatorSelection.authenticatorAttachment.select);
+            if (value) {
+                selectParams.push([`${prefix}authenticatorSelection_authenticatorAttachment`, value]);
+            }
+        }
+        
+        // ResidentKey
+        if (form.authenticatorSelection?.residentKey?.checkbox?.checked) {
+            const value = getSelectValue(form.authenticatorSelection.residentKey.select);
+            if (value) {
+                selectParams.push([`${prefix}authenticatorSelection_residentKey`, value]);
+            }
+        }
+        
+        // UserVerification
+        if (form.authenticatorSelection?.userVerification?.checkbox?.checked) {
+            const value = getSelectValue(form.authenticatorSelection.userVerification.select);
+            if (value) {
+                selectParams.push([`${prefix}authenticatorSelection_userVerification`, value]);
+            }
+        } else if (form.userVerification?.checkbox?.checked) {
+            // Für das Get-Formular
+            const value = getSelectValue(form.userVerification.select);
+            if (value) {
+                selectParams.push([`${prefix}userVerification`, value]);
+            }
+        }
+        
+        // Attestation
+        if (form.attestation?.checkbox?.checked) {
+            const value = getSelectValue(form.attestation.select);
+            if (value) {
+                selectParams.push([`${prefix}attestation`, value]);
+            }
+        }
+        
+        // Mediation
+        if (form.mediation?.checkbox?.checked) {
+            const value = getSelectValue(form.mediation.select);
+            if (value) {
+                selectParams.push([`${prefix}mediation`, value]);
+            }
+        }
+        
+        // CredProtectPolicy
+        if (form.extensions?.credProtectPolicy?.checkbox?.checked) {
+            const value = getSelectValue(form.extensions.credProtectPolicy.select);
+            if (value) {
+                selectParams.push([`${prefix}extensions_credProtectPolicy`, value]);
+            }
+        }
+        
+        return selectParams;
+    }
+    
+    // Hilfsfunktion zum Sammeln von Checkbox-Werten
+    function collectCheckboxes(form, prefix) {
+        const checkboxParams = [];
+        
+        // RequireResidentKey
+        if (form.authenticatorSelection?.checkbox?.checked && 
+            form.authenticatorSelection?.requireResidentKey?.checkbox?.checked) {
+            checkboxParams.push([
+                `${prefix}authenticatorSelection_requireResidentKey`,
+                form.authenticatorSelection.requireResidentKey.checkbox.checked.toString()
+            ]);
+        }
+        
+        // Extensions - credProps
+        if (form.extensions?.checkbox?.checked && 
+            form.extensions?.credProps?.checkbox?.checked) {
+            checkboxParams.push([
+                `${prefix}extensions_credProps`, 
+                form.extensions.credProps.checkbox.checked.toString()
+            ]);
+        }
+        
+        // Extensions - credProtectEnforce
+        if (form.extensions?.checkbox?.checked && 
+            form.extensions?.credProtectEnforce?.checkbox?.checked) {
+            checkboxParams.push([
+                `${prefix}extensions_credProtectEnforce`, 
+                form.extensions.credProtectEnforce.checkbox.checked.toString()
+            ]);
+        }
+        
+        // Extensions - minPinLength
+        if (form.extensions?.checkbox?.checked && 
+            form.extensions?.minPinLength?.checkbox?.checked) {
+            checkboxParams.push([
+                `${prefix}extensions_minPinLength`, 
+                form.extensions.minPinLength.checkbox.checked.toString()
+            ]);
+        }
+        
+        // Extensions - uvm
+        if (form.extensions?.checkbox?.checked && 
+            form.extensions?.uvm?.checkbox?.checked) {
+            checkboxParams.push([
+                `${prefix}extensions_uvm`, 
+                form.extensions.uvm.checkbox.checked.toString()
+            ]);
+        }
+        
+        return checkboxParams;
+    }
+    
+    // Hilfsfunktion zum Sammeln von Transport-Werten
+    function collectTransports(item) {
+        if (!item.type?.checkbox?.checked) return null;
+        
+        const transports = [];
+        
+        if (item.type.usb?.checked) transports.push('usb');
+        if (item.type.nfc?.checked) transports.push('nfc');
+        if (item.type.ble?.checked) transports.push('ble');
+        if (item.type.internal?.checked) transports.push('internal');
+        
+        return transports.length > 0 ? transports.join(',') : null;
+    }
+    
+    // Sammle Werte aus dem Create-Formular
+    const createTextParams = collectTextInputs(dom.createForm, "");
+    const createSelectParams = collectSelects(dom.createForm, "");
+    const createCheckboxParams = collectCheckboxes(dom.createForm, "");
+    
+    // Sammle Werte aus dem Get-Formular
+    const getTextParams = collectTextInputs(dom.getForm, "");
+    const getSelectParams = collectSelects(dom.getForm, "");
+    const getCheckboxParams = collectCheckboxes(dom.getForm, "");
+    
+    // Sammle excluded/allowed credentials
+    if (dom.createForm.excludeCredentials?.checkbox?.checked) {
+        const transports = collectTransports(excludedCredentials[0]);
+        if (transports) {
+            createTextParams.push(["excludeCredentials", transports]);
+        }
+    }
+    
+    if (dom.getForm.allowCredentials?.checkbox?.checked) {
+        const transports = collectTransports(allowedCredentials[0]);
+        if (transports) {
+            getTextParams.push(["allowCredentials", transports]);
+        }
+    }
+    
+    // Füge alle Parameter zur URLSearchParams hinzu
+    for (const [key, value] of [
+        ...createTextParams, 
+        ...createSelectParams, 
+        ...createCheckboxParams,
+        ...getTextParams,
+        ...getSelectParams,
+        ...getCheckboxParams
+    ]) {
+        urlParams.append(key, value);
+    }
+    
+    return urlParams.toString();
 }
 
 
