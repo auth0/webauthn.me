@@ -1,0 +1,27 @@
+{ 
+    "version": 2, 
+    "builds": [],
+    "outputDirectory": "dist",
+    "rewrites": [
+        { 
+            "source": "/", 
+            "destination": "/index.html"
+        },
+        {
+            "source": "/introduction", 
+            "destination": "/introduction.html" 
+        },
+        {
+            "source": "/passkeys", 
+            "destination": "/passkeys.html" 
+        },
+        {
+            "source": "/debugger", 
+            "destination": "/debugger.html" 
+        },
+        {
+            "source": "/browser-support", 
+            "destination": "/browser-support.html" 
+        }
+    ] 
+}

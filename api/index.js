@@ -22,3 +22,5 @@ app.use("/browser-support", express.static("dist/browser-support.html"));
 app.listen(process.env.PORT || 3000, function() {
     console.log("Started.");
 });
+
+module.exports = app;
