@@ -5,11 +5,10 @@
   "main": "src/debugger/index.js",
   "scripts": {
     "postinstall": "grunt build-prod",
-    "start": "node server.js",
+    "start": "node api/index.js",
     "start:dev": "grunt",
     "build": "grunt build-prod",
-    "test": "grunt test",
-    "heroku-postbuild": "npm run build"
+    "test": "grunt test"
   },
   "keywords": [
     "webauthn",
@@ -39,7 +38,6 @@
     "grunt-contrib-less": "^2.0.0",
     "grunt-contrib-pug": "^1.0.0",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-mocha-test": "^0.13.3",
     "grunt-real-favicon": "^0.2.4",
     "grunt-sitemap": "^2.0.1",
     "grunt-webpack": "^4.0.3",
@@ -47,7 +45,6 @@
     "jwk-to-pem": "^2.0.0",
     "less": "^3.8.0",
     "loglevel": "^1.6.1",
-    "mocha": "^5.2.0",
     "node-forge": "^0.7.5",
     "pkijs": "^2.1.63",
     "pug": "^3.0.2",
@@ -65,7 +62,7 @@
     "express-sslify": "^1.2.0"
   },
   "engines": {
-    "node": "16"
+    "node": "18"
   },
   "heroku-run-build-script": true
 }
