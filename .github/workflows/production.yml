@@ -10,7 +10,7 @@ on:
 jobs:
   Deploy-Production:
     runs-on:
-      labels: ubuntu-22.04-2cpu-8ram-75ssd
+      labels: ubuntu-latest
     steps:
       - name: Checkout the Codebase
         uses: actions/checkout@v4
