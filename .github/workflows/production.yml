@@ -19,4 +19,4 @@ jobs:
       - name: Deploy on Vercel
         id: deploy
         run: |
-          vercel deploy --yes --prod --token=${{ secrets.VERCEL_ACCESS_TOKEN }} --org-id=${{ secrets.VERCEL_ORG_ID }} --project-id=${{ secrets.VERCEL_PROJECT_ID }}
+          vercel deploy --prod --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
