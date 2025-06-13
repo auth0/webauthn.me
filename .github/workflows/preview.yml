@@ -15,13 +15,6 @@ jobs:
     outputs:
       deploymentUrl: ${{ steps.deploy.outputs.deploymentUrl }}
     steps:
-      - name: Create Vercel project config
-        run: |
-         mkdir -p .vercel 
-         echo '{
-           "orgId": "'"${{ secrets.VERCEL_ORG_ID}}"'",
-           "projectId": "'"${{ secrets.VERCEL_PROJECT_ID}}"'",
-         }' > .vercel/project.json
       - name: Checkout the Codebase
         uses: actions/checkout@v4
       - name: Install Vercel CLI
