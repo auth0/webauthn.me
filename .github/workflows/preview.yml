@@ -15,6 +15,13 @@ jobs:
     outputs:
       deploymentUrl: ${{ steps.deploy.outputs.deploymentUrl }}
     steps:
+      - name: Create Vercel project config
+        run: |
+         mkdir -p .vercel 
+         echo '{
+           "orgId": "'"${{ secrets.VERCEL_ORG_ID}}"'",
+           "projectId": "'"${{ secrets.VERCEL_PROJECT_ID}}"'",
+         }' > .vercel/project.json
       - name: Checkout the Codebase
         uses: actions/checkout@v4
       - name: Install Vercel CLI
@@ -22,7 +29,7 @@ jobs:
       - name: Deploy on Vercel
         id: deploy
         run: |
-          vercel deploy --yes --token=${{ secrets.VERCEL_ACCESS_TOKEN }} --org-id=${{ secrets.VERCEL_ORG_ID }} --project-id=${{ secrets.VERCEL_PROJECT_ID }} > deploy.log
+          vercel deploy --yes --token=${{ secrets.VERCEL_ACCESS_TOKEN }} > deploy.log
           URL=$(cat deploy.log | grep -o 'https://[^ ]*.vercel.app' | head -n1)
           echo "deploymentUrl=$URL" >> $GITHUB_OUTPUT
   Add-Comment:
