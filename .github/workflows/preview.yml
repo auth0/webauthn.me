@@ -22,7 +22,7 @@ jobs:
       - name: Deploy on Vercel
         id: deploy
         run: |
-          vercel deploy --yes --token=${{ secrets.VERCEL_ACCESS_TOKEN }} > deploy.log
+          vercel deploy --yes --token=${{ secrets.VERCEL_ACCESS_TOKEN }} --org-id=${{ secrets.VERCEL_ORG_ID }} --project-id=${{ secrets.VERCEL_PROJECT_ID }} > deploy.log
           URL=$(cat deploy.log | grep -o 'https://[^ ]*.vercel.app' | head -n1)
           echo "deploymentUrl=$URL" >> $GITHUB_OUTPUT
   Add-Comment:
