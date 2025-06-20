@@ -64,5 +64,9 @@
   "engines": {
     "node": "18"
   },
+
+  "overrides": {
+    "fsevents": "^2.3.3"
+  },
   "heroku-run-build-script": true
 }
