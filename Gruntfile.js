@@ -5,10 +5,7 @@ module.exports = (grunt) => {
     grunt.loadNpmTasks("grunt-webpack");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-mocha-test");
-    grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks("grunt-sitemap");
-    grunt.loadNpmTasks("grunt-real-favicon");
 
     grunt.initConfig({
         clean: {
@@ -35,14 +32,6 @@ module.exports = (grunt) => {
                         src: "robots.txt",
                         dest: "dist/",
                     },
-                    /*{
-                                       expand: true,
-                                       flatten: true,
-                                       src: [
-                                         'node_modules/bulma/css/bulma.min.css'
-                                       ],
-                                       dest: 'dist/css/'
-                                     }*/
                 ],
             },
         },
@@ -116,29 +105,6 @@ module.exports = (grunt) => {
                 tasks: "less",
             },
         },
-
-        /*mochaTest: {
-              unit: {
-                options: {},
-                src: ['dist/test/unit-tests.js']
-              },
-              functional: {
-                options: {
-                  // Higher default timeout to account for some animations
-                  timeout: 10000
-                },
-                src: ['test/functional/**.js']
-              }
-            },*/
-
-        connect: {
-            default: {
-                options: {
-                    hostname: "127.0.0.1",
-                    base: "dist",
-                },
-            },
-        },
     });
 
     grunt.registerTask("build-dev", [
@@ -159,5 +125,5 @@ module.exports = (grunt) => {
         "sitemap",
     ]);
 
-    grunt.registerTask("default", ["build-dev", "connect", "watch"]);
+    grunt.registerTask("default", ["build-dev", "watch"]);
 };
