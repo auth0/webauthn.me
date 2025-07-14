@@ -637,10 +637,18 @@ function uploadCBOR(event) {
     reader.readAsArrayBuffer(file);
 }
 
-function downloadCBOR() {
-    const creds = deepClone(lastCredentials);
+function cleanCredentialsObject(creds) {
     delete creds.getClientExtensionResults;
     delete creds.response.getTransports;
+    delete creds.response.getAuthenticatorData;
+    delete creds.response.getPublicKey;
+    delete creds.response.getPublicKeyAlgorithm;
+    delete creds.toJSON;
+}
+
+function downloadCBOR() {
+    const creds = deepClone(lastCredentials);
+    cleanCredentialsObject(creds)
     const encoded = cborEncoder._encodeAll([creds]);
     log.debug(cbor.decodeFirstSync(encoded));
     saveAs(new Blob([encoded]), "output.cbor");
@@ -648,7 +656,7 @@ function downloadCBOR() {
 
 function downloadJSON() {
     const creds = deepClone(lastCredentials);
-    delete creds.getClientExtensionResults;
+    cleanCredentialsObject(creds)
 
     const transformations = deepClone(prettifyTransformations);
     transformations.x5c.transform = (data) => data.map(binToHex);
