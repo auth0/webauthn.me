@@ -62,7 +62,7 @@
     "express-sslify": "^1.2.0"
   },
   "engines": {
-    "node": "18"
+    "node": "22"
   },
   "heroku-run-build-script": true
 }
