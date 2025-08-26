@@ -623,16 +623,34 @@ function showCBORUpload(event) {
 
 function uploadCBOR(event) {
     const file = event.target.files[0];
-    if (!file) {
-        return;
+    if (!file) return;
+    // Check extension
+    const allowedExtensions = ['.cbor']
+    const fileName = file.name.toLowerCase();
+    const hasValidExtension = allowedExtensions.some(ext => fileName.endsWith(ext))
+    if(!hasValidExtension) {
+        alert('Invalid file type. Please upload a .cbor file.')
+        event.target.value = ''
+        return
     }
-
+    // Check size
+    const MAX_SIZE_BYTES = 2 * 1024 * 1024
+    if(file.size > MAX_SIZE_BYTES) {
+        alert('File is too large. Max allowed size is 2MB')
+        event.target.value = ''
+        return
+    }
     const reader = new FileReader();
     reader.onload = () => {
-        const buf = Buffer.from(reader.result);
-        const credentials = cbor.decodeFirstSync(buf);
-        handleCBORCredentials(credentials);
-        dom.output.cbor.output.classList.remove("is-invisible");
+        try {
+            const buf = Buffer.from(reader.result);
+            const credentials = cbor.decodeFirstSync(buf);
+            handleCBORCredentials(credentials);
+            dom.output.cbor.output.classList.remove("is-invisible");
+        } catch(err) {
+            alert(`Invalid CBOR file: ${err.message}`)
+            event.target.value = ''
+        }
     };
     reader.readAsArrayBuffer(file);
 }
