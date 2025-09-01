@@ -1,7 +1,9 @@
 const webpack = require('webpack');
+const path = require('path')
 
 module.exports = {
   devtool: 'source-map',
+  target: 'web',
   module: {
     rules: [{
       test: /\.m?js$/,
@@ -23,11 +25,28 @@ module.exports = {
       }
     }]
   },
+  resolve: {
+    extensions: ['.js'],
+    fallback: {
+      util: require.resolve('util'),
+      url: require.resolve('url'),
+      events: require.resolve('events'),
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+      buffer: require.resolve('buffer/'),
+      process: require.resolve('process/browser')
+    }
+  },
   plugins: [
     new webpack.ProvidePlugin({
+      Buffer: ['buffer',  'Buffer'],
+      process: 'process/browser'
       // In case we need this in the future
       // $: "jquery",
       // jQuery: "jquery"
     })
-  ]
+  ],
+  cache: {
+    type: 'filesystem'
+  }
 };
