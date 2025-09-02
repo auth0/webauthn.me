@@ -39,6 +39,7 @@ html(lang='en')
     block prefetch
     include prefetch.pug
 
+
     // OneTrustScripts
     if NODE_ENV === "production"
       script(src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js", type="text/javascript", charset="UTF-8", data-domain-script="3cdc400f-b58d-4d3b-83fd-9f22770403da", id="consent-script")
@@ -118,6 +119,10 @@ html(lang='en')
     meta(name="google-site-verification" content="8PENs1ni2zY2-JstEN8PRrMO3N76CRf2r1yP1qMf14M")
 
   body
+    div
+      p The current environment is:
+      strong #{NODE_ENV}
+
     // Google Tag Manager (noscript)
     noscript
       iframe(src="https://www.googletagmanager.com/ns.html?id=GTM-PJZ8DTR2" height="0" width="0" style="display:none;visibility:hidden")
