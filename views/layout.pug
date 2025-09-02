@@ -39,11 +39,12 @@ html(lang='en')
     block prefetch
     include prefetch.pug
 
+
     // OneTrustScripts
-    if process.env.NODE_ENV === "production"
+    if NODE_ENV === "production"
       script(src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js", type="text/javascript", charset="UTF-8", data-domain-script="3cdc400f-b58d-4d3b-83fd-9f22770403da", id="consent-script")
-      script(src="/js/ccpa-modal.js")
-      script(src="/js/cookie-consent.js")
+      script(src="js/ccpa-modal.js")
+      script(src="js/cookie-consent.js")
 
     script(type="application/ld+json").
       [{

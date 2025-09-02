@@ -54,7 +54,9 @@ module.exports = (grunt) => {
             default: {
                 options: {
                     pretty: true,
-                    data: {},
+                    data: {
+                        NODE_ENV: process.env.NODE_ENV,
+                    },
                 },
                 files: {
                     //'dist/index.html': 'views/index.pug',
