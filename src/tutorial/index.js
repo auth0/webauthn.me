@@ -15,8 +15,6 @@ if (
   document.querySelector("#tutorial-error-message").classList.remove("hidden");
 }
 
-console.log(process.env.NODE_ENV);
-
 step1.init();
 step2.init();
 step3.init();

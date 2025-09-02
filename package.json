@@ -7,7 +7,7 @@
     "postinstall": "grunt build-prod",
     "start": "node api/index.js",
     "start:dev": "grunt",
-    "build": "grunt build-prod",
+    "build": "NODE_ENV=production grunt build-prod",
     "test": "grunt test"
   },
   "keywords": [
