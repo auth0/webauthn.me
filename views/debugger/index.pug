@@ -57,7 +57,10 @@ block content
           #debugger-register-options
             include create.pug
         
-        button#debugger-register-button.button.button-full Register
+        div.debugger-button-container
+          button#debugger-register-button.button.button-full Register
+          button#debugger-share-register-button.button.button-share
+            img(src="/img/share-icon.svg" alt="Share" title="Konfiguration teilen")
         
         #debugger-register-output.is-invisible
           include output.pug
@@ -75,7 +78,10 @@ block content
             include get.pug
             
         
-        button#debugger-authenticate-button.button.button-full Authenticate
+        div.debugger-button-container
+          button#debugger-authenticate-button.button.button-full Authenticate
+          button#debugger-share-authenticate-button.button.button-share
+            img(src="/img/share-icon.svg" alt="Share" title="Konfiguration teilen")
           
         #debugger-authenticate-output.is-invisible
           include output-authenticate.pug
