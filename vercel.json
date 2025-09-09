@@ -8,7 +8,11 @@
             "headers": [
                 {
                     "key": "Content-Security-Policy",
-                    "value": "frame-ancestors 'none'"
+                    "value": "default-src 'self'; frame-ancestors 'none'; form-action 'self'"
+                },
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "https://webauthn.me"
                 },
                 {
                     "key": "X-Frame-Options",
