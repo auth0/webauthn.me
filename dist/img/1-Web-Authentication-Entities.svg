@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="795px" height="640px" viewBox="0 0 795 640" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>1-Web-Authentication-Entities</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="90" height="76" rx="2"></rect>
+        <path d="M327,210 L471,210 C472.656854,210 474,211.343146 474,213 L474,527 C474,528.656854 472.656854,530 471,530 L327,530 C325.343146,530 324,528.656854 324,527 L324,213 C324,211.343146 325.343146,210 327,210 Z" id="path-3"></path>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="150" height="320" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <circle id="path-5" cx="45" cy="45" r="45"></circle>
+    </defs>
+    <g id="Lock-and-Feeling" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI_Tutorial-Information" transform="translate(-323.000000, -634.000000)">
+            <rect fill="#000000" x="0" y="0" width="1440" height="7895"></rect>
+            <g id="How-It-Works" transform="translate(322.000000, 546.000000)">
+                <g id="Graphic-#1" transform="translate(1.000000, 88.000000)">
+                    <path d="M3,0 L792,0 C793.656854,-3.04359188e-16 795,1.34314575 795,3 L795,637 C795,638.656854 793.656854,640 792,640 L3,640 C1.34314575,640 2.02906125e-16,638.656854 0,637 L0,3 C-2.02906125e-16,1.34314575 1.34314575,3.04359188e-16 3,0 Z" id="Rectangle-3" fill="#202122" fill-rule="nonzero"></path>
+                    <path d="M228.923999,193.678399 L231.771875,198.235001 C231.91823,198.469169 231.847044,198.777644 231.612876,198.923999 C231.53341,198.973665 231.441586,199 231.347876,199 L225.652124,199 C225.375981,199 225.152124,198.776142 225.152124,198.5 C225.152124,198.40629 225.178459,198.314466 225.228125,198.235001 L228.076001,193.678399 C228.222356,193.44423 228.530831,193.373044 228.764999,193.519399 C228.829384,193.559639 228.883759,193.614014 228.923999,193.678399 Z" id="Rectangle-19" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    <path d="M256.923999,193.678399 L259.771875,198.235001 C259.91823,198.469169 259.847044,198.777644 259.612876,198.923999 C259.53341,198.973665 259.441586,199 259.347876,199 L253.652124,199 C253.375981,199 253.152124,198.776142 253.152124,198.5 C253.152124,198.40629 253.178459,198.314466 253.228125,198.235001 L256.076001,193.678399 C256.222356,193.44423 256.530831,193.373044 256.764999,193.519399 C256.829384,193.559639 256.883759,193.614014 256.923999,193.678399 Z" id="Rectangle-19" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    <g id="Rectangle-4" transform="translate(353.000000, 230.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#595B5C" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <text id="Browser" mask="url(#mask-2)" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="20" fill="#FFFFFF">
+                            <tspan x="20" y="44">Browser</tspan>
+                        </text>
+                        <rect fill="#2F3132" fill-rule="nonzero" mask="url(#mask-2)" x="0" y="0" width="90" height="11.25"></rect>
+                        <circle id="Oval-3" fill="#FF554F" fill-rule="nonzero" mask="url(#mask-2)" cx="5.625" cy="5.625" r="2.25"></circle>
+                        <circle id="Oval-3" fill="#FFC430" fill-rule="nonzero" mask="url(#mask-2)" cx="12.375" cy="5.625" r="2.25"></circle>
+                        <circle id="Oval-3" fill="#29CF42" fill-rule="nonzero" mask="url(#mask-2)" cx="19.125" cy="5.625" r="2.25"></circle>
+                    </g>
+                    <use id="Rectangle-18" stroke="#444647" mask="url(#mask-4)" stroke-width="2" stroke-dasharray="3,3" fill-rule="nonzero" xlink:href="#path-3"></use>
+                    <text id="User-Agent" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="22" letter-spacing="0.8571429" fill="#FFFFFF">
+                        <tspan x="355.036551" y="333">USER AGENT</tspan>
+                    </text>
+                    <text id="User" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="22" letter-spacing="0.8571429" fill="#FFFFFF">
+                        <tspan x="379.615792" y="499">USER</tspan>
+                    </text>
+                    <text id="Client" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="22" letter-spacing="0.8571429" fill="#FFFFFF">
+                        <tspan x="374.091657" y="555">CLIENT</tspan>
+                    </text>
+                    <text id="Auth0-Facebook-Googl" opacity="0.5" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="20" fill="#FFFFFF">
+                        <tspan x="606" y="85">	• 	Auth0</tspan>
+                        <tspan x="606" y="105">	• 	Facebook</tspan>
+                        <tspan x="606" y="125">	• 	Google</tspan>
+                        <tspan x="606" y="145">	• 	Amazon</tspan>
+                        <tspan x="606" y="165">	• 	Your web server</tspan>
+                    </text>
+                    <text id="Yubikey-USB-Token-Sm" opacity="0.5" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="20" fill="#FFFFFF">
+                        <tspan x="45" y="105">	• 	Yubikey</tspan>
+                        <tspan x="45" y="125">	• 	USB Token</tspan>
+                        <tspan x="45" y="145">	• 	Smartphone</tspan>
+                    </text>
+                    <text id="RELYING-PARTY" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="22" letter-spacing="0.8571429" fill="#FFFFFF">
+                        <tspan x="470.907087" y="170">RELYING PARTY</tspan>
+                    </text>
+                    <text id="Browser" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="20" fill="#FFFFFF">
+                        <tspan x="373" y="274">Browser</tspan>
+                    </text>
+                    <text id="Authenticator" font-family="Helvetica" font-size="12" font-weight="normal" letter-spacing="0.8571429" fill="#FFFFFF">
+                        <tspan x="192.476423" y="171">AUTHENTICATOR</tspan>
+                    </text>
+                    <g id="Group-5" transform="translate(485.000000, 82.000000)" fill-rule="nonzero">
+                        <path d="M2,48 L76,48 C77.1045695,48 78,48.8954305 78,50 L78,58 C78,59.1045695 77.1045695,60 76,60 L2,60 C0.8954305,60 1.3527075e-16,59.1045695 0,58 L0,50 C-1.3527075e-16,48.8954305 0.8954305,48 2,48 Z" id="Rectangle-8" fill="#595B5C"></path>
+                        <path d="M2,32 L76,32 C77.1045695,32 78,32.8954305 78,34 L78,42 C78,43.1045695 77.1045695,44 76,44 L2,44 C0.8954305,44 1.3527075e-16,43.1045695 0,42 L0,34 C-1.3527075e-16,32.8954305 0.8954305,32 2,32 Z" id="Rectangle-8" fill="#595B5C"></path>
+                        <path d="M2,16 L76,16 C77.1045695,16 78,16.8954305 78,18 L78,26 C78,27.1045695 77.1045695,28 76,28 L2,28 C0.8954305,28 1.3527075e-16,27.1045695 0,26 L0,18 C-1.3527075e-16,16.8954305 0.8954305,16 2,16 Z" id="Rectangle-8" fill="#595B5C"></path>
+                        <path d="M2,0 L76,0 C77.1045695,-2.02906125e-16 78,0.8954305 78,2 L78,10 C78,11.1045695 77.1045695,12 76,12 L2,12 C0.8954305,12 1.3527075e-16,11.1045695 0,10 L0,2 C-1.3527075e-16,0.8954305 0.8954305,2.02906125e-16 2,0 Z" id="Rectangle-8" fill="#595B5C"></path>
+                        <circle id="Oval-6" fill="#34E27A" cx="62" cy="6" r="2"></circle>
+                        <circle id="Oval-6" fill="#000000" cx="62" cy="22" r="2"></circle>
+                        <circle id="Oval-6" fill="#000000" cx="62" cy="38" r="2"></circle>
+                        <circle id="Oval-6" fill="#000000" cx="62" cy="54" r="2"></circle>
+                    </g>
+                    <g id="YubiKey" transform="translate(188.000000, 89.000000)" fill-rule="nonzero">
+                        <rect id="Rectangle-6" fill="#595B5C" x="0" y="0" width="85.8" height="45.1" rx="2"></rect>
+                        <path d="M88,8.8 L108,8.8 C109.104569,8.8 110,9.6954305 110,10.8 L110,34.3 C110,35.4045695 109.104569,36.3 108,36.3 L88,36.3 L88,8.8 Z" id="Rectangle-5" fill="#595B5C"></path>
+                        <path d="M88.55,15.95 L106.15,15.95" id="Line-2" stroke="#000000" stroke-linecap="square"></path>
+                        <path d="M88.55,29.15 L106.15,29.15" id="Line-2" stroke="#000000" stroke-linecap="square"></path>
+                        <path d="M88.3558824,20.35 L99.7441176,20.35" id="Line-2" stroke="#000000" stroke-linecap="square"></path>
+                        <path d="M88.3558824,24.75 L99.7441176,24.75" id="Line-2" stroke="#000000" stroke-linecap="square"></path>
+                        <circle id="Oval-4" stroke="#34E27A" cx="42.9" cy="23.1" r="14.3"></circle>
+                    </g>
+                    <g id="Rectangle-11-+-Rectangle-16-Mask" transform="translate(353.000000, 384.000000)">
+                        <mask id="mask-6" fill="white">
+                            <use xlink:href="#path-5"></use>
+                        </mask>
+                        <use id="Mask" fill="#595B5C" fill-rule="nonzero" xlink:href="#path-5"></use>
+                        <rect id="Rectangle-11" fill="#2F3132" fill-rule="nonzero" mask="url(#mask-6)" x="31" y="18" width="28" height="34" rx="14"></rect>
+                        <rect id="Rectangle-16" fill="#2F3132" fill-rule="nonzero" mask="url(#mask-6)" x="11" y="57" width="68" height="70" rx="34"></rect>
+                    </g>
+                    <path d="M397.5,350.5 L397.5,373.5" id="Line-8" stroke="#FFFFFF" stroke-linecap="square" fill-rule="nonzero"></path>
+                    <text id="The-user-may-be-requ" opacity="0.5" font-family="Helvetica" font-size="12" font-weight="normal" line-spacing="20" fill="#FFFFFF">
+                        <tspan x="64" y="458">The user may be required to </tspan>
+                        <tspan x="64" y="478">interact with the authenticator </tspan>
+                        <tspan x="64" y="498">to authorize operations</tspan>
+                    </text>
+                    <path d="M324.930601,267.785134 L327.840977,272.441736 C327.987332,272.675905 327.916146,272.98438 327.681978,273.130735 C327.602512,273.180401 327.510688,273.206736 327.416978,273.206736 L321.596226,273.206736 C321.320083,273.206736 321.096226,272.982878 321.096226,272.706736 C321.096226,272.613026 321.12256,272.521202 321.172227,272.441736 L324.082603,267.785134 C324.228958,267.550966 324.537433,267.47978 324.771601,267.626135 C324.835986,267.666375 324.890361,267.72075 324.930601,267.785134 Z" id="Rectangle-19" fill="#FFFFFF" fill-rule="nonzero" transform="translate(324.506669, 270.600067) rotate(-270.000000) translate(-324.506669, -270.600067) "></path>
+                    <path d="M397.923865,370.791736 L400.896741,375.548338 C401.043097,375.782506 400.97191,376.090982 400.737742,376.237337 C400.658276,376.287003 400.566452,376.313338 400.472742,376.313338 L394.52699,376.313338 C394.250848,376.313338 394.02699,376.08948 394.02699,375.813338 C394.02699,375.719628 394.053325,375.627804 394.102991,375.548338 L397.075867,370.791736 C397.222222,370.557568 397.530697,370.486381 397.764866,370.632737 C397.82925,370.672977 397.883625,370.727352 397.923865,370.791736 Z" id="Rectangle-19" fill="#FFFFFF" fill-rule="nonzero" transform="translate(397.499933, 373.656669) rotate(-180.000000) translate(-397.499933, -373.656669) "></path>
+                    <path d="M397.923865,349.678399 L400.771741,354.235001 C400.918097,354.469169 400.84691,354.777644 400.612742,354.923999 C400.533276,354.973665 400.441452,355 400.347742,355 L394.65199,355 C394.375848,355 394.15199,354.776142 394.15199,354.5 C394.15199,354.40629 394.178325,354.314466 394.227991,354.235001 L397.075867,349.678399 C397.222222,349.44423 397.530697,349.373044 397.764866,349.519399 C397.82925,349.559639 397.883625,349.614014 397.923865,349.678399 Z" id="Rectangle-19" fill="#FFFFFF" fill-rule="nonzero" transform="translate(397.499933, 352.443331) scale(1, -1) rotate(-180.000000) translate(-397.499933, -352.443331) "></path>
+                    <path d="M326.030601,425.785134 L328.940977,430.441736 C329.087332,430.675905 329.016146,430.98438 328.781978,431.130735 C328.702512,431.180401 328.610688,431.206736 328.516978,431.206736 L322.696226,431.206736 C322.420083,431.206736 322.196226,430.982878 322.196226,430.706736 C322.196226,430.613026 322.22256,430.521202 322.272227,430.441736 L325.182603,425.785134 C325.328958,425.550966 325.637433,425.47978 325.871601,425.626135 C325.935986,425.666375 325.990361,425.72075 326.030601,425.785134 Z" id="Rectangle-19" fill="#FFFFFF" fill-rule="nonzero" transform="translate(325.606669, 428.600067) rotate(-270.000000) translate(-325.606669, -428.600067) "></path>
+                    <path d="M228.642111,195.13976 L228.642111,408.70998 C228.642111,419.755675 237.596416,428.70998 248.642111,428.70998 L323.170747,428.70998" id="Path-3" stroke="#FFFFFF" stroke-dasharray="3" fill-rule="nonzero"></path>
+                    <path d="M256.642111,195.13976 L256.642111,250.70998 C256.642111,261.755675 265.596416,270.70998 276.642111,270.70998 L323.170747,270.70998" id="Path-3" stroke="#FFFFFF" fill-rule="nonzero"></path>
+                    <path d="M469.678399,271.023999 C469.614014,270.983759 469.559639,270.929384 469.519399,270.864999 C469.373044,270.630831 469.44423,270.322356 469.678399,270.176001 L474.335001,267.265625 C474.414466,267.215959 474.50629,267.189624 474.6,267.189624 C474.876142,267.189624 475.1,267.413481 475.1,267.689624 L475.1,273.510376 C475.1,273.604086 475.073665,273.69591 475.023999,273.775376 C474.877644,274.009544 474.569169,274.08073 474.335001,273.934375 L469.678399,271.023999 Z" id="Rectangle-19" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    <path d="M469.642111,195.13976 L469.642111,250.70998 C469.642111,261.755675 478.596416,270.70998 489.642111,270.70998 L536.170747,270.70998" id="Path-3" stroke="#FFFFFF" fill-rule="nonzero" transform="translate(502.906429, 232.924870) scale(-1, 1) translate(-502.906429, -232.924870) "></path>
+                    <path d="M536.771875,195.235067 L539.619752,199.791669 C539.766107,200.025838 539.69492,200.334313 539.460752,200.480668 C539.381286,200.530334 539.289462,200.556669 539.195752,200.556669 L533.5,200.556669 C533.223858,200.556669 533,200.332811 533,200.056669 C533,199.962959 533.026335,199.871135 533.076001,199.791669 L535.923877,195.235067 C536.070232,195.000899 536.378707,194.929713 536.612876,195.076068 C536.67726,195.116308 536.731635,195.170683 536.771875,195.235067 Z" id="Rectangle-19" fill="#FFFFFF" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

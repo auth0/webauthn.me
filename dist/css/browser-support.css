@@ -1,0 +1,135 @@
+.table {
+  position: relative;
+}
+.table::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background: linear-gradient(to left, #000, rgba(0, 0, 0, 0));
+}
+.table-scroll-wrap {
+  overflow-y: scroll;
+}
+table {
+  margin: 0 0 2rem;
+  width: 100%;
+  border: 1px solid #494848;
+  border-collapse: collapse;
+}
+th {
+  padding: 1rem;
+  background: #494848;
+  border-right: 1px solid #000000;
+  color: #fff;
+}
+th:last-child {
+  border-right: 1px solid #494848;
+}
+td {
+  padding: 1rem;
+  width: 12.5%;
+  border: 1px solid #494848;
+}
+td:first-child {
+  width: 25%;
+  font-weight: bold;
+}
+td.y {
+  background: #df6dff;
+  color: #fff;
+}
+.small {
+  display: block;
+  font-size: 12px;
+  font-style: italic;
+}
+a {
+  color: #d43aff;
+}
+.banner {
+  width: 100%;
+  border: 1px solid #2f3132;
+  border-radius: 3px;
+  margin: 20px 0 30px;
+  box-sizing: border-box;
+}
+.browser-test {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
+.browser-test > div {
+  box-sizing: border-box;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #2f3132;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.browser-test > div:last-child {
+  border: 0;
+}
+.browser-test p {
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  line-height: 1.2;
+}
+.browser-test p img {
+  height: 20px;
+  margin: 0 0 0 12px;
+  opacity: 1;
+}
+.browser-test img {
+  height: 50px;
+  opacity: 0.7;
+  margin: 12px;
+}
+.browser-test img.supported {
+  display: none;
+}
+.browser-test img.not-supported {
+  display: inline-block;
+}
+.browser-test .supported .supported {
+  display: inline-block;
+}
+.browser-test .supported .not-supported {
+  display: none;
+}
+.browser {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #2f3132;
+  text-align: center;
+}
+.browser strong {
+  border-bottom: 1px dotted #9b9b9b;
+  text-transform: capitalize;
+}
+@media (min-width: 680px) {
+  .table {
+    position: static;
+  }
+  .table::after {
+    display: none;
+  }
+  .browser-test {
+    flex-direction: row;
+  }
+  .browser-test > div {
+    width: 50%;
+    border-width: 0 1px 0 0;
+  }
+}

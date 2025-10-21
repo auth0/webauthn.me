@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Lock-and-Feeling" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI_Tutorial-Step-byt-Step" transform="translate(-680.000000, -8703.000000)" fill-rule="nonzero">
+            <g id="Logo" transform="translate(720.000000, 8743.000000) scale(-1, 1) translate(-720.000000, -8743.000000) translate(680.000000, 8703.000000)">
+                <path d="M16.1118881,16.1118881 L16.1118881,47.8881119 L47.8881119,47.8881119 L47.8881119,16.1118881 L16.1118881,16.1118881 Z M0,0 L64,0 L64,64 L0,64 L0,0 Z" id="Rectangle-13" fill="#D43AFF"></path>
+                <polygon id="Rectangle-12" fill="#F9015B" points="40 80 40 40 80 40 80 80"></polygon>
+                <polygon id="Line" fill="#00F0E4" points="65 53.6852566 53.8679618 65 26 37.3147434 37.1320382 26"></polygon>
+                <circle id="Oval" fill="#000000" cx="60" cy="60" r="8"></circle>
+                <circle id="Oval" fill="#FFFFFF" cx="32" cy="32" r="8"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>An introduction to WebAuthn</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="auth0.com">
+    <meta name="description" content="Learn more about the WebAuthn spec, that enables public key-based credentials in the browser for securely authenticating users using hardware authenticators.">
+    <meta property="og:title" content="An introduction to WebAuthn">
+    <meta property="og:site_name" content="An introduction to WebAuthn">
+    <meta property="og:url" content="https://webauthn.me/introduction">
+    <meta property="og:image" content="https://cdn.auth0.com/blog/webauthn:card.png">
+    <meta property="og:description" content="Learn more about the WebAuthn spec, that enables public key-based credentials in the browser for securely authenticating users using hardware authenticators.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:site" content="@auth0">
+    <meta name="twitter:creator" content="@auth0">
+    <meta name="twitter:title" content="An introduction to WebAuthn">
+    <meta name="twitter:url" content="https://webauthn.me/introduction">
+    <meta name="twitter:description" content="Learn more about the WebAuthn spec, that enables public key-based credentials in the browser for securely authenticating users using hardware authenticators.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://cdn.auth0.com/blog/webauthn:card.png">
+    <meta name="twitter:image:height" content="512">
+    <meta name="twitter:image:width" content="1024">
+    <link rel="canonical" href="https://webauthn.me">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common.css" type="text/css" media="all">
+    <link rel="shortcut icon" href="https://cdn.auth0.com/website/webauthn/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/css/introduction.css" type="text/css" media="all">
+    <link rel="prefetch" href="/introduction.html">
+    <!-- OneTrustScripts-->
+    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="3cdc400f-b58d-4d3b-83fd-9f22770403da" id="consent-script"></script>
+    <script src="js/ccpa-modal.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <!-- Adobe Analytics script-->
+    <script src="https://assets.adobedtm.com/6bb3f7663515/fea558f43eb7/launch-be034d63605e.min.js" type="text/javascript" charset="UTF-8" id="adobe-analytics-script"></script>
+    <script type="application/ld+json">
+      [{
+          "@context": "http://schema.org",
+          "@type": "WebPage",
+          "name": "Web Authentication (WebAuthn) Credential and Login Demo",
+          "description": "Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.",
+          "url": "https://webauthn.me/",
+          "image": "https://webauthn.me/img/webauthn-logo.svg",
+          "publisher": {
+              "@type": "Organization",
+              "name": "Auth0",
+              "legalName": "Auth0 Inc.",
+              "url": "https://auth0.com/",
+              "logo": "https://cdn.auth0.com/website/assets/pages/press/img/resources/auth0-logo-main-6001cece68.svg",
+              "foundingDate": "2013",
+              "sameAs": [
+                  "https://twitter.com/auth0",
+                  "https://www.facebook.com/getauth0/",
+                  "https://www.linkedin.com/company/auth0"
+              ]
+          }
+        }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "WebAuthn debugger",
+              "item": "https://webauthn.me/debugger",
+              "description": "Quickly change a WebAuthn configuration parameter, and see the change take effect in our handy debugger."
+          }]
+      }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "Introduction",
+              "item": "https://webauthn.me/introduction",
+              "description": "Learn more about the WebAuthn spec, that enables public key-based credentials in the browser for securely authenticating users using hardware authenticators."
+          }]
+      }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "Introduction",
+              "item": "https://webauthn.me/browser-support",
+              "description": "An overview of all modern browser and their support for platform and roaming authenticators, using WebAuthn."
+          }]
+      }]
+    </script>
+    <meta name="google-site-verification" content="8PENs1ni2zY2-JstEN8PRrMO3N76CRf2r1yP1qMf14M">
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJZ8DTR2" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript)-->
+    <header class="header">
+      <div class="header-container">
+        <div class="header-left">
+          <div class="header-crafted-by-container"><a href="https://auth0.com/developers/"><span>Crafted by</span><img src="/img/auth0-logo.svg" alt="Auth0 Logo"></a></div>
+        </div>
+        <div class="header-right">
+          <div class="header-nav-item"><a href="/">Tutorial</a></div>
+          <div class="header-nav-item active"><a href="/introduction">Info</a></div>
+          <div class="header-nav-item"><a href="/debugger">debugger</a></div>
+          <div class="header-nav-item"><a href="/passkeys">passkeys</a></div>
+        </div>
+      </div>
+    </header>
+    <div class="introduction-container"><h2>Web Authentication</h2>
+<p><a href="https://auth0.com/docs/secure/multi-factor-authentication/fido-authentication-with-webauthn">Web Authentication</a>, or WebAuthn for short, is a <a href="https://www.w3.org/TR/webauthn-2/">W3C recommendation</a> for defining an API enabling the <strong>creation</strong> and <strong>use</strong> of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users.</p>
+<p>WebAuthn works hand in hand with other industry standards such as <a href="https://www.w3.org/TR/credential-management-1/">Credential Management Level 1</a> and <a href="https://fidoalliance.org/specs/fido-v2.0-id-20180227/fido-client-to-authenticator-protocol-v2.0-id-20180227.html">FIDO 2.0 Client to Authenticator Protocol 2</a>.</p>
+<div class="banner">
+  Auth0 allows you to quickly setup Multi-Factor Authentication with WebAuthn.
+  <a href="https://auth0.com/docs/mfa/fido-authentication-with-webauthn">Read more in our documentation.</a>
+</div>
+<h2>How It Works</h2>
+<p>WebAuthn has three main entities: the authenticator, the client and the relying party and they work together in two separate use cases: <strong>registration</strong> and <strong>authentication</strong>. All communications between the different entities in the diagram are handled by the user agent (usually a <a href="/browser-support">web browser</a>).</p>
+<figure class="image">
+  <img src="img/1-Web-Authentication-Entities.svg" alt="Web Authentication Entities">
+</figure>
+<p>Registration makes the authenticator create a new set of public-key credentials that can be used to sign a challenge generated by the relying party. The public part of these new credentials, along with the signed challenge, can be sent back to the relying party for storage. The relying party can later use these credentials to verify the identity of a user whenever required.</p>
+<figure class="image">
+  <img src="img/2-Registration.svg" alt="Registration">
+</figure>
+<p>Authentication, in contrast, allows the relying party to send a challenge to the authenticator. This challenge can then be signed with the previously generated public-key credentials and sent back to the relying party. This way, the relying party can verify that a user is in possession of the required credentials, proving their identity.</p>
+<p>There are two types of authenticators. <a href="https://auth0.com/docs/mfa/configure-webauthn-security-keys-for-mfa">Roaming authenticators</a> connect to your devices through USB, Bluetooth or NFC, and <a href="https://auth0.com/docs/mfa/configure-webauthn-device-biometrics-for-mfa">platform authenticators</a> are built in.</p>
+<p>While roaming authenticators are widely supported in most modern browsers, platform authenticators support is running a bit behind. <a href="/browser-support">Find out if your current browser supports roaming and platform authenticators</a>.</p>
+<figure class="image">
+  <img src="img/3-Login.svg" alt="Authentication">
+</figure>
+<p>Both processes work with the help of public-key cryptography and digital signatures. If you are not familiar with how public-key cryptography or digital signatures work, the important thing you need to know is that there is a <strong>public key</strong> and a <strong>private key</strong>.</p>
+<p>The private key is secret, and only the user (or the authenticator) need to know it. The public key, in contrast, can be seen or stored by anyone. The public key can be used to verify signatures generated by the private key. No other key, other than the private key, can generate a signature that the public key can verify as valid. This way, the relying party can store a public key and use it to verify signatures performed by the user holding the private key.</p>
+<h2>The API</h2>
+<p>The Web Authentication API has two main calls: <code>navigator.credentials.create</code>, and <code>navigator.credentials.get</code>.</p>
+<p><code>create</code> can be used to perform the registration step. <code>get</code> can be used to perform the authentication step.</p>
+<p>Here is a sample call of the <code>create</code> function inside an EJS template:</p>
+<pre><code class="language-javascript">navigator.credentials
+  .create({
+    publicKey: {
+      // random, cryptographically secure, at least 16 bytes
+      challenge: base64url.decode(&quot;&lt;%= challenge %&gt;&quot;),
+      // relying party
+      rp: {
+        name: &quot;Awesome Corp&quot;, // sample relying party
+      },
+      user: {
+        id: base64url.decode(&quot;&lt;%= id %&gt;&quot;),
+        name: &quot;&lt;%= name %&gt;&quot;,
+        displayName: &quot;&lt;%= displayName %&gt;&quot;,
+      },
+      authenticatorSelection: { userVerification: &quot;preferred&quot; },
+      attestation: &quot;direct&quot;,
+      pubKeyCredParams: [
+        {
+          type: &quot;public-key&quot;,
+          alg: -7, // &quot;ES256&quot; IANA COSE Algorithms registry
+        },
+      ],
+    },
+  })
+  .then((res) =&gt; {
+    var json = publicKeyCredentialToJSON(res);
+    // Send data to relying party's servers
+    post(&quot;/webauthn/register&quot;, {
+      state: &quot;&lt;%= state %&gt;&quot;,
+      provider: &quot;&lt;%= provider %&gt;&quot;,
+      res: JSON.stringify(json),
+    });
+  })
+  .catch(console.error);
+</code></pre>
+<p>Here is a sample call of the <code>get</code> function in an EJS template:</p>
+<pre><code class="language-javascript">navigator.credentials
+  .get({
+    publicKey: {
+      // random, cryptographically secure, at least 16 bytes
+      challenge: base64url.decode(&quot;&lt;%= challenge %&gt;&quot;),
+      allowCredentials: [
+        {
+          id: base64url.decode(&quot;&lt;%= id %&gt;&quot;),
+          type: &quot;public-key&quot;,
+        },
+      ],
+      timeout: 15000,
+      authenticatorSelection: { userVerification: &quot;preferred&quot; },
+    },
+  })
+  .then((res) =&gt; {
+    var json = publicKeyCredentialToJSON(res);
+    // Send data to relying party's servers
+    post(&quot;/webauthn/authenticate&quot;, {
+      state: &quot;&lt;%= state %&gt;&quot;,
+      provider: &quot;&lt;%= provider %&gt;&quot;,
+      res: JSON.stringify(json),
+    });
+  })
+  .catch((err) =&gt; {
+    alert(&quot;Invalid FIDO device&quot;);
+  });
+</code></pre>
+<h2>Glossary</h2>
+<ul>
+<li><strong>Assertion</strong>: a signed statement returned by the authenticator carrying data sent by the relying party and the client.</li>
+<li><strong>Attestation</strong>: an operation that conveys the provenance of an authenticator and the data it emits. This operation can also be used to create new credentials.</li>
+<li><strong>Authentication</strong>: the ceremony where a user, and the user’s computing device(s) (containing at least one authenticator) work in concert to cryptographically prove to a Relying Party that the user controls the credential private key associated with a previously-registered public key credential. Note that this includes a test of user presence or user verification.</li>
+<li><strong>Authenticator</strong>: a hardware or software device that receives requests from the client to either perform an attestation operation or an assertion operation. It generates public key credentials and associates them with a single user and relying party.</li>
+<li><strong>Authorization Gesture</strong>: An authorization gesture is a physical interaction performed by a user with an authenticator as part of a ceremony, such as registration or authentication. By making such an authorization gesture, a user provides consent for (i.e., authorizes) a ceremony to proceed. This may involve user verification if the employed authenticator is capable, or it may involve a simple test of user presence.</li>
+<li><strong>Ceremony</strong>: a group of operations performed in a certain way by a group of entities according to protocols and procedures. These entities can include humans performing actions.</li>
+<li><strong>Client</strong>: an entity that represents the collaboration between the user, the user agent, and the platform.</li>
+<li><strong>Credential ID</strong>: A probabilistically-unique byte sequence identifying a public key credential source and its authentication assertions. It may contain encrypted data only readable by the authenticator that created it.</li>
+<li><strong>Registration</strong>: The ceremony where a user, a Relying Party, and the user’s computing device(s) (containing at least one authenticator) work in concert to create a public key credential and associate it with the user’s Relying Party account. Note that this includes employing a test of user presence or user verification.</li>
+<li><strong>Relying Party</strong>: the entity that makes use of Web Authentication to authenticate a user (for example: Auth0, Facebook, Google).</li>
+</ul>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-javascript.min.js"></script>
+    <div class="footer-container">
+      <div class="footer-browser-status-container">
+        <div class="footer-browser-status-text-container">
+          <div class="footer-browser-status-text-title"><img src="/img/question-circle.svg" alt="question icon">
+            <h4>Browser Status</h4>
+          </div>
+          <p>Web Authentication is (partially) supported in most modern browsers.</p><a class="button-dark" href="/browser-support" style="margin-top: 1rem; text-align: center;">Test your browser</a>
+        </div>
+        <div class="footer-browser-icons-container">
+              <div class="footer-browser-status"><img src="/img/firefox-logo.png" alt="browser logo"><span>Firefox</span></div>
+              <div class="footer-browser-status"><img src="/img/chrome-logo.png" alt="browser logo"><span>Chrome</span></div>
+              <div class="footer-browser-status"><img src="/img/edge-logo.png" alt="browser logo"><span>Edge</span></div>
+        </div>
+      </div>
+      <div class="footer-banner"><img class="footer-banner-logo" src="/img/auth0-logo.svg" alt="Auth0 logo">
+        <p class="footer-banner-text">With Auth0 you can easily add WebAuthn as a second factor<br/> to add an extra layer of security for your users.</p>
+        <div class="footer-banner-buttons"><a class="button-orange" href="https://auth0.com/signup/?utm_source=webauthn.me&amp;utm_medium=microsites&amp;utm_campaign=devn_signup" target="_blank" rel="noreferrer noopener">Try Auth0 for free</a></div>
+      </div>
+      <div class="footer-branding-container">
+        <div class="footer-branding-container-inner"> 
+          <div class="footer-branding-left"><a class="footer-crafted-by-container" href="https://auth0.com/developers/"><span>Crafted by</span><img class="footer-branded-crafted-img" src="/img/auth0-logo.svg" alt="auth0 logo"></a>
+            <div class="footer-privacy-container"><a class="footer-privacy-link" href="https://auth0.com/privacy/" target="_blank">Privacy</a><span class="footer-privacy-separator">•</span><a class="footer-privacy-link" href="https://auth0.com/web-terms" target="_blank">Terms of Service</a><span class="footer-privacy-separator">•</span>
+              <button class="as-anchor" id="open-ccpa">Your Privacy Choices </button><img class="ccpa-toggle" src="https://cdn.auth0.com/website/footer/ccpa.svg" alt="Privacy choices">
+            </div>
+            <div id="ccpa-modal">
+              <button id="close-ccpa">x</button>
+              <h3 class="title">Your Privacy Choices</h3>
+              <p class="paragraph">Depending on your state of residence, including if you are a California resident, you have the right to opt out of certain sharing of personal information with third-party ad partners. We may share personal information with third-party ad partners, such as through cookies or by providing lists of email addresses for potential customers, so that we can reach them across the web with relevant ads.</p>
+              <p class="paragraph">If you wish to opt out of this sharing of your personal data in connection with cookies, please update your 
+                <button class="settings" onClick="window.OneTrust.ToggleInfoDisplay()">cookie settings.</button>
+              </p>
+              <p class="paragraph">If you wish to opt out of email-based sharing, provide your email address at <a class="settings" href="https://www.okta.com/your-privacy-choices/" target="_blank">this link.</a></p>
+            </div><span class="footer-copyright">© 2025 Okta, Inc. All Rights Reserved.</span>
+          </div><img src="/img/webauthn-logo-no-text.svg" alt="webauthn logo">
+          <div class="footer-branding-right"><span>Spread the word</span><a class="footer-branding-twitter" href="https://twitter.com/home?status=Check%20out%20https%3A//webauthn.me%20and%20learn%20what%20Web%20Authentication%20is%20all%20about!" target="_blank"><img src="/img/twitter-logo.svg" alt="twitter logo"></a><a class="footer-branding-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//webauthn.me" target="_blank"><img src="/img/facebook-logo.svg" alt="facebook logo"></a></div>
+        </div>
+        <div class="footer-github">
+          <p>Found a bug? </p><a href="https://github.com/auth0/webauthn.me/pulls" target="_blank">Send a Pull Request!</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      function topBanner() {
+        event.preventDefault();
+        document.querySelector(".top-banner").classList.add('closed');
+        document.querySelector(".top-banner-spacer").classList.add('hide');
+        document.querySelector(".header").classList.remove("top-banner-open");
+      }
+    </script>
+  </body>
+</html>

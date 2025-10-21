@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WebAuthn and Passkeys</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="auth0.com">
+    <meta name="description" content="Learn about how WebAuthn enables the implementation of passkeys, discoverable FIDO credentials that allows secure user authentication without the risk of phishing.">
+    <meta property="og:title" content="WebAuthn and Passkeys">
+    <meta property="og:site_name" content="WebAuthn and Passkeys">
+    <meta property="og:url" content="https://webauthn.me/passkeys">
+    <meta property="og:image" content="https://cdn.auth0.com/blog/webauthn:card.png">
+    <meta property="og:description" content="Learn about how WebAuthn enables the implementation of passkeys, discoverable FIDO credentials that allows secure user authentication without the risk of phishing.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:site" content="@auth0">
+    <meta name="twitter:creator" content="@auth0">
+    <meta name="twitter:title" content="WebAuthn and Passkeys">
+    <meta name="twitter:url" content="https://webauthn.me/passkeys">
+    <meta name="twitter:description" content="Learn about how WebAuthn enables the implementation of passkeys, discoverable FIDO credentials that allows secure user authentication without the risk of phishing.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://cdn.auth0.com/blog/webauthn:card.png">
+    <meta name="twitter:image:height" content="512">
+    <meta name="twitter:image:width" content="1024">
+    <link rel="canonical" href="https://webauthn.me">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common.css" type="text/css" media="all">
+    <link rel="shortcut icon" href="https://cdn.auth0.com/website/webauthn/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/css/passkeys.css" type="text/css" media="all">
+    <link rel="prefetch" href="/introduction.html">
+    <!-- OneTrustScripts-->
+    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="3cdc400f-b58d-4d3b-83fd-9f22770403da" id="consent-script"></script>
+    <script src="js/ccpa-modal.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <!-- Adobe Analytics script-->
+    <script src="https://assets.adobedtm.com/6bb3f7663515/fea558f43eb7/launch-be034d63605e.min.js" type="text/javascript" charset="UTF-8" id="adobe-analytics-script"></script>
+    <script type="application/ld+json">
+      [{
+          "@context": "http://schema.org",
+          "@type": "WebPage",
+          "name": "Web Authentication (WebAuthn) Credential and Login Demo",
+          "description": "Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.",
+          "url": "https://webauthn.me/",
+          "image": "https://webauthn.me/img/webauthn-logo.svg",
+          "publisher": {
+              "@type": "Organization",
+              "name": "Auth0",
+              "legalName": "Auth0 Inc.",
+              "url": "https://auth0.com/",
+              "logo": "https://cdn.auth0.com/website/assets/pages/press/img/resources/auth0-logo-main-6001cece68.svg",
+              "foundingDate": "2013",
+              "sameAs": [
+                  "https://twitter.com/auth0",
+                  "https://www.facebook.com/getauth0/",
+                  "https://www.linkedin.com/company/auth0"
+              ]
+          }
+        }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "WebAuthn debugger",
+              "item": "https://webauthn.me/debugger",
+              "description": "Quickly change a WebAuthn configuration parameter, and see the change take effect in our handy debugger."
+          }]
+      }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "Introduction",
+              "item": "https://webauthn.me/introduction",
+              "description": "Learn more about the WebAuthn spec, that enables public key-based credentials in the browser for securely authenticating users using hardware authenticators."
+          }]
+      }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "Introduction",
+              "item": "https://webauthn.me/browser-support",
+              "description": "An overview of all modern browser and their support for platform and roaming authenticators, using WebAuthn."
+          }]
+      }]
+    </script>
+    <meta name="google-site-verification" content="8PENs1ni2zY2-JstEN8PRrMO3N76CRf2r1yP1qMf14M">
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJZ8DTR2" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript)-->
+    <header class="header">
+      <div class="header-container">
+        <div class="header-left">
+          <div class="header-crafted-by-container"><a href="https://auth0.com/developers/"><span>Crafted by</span><img src="/img/auth0-logo.svg" alt="Auth0 Logo"></a></div>
+        </div>
+        <div class="header-right">
+          <div class="header-nav-item"><a href="/">Tutorial</a></div>
+          <div class="header-nav-item"><a href="/introduction">Info</a></div>
+          <div class="header-nav-item"><a href="/debugger">debugger</a></div>
+          <div class="header-nav-item active"><a href="/passkeys">passkeys</a></div>
+        </div>
+      </div>
+    </header>
+    <div class="content-container"><h2>Web Authentication and Passkeys</h2>
+<p>Passkeys are gaining popularity as a phishing-resistant passwordless approach to user authentication. When discussing the technical aspects of passkey implementation, WebAuthn is often mentioned. In this document, you will learn about the relationship between passkeys and WebAuthn, and will discover that WebAuthn is a piece in the puzzle of the infrastructure that makes passkeys work.</p>
+<h3>What is a passkey?</h3>
+<p>According to the <a href="https://fidoalliance.org/">FIDO Alliance</a>, passkeys are a password replacement that provide a faster, easier, and more secure user login experience. User authentication based on passkeys is immune to phishing risks because passkeys don't rely on a shared secret as it happens with passwords.</p>
+<p>Passkeys use the same infrastructure as WebAuthn and involve the same entities — user, user agent, authenticator, and relying party — as shown in the following diagram:</p>
+<figure class="image">
+  <img src="img/1-Web-Authentication-Entities.svg" alt="Web Authentication Entities">
+</figure>
+<p>Technically, <strong>a passkey is a discoverable FIDO credential that is tied to a user account and a website or application</strong>. Let's break this definition down:</p>
+<ul>
+<li>As a <strong>FIDO credential</strong>, a passkey is a key pair that uses standard public key cryptography to prove a user's identity without sharing any secrets. This is the same approach used in <a href="https://webauthn.me/introduction">the WebAuthn authentication flow</a>.</li>
+<li>A passkey is <strong>bound to both a user account and a website or application</strong>. This means that when a new passkey is created, it is automatically associated with the user ID and the Relying Party ID — typically its domain, in the case of a website.</li>
+<li>Passkeys are <strong>discoverable</strong>. This means that they can be automatically detected and used by clients to perform user authentication. When the user initiates the authentication process, the authenticator doesn't need to know the user's ID. It uses the relying party ID to find the correct passkey to authenticate against that website. This frees the user from having to enter their user ID and ensures that a bad actor can't trick them into signing in to a fake website.</li>
+</ul>
+<h3>Types of passkeys</h3>
+<p>There are two types of passkeys: device-bound passkeys and synced passkeys. Let's go over the differences and their respective advantages and drawbacks.</p>
+<h4>Device-bound passkeys</h4>
+<p><strong>Device-bound passkeys</strong> are also known as <em>single-device passkeys</em>. They are bound to the specific device on which they were created. This means that the private key can't leave that device, i.e., you can't copy it.</p>
+<p>Typically, device-bound passkeys are stored on security keys, which guarantee that private keys can't be exported from the device.</p>
+<p>The device-binding constraint makes this type of passkey a high-assurance possession factor. In other words, if you prove that you have this passkey, you also prove that you possess the security key.</p>
+<p>Of course, there is a downside: if you lose the device, you also lose access to the passkey stored on it.</p>
+<h4>Synced passkeys</h4>
+<p><strong>Synced passkeys</strong>, also known as <em>multi-device passkeys</em>, are not tied to a single device. They can be shared across devices and synchronized to a user's cloud account. For example, if you create a passkey on your Mac, you can sync it with your Apple ID in iCloud Keychain. Then, you can share your passkey with all your devices that are bound to your Apple ID, that is, all your Macs, iPhones, iPads, etc.</p>
+<p>This simplifies the user experience because you don't have to create a different passkey for each device, and you have a backup in the cloud in case you lose one of your devices.</p>
+<p>Note that the passkey stored in the cloud is end-to-end encrypted, so only you can access it.</p>
+<h3>How is WebAuthn involved in passkeys?</h3>
+<p>Passkeys are a new type of credentials that allow users to prove their identity without sharing secrets and without the risk of phishing. The implementation of passkeys relies on a set of standard specifications known as <a href="https://fidoalliance.org/fido2/">FIDO 2</a>. WebAuthn is one of the FIDO 2 specifications that enables passkey support in browsers.</p>
+<p>Basically, WebAuthn provides applications with a JavaScript interface to create and manage passkeys for user authentication. Thanks to WebAuthn, the browser mediates access to authenticators where the user's passkeys are stored. If the authenticator is external, i.e. it's not the device the browser is running on, the other important FIDO 2 specification is involved to securely set up the communication: <a href="https://fidoalliance.org/specs/fido-v2.2-rd-20230321/fido-client-to-authenticator-protocol-v2.2-rd-20230321.html">Client to Authenticator Protocols 2 (CTAP2)</a>. The synergy of WebAuthn and CTAP2 allows you to perform what is called Cross-Device Authentication (CDA).</p>
+<h3>The difference between WebAuthn and passkeys</h3>
+<p>The key difference between passkeys and WebAuthn is that passkeys are credentials that authenticate users securely and without phishing risks, while WebAuthn is a specification that allows developers to implement passkey support in their web applications.</p>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-javascript.min.js"></script>
+    <div class="footer-container">
+      <div class="footer-browser-status-container">
+        <div class="footer-browser-status-text-container">
+          <div class="footer-browser-status-text-title"><img src="/img/question-circle.svg" alt="question icon">
+            <h4>Browser Status</h4>
+          </div>
+          <p>Web Authentication is (partially) supported in most modern browsers.</p><a class="button-dark" href="/browser-support" style="margin-top: 1rem; text-align: center;">Test your browser</a>
+        </div>
+        <div class="footer-browser-icons-container">
+              <div class="footer-browser-status"><img src="/img/firefox-logo.png" alt="browser logo"><span>Firefox</span></div>
+              <div class="footer-browser-status"><img src="/img/chrome-logo.png" alt="browser logo"><span>Chrome</span></div>
+              <div class="footer-browser-status"><img src="/img/edge-logo.png" alt="browser logo"><span>Edge</span></div>
+        </div>
+      </div>
+      <div class="footer-banner"><img class="footer-banner-logo" src="/img/auth0-logo.svg" alt="Auth0 logo">
+        <p class="footer-banner-text">With Auth0 you can easily add WebAuthn as a second factor<br/> to add an extra layer of security for your users.</p>
+        <div class="footer-banner-buttons"><a class="button-orange" href="https://auth0.com/signup/?utm_source=webauthn.me&amp;utm_medium=microsites&amp;utm_campaign=devn_signup" target="_blank" rel="noreferrer noopener">Try Auth0 for free</a></div>
+      </div>
+      <div class="footer-branding-container">
+        <div class="footer-branding-container-inner"> 
+          <div class="footer-branding-left"><a class="footer-crafted-by-container" href="https://auth0.com/developers/"><span>Crafted by</span><img class="footer-branded-crafted-img" src="/img/auth0-logo.svg" alt="auth0 logo"></a>
+            <div class="footer-privacy-container"><a class="footer-privacy-link" href="https://auth0.com/privacy/" target="_blank">Privacy</a><span class="footer-privacy-separator">•</span><a class="footer-privacy-link" href="https://auth0.com/web-terms" target="_blank">Terms of Service</a><span class="footer-privacy-separator">•</span>
+              <button class="as-anchor" id="open-ccpa">Your Privacy Choices </button><img class="ccpa-toggle" src="https://cdn.auth0.com/website/footer/ccpa.svg" alt="Privacy choices">
+            </div>
+            <div id="ccpa-modal">
+              <button id="close-ccpa">x</button>
+              <h3 class="title">Your Privacy Choices</h3>
+              <p class="paragraph">Depending on your state of residence, including if you are a California resident, you have the right to opt out of certain sharing of personal information with third-party ad partners. We may share personal information with third-party ad partners, such as through cookies or by providing lists of email addresses for potential customers, so that we can reach them across the web with relevant ads.</p>
+              <p class="paragraph">If you wish to opt out of this sharing of your personal data in connection with cookies, please update your 
+                <button class="settings" onClick="window.OneTrust.ToggleInfoDisplay()">cookie settings.</button>
+              </p>
+              <p class="paragraph">If you wish to opt out of email-based sharing, provide your email address at <a class="settings" href="https://www.okta.com/your-privacy-choices/" target="_blank">this link.</a></p>
+            </div><span class="footer-copyright">© 2025 Okta, Inc. All Rights Reserved.</span>
+          </div><img src="/img/webauthn-logo-no-text.svg" alt="webauthn logo">
+          <div class="footer-branding-right"><span>Spread the word</span><a class="footer-branding-twitter" href="https://twitter.com/home?status=Check%20out%20https%3A//webauthn.me%20and%20learn%20what%20Web%20Authentication%20is%20all%20about!" target="_blank"><img src="/img/twitter-logo.svg" alt="twitter logo"></a><a class="footer-branding-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//webauthn.me" target="_blank"><img src="/img/facebook-logo.svg" alt="facebook logo"></a></div>
+        </div>
+        <div class="footer-github">
+          <p>Found a bug? </p><a href="https://github.com/auth0/webauthn.me/pulls" target="_blank">Send a Pull Request!</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      function topBanner() {
+        event.preventDefault();
+        document.querySelector(".top-banner").classList.add('closed');
+        document.querySelector(".top-banner-spacer").classList.add('hide');
+        document.querySelector(".header").classList.remove("top-banner-open");
+      }
+    </script>
+  </body>
+</html>
