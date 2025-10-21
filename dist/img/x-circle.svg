@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>x-circle</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="x-circle" transform="translate(1.000000, 1.000000)" stroke="#F9015B" stroke-width="1.5">
+            <circle id="Oval" cx="10" cy="10" r="10"></circle>
+            <line x1="13" y1="7" x2="7" y2="13" id="Path"></line>
+            <line x1="7" y1="7" x2="13" y2="13" id="Path"></line>
+        </g>
+    </g>
+</svg>

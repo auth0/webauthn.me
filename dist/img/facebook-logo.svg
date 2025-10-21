@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="9px" height="16px" viewBox="0 0 9 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="1440" height="227"></rect>
+        <filter x="-0.2%" y="-1.5%" width="100.5%" height="103.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="-4" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI_Auth0_Banner" transform="translate(-1295.000000, -2289.000000)">
+            <g id="Footer" transform="translate(0.000000, 2183.000000)">
+                <g id="Group-13" transform="translate(1280.000000, 94.000000)">
+                    <path d="M15.4292889,20.6153846 L17.8280222,20.6153846 L17.8280222,27.9076923 L20.8378667,27.9076923 L20.8378667,20.6153846 L23.8477111,20.6153846 L23.8477111,17.6 L20.8378667,17.6 L20.8378667,16.0615385 C20.8378667,15.7998769 20.8989778,15.6 21.0212,15.4153846 C21.1588222,15.2460308 21.2962,15.1692308 21.4489778,15.1692308 L23.8477111,15.1692308 L23.8477111,12.1538462 L21.4489778,12.1538462 C20.4406444,12.1538462 19.6002444,12.5385846 18.8974667,13.3078154 C18.1792889,14.0770462 17.8280222,15.0001231 17.8280222,16.0925538 L17.8280222,17.6002462 L15.4292889,17.6002462 L15.4292889,20.6156308 L15.4292889,20.6153846 Z" id="Shape" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

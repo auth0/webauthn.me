@@ -46,6 +46,12 @@ html(lang='en')
       script(src="js/ccpa-modal.js")
       script(src="js/cookie-consent.js")
 
+    // Adobe Analytics script
+    if NODE_ENV == "production"
+      script(src="https://assets.adobedtm.com/6bb3f7663515/fea558f43eb7/launch-be034d63605e.min.js", type="text/javascript", charset="UTF-8", id="adobe-analytics-script")
+    else 
+      script(src="https://assets.adobedtm.com/6bb3f7663515/fea558f43eb7/launch-e7dc4271fcde-development.min.js", type="text/javascript", charset="UTF-8", id="adobe-analytics-script")
+
     script(type="application/ld+json").
       [{
           "@context": "http://schema.org",

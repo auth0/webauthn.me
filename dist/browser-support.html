@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Does my browser support WebAuthn?</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="auth0.com">
+    <meta name="description" content="An overview of all modern browser and their support for WebAuthn platform and roaming authenticators.">
+    <meta property="og:title" content="Does my browser support WebAuthn?">
+    <meta property="og:site_name" content="Does my browser support WebAuthn?">
+    <meta property="og:url" content="https://webauthn.me/browser-support">
+    <meta property="og:image" content="https://cdn.auth0.com/blog/webauthn:card.png">
+    <meta property="og:description" content="An overview of all modern browser and their support for WebAuthn platform and roaming authenticators.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:site" content="@auth0">
+    <meta name="twitter:creator" content="@auth0">
+    <meta name="twitter:title" content="Does my browser support WebAuthn?">
+    <meta name="twitter:url" content="https://webauthn.me/browser-support">
+    <meta name="twitter:description" content="An overview of all modern browser and their support for WebAuthn platform and roaming authenticators.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://cdn.auth0.com/blog/webauthn:card.png">
+    <meta name="twitter:image:height" content="512">
+    <meta name="twitter:image:width" content="1024">
+    <link rel="canonical" href="https://webauthn.me">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common.css" type="text/css" media="all">
+    <link rel="shortcut icon" href="https://cdn.auth0.com/website/webauthn/favicon.png">
+    <link rel="stylesheet" href="/css/browser-support.css" type="text/css" media="all">
+    <link rel="prefetch" href="/introduction.html">
+    <!-- OneTrustScripts-->
+    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="3cdc400f-b58d-4d3b-83fd-9f22770403da" id="consent-script"></script>
+    <script src="js/ccpa-modal.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <!-- Adobe Analytics script-->
+    <script src="https://assets.adobedtm.com/6bb3f7663515/fea558f43eb7/launch-be034d63605e.min.js" type="text/javascript" charset="UTF-8" id="adobe-analytics-script"></script>
+    <script type="application/ld+json">
+      [{
+          "@context": "http://schema.org",
+          "@type": "WebPage",
+          "name": "Web Authentication (WebAuthn) Credential and Login Demo",
+          "description": "Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.",
+          "url": "https://webauthn.me/",
+          "image": "https://webauthn.me/img/webauthn-logo.svg",
+          "publisher": {
+              "@type": "Organization",
+              "name": "Auth0",
+              "legalName": "Auth0 Inc.",
+              "url": "https://auth0.com/",
+              "logo": "https://cdn.auth0.com/website/assets/pages/press/img/resources/auth0-logo-main-6001cece68.svg",
+              "foundingDate": "2013",
+              "sameAs": [
+                  "https://twitter.com/auth0",
+                  "https://www.facebook.com/getauth0/",
+                  "https://www.linkedin.com/company/auth0"
+              ]
+          }
+        }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "WebAuthn debugger",
+              "item": "https://webauthn.me/debugger",
+              "description": "Quickly change a WebAuthn configuration parameter, and see the change take effect in our handy debugger."
+          }]
+      }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "Introduction",
+              "item": "https://webauthn.me/introduction",
+              "description": "Learn more about the WebAuthn spec, that enables public key-based credentials in the browser for securely authenticating users using hardware authenticators."
+          }]
+      }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "Introduction",
+              "item": "https://webauthn.me/browser-support",
+              "description": "An overview of all modern browser and their support for platform and roaming authenticators, using WebAuthn."
+          }]
+      }]
+    </script>
+    <meta name="google-site-verification" content="8PENs1ni2zY2-JstEN8PRrMO3N76CRf2r1yP1qMf14M">
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJZ8DTR2" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript)-->
+    <header class="header">
+      <div class="header-container">
+        <div class="header-left">
+          <div class="header-crafted-by-container"><a href="https://auth0.com/developers/"><span>Crafted by</span><img src="/img/auth0-logo.svg" alt="Auth0 Logo"></a></div>
+        </div>
+        <div class="header-right">
+          <div class="header-nav-item"><a href="/">Tutorial</a></div>
+          <div class="header-nav-item"><a href="/introduction">Info</a></div>
+          <div class="header-nav-item"><a href="/debugger">debugger</a></div>
+          <div class="header-nav-item"><a href="/passkeys">passkeys</a></div>
+        </div>
+      </div>
+    </header>
+    <div class="browser-support-container">
+      <h2>Browser support</h2>
+      <p>Browser support for WebAuthn is quickly improving. You can find an overview of both platform and external authenticators on this page.</p>
+      <h3>Does your current browser support WebAuthn?</h3>
+      <div class="banner">
+        <div class="browser-test"> 
+          <div class="roaming" data-credential-support> <img src="/img/roaming.svg" alt="Roaming authenticators">
+            <p>
+               Roaming authenticators<img class="supported" src="/img/check-circle.svg" alt="Your browser supports roaming authenticators"><img class="not-supported" src="/img/x-circle.svg" alt="Your browser does not support roaming authenticators"></p>
+          </div>
+          <div class="platform" data-platform-authenticator-support><img src="/img/platform.svg" alt="platform authenticators">
+            <p>
+               Platform authenticators<img class="supported" src="/img/check-circle.svg" alt="Your browser supports platform authenticators"><img class="not-supported" src="/img/x-circle.svg" alt="Your browser does not support platform authenticators"></p>
+          </div>
+        </div>
+        <div class="browser">You are currently using <strong data-browser-name></strong> with version <strong data-browser-version></strong></div>
+      </div>
+      <h3>Platform Authenticators</h3>
+      <p>Platform authenticators are built into your devices like computers and smartphone. They can often be unlocked using biometrics, a finger print with Touch ID, or your face with Windows Hello or Face ID.</p>
+      <div class="table">
+        <div class="table-scroll-wrap">
+          <table>
+            <thead>
+              <th></th>
+              <th>Android 7+</th>
+              <th>iOS 14.5+</th>
+              <th>
+                 Windows 10 <span class="small">(with Windows Hello)</span></th>
+              <th>macOS Catalina</th>
+              <th>macOS Big Sur</th>
+              <th>Desktop Linux</th>
+            </thead>
+            <tbody> 
+              <tr> 
+                <td>Chrome</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Safari</td>
+                <td>N/A</td>
+                <td class="y">Yes</td>
+                <td>N/A</td>
+                <td>No</td>
+                <td class="y">Yes</td>
+                <td>N/A</td>
+              </tr>
+              <tr>
+                <td>Firefox</td>
+                <td>No</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td>No</td>
+                <td>No</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Brave</td>
+                <td>No</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Edge</td>
+                <td>No</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>Internet Explorer</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>No</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <h3>Roaming Authenticators</h3>
+      <p>Roaming Authenticators are separate hardware authenticators, that can be connected to your device in a number of ways. The most common ones connect through USB, Bluetooth or NFC. These are most commonly security keys like Yubikeys or Titan Keys.</p>
+      <div class="table">
+        <div class="table-scroll-wrap">
+          <table>
+            <thead>
+              <th></th>
+              <th>Android 7+</th>
+              <th>iOS 14.5+</th>
+              <th>Windows 10</th>
+              <th>macOS Catalina </th>
+              <th>macOS Big Sur</th>
+              <th>Desktop Linux</th>
+            </thead>
+            <tbody> 
+              <tr> 
+                <td>Chrome</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+              </tr>
+              <tr>
+                <td>Safari</td>
+                <td>N/A</td>
+                <td class="y">Yes</td>
+                <td>N/A</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td>N/A</td>
+              </tr>
+              <tr>
+                <td>Firefox</td>
+                <td>No</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+              </tr>
+              <tr>
+                <td>Brave</td>
+                <td>No</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+              </tr>
+              <tr>
+                <td>Edge</td>
+                <td>No</td>
+                <td>No</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+                <td class="y">Yes</td>
+              </tr>
+              <tr>
+                <td>Internet Explorer</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>No</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <h3>Read more</h3>
+      <ul>
+        <li><a href="https://fidoalliance.org/fido2/fido2-web-authentication-webauthn/">Fido Aliance</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API#authenticatorresponse">Mozilla Developer Network</a></li>
+        <li><a href="https://caniuse.com/?search=webauthn">Caniuse</a></li>
+      </ul>
+    </div>
+    <div class="footer-container">
+      <div class="footer-banner"><img class="footer-banner-logo" src="/img/auth0-logo.svg" alt="Auth0 logo">
+        <p class="footer-banner-text">With Auth0 you can easily add WebAuthn as a second factor<br/> to add an extra layer of security for your users.</p>
+        <div class="footer-banner-buttons"><a class="button-orange" href="https://auth0.com/signup/?utm_source=webauthn.me&amp;utm_medium=microsites&amp;utm_campaign=devn_signup" target="_blank" rel="noreferrer noopener">Try Auth0 for free</a></div>
+      </div>
+      <div class="footer-branding-container">
+        <div class="footer-branding-container-inner"> 
+          <div class="footer-branding-left"><a class="footer-crafted-by-container" href="https://auth0.com/developers/"><span>Crafted by</span><img class="footer-branded-crafted-img" src="/img/auth0-logo.svg" alt="auth0 logo"></a>
+            <div class="footer-privacy-container"><a class="footer-privacy-link" href="https://auth0.com/privacy/" target="_blank">Privacy</a><span class="footer-privacy-separator">•</span><a class="footer-privacy-link" href="https://auth0.com/web-terms" target="_blank">Terms of Service</a><span class="footer-privacy-separator">•</span>
+              <button class="as-anchor" id="open-ccpa">Your Privacy Choices </button><img class="ccpa-toggle" src="https://cdn.auth0.com/website/footer/ccpa.svg" alt="Privacy choices">
+            </div>
+            <div id="ccpa-modal">
+              <button id="close-ccpa">x</button>
+              <h3 class="title">Your Privacy Choices</h3>
+              <p class="paragraph">Depending on your state of residence, including if you are a California resident, you have the right to opt out of certain sharing of personal information with third-party ad partners. We may share personal information with third-party ad partners, such as through cookies or by providing lists of email addresses for potential customers, so that we can reach them across the web with relevant ads.</p>
+              <p class="paragraph">If you wish to opt out of this sharing of your personal data in connection with cookies, please update your 
+                <button class="settings" onClick="window.OneTrust.ToggleInfoDisplay()">cookie settings.</button>
+              </p>
+              <p class="paragraph">If you wish to opt out of email-based sharing, provide your email address at <a class="settings" href="https://www.okta.com/your-privacy-choices/" target="_blank">this link.</a></p>
+            </div><span class="footer-copyright">© 2025 Okta, Inc. All Rights Reserved.</span>
+          </div><img src="/img/webauthn-logo-no-text.svg" alt="webauthn logo">
+          <div class="footer-branding-right"><span>Spread the word</span><a class="footer-branding-twitter" href="https://twitter.com/home?status=Check%20out%20https%3A//webauthn.me%20and%20learn%20what%20Web%20Authentication%20is%20all%20about!" target="_blank"><img src="/img/twitter-logo.svg" alt="twitter logo"></a><a class="footer-branding-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//webauthn.me" target="_blank"><img src="/img/facebook-logo.svg" alt="facebook logo"></a></div>
+        </div>
+        <div class="footer-github">
+          <p>Found a bug? </p><a href="https://github.com/auth0/webauthn.me/pulls" target="_blank">Send a Pull Request!</a>
+        </div>
+      </div>
+    </div>
+    <script src="js/browserSupport.js"></script>
+    <script>
+      function topBanner() {
+        event.preventDefault();
+        document.querySelector(".top-banner").classList.add('closed');
+        document.querySelector(".top-banner-spacer").classList.add('hide');
+        document.querySelector(".header").classList.remove("top-banner-open");
+      }
+    </script>
+  </body>
+</html>

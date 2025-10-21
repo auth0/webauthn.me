@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>See your WebAuthn config in action</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="auth0.com">
+    <meta name="description" content="Quickly change a WebAuthn configuration parameter, and see the change take effect in our handy debugger.">
+    <meta property="og:title" content="See your WebAuthn config in action">
+    <meta property="og:site_name" content="See your WebAuthn config in action">
+    <meta property="og:url" content="https://webauthn.me/debugger">
+    <meta property="og:image" content="https://cdn.auth0.com/blog/webauthn:card.png">
+    <meta property="og:description" content="Quickly change a WebAuthn configuration parameter, and see the change take effect in our handy debugger.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:site" content="@auth0">
+    <meta name="twitter:creator" content="@auth0">
+    <meta name="twitter:title" content="See your WebAuthn config in action">
+    <meta name="twitter:url" content="https://webauthn.me/debugger">
+    <meta name="twitter:description" content="Quickly change a WebAuthn configuration parameter, and see the change take effect in our handy debugger.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://cdn.auth0.com/blog/webauthn:card.png">
+    <meta name="twitter:image:height" content="512">
+    <meta name="twitter:image:width" content="1024">
+    <link rel="canonical" href="https://webauthn.me">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common.css" type="text/css" media="all">
+    <link rel="shortcut icon" href="https://cdn.auth0.com/website/webauthn/favicon.png">
+    <link rel="stylesheet" href="/css/debugger.css" type="text/css" media="all">
+    <link rel="prefetch" href="/introduction.html">
+    <!-- OneTrustScripts-->
+    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="3cdc400f-b58d-4d3b-83fd-9f22770403da" id="consent-script"></script>
+    <script src="js/ccpa-modal.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <!-- Adobe Analytics script-->
+    <script src="https://assets.adobedtm.com/6bb3f7663515/fea558f43eb7/launch-be034d63605e.min.js" type="text/javascript" charset="UTF-8" id="adobe-analytics-script"></script>
+    <script type="application/ld+json">
+      [{
+          "@context": "http://schema.org",
+          "@type": "WebPage",
+          "name": "Web Authentication (WebAuthn) Credential and Login Demo",
+          "description": "Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.",
+          "url": "https://webauthn.me/",
+          "image": "https://webauthn.me/img/webauthn-logo.svg",
+          "publisher": {
+              "@type": "Organization",
+              "name": "Auth0",
+              "legalName": "Auth0 Inc.",
+              "url": "https://auth0.com/",
+              "logo": "https://cdn.auth0.com/website/assets/pages/press/img/resources/auth0-logo-main-6001cece68.svg",
+              "foundingDate": "2013",
+              "sameAs": [
+                  "https://twitter.com/auth0",
+                  "https://www.facebook.com/getauth0/",
+                  "https://www.linkedin.com/company/auth0"
+              ]
+          }
+        }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "WebAuthn debugger",
+              "item": "https://webauthn.me/debugger",
+              "description": "Quickly change a WebAuthn configuration parameter, and see the change take effect in our handy debugger."
+          }]
+      }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "Introduction",
+              "item": "https://webauthn.me/introduction",
+              "description": "Learn more about the WebAuthn spec, that enables public key-based credentials in the browser for securely authenticating users using hardware authenticators."
+          }]
+      }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "Introduction",
+              "item": "https://webauthn.me/browser-support",
+              "description": "An overview of all modern browser and their support for platform and roaming authenticators, using WebAuthn."
+          }]
+      }]
+    </script>
+    <meta name="google-site-verification" content="8PENs1ni2zY2-JstEN8PRrMO3N76CRf2r1yP1qMf14M">
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJZ8DTR2" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript)-->
+    <header class="header">
+      <div class="header-container">
+        <div class="header-left">
+          <div class="header-crafted-by-container"><a href="https://auth0.com/developers/"><span>Crafted by</span><img src="/img/auth0-logo.svg" alt="Auth0 Logo"></a></div>
+        </div>
+        <div class="header-right">
+          <div class="header-nav-item"><a href="/">Tutorial</a></div>
+          <div class="header-nav-item"><a href="/introduction">Info</a></div>
+          <div class="header-nav-item active"><a href="/debugger">debugger</a></div>
+          <div class="header-nav-item"><a href="/passkeys">passkeys</a></div>
+        </div>
+      </div>
+    </header>
+    <div class="content-container"></div>
+    <section id="debugger">
+      <ul class="tabs" data-tabs="debugger">
+        <li class="tab"><a class="active" href="#" data-tab="#debugger-register">Register</a></li>
+        <li class="tab"><a href="#" data-tab="#debugger-authenticate">Authenticate</a></li>
+        <li class="tab hide-mobile"><a href="#" data-tab="#debugger-upload">Upload CBOR output</a></li>
+      </ul>
+      <div>
+        <div id="debugger-register">
+          <div class="container">
+            <div class="debugger-header">
+              <div class="debugger-header-title">
+                <h2>Register New Credentials</h2>
+                <p>Set your preferential registration settings and check them below in the output</p>
+              </div>
+              <div class="debugger-header-key" id="debugger-auth-available-indicator"><img src="/img/yubikey.svg" alt="Yubi key"></div>
+            </div>
+            <div id="debugger-register-options">
+              <div id="debugger-code-create">
+                <div class="editor">
+                  <div class="editor-label">navigator.credentials.create({</div>
+                  <div class="editor-label indent-1">publicKey: {</div>
+                  <div class="editor-label indent-2">rp: {
+                    <div class="form-row indent-1"><span class="checkbox-container position-outside">
+                        <input id="d-c-rp-id-cbox" type="checkbox">
+                        <label class="checkbox" for="d-c-rp-id-cbox"></label></span>
+                      <label class="label" id="d-c-rp-id-line" for="d-c-rp-id">id: </label>
+                      <input class="input" id="d-c-rp-id" type="text" value="localhost">
+                    </div>
+                    <div class="form-row indent-1">
+                      <label class="label" id="d-c-rp-name-line" for="d-c-rp-name">name: </label>
+                      <input class="input" id="d-c-rp-name" type="text" value="test">
+                    </div>
+                  </div>
+                  <div class="editor-label indent-2">}</div>
+                  <div class="editor-label indent-2">user: {
+                    <div class="form-row indent-1">
+                      <label class="label" id="d-c-user-id-line" for="d-c-regen-uid">id: </label>
+                      <button class="button" id="d-c-regen-uid">Regenerate (binary, random)</button>
+                    </div>
+                    <div class="form-row indent-1">
+                      <label class="label" id="d-c-user-name-line" for="d-c-user-name">name: </label>
+                      <input class="input" id="d-c-user-name" type="text" value="test">
+                    </div>
+                    <div class="form-row indent-1">
+                      <label class="label" id="d-c-user-dp-line" for="d-c-user-dpname">displayName: </label>
+                      <input class="input" id="d-c-user-dpname" type="text" value="Test User">
+                    </div>
+                  </div>
+                  <div class="editor-label indent-2">}</div>
+                  <div class="form-row indent-2"> 
+                    <label class="label" id="d-c-challenge-line" for="d-c-regen-challenge">challenge:</label>
+                    <button class="button" id="d-c-regen-challenge">Regenerate (binary, random)  </button>
+                  </div>
+                  <div class="editor-dynamic indent-1">
+                    <button class="editor-dynamic-add" id="d-c-add-pubkey-params">+</button>
+                    <div class="editor-label indent-1">pubKeyCredParams: [</div>
+                    <div class="editor-dynamic-item"> 
+                      <div class="editor-label indent-2">{</div>
+                      <div class="editor-label indent-3">type: 'public-key',</div>
+                      <div class="form-row indent-3">
+                        <label class="label" id="d-c-pubkey-alg-line" for="d-c-pubkey-alg-select">alg:</label>
+                        <div class="select-container">
+                          <select class="select" id="d-c-pubkey-alg-select">
+                            <option value="rs256" selected>RS256 (RSASSA + SHA-256)</option>
+                            <option value="es256">ES256 (ECDSA P-256 + SHA-256)</option>
+                            <option value="es384">ES384 (ECDSA P-384 + SHA-384)</option>
+                            <option value="es512">ES512 (ECDSA P-521 + SHA-512)</option>
+                            <option value="edDSA">EdDSA (Ed25519)</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="editor-label indent-2">}</div>
+                    </div>
+                    <div class="editor-dynamic-item">
+                      <div class="editor-label indent-2">{</div>
+                      <div class="editor-label indent-3">type: 'public-key',</div>
+                      <div class="form-row indent-3">
+                        <label class="label" id="d-c-pubkey-alg-line" for="d-c-pubkey-alg-select-1">alg:</label>
+                        <div class="select-container">
+                          <select class="select" id="d-c-pubkey-alg-select-1">
+                            <option value="rs256">RS256 (RSASSA + SHA-256)</option>
+                            <option value="es256" selected>ES256 (ECDSA P-256 + SHA-256)</option>
+                            <option value="es384">ES384 (ECDSA P-384 + SHA-384)</option>
+                            <option value="es512">ES512 (ECDSA P-521 + SHA-512)</option>
+                            <option value="edDSA">EdDSA (Ed25519)</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="editor-label indent-2">}</div>
+                    </div>
+                    <div class="editor-public-key-credential-params-placeholder" id="d-c-add-pubkey-params-placeholder"></div>
+                    <div class="editor-label indent-1">]</div>
+                  </div>
+                  <div class="form-row indent-2"> 
+                    <label class="label" id="d-c-timeout-line" for="d-c-timeout">timeout:</label>
+                    <input class="input" id="d-c-timeout" type="number" value="300000">
+                  </div>
+                  <div class="editor-dynamic indent-1">
+                    <div class="form-row indent-2"><span class="checkbox-container position-outside">
+                        <input id="d-c-excl-creds-cbox" type="checkbox">
+                        <label class="checkbox" for="d-c-excl-creds-cbox">excludeCredentials: [</label></span></div>
+                    <button class="editor-dynamic-add" id="d-c-add-excl-creds">+</button>
+                    <div class="editor-dynamic-item"> 
+                      <div class="editor-label indent-2">{</div>
+                      <div class="editor-label indent-3">type: 'public-key',</div>
+                      <div class="form-row indent-3">
+                        <label class="label" for="d-c-excl-creds-upload">id: <span id="d-c-excl-creds-id-line"></span></label>
+                        <input id="d-c-excl-creds-upload" type="file" style="display: none">
+                        <button class="button" id="d-c-upload-excl-creds-id">Upload (binary)</button>
+                      </div>
+                      <div class="form-row indent-3"><span class="checkbox-container position-outside">
+                          <input id="d-c-excl-creds-type-cbox" type="checkbox">
+                          <label class="checkbox" for="d-c-excl-creds-type-cbox"></label></span>
+                        <label class="label" id="d-c-excl-creds-type-cbox">transports: [ <span class="checkbox-container">
+                            <input id="d-c-excl-creds-type-usb" type="checkbox">
+                            <label class="checkbox" for="d-c-excl-creds-type-usb">USB</label></span><span class="checkbox-container">
+                            <input id="d-c-excl-creds-type-nfc" type="checkbox">
+                            <label class="checkbox" for="d-c-excl-creds-type-nfc">NFC</label></span><span class="checkbox-container">
+                            <input id="d-c-excl-creds-type-ble" type="checkbox">
+                            <label class="checkbox" for="d-c-excl-creds-type-ble">BLE</label></span><span class="checkbox-container">
+                            <input id="d-c-excl-creds-type-internal" type="checkbox">
+                            <label class="checkbox" for="d-c-excl-creds-type-internal">INTERNAL</label></span></label>]
+                      </div>
+                      <div class="editor-label indent-2">}</div><span id="d-c-excl-creds-placeholder"></span>
+                    </div>
+                    <div class="editor-label indent-1">]</div>
+                  </div>
+                  <div class="form-row indent-2"><span class="checkbox-container position-outside">
+                      <input id="d-c-auth-sel-cbox" type="checkbox">
+                      <label class="checkbox" for="d-c-auth-sel-cbox">authenticatorSelection: {</label></span></div>
+                  <div class="form-row indent-2"><span class="checkbox-container">
+                      <input id="d-c-auth-attach-cbox" type="checkbox">
+                      <label class="checkbox" id="d-c-auth-attach-line" for="d-c-auth-attach-cbox">authenticatorAttachment:</label></span>
+                    <div class="select-container">
+                      <select class="select" id="d-c-auth-attach-select">
+                        <option value="platform">platform</option>
+                        <option value="cross-platform" selected>cross-platform</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row indent-2"><span class="checkbox-container">
+                      <input id="d-c-res-key-cbox" type="checkbox">
+                      <label class="checkbox" id="d-c-res-key-line" for="d-c-res-key-cbox">residentKey:</label></span>
+                    <div class="select-container">
+                      <select class="select" id="d-c-res-key-select">
+                        <option value="discouraged">discouraged</option>
+                        <option value="preferred" selected>preferred</option>
+                        <option value="required">required</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row indent-2"><span class="checkbox-container">
+                      <input id="d-c-req-res-key-cbox-val" type="checkbox">
+                      <label class="checkbox" id="d-c-req-res-key-line" for="d-c-req-res-key-cbox-val">requireResidentKey</label></span></div>
+                  <div class="form-row indent-2"><span class="checkbox-container">
+                      <input id="d-c-user-verif-cbox" type="checkbox">
+                      <label class="checkbox" id="d-c-user-verif-line" for="d-c-user-verif-cbox">userVerification:</label></span>
+                    <div class="select-container">
+                      <select class="select" id="d-c-user-verif-select">
+                        <option value="required">required</option>
+                        <option value="preferred" selected>preferred</option>
+                        <option value="discouraged">discouraged</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="editor-label indent-1">}</div>
+                  <div class="form-row indent-1"><span class="checkbox-container">
+                      <input id="d-c-attest-cbox" type="checkbox">
+                      <label class="checkbox" id="d-c-attest-line" for="d-c-attest-cbox">attestation:</label></span>
+                    <div class="select-container">
+                      <select class="select" id="d-c-attest-select">
+                        <option value="none" selected>none</option>
+                        <option value="indirect">indirect</option>
+                        <option value="direct">direct</option>
+                        <option value="enterprise">enterprise</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="editor-label indent-1">}</div>
+                  <div class="form-row indent-2"><span class="checkbox-container position-outside">
+                      <input id="d-c-extensions-cbox" type="checkbox">
+                      <label class="checkbox" id="d-c-extensions-cbox-line" for="d-c-extensions-cbox">extensions: {</label></span></div>
+                  <div class="form-row indent-2"><span class="checkbox-container">
+                      <input id="d-c-cred-props-cbox-val" type="checkbox">
+                      <label class="checkbox" id="d-c-cred-props-line" for="d-c-cred-props-cbox-val">credProps</label></span></div>
+                  <div class="form-row indent-2"><span class="checkbox-container">
+                      <input id="d-c-cred-protect-policy-cbox" type="checkbox">
+                      <label class="checkbox" id="d-c-cred-protect-policy-line" for="d-c-cred-protect-policy-cbox">credentialProtectionPolicy:</label></span>
+                    <div class="select-container">
+                      <select class="select" id="d-c-cred-protect-policy-select">
+                        <option value="userVerificationOptional">userVerificationOptional</option>
+                        <option value="userVerificationOptionalWithCredentialIDList" selected>userVerificationOptionalWithCredentialIDList</option>
+                        <option value="userVerificationRequired">userVerificationRequired</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row indent-2"><span class="checkbox-container">
+                      <input id="d-c-cred-protect-enforce-cbox-val" type="checkbox">
+                      <label class="checkbox" id="d-c-cred-protect-enforce-line" for="d-c-cred-protect-enforce-cbox-val">enforceCredentialProtectionPolicy</label></span></div>
+                  <div class="form-row indent-2"><span class="checkbox-container">
+                      <input id="d-c-min-pin-length-cbox-val" type="checkbox">
+                      <label class="checkbox" id="d-c-min-pin-length-line" for="d-c-min-pin-length-cbox-val">minPinLength</label></span></div>
+                  <div class="form-row indent-2"><span class="checkbox-container">
+                      <input id="d-c-uvm-cbox-val" type="checkbox">
+                      <label class="checkbox" id="d-c-uvm-line" for="d-c-uvm-cbox-val">uvm</label></span></div>
+                  <div class="editor-label indent-1">}</div>
+                  <div class="editor-label">});</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="button button-full" id="debugger-register-button">Register</button>
+          <div class="is-invisible" id="debugger-register-output">
+            <div class="container output" id="debugger-output">
+              <div class="output-header">
+                <h2>Output</h2>
+                <div class="output-download hide-mobile">
+                  <button class="button button-big" id="debugger-output-download-cbor">Download (CBOR)</button>
+                  <button class="button button-big" id="debugger-output-download-json">Download (JSON)</button>
+                </div>
+              </div>
+              <div class="output-up-warning warning hidden"><strong>Warning: </strong>Your authenticator device does not perform a <strong>test of user presence </strong>as defined in the <a href="https://www.w3.org/TR/webauthn/#test-of-user-presence" title="WebAuthn Specification">WebAuthn Specification.</a></div>
+              <div class="output-container">
+                <div class="output-columns">
+                  <div>
+                    <h4>rawID</h4>
+                    <div class="output-raw" id="register-output-rawid"></div>
+                  </div>
+                  <div>
+                    <h4>credentialPublicKey</h4>
+                    <div class="overflow-wrapper">
+                      <pre id="register-output-public-key"></pre>
+                    </div>
+                  </div>
+                </div>
+                <div class="output-console" id="debugger-register-output-console"></div>
+              </div>
+            </div>
+            <div class="output-container output-more-container">
+              <div class="output-columns">
+                <div>
+                  <h4>Would you like to authenticate your credentials?</h4>
+                  <p class="output-description">Now with your rawID you can authenticate.</p>
+                  <button class="button button-large" data-tab-trigger="debugger.#debugger-authenticate">Authenticate</button>
+                </div>
+                <div class="hide-mobile">
+                  <h4>Do you want to check your CBOR code?</h4>
+                  <p class="output-description">You can make your own tests and analyze your code in our panel.</p>
+                  <button class="button button-large button-clear" data-tab-trigger="debugger.#debugger-upload">Upload CBOR code</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="debugger-authenticate">
+          <div class="container">
+            <div class="debugger-header">
+              <div class="debugger-header-title">
+                <h2>Authenticate new credentials</h2>
+                <p>Set your preferential authentication settings and check them below in the output</p>
+              </div>
+              <div class="debugger-header-key" id="debugger-auth-available-indicator"><img src="/img/yubikey.svg" alt="Yubi key"></div>
+            </div>
+            <div id="debugger-authenticate-options">
+              <div id="debugger-code-get">
+                <div class="editor">
+                  <div class="editor-label">navigator.credentials.get({</div>
+                  <div class="editor-label indent-1">publicKey: {
+                    <div class="form-row indent-1"> 
+                      <label class="label" id="d-g-challenge-line" for="d-g-regen-challenge">challenge:</label>
+                      <button class="button" id="d-g-regen-challenge">Regenerate (binary, random)  </button>
+                    </div>
+                    <div class="form-row indent-1"> 
+                      <label class="label" id="d-g-timeout-line" for="d-g-timeout">timeout:</label>
+                      <input class="input" id="d-g-timeout" type="number" value="300000">
+                    </div>
+                    <div class="form-row indent-1"><span class="checkbox-container position-outside">
+                        <input id="d-g-rp-id-cbox" type="checkbox">
+                        <label class="checkbox" for="d-g-rp-id-cbox"></label></span>
+                      <label class="label" id="d-g-rp-id-line" for="d-g-rp-id">rpId: </label>
+                      <input class="input" id="d-g-rp-id" type="text" value="localhost">
+                    </div>
+                    <div class="form-row indent-1"><span class="checkbox-container position-outside">
+                        <input id="d-g-allow-creds-cbox" type="checkbox">
+                        <label class="checkbox" for="d-g-allow-creds-cbox"></label></span>
+                      <label class="label" id="d-g-rp-id-line" for="d-g-rp-id">allowCredentials: </label>
+                    </div>
+                    <div class="editor-dynamic">
+                      <button class="button editor-dynamic-add" id="d-g-add-allow-creds">+</button>
+                      <div class="editor-dynamic-item"> 
+                        <div class="editor-label indent-1">{</div>
+                        <div class="editor-label indent-2">type: 'public-key',</div>
+                        <div class="form-row indent-2">
+                          <label class="label">id: <span id="d-g-allow-creds-id"></span></label>
+                          <input id="d-g-upload-allow-creds-file" type="file" style="display: none">
+                          <button class="button" id="d-g-upload-allow-creds-id">Upload (binary)</button>
+                        </div>
+                        <div class="form-row indent-2"><span class="checkbox-container position-outside">
+                            <input id="d-g-allow-creds-type-cbox" type="checkbox">
+                            <label class="checkbox" for="d-g-allow-creds-type-cbox"></label></span>
+                          <label class="label" id="d-c-excl-creds-type-cbox">transports: [ <span class="checkbox-container">
+                              <input id="d-g-allow-creds-type-usb" type="checkbox" disabled>
+                              <label class="checkbox" for="d-g-allow-creds-type-usb">USB</label></span><span class="checkbox-container">
+                              <input id="d-g-allow-creds-type-nfc" type="checkbox" disabled>
+                              <label class="checkbox" for="d-g-allow-creds-type-nfc">NFC</label></span><span class="checkbox-container">
+                              <input id="d-g-allow-creds-type-ble" type="checkbox" disabled>
+                              <label class="checkbox" for="d-g-allow-creds-type-ble">BLE</label></span><span class="checkbox-container">
+                              <input id="d-g-allow-creds-type-internal" type="checkbox" disabled>
+                              <label class="checkbox" for="d-g-allow-creds-type-internal">INTERNAL</label></span>]</label>
+                        </div>
+                        <div class="editor-label indent-1">}</div>
+                      </div>
+                      <div class="is-invisible" id="d-g-allow-creds-placeholder"></div>
+                      <div class="form-row indent-2"><span class="checkbox-container position-outside">
+                          <input id="d-g-user-verif-cbox" type="checkbox">
+                          <label class="checkbox" for="d-g-user-verif-cbox"></label></span>
+                        <label class="label" id="d-g-mediation-line" for="d-g-user-verif-select">userVerification: </label>
+                        <div class="select-container">
+                          <select class="select" id="d-g-user-verif-select">
+                            <option value="required">required</option>
+                            <option value="preferred" selected>preferred</option>
+                            <option value="discouraged">discouraged</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="editor-label">}</div>
+                    <div class="form-row indent-1"><span class="checkbox-container position-outside">
+                        <input id="d-g-mediation-cbox" type="checkbox">
+                        <label class="checkbox" for="d-g-mediation-cbox"></label></span>
+                      <label class="label" id="d-g-mediation-line" for="d-g-mediation-select">mediation: </label>
+                      <div class="select-container">
+                        <select class="select" id="d-g-mediation-select">
+                          <option value="silent">silent</option>
+                          <option value="optional" selected>optional</option>
+                          <option value="conditional">conditional</option>
+                          <option value="required">required</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-row indent-1"><span class="checkbox-container position-outside">
+                        <input id="d-g-extensions-cbox" type="checkbox">
+                        <label class="checkbox" for="d-g-extensions-cbox">extensions: {</label>
+                        <div class="form-row indent-2"><span class="checkbox-container">
+                            <input id="d-g-uvm-cbox-val" type="checkbox">
+                            <label class="checkbox" id="d-g-uvm-line" for="d-g-uvm-cbox-val">uvm</label></span></div></span></div>
+                    <div class="editor-label indent-1">}</div>
+                  </div>
+                  <div class="editor-label">});</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="button button-full" id="debugger-authenticate-button">Authenticate</button>
+          <div class="is-invisible" id="debugger-authenticate-output">
+            <div class="container output" id="debugger-output">
+              <div class="output-header">
+                <h2>Output  </h2>
+              </div>
+              <div class="output-container">
+                <div class="output-columns">
+                  <div>
+                    <h4>signature</h4>
+                    <div class="output-raw" id="authenticate-output-signature"></div>
+                  </div>
+                  <div>
+                    <h4>challenge</h4>
+                    <div class="output-raw" id="authenticate-output-challenge"></div>
+                  </div>
+                </div>
+                <div class="output-console" id="debugger-authenticate-output-console"></div>
+              </div>
+            </div>
+            <div class="output-container output-more-container">
+              <div class="output-columns">
+                <div>
+                  <h4>Would you like to register a new credential?</h4>
+                  <p class="output-description">You can test and debug a new credential.</p>
+                  <button class="button button-large" data-tab-trigger="debugger.#debugger-register">Register</button>
+                </div>
+                <div class="hide-mobile">
+                  <h4>Do you want to check your CBOR code?</h4>
+                  <p class="output-description">You can make your own tests and analyze your code in our panel.</p>
+                  <button class="button button-large button-clear" data-tab-trigger="debugger.#debugger-upload">Upload CBOR code</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="debugger-upload">
+          <div class="container" style="display: flex; flex-flow: column; align-items: center;">
+            <h2 style="display: block;">Upload full response</h2>
+            <div style="text-align: center;">
+              <button class="button button-large" id="debugger-output-upload-cbor-trigger">Upload CBOR</button>
+              <input class="file-input hidden" id="debugger-output-upload-cbor" type="file">
+            </div>
+          </div>
+          <div class="is-invisible" id="debugger-cbor-output">
+            <div class="container output" id="debugger-output">
+              <div class="output-header">
+                <h2>Output</h2>
+              </div>
+              <div class="output-container">
+                <div class="output-columns">
+                  <div>
+                    <h4>rawID</h4>
+                    <div class="output-raw" id="cbor-output-rawid"></div>
+                  </div>
+                  <div>
+                    <h4>credentialPublicKey</h4>
+                    <div class="overflow-wrapper">
+                      <pre id="cbor-output-public-key"></pre>
+                    </div>
+                  </div>
+                </div>
+                <div class="output-console" id="debugger-cbor-output-console"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="hidden" id="debugger-error-message">
+      <div class="error">
+        <h2>Oops!</h2>
+        <p class="intro">Looks like your browser does not support the web authentication API, or it doesn't support public key-based credentials.</p>
+        <p>You won't be able to follow along with the interactive tutorial, or try the debugger but you can still get more information on the web authentication API.</p><a class="button-colorful" href="/introduction">Learn more</a>
+      </div>
+    </div>
+    <div class="modal" id="debugger-key-modal">
+      <div class="modal-background"></div>
+      <div class="modal-content has-background-light">
+        <pre id="debugger-key-modal-key">Placeholder</pre>
+      </div>
+      <button class="modal-close is-large" id="debugger-key-modal-close-button" aria-label="close"></button>
+    </div>
+    <div class="modal" id="debugger-paste-modal">
+      <div class="modal-background"></div>
+      <div class="modal-header"><span>Paste your content below</span>
+        <button class="modal-header-close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <input class="input" id="debugger-paste-modal-input" type="text" placeholder="Base64 data">
+        </div>
+        <button class="button button-wide" id="debugger-paste-modal-button-ok">OK</button>
+      </div>
+    </div>
+    <div class="footer-container">
+      <div class="footer-browser-status-container">
+        <div class="footer-browser-status-text-container">
+          <div class="footer-browser-status-text-title"><img src="/img/question-circle.svg" alt="question icon">
+            <h4>Browser Status</h4>
+          </div>
+          <p>Web Authentication is (partially) supported in most modern browsers.</p><a class="button-dark" href="/browser-support" style="margin-top: 1rem; text-align: center;">Test your browser</a>
+        </div>
+        <div class="footer-browser-icons-container">
+              <div class="footer-browser-status"><img src="/img/firefox-logo.png" alt="browser logo"><span>Firefox</span></div>
+              <div class="footer-browser-status"><img src="/img/chrome-logo.png" alt="browser logo"><span>Chrome</span></div>
+              <div class="footer-browser-status"><img src="/img/edge-logo.png" alt="browser logo"><span>Edge</span></div>
+        </div>
+      </div>
+      <div class="footer-banner"><img class="footer-banner-logo" src="/img/auth0-logo.svg" alt="Auth0 logo">
+        <p class="footer-banner-text">With Auth0 you can easily add WebAuthn as a second factor<br/> to add an extra layer of security for your users.</p>
+        <div class="footer-banner-buttons"><a class="button-orange" href="https://auth0.com/signup/?utm_source=webauthn.me&amp;utm_medium=microsites&amp;utm_campaign=devn_signup" target="_blank" rel="noreferrer noopener">Try Auth0 for free</a></div>
+      </div>
+      <div class="footer-branding-container">
+        <div class="footer-branding-container-inner"> 
+          <div class="footer-branding-left"><a class="footer-crafted-by-container" href="https://auth0.com/developers/"><span>Crafted by</span><img class="footer-branded-crafted-img" src="/img/auth0-logo.svg" alt="auth0 logo"></a>
+            <div class="footer-privacy-container"><a class="footer-privacy-link" href="https://auth0.com/privacy/" target="_blank">Privacy</a><span class="footer-privacy-separator">•</span><a class="footer-privacy-link" href="https://auth0.com/web-terms" target="_blank">Terms of Service</a><span class="footer-privacy-separator">•</span>
+              <button class="as-anchor" id="open-ccpa">Your Privacy Choices </button><img class="ccpa-toggle" src="https://cdn.auth0.com/website/footer/ccpa.svg" alt="Privacy choices">
+            </div>
+            <div id="ccpa-modal">
+              <button id="close-ccpa">x</button>
+              <h3 class="title">Your Privacy Choices</h3>
+              <p class="paragraph">Depending on your state of residence, including if you are a California resident, you have the right to opt out of certain sharing of personal information with third-party ad partners. We may share personal information with third-party ad partners, such as through cookies or by providing lists of email addresses for potential customers, so that we can reach them across the web with relevant ads.</p>
+              <p class="paragraph">If you wish to opt out of this sharing of your personal data in connection with cookies, please update your 
+                <button class="settings" onClick="window.OneTrust.ToggleInfoDisplay()">cookie settings.</button>
+              </p>
+              <p class="paragraph">If you wish to opt out of email-based sharing, provide your email address at <a class="settings" href="https://www.okta.com/your-privacy-choices/" target="_blank">this link.</a></p>
+            </div><span class="footer-copyright">© 2025 Okta, Inc. All Rights Reserved.</span>
+          </div><img src="/img/webauthn-logo-no-text.svg" alt="webauthn logo">
+          <div class="footer-branding-right"><span>Spread the word</span><a class="footer-branding-twitter" href="https://twitter.com/home?status=Check%20out%20https%3A//webauthn.me%20and%20learn%20what%20Web%20Authentication%20is%20all%20about!" target="_blank"><img src="/img/twitter-logo.svg" alt="twitter logo"></a><a class="footer-branding-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//webauthn.me" target="_blank"><img src="/img/facebook-logo.svg" alt="facebook logo"></a></div>
+        </div>
+        <div class="footer-github">
+          <p>Found a bug? </p><a href="https://github.com/auth0/webauthn.me/pulls" target="_blank">Send a Pull Request!</a>
+        </div>
+      </div>
+    </div>
+    <script src="js/debugger.js"></script>
+    <script>
+      function topBanner() {
+        event.preventDefault();
+        document.querySelector(".top-banner").classList.add('closed');
+        document.querySelector(".top-banner-spacer").classList.add('hide');
+        document.querySelector(".header").classList.remove("top-banner-open");
+      }
+    </script>
+  </body>
+</html>

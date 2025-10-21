@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="793px" height="140px" viewBox="0 0 793 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 5</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="80" height="64" rx="2"></rect>
+        <rect id="path-3" x="0" y="0" width="80" height="64" rx="2"></rect>
+        <rect id="path-5" x="0" y="0" width="80" height="64" rx="2"></rect>
+        <rect id="path-7" x="0" y="0" width="80" height="64" rx="2"></rect>
+    </defs>
+    <g id="Lock-and-Feeling" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI_Tutorial-Step-byt-Step" transform="translate(-401.000000, -1884.000000)">
+            <g id="Group-5" transform="translate(400.000000, 1878.000000)">
+                <text id="Countdown" font-family="Helvetica-Bold, Helvetica" font-size="14" font-weight="bold" line-spacing="24" letter-spacing="1" fill="#34E27A">
+                    <tspan x="35" y="17">15s</tspan>
+                </text>
+                <g id="browser" transform="translate(375.000000, 110.000000)" fill="#FFFFFF" font-family="FaktPro-Medium, Fakt Pro, sans-serif" font-size="13" font-weight="normal">
+                    <text>
+                        <tspan x="0" y="14">browser</tspan>
+                    </text>
+                </g>
+                <g id="relying-party" transform="translate(785.000000, 110.000000)" fill="#FFFFFF" font-family="FaktPro-Medium, Fakt Pro, sans-serif" font-size="13" font-weight="normal">
+                    <text text-anchor="end">
+                        <tspan x="0" y="14">relying party</tspan>
+                        <tspan x="0" y="34">https://myapp.com</tspan>
+                    </text>
+                </g>
+                <g id="authenticator" transform="translate(0.000000, 110.000000)" fill="#FFFFFF" font-family="FaktPro-Medium, Fakt Pro, sans-serif" font-size="13" font-weight="normal">
+                    <text>
+                        <tspan x="0" y="14">authenticator</tspan>
+                    </text>
+                </g>
+                <g id="Browser" transform="translate(361.000000, 37.000000)">
+                    <g id="Mask" fill="#2F2F2F" fill-rule="nonzero">
+                        <rect id="path-1" x="0" y="0" width="80" height="64" rx="2"></rect>
+                    </g>
+                    <g id="Clipped">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <g id="path-1"></g>
+                        <rect id="Rectangle-path" fill="#515151" fill-rule="nonzero" mask="url(#mask-2)" x="0" y="0" width="80" height="10"></rect>
+                    </g>
+                    <g id="Oval-3-Clipped">
+                        <mask id="mask-4" fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <g id="path-1"></g>
+                        <circle id="Oval-3" fill="#000000" fill-rule="nonzero" mask="url(#mask-4)" cx="5" cy="5" r="2"></circle>
+                    </g>
+                    <g id="Oval-3-Clipped">
+                        <mask id="mask-6" fill="white">
+                            <use xlink:href="#path-5"></use>
+                        </mask>
+                        <g id="path-1"></g>
+                        <circle id="Oval-3" fill="#000000" fill-rule="nonzero" mask="url(#mask-6)" cx="11" cy="5" r="2"></circle>
+                    </g>
+                    <g id="Oval-3-Clipped">
+                        <mask id="mask-8" fill="white">
+                            <use xlink:href="#path-7"></use>
+                        </mask>
+                        <g id="path-1"></g>
+                        <circle id="Oval-3" fill="#000000" fill-rule="nonzero" mask="url(#mask-8)" cx="17" cy="5" r="2"></circle>
+                    </g>
+                </g>
+                <path d="M122,69 L338.5,69" id="Line-Left" stroke="#4C4C4C" stroke-linecap="square"></path>
+                <path d="M459,68.25 L675.5,68.25" id="Line-Right" stroke="#4C4C4C" stroke-linecap="square"></path>
+                <g id="YubiKey" transform="translate(4.000000, 48.000000)">
+                    <g id="Group">
+                        <rect id="Rectangle-6" fill="#515151" fill-rule="nonzero" x="0" y="0" width="78" height="41" rx="2"></rect>
+                        <path d="M78,8 L96,8 C97.1045695,8 98,8.8954305 98,10 L98,31 C98,32.1045695 97.1045695,33 96,33 L78,33 L78,8 Z" id="Rectangle-5" fill="#2F2F2F" fill-rule="nonzero"></path>
+                        <path d="M78.5,14.5 L94.5,14.5" id="Line-2" stroke="#000000" stroke-linecap="square"></path>
+                        <path d="M78.5,26.5 L94.5,26.5" id="Line-2" stroke="#000000" stroke-linecap="square"></path>
+                        <path d="M78.3235294,18.5 L88.6764706,18.5" id="Line-2" stroke="#000000" stroke-linecap="square"></path>
+                        <path d="M78.3235294,22.5 L88.6764706,22.5" id="Line-2" stroke="#000000" stroke-linecap="square"></path>
+                        <circle id="Oval-4" stroke="#000000" cx="39" cy="21" r="13"></circle>
+                    </g>
+                </g>
+                <g id="Relying-Party" transform="translate(701.000000, 39.000000)" fill-rule="nonzero">
+                    <rect id="Rectangle-8" fill="#515151" x="0" y="48" width="85" height="12" rx="2"></rect>
+                    <rect id="Rectangle-8" fill="#515151" x="0" y="32" width="85" height="12" rx="2"></rect>
+                    <rect id="Rectangle-8" fill="#515151" x="0" y="16" width="85" height="12" rx="2"></rect>
+                    <rect id="Rectangle-8" fill="#515151" x="0" y="0" width="85" height="12" rx="2"></rect>
+                    <circle id="Oval-6" fill="#000000" cx="79" cy="6" r="2"></circle>
+                    <circle id="Oval-6" fill="#000000" cx="79" cy="22" r="2"></circle>
+                    <circle id="Oval-6" fill="#000000" cx="79" cy="38" r="2"></circle>
+                    <circle id="Oval-6" fill="#000000" cx="79" cy="54" r="2"></circle>
+                </g>
+                <g id="Check" transform="translate(388.000000, 61.000000)">
+                    <circle id="Oval-7" fill="#34E27A" fill-rule="nonzero" cx="13" cy="13" r="13"></circle>
+                    <polyline id="Path-2" stroke="#000000" stroke-width="2" points="7 12.5557463 11.5998587 17 20 9"></polyline>
+                </g>
+                <circle id="Data-Dot" fill="#FFFFFF" fill-rule="nonzero" cx="121.5" cy="69.5" r="2.5"></circle>
+                <g id="Text-Right" transform="translate(565.000000, 87.000000)" fill="#FFFFFF" font-family="FaktPro-Medium, Fakt Pro, sans-serif" font-size="14" font-weight="400">
+                    <text text-anchor="middle">
+                        <tspan id="Text-Right-1" x="0" y="10">CHALLENGE</tspan>
+                        <tspan id="Text-Right-2" x="0" y="30">CHALLENGE</tspan>
+                        <tspan id="Text-Right-3" x="0" y="50">CHALLENGE</tspan>
+                    </text>
+                </g>
+                <g id="Text-Left" transform="translate(225.000000, 87.000000)" fill="#FFFFFF" font-family="FaktPro-Medium, Fakt Pro, sans-serif" font-size="14" font-weight="400">
+                    <text text-anchor="middle">
+                        <tspan id="Text-Left-1" x="0" y="10">CHALLENGE</tspan>
+                        <tspan id="Text-Left-2" x="0" y="30">CHALLENGE</tspan>
+                        <tspan id="Text-Left-3" x="0" y="50">CHALLENGE</tspan>
+                    </text>
+                </g>
+                <g id="Touch-Circles" transform="translate(14.000000, 40.000000)" fill-rule="nonzero" stroke="#34E27A" stroke-width="2">
+                    <circle id="Oval-7" cx="29" cy="29" r="13"></circle>
+                    <circle id="Oval-7" opacity="0.5" cx="29" cy="29" r="19"></circle>
+                    <circle id="Oval-7" opacity="0.400000006" cx="29" cy="29" r="24"></circle>
+                    <circle id="Oval-7" opacity="0.200000003" cx="29" cy="29" r="29"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

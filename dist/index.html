@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Web Authentication (WebAuthn) Credential and Login Demo</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="auth0.com">
+    <meta name="description" content="Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.">
+    <meta property="og:title" content="Web Authentication (WebAuthn) Credential and Login Demo">
+    <meta property="og:site_name" content="Web Authentication (WebAuthn) Credential and Login Demo">
+    <meta property="og:url" content="https://webauthn.me">
+    <meta property="og:image" content="https://cdn.auth0.com/blog/webauthn:card.png">
+    <meta property="og:description" content="Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:site" content="@auth0">
+    <meta name="twitter:creator" content="@auth0">
+    <meta name="twitter:title" content="Web Authentication (WebAuthn) Credential and Login Demo">
+    <meta name="twitter:url" content="https://webauthn.me">
+    <meta name="twitter:description" content="Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://cdn.auth0.com/blog/webauthn:card.png">
+    <meta name="twitter:image:height" content="512">
+    <meta name="twitter:image:width" content="1024">
+    <link rel="canonical" href="https://webauthn.me">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common.css" type="text/css" media="all">
+    <link rel="shortcut icon" href="https://cdn.auth0.com/website/webauthn/favicon.png">
+    <link rel="stylesheet" href="/css/tutorial.css" type="text/css" media="all">
+    <link rel="prefetch" href="/introduction.html">
+    <!-- OneTrustScripts-->
+    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="3cdc400f-b58d-4d3b-83fd-9f22770403da" id="consent-script"></script>
+    <script src="js/ccpa-modal.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <!-- Adobe Analytics script-->
+    <script src="https://assets.adobedtm.com/6bb3f7663515/fea558f43eb7/launch-be034d63605e.min.js" type="text/javascript" charset="UTF-8" id="adobe-analytics-script"></script>
+    <script type="application/ld+json">
+      [{
+          "@context": "http://schema.org",
+          "@type": "WebPage",
+          "name": "Web Authentication (WebAuthn) Credential and Login Demo",
+          "description": "Try the Web Authentication demo to register a credential and login with biometrics. WebAuthn spec enables public key-based credentials for securely authenticating users using hardware authenticators.",
+          "url": "https://webauthn.me/",
+          "image": "https://webauthn.me/img/webauthn-logo.svg",
+          "publisher": {
+              "@type": "Organization",
+              "name": "Auth0",
+              "legalName": "Auth0 Inc.",
+              "url": "https://auth0.com/",
+              "logo": "https://cdn.auth0.com/website/assets/pages/press/img/resources/auth0-logo-main-6001cece68.svg",
+              "foundingDate": "2013",
+              "sameAs": [
+                  "https://twitter.com/auth0",
+                  "https://www.facebook.com/getauth0/",
+                  "https://www.linkedin.com/company/auth0"
+              ]
+          }
+        }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "WebAuthn debugger",
+              "item": "https://webauthn.me/debugger",
+              "description": "Quickly change a WebAuthn configuration parameter, and see the change take effect in our handy debugger."
+          }]
+      }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "Introduction",
+              "item": "https://webauthn.me/introduction",
+              "description": "Learn more about the WebAuthn spec, that enables public key-based credentials in the browser for securely authenticating users using hardware authenticators."
+          }]
+      }, {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [{
+              "@type": "ListItem", 
+              "position": 1, 
+              "name": "WebAuthn.me",
+              "item": "https://webauthn.me/",
+              "description": "Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators."
+          },{
+              "@type": "ListItem", 
+              "position": 2, 
+              "name": "Introduction",
+              "item": "https://webauthn.me/browser-support",
+              "description": "An overview of all modern browser and their support for platform and roaming authenticators, using WebAuthn."
+          }]
+      }]
+    </script>
+    <meta name="google-site-verification" content="8PENs1ni2zY2-JstEN8PRrMO3N76CRf2r1yP1qMf14M">
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJZ8DTR2" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript)-->
+    <header class="header">
+      <div class="header-container">
+        <div class="header-left">
+          <div class="header-crafted-by-container"><a href="https://auth0.com/developers/"><span>Crafted by</span><img src="/img/auth0-logo.svg" alt="Auth0 Logo"></a></div>
+        </div>
+        <div class="header-right">
+          <div class="header-nav-item active"><a href="/">Tutorial</a></div>
+          <div class="header-nav-item"><a href="/introduction">Info</a></div>
+          <div class="header-nav-item"><a href="/debugger">debugger</a></div>
+          <div class="header-nav-item"><a href="/passkeys">passkeys</a></div>
+        </div>
+      </div>
+    </header>
+    <div class="hero-container">
+      <div class="hero-logo"><img src="/img/webauthn-logo.svg" alt="WebAuthn Logo"></div>
+      <h3 class="hero-subtitle subtitle">Web Authentication is a new standard enabling the creation and use of strong, attested, scoped, public key-based credentials by web applications, for the purpose of strongly authenticating users using hardware authenticators.</h3>
+      <div class="hero-buttons-container"><a class="button-dark" href="/introduction" data-learn-more>Learn more</a></div>
+    </div>
+    <div class="tutorial-container">
+      <div id="tutorial">
+        <div class="tutorial-step-1-container tutorial-step-container">
+                  <div class="tutorial-step-left">
+                    <div class="tutorial-step-circle"><span class="tutorial-step-number">1</span></div>
+                    <div class="tutorial-step-line"></div>
+                  </div>
+          <div class="tutorial-step-content">
+            <h1 class="tutorial-step-title title">Register Your User</h1>
+            <h4 class="tutorial-step-subtitle normal">
+              Connect a USB authenticator, or make sure your device has a built in one like TouchID, and enter your username
+              or email address.
+              
+            </h4>
+            <div class="tutorial-step-1-box"><span class="tutorial-step-1-name">Name:</span>
+              <input class="tutorial-step-1-input" type="text" placeholder="Username or email">
+            </div>
+            <button class="tutorial-step-1-register button-colorful">Register</button>
+            <div class="tutorial-animation-container">
+              <object class="tutorial-animation-object" id="tutorial-step-1-animation-object" type="image/svg+xml" data="/img/animation.svg"></object>
+            </div>
+          </div>
+        </div>
+        <div class="tutorial-step-2-container tutorial-step-container">
+                  <div class="tutorial-step-left">
+                    <div class="tutorial-step-circle"><span class="tutorial-step-number">2</span></div>
+                    <div class="tutorial-step-line"></div>
+                  </div>
+          <div class="tutorial-step-content">
+            <h1 class="tutorial-step-title title">Touch Your Authenticator</h1>
+            <div class="tutorial-animation-container">
+              <object class="tutorial-animation-object" id="tutorial-step-2-animation-object" type="image/svg+xml" data="/img/animation.svg"></object>
+            </div>
+          </div>
+        </div>
+        <div class="tutorial-step-3-container tutorial-step-container">
+                  <div class="tutorial-step-left">
+                    <div class="tutorial-step-circle"><span class="tutorial-step-number">3</span></div>
+                    <div class="tutorial-step-line"></div>
+                  </div>
+          <div class="tutorial-step-content">
+            <h1 class="tutorial-step-title title">Your New Credential</h1>
+            <h4 class="tutorial-step-subtitle normal">You have created a new credential. The 
+              <pre>rawId</pre> and the public key are all that are needed to identify you. These are meant to be passed to the Relying Party.
+              
+            </h4>
+            <div class="tutorial-animation-container">
+              <object class="tutorial-animation-object" id="tutorial-step-3-animation-object" type="image/svg+xml" data="/img/animation.svg"></object>
+            </div>
+            <div class="tutorial-step-3-up-warning warning hidden"><strong>Warning: </strong>Your authenticator device does not perform a <strong>test of user presence </strong>as defined in the <a href="https://www.w3.org/TR/webauthn/#test-of-user-presence" title="WebAuthn Specification">WebAuthn Specification.</a></div>
+            <div class="tutorial-step-3-data-container">
+              <div class="tutorial-step-3-data-left">
+                <h3 class="tutorial-step-3-data-title">Your rawId</h3><code class="tutorial-code-container" id="tutorial-step-3-data-raw-id"></code>
+              </div>
+              <div class="tutorial-step-3-data-right">
+                <h3 class="tutorial-step-3-data-title">Your Public Key</h3>
+                <pre class="tutorial-code-container" id="tutorial-step-3-data-public-key"></pre>
+              </div>
+            </div>
+            <button class="tutorial-step-3-next button-colorful">Next</button>
+          </div>
+        </div>
+        <div class="tutorial-step-4-container tutorial-step-container">
+                  <div class="tutorial-step-left">
+                    <div class="tutorial-step-circle"><span class="tutorial-step-number">4</span></div>
+                    <div class="tutorial-step-line"></div>
+                  </div>
+          <div class="tutorial-step-content">
+            <h1 class="tutorial-step-title title">Authenticate With Your Credential</h1>
+            <h4 class="tutorial-step-subtitle normal">Using the 
+              <pre>rawId</pre> you can authenticate as the user you just created.
+              
+            </h4>
+            <div class="tutorial-step-4-data-container"><div class="tutorial-step-4-allow-credentials-container">
+
+<pre><code>allowCredentials: [
+  {
+    type: 'public-key',
+    id: <div class="tutorial-step-4-allow-credentials-id-container"><code class="tutorial-step-4-allow-credentials-id-code"></code></div>
+  }
+],</code></pre>
+
+</div>
+
+            </div>
+            <button class="tutorial-step-4-login button-colorful">Login</button>
+            <div class="tutorial-animation-container">
+              <object class="tutorial-animation-object" id="tutorial-step-4-animation-object" type="image/svg+xml" data="/img/animation.svg"></object>
+            </div>
+          </div>
+        </div>
+        <div class="tutorial-step-5-container tutorial-step-container">
+                  <div class="tutorial-step-left">
+                    <div class="tutorial-step-circle"><span class="tutorial-step-number">5</span></div>
+                    <div class="tutorial-step-line"></div>
+                  </div>
+          <div class="tutorial-step-content">
+            <h1 class="tutorial-step-title title">Touch Your Authenticator</h1>
+            <div class="tutorial-animation-container">
+              <object class="tutorial-animation-object" id="tutorial-step-5-animation-object" type="image/svg+xml" data="/img/animation.svg"></object>
+            </div>
+          </div>
+        </div>
+        <div class="tutorial-step-6-container tutorial-step-container">
+                  <div class="tutorial-step-left">
+                    <div class="tutorial-step-circle"><span class="tutorial-step-number">6</span></div>
+                  </div>
+          <div class="tutorial-step-content">
+            <h1 class="tutorial-step-title title">Login Successful</h1>
+            <div class="tutorial-animation-container">
+              <object class="tutorial-animation-object" id="tutorial-step-6-animation-object" type="image/svg+xml" data="/img/animation.svg"></object>
+            </div>
+          </div>
+        </div>
+        <div class="tutorial-try-the-debugger-container">
+          <div class="tutorial-try-the-debugger-left">
+            <h1>Now you can try the debugger to play with all options</h1>
+          </div>
+          <div class="tutorial-try-the-debugger-right"><a class="tutorial-try-the-debugger-learn-more button-dark" href="/introduction">Learn more</a><a class="tutorial-try-the-debugger-try button-colorful" href="/debugger">Try the debugger</a></div>
+        </div>
+      </div>
+      <div class="hidden" id="tutorial-error-message">
+        <div class="error">
+          <h2>Oops!</h2>
+          <p class="intro">Looks like your browser does not support the web authentication API, or it doesn't support public key-based credentials.</p>
+          <p>You won't be able to follow along with the interactive tutorial, or try the debugger but you can still get more information on the web authentication API.</p><a class="button-colorful" href="/introduction">Learn more</a>
+        </div>
+      </div>
+    </div>
+    <div class="modal">
+      <div class="modal-header"><span>Oops, something went wrong!</span>
+        <button class="modal-header-close-button">&times;</button>
+      </div>
+      <div class="modal-body"><span class="modal-message"></span></div>
+    </div>
+    <div class="footer-container">
+      <div class="footer-browser-status-container">
+        <div class="footer-browser-status-text-container">
+          <div class="footer-browser-status-text-title"><img src="/img/question-circle.svg" alt="question icon">
+            <h4>Browser Status</h4>
+          </div>
+          <p>Web Authentication is (partially) supported in most modern browsers.</p><a class="button-dark" href="/browser-support" style="margin-top: 1rem; text-align: center;">Test your browser</a>
+        </div>
+        <div class="footer-browser-icons-container">
+              <div class="footer-browser-status"><img src="/img/firefox-logo.png" alt="browser logo"><span>Firefox</span></div>
+              <div class="footer-browser-status"><img src="/img/chrome-logo.png" alt="browser logo"><span>Chrome</span></div>
+              <div class="footer-browser-status"><img src="/img/edge-logo.png" alt="browser logo"><span>Edge</span></div>
+        </div>
+      </div>
+      <div class="footer-banner"><img class="footer-banner-logo" src="/img/auth0-logo.svg" alt="Auth0 logo">
+        <p class="footer-banner-text">With Auth0 you can easily add WebAuthn as a second factor<br/> to add an extra layer of security for your users.</p>
+        <div class="footer-banner-buttons"><a class="button-orange" href="https://auth0.com/signup/?utm_source=webauthn.me&amp;utm_medium=microsites&amp;utm_campaign=devn_signup" target="_blank" rel="noreferrer noopener">Try Auth0 for free</a></div>
+      </div>
+      <div class="footer-branding-container">
+        <div class="footer-branding-container-inner"> 
+          <div class="footer-branding-left"><a class="footer-crafted-by-container" href="https://auth0.com/developers/"><span>Crafted by</span><img class="footer-branded-crafted-img" src="/img/auth0-logo.svg" alt="auth0 logo"></a>
+            <div class="footer-privacy-container"><a class="footer-privacy-link" href="https://auth0.com/privacy/" target="_blank">Privacy</a><span class="footer-privacy-separator">•</span><a class="footer-privacy-link" href="https://auth0.com/web-terms" target="_blank">Terms of Service</a><span class="footer-privacy-separator">•</span>
+              <button class="as-anchor" id="open-ccpa">Your Privacy Choices </button><img class="ccpa-toggle" src="https://cdn.auth0.com/website/footer/ccpa.svg" alt="Privacy choices">
+            </div>
+            <div id="ccpa-modal">
+              <button id="close-ccpa">x</button>
+              <h3 class="title">Your Privacy Choices</h3>
+              <p class="paragraph">Depending on your state of residence, including if you are a California resident, you have the right to opt out of certain sharing of personal information with third-party ad partners. We may share personal information with third-party ad partners, such as through cookies or by providing lists of email addresses for potential customers, so that we can reach them across the web with relevant ads.</p>
+              <p class="paragraph">If you wish to opt out of this sharing of your personal data in connection with cookies, please update your 
+                <button class="settings" onClick="window.OneTrust.ToggleInfoDisplay()">cookie settings.</button>
+              </p>
+              <p class="paragraph">If you wish to opt out of email-based sharing, provide your email address at <a class="settings" href="https://www.okta.com/your-privacy-choices/" target="_blank">this link.</a></p>
+            </div><span class="footer-copyright">© 2025 Okta, Inc. All Rights Reserved.</span>
+          </div><img src="/img/webauthn-logo-no-text.svg" alt="webauthn logo">
+          <div class="footer-branding-right"><span>Spread the word</span><a class="footer-branding-twitter" href="https://twitter.com/home?status=Check%20out%20https%3A//webauthn.me%20and%20learn%20what%20Web%20Authentication%20is%20all%20about!" target="_blank"><img src="/img/twitter-logo.svg" alt="twitter logo"></a><a class="footer-branding-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//webauthn.me" target="_blank"><img src="/img/facebook-logo.svg" alt="facebook logo"></a></div>
+        </div>
+        <div class="footer-github">
+          <p>Found a bug? </p><a href="https://github.com/auth0/webauthn.me/pulls" target="_blank">Send a Pull Request!</a>
+        </div>
+      </div>
+    </div>
+    <script src="js/tutorial.js"></script>
+    <script>
+      function topBanner() {
+        event.preventDefault();
+        document.querySelector(".top-banner").classList.add('closed');
+        document.querySelector(".top-banner-spacer").classList.add('hide');
+        document.querySelector(".header").classList.remove("top-banner-open");
+      }
+    </script>
+  </body>
+</html>
