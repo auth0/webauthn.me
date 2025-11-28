@@ -17,6 +17,7 @@ Web Authentication is a new standard enabling the creation and use of strong, at
 First, install the required dependencies:
 
 ```
+export NODE_OPTIONS=--openssl-legacy-provider
 npm install
 ```
 
