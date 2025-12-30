@@ -121,6 +121,21 @@ export function prettifyCredentials(credentials) {
     return splitCredentialsByType(creds);
 }
 
+export function stringifyBuffers(data) {
+    const object = deepClone(data);
+    Object.keys(object).forEach(key => {
+        if(object[key] instanceof ArrayBuffer){
+            object[key] = btoa(String.fromCharCode(...new Uint8Array(object[key])));
+            return;
+        }
+        if(typeof (object[key]) === 'object') {
+            object[key] = stringifyBuffers(object[key]);
+            return;
+        }
+    });
+    return object;
+}
+
 export function addMarkupToLine(line) {
     const separator = line.indexOf(":");
     const head = line.substring(0, separator);
@@ -262,6 +277,6 @@ export function prettyCredentialsWithHtml(prettyCredentials) {
 
 export function getUserPresentStatus(credentials) {
     const parsed = parseAttestationObject(credentials.response.attestationObject);
-    console.log(parsed.authData.flags);
+    console.log("attestation.flags:", parsed.authData.flags);
     return parsed.authData.flags.userPresent;
 }

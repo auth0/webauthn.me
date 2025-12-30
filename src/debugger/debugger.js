@@ -18,6 +18,7 @@ import { prettifyTransformations, binToHex } from "./transformations.js";
 import {
     parseCredentials,
     prettifyCredentials,
+    stringifyBuffers,
     prettyCredentialsWithHtml,
     orderCredentialsByType,
     getUserPresentStatus,
@@ -257,6 +258,7 @@ function getCreateOptions() {
 function handleRegistrationCredentials(credentials) {
     lastCredentials = deepClone(credentials);
     lastCredentialsParsed = parseCredentials(credentials);
+    console.log("navigator.credentials.create:result", stringifyBuffers(lastCredentials));
 
     const prettyCredentials = prettifyCredentials(
         orderCredentialsByType(credentials)
@@ -312,6 +314,7 @@ function handleCBORCredentials(credentials) {
 function handleAuthenticationCredentials(credentials) {
     lastCredentials = deepClone(credentials);
     lastCredentialsParsed = parseCredentials(credentials);
+    console.log("navigator.credentials.get:result", stringifyBuffers(lastCredentials));
 
     const prettyCredentials = prettifyCredentials(
         orderCredentialsByType(credentials)
