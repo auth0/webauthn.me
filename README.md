@@ -1,3 +1,5 @@
+@claude
+@copilot
 # WebAuthn.me
 
 ![A screenshot of webauthn.me](https://cdn.auth0.com/blog/webauthn/screenshot.png)
