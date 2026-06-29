@@ -18,10 +18,10 @@
   "author": "Auth0, Inc.",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.18.10",
-    "@babel/preset-env": "^7.18.10",
+    "@babel/core": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
     "animejs": "^2.2.0",
-    "babel-loader": "^8.2.5",
+    "babel-loader": "^10.1.1",
     "buffer": "^6.0.3",
     "bulma": "^0.7.1",
     "cbor": "^4.1.0",
