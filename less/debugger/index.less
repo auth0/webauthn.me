@@ -104,3 +104,37 @@
 .warning.hidden {
   display: none;
 }
+
+.debugger-button-container {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  gap: 10px;
+  
+  .button-full {
+    flex: 1;
+  }
+  
+  .button-share {
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eb5424;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    
+    img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
+    }
+    
+    &:hover {
+      background-color: darken(#eb5424, 10%);
+    }
+  }
+}

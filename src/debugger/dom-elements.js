@@ -182,6 +182,14 @@ export const authenticateButton = document.getElementById(
     "debugger-authenticate-button"
 );
 
+export const shareRegisterButton = document.getElementById(
+    "debugger-share-register-button"
+);
+
+export const shareAuthenticateButton = document.getElementById(
+    "debugger-share-authenticate-button"
+);
+
 export const availableIndicators = document.querySelectorAll(
     "#debugger-auth-available-indicator"
 );
