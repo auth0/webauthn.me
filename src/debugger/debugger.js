@@ -147,7 +147,7 @@ function getCreateOptions() {
             type: "public-key",
             alg: getAlgValueFromSelect(select),
         })),
-        timeout: cForm.timeout.input.value,
+        timeout: parseInt(cForm.timeout.input.value, 10),
     };
 
     if (cForm.excludeCredentials.checkbox.checked) {
@@ -375,7 +375,7 @@ function getGetOptions() {
 
     const publicKey = {
         challenge: globalOptions.challenge,
-        timeout: gForm.timeout.input.value,
+        timeout: parseInt(gForm.timeout.input.value, 10),
     };
 
     if (gForm.rpId.checkbox.checked) {
